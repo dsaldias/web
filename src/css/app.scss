@@ -1,0 +1,227 @@
+// app global css in SCSS form
+
+.text-toolbar {
+  color: white;
+}
+
+.dark-hea {
+  background-color: #040b25;
+  border-bottom: 1px solid grey;
+}
+
+.my-sticky-header-table {
+  /* height or max-height is important */
+  height: 84vh;
+
+  /* .q-table__top,
+  .q-table__bottom,
+  thead tr:first-child th { 
+    background-color: #012044;
+    color: white;
+  } */
+
+  thead tr th {
+    position: sticky;
+    z-index: 1;
+  }
+
+  thead tr:first-child th {
+    top: 0;
+  }
+
+  /* this is when the loading indicator appears */
+  &.q-table--loading thead tr:last-child th {
+    /* height of all previous header rows */
+    top: 48px;
+  }
+
+  /* prevent scrolling behind sticky top row on focus */
+  tbody {
+    /* height of all previous header rows */
+    scroll-margin-top: 48px;
+  }
+
+  thead tr:last-child th:last-child {
+    background-color: #01204411;
+  }
+
+  td:last-child {
+    background-color: #01204411;
+  }
+
+  th:last-child,
+  td:last-child {
+    position: sticky;
+    right: 0;
+    z-index: 1;
+  }
+}
+
+// tema cuaderno
+/* Tema cuadriculado */
+body.grid-theme,
+#q-app.grid-theme {
+  background-color: #fff;
+  background-image: linear-gradient(to right, rgba(0, 0, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: #000;
+  font-family: 'Patrick Hand', cursive;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1.1em;
+}
+
+/* Botones cuadriculados */
+.grid-theme .q-page .q-btn {
+  background: linear-gradient(to right, rgba(0, 0, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 255, 0.1) 1px, transparent 1px), #fff; /* color de fondo base */
+  background-size: 12px 12px !important;
+  color: #000;
+  border: 2px solid #000 !important;
+  text-transform: uppercase;
+  font-weight: bold;
+  box-shadow: none;
+  transition: 0.2s;
+}
+.grid-theme .q-btn--outline {
+  background: linear-gradient(to right, rgba(0, 0, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 255, 0.1) 1px, transparent 1px), white !important; /* color de fondo base */
+  background-size: 12px 12px !important;
+  border: 2px solid #000 !important;
+}
+.grid-theme .q-btn--outline:before {
+  border: none !important;
+}
+.grid-theme .q-table td {
+  font-size: 0.9em !important;
+}
+.grid-theme .q-table th {
+  font-size: 1em !important;
+}
+.grid-theme canvas {
+  background: linear-gradient(to right, rgba(200, 200, 200, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(200, 200, 200, 0.1) 1px, transparent 1px), white !important; /* color de fondo base */
+  background-size: 20px 20px !important;
+}
+.grid-theme .q-page .q-btn--flat {
+  background: linear-gradient(to right, rgba(0, 0, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 255, 0.1) 1px, transparent 1px), white !important; /* color de fondo base */
+  background-size: 12px 12px !important;
+  border: 1px solid #cdcdcd !important;
+}
+.grid-theme .q-page .q-btn-item {
+  background-image: linear-gradient(to right, rgba(0, 0, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 255, 0.1) 1px, transparent 1px) !important; /* color de fondo base */
+  background-size: 12px 12px !important;
+}
+
+.grid-theme .q-page .q-field__inner {
+  background: white;
+  background-image: linear-gradient(to right, rgba(125, 125, 125, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(125, 125, 125, 0.1) 1px, transparent 1px) !important; /* color de fondo base */
+  background-size: 8px 8px !important;
+}
+.grid-theme .q-editor {
+  background: white;
+  background-image: linear-gradient(to right, rgba(125, 125, 125, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(125, 125, 125, 0.1) 1px, transparent 1px) !important; /* color de fondo base */
+  background-size: 12px 12px !important;
+}
+.grid-theme .q-header {
+  background: white;
+  background-image: linear-gradient(to right, rgba(180, 180, 180, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(180, 180, 180, 0.1) 1px, transparent 1px) !important; /* color de fondo base */
+  background-size: 20px 20px !important;
+}
+.grid-theme .q-tabs {
+  background: white;
+  background-image: linear-gradient(to right, rgba(180, 180, 180, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(180, 180, 180, 0.1) 1px, transparent 1px) !important; /* color de fondo base */
+  background-size: 20px 20px !important;
+}
+.grid-theme .q-table__middle {
+  background: transparent;
+}
+.grid-theme .q-expansion-item {
+  background: white;
+  background-image: linear-gradient(to right, rgba(180, 180, 180, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(180, 180, 180, 0.1) 1px, transparent 1px) !important; /* color de fondo base */
+  background-size: 20px 20px !important;
+}
+
+.grid-theme .q-btn:hover {
+  // background-color: #f9f9f9;
+  // border-color: #333;
+  transform: scale(1.05);
+}
+
+.grid-theme .q-menu:not(.q-menu--dark) {
+  background-color: #fff;
+  background-image: linear-gradient(to right, rgba(0, 0, 255, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 255, 0.15) 1px, transparent 1px);
+  background-size: 12px 12px;
+  color: #000;
+  border: 2px solid #000;
+  font-weight: bold;
+  box-shadow: none;
+  transition: 0.2s;
+}
+.grid-theme .q-menu--dark {
+  background-image: linear-gradient(to right, rgba(0, 0, 255, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 255, 0.15) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+.grid-theme .q-card {
+  background-color: #fff;
+  background: linear-gradient(to right, rgba(0, 0, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 255, 0.05) 1px, transparent 1px), white !important;
+  background-size: 20px 20px !important;
+  border: 2px solid #000;
+  border-radius: 6px;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+}
+.grid-theme .q-drawer {
+  background-color: #fff;
+  background-image: linear-gradient(to right, rgba(0, 0, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  border: 2px solid #000;
+  border-radius: 0px;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+}
+
+.grid-theme .q-table__top {
+  background-color: #fff;
+  background-image: linear-gradient(to right, rgba(0, 0, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  border-top: 2px solid #000;
+  border-left: 2px solid #000;
+  border-right: 2px solid #000;
+  border-radius: 0px;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+}
+.grid-theme .q-table {
+  background-color: #fff;
+  background-image: linear-gradient(to right, rgba(0, 0, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  border-left: 2px solid #000;
+  border-right: 2px solid #000;
+  border-bottom: 2px solid #000;
+  border-radius: 0px 0px;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+}
+.grid-theme .q-table thead {
+  background-color: #efefef;
+  background-image: linear-gradient(to right, rgba(0, 0, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.grid-theme .q-table__middle {
+  background-image: linear-gradient(to right, rgba(0, 0, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
