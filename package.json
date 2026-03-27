@@ -15,8 +15,12 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "scripts"
   ],
+  "bin": {
+    "auth-web-init": "./scripts/init.mjs"
+  },
   "scripts": {
     "lint": "eslint -c ./eslint.config.js \"./src*/**/*.{ts,js,cjs,mjs,vue}\"",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
