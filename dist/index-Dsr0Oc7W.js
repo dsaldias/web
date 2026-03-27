@@ -1,8 +1,6 @@
 import { ApolloClient } from "@apollo/client/core";
 import { useMutation, useQuery, provideApolloClients, ApolloClients, useSubscription } from "@vue/apollo-composable";
-import { createHttpLink } from "@apollo/client/link/http/index.js";
-import { InMemoryCache } from "@apollo/client/cache/index.js";
-import { split } from "@apollo/client/link/core";
+import { createHttpLink, split, InMemoryCache } from "@apollo/client";
 import { parse, Kind, OperationTypeNode } from "graphql";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
@@ -3980,9 +3978,9 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     const foto_64 = ref("");
     const refusuarios_conectados = ref();
     const router = useRouter();
-    const Login = defineAsyncComponent(() => import("./login-index-D1TOnBkG.js"));
+    const Login = defineAsyncComponent(() => import("./login-index-CUOMmsf0.js"));
     const usuarios_conectados = defineAsyncComponent(
-      () => import("./usuarios_conectados-CufvV40Z.js")
+      () => import("./usuarios_conectados-DoW0VN66.js")
     );
     const showConectados = ref(false);
     const pendingOpenConectados = ref(false);

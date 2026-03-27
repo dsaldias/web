@@ -1,7 +1,9 @@
-import type { ApolloClientOptions } from '@apollo/client/core'
-import { createHttpLink } from '@apollo/client/link/http/index.js'
-import { InMemoryCache } from '@apollo/client/cache/index.js'
-import { split } from '@apollo/client/link/core'
+import {
+  type ApolloClientOptions,
+  createHttpLink,
+  InMemoryCache,
+  split,
+} from '@apollo/client'
 import { Kind, OperationTypeNode } from 'graphql'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
