@@ -179,8 +179,10 @@ patchQuasarConfig()
 console.log(`
 ✨ Listo. Próximos pasos:
 
-  1. Completa DECODE_PASS_KEY en .env (debe coincidir con el servidor)
-  2. Ajusta las URLs en .env si tu servidor corre en otro puerto/host
+  1. Instala las dependencias requeridas:
+     yarn add @apollo/client @vue/apollo-composable graphql graphql-ws graphql-query-compress firebase jwt-decode axios crypto-js
+
+  2. Ajusta las URLs en .env si tu servidor corre en otro host
   3. quasar dev -m pwa
 
   Tus rutas propias van en:  src/router/rutas-app.ts

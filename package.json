@@ -29,7 +29,7 @@
     "dev": "quasar dev",
     "build": "quasar build",
     "build:lib": "vite build --config vite.config.lib.ts",
-    "postinstall": "quasar prepare"
+    "dev:prepare": "quasar prepare"
   },
   "peerDependencies": {
     "@apollo/client": ">=3.8",
