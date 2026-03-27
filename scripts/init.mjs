@@ -33,6 +33,7 @@ onBeforeUnmount(() => detenerSubscripcion())
 // ─── boot/auth.ts ───────────────────────────────────────────────────────────
 const bootAuth = `import { boot } from 'quasar/wrappers'
 import { AuthPlugin } from '@dsaldias/auth-web'
+import '@dsaldias/auth-web/style'
 
 export default boot(({ app }) => {
   app.use(AuthPlugin, {
