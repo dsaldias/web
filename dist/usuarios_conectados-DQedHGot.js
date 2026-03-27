@@ -1,5 +1,14 @@
-import { defineComponent, ref, resolveComponent, openBlock, createBlock, withCtx, createVNode, createElementVNode, createTextVNode, toDisplayString, unref } from "vue";
-import { p as parseFecha, U as UsuariosService } from "./index-Dsr0Oc7W.js";
+import QSpace from "quasar/src/components/space/QSpace.js";
+import QCardSection from "quasar/src/components/card/QCardSection.js";
+import QSeparator from "quasar/src/components/separator/QSeparator.js";
+import QTd from "quasar/src/components/table/QTd.js";
+import QTable from "quasar/src/components/table/QTable.js";
+import QBtn from "quasar/src/components/btn/QBtn.js";
+import QCardActions from "quasar/src/components/card/QCardActions.js";
+import QCard from "quasar/src/components/card/QCard.js";
+import QDialog from "quasar/src/components/dialog/QDialog.js";
+import { defineComponent, ref, openBlock, createBlock, withCtx, createVNode, createElementVNode, createTextVNode, toDisplayString, unref } from "vue";
+import { p as parseFecha, U as UsuariosService } from "./index-DqlTqrFl.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "usuarios_conectados",
   setup(__props, { expose: __expose }) {
@@ -33,41 +42,32 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       open
     });
     return (_ctx, _cache) => {
-      const _component_q_space = resolveComponent("q-space");
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_separator = resolveComponent("q-separator");
-      const _component_q_td = resolveComponent("q-td");
-      const _component_q_table = resolveComponent("q-table");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_card_actions = resolveComponent("q-card-actions");
-      const _component_q_card = resolveComponent("q-card");
-      const _component_q_dialog = resolveComponent("q-dialog");
-      return openBlock(), createBlock(_component_q_dialog, {
+      return openBlock(), createBlock(QDialog, {
         modelValue: alert.value,
         "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => alert.value = $event),
         persistent: "",
         square: ""
       }, {
         default: withCtx(() => [
-          createVNode(_component_q_card, {
+          createVNode(QCard, {
             xstyle: "min-width: 500px",
             class: "q-pa-md"
           }, {
             default: withCtx(() => [
-              createVNode(_component_q_card_section, { class: "row items-center q-pb-xs" }, {
+              createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
                 default: withCtx(() => [
                   _cache[2] || (_cache[2] = createElementVNode("div", { class: "q-ml-sm text-h6" }, "Usuarios conectados:", -1)),
-                  createVNode(_component_q_space)
+                  createVNode(QSpace)
                 ]),
                 _: 1
               }),
-              createVNode(_component_q_card_section, { class: "q-pt-none" }, {
+              createVNode(QCardSection, { class: "q-pt-none" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_separator, {
+                  createVNode(QSeparator, {
                     size: "xs",
                     class: "q-py-none"
                   }),
-                  createVNode(_component_q_table, {
+                  createVNode(QTable, {
                     rows: usuarios.value,
                     columns,
                     "row-key": "id",
@@ -78,7 +78,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     "rows-per-page-options": [0]
                   }, {
                     "body-cell-usuario": withCtx((props) => [
-                      createVNode(_component_q_td, { props }, {
+                      createVNode(QTd, { props }, {
                         default: withCtx(() => [
                           createTextVNode(toDisplayString(props.row.nombres) + " " + toDisplayString(props.row.apellido1) + " " + toDisplayString(props.row.apellido2), 1)
                         ]),
@@ -86,7 +86,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       }, 1032, ["props"])
                     ]),
                     "body-cell-ind": withCtx((props) => [
-                      createVNode(_component_q_td, { props }, {
+                      createVNode(QTd, { props }, {
                         default: withCtx(() => [
                           createTextVNode(toDisplayString(props.rowIndex + 1), 1)
                         ]),
@@ -94,7 +94,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       }, 1032, ["props"])
                     ]),
                     "body-cell-last_login": withCtx((props) => [
-                      createVNode(_component_q_td, { props }, {
+                      createVNode(QTd, { props }, {
                         default: withCtx(() => [
                           createTextVNode(toDisplayString(unref(parseFecha)(props.row.last_login)), 1)
                         ]),
@@ -106,9 +106,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 ]),
                 _: 1
               }),
-              createVNode(_component_q_card_actions, { align: "center" }, {
+              createVNode(QCardActions, { align: "center" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_btn, {
+                  createVNode(QBtn, {
                     loading: loading.value,
                     flat: "",
                     label: "cerrar",

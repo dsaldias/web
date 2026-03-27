@@ -6,12 +6,64 @@ import { getMainDefinition } from "@apollo/client/utilities";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
 import { defineStore } from "pinia";
-import { defineComponent, ref, resolveComponent, openBlock, createElementBlock, createVNode, withCtx, createElementVNode, withDirectives, vShow, createTextVNode, createCommentVNode, createApp, h, watch, createBlock, Fragment, renderList, toDisplayString, unref, computed, onBeforeMount, onUnmounted, onMounted, defineAsyncComponent, resolveDirective, Transition, normalizeClass, nextTick, normalizeStyle } from "vue";
-import { Notify, Quasar, useQuasar, Cookies, Dark } from "quasar";
+import { defineComponent, ref, openBlock, createElementBlock, createVNode, withCtx, createElementVNode, withDirectives, vShow, createTextVNode, createCommentVNode, createApp, h, watch, createBlock, Fragment, renderList, toDisplayString, unref, computed, onBeforeMount, onUnmounted, onMounted, defineAsyncComponent, resolveComponent, Transition, normalizeClass, nextTick, normalizeStyle } from "vue";
+import Notify from "quasar/src/plugins/notify/Notify.js";
+import Quasar from "quasar/src/vue-plugin.js";
+import QSpace from "quasar/src/components/space/QSpace.js";
+import QBtn from "quasar/src/components/btn/QBtn.js";
+import QCardSection from "quasar/src/components/card/QCardSection.js";
+import QInput from "quasar/src/components/input/QInput.js";
+import QIcon from "quasar/src/components/icon/QIcon.js";
+import QCheckbox from "quasar/src/components/checkbox/QCheckbox.js";
+import QCard from "quasar/src/components/card/QCard.js";
+import QDialog from "quasar/src/components/dialog/QDialog.js";
 import graphqlQueryCompress from "graphql-query-compress";
+import QAvatar from "quasar/src/components/avatar/QAvatar.js";
+import QSeparator from "quasar/src/components/separator/QSeparator.js";
+import QCardActions from "quasar/src/components/card/QCardActions.js";
 import { setContext } from "@apollo/client/link/context";
+import QLinearProgress from "quasar/src/components/linear-progress/QLinearProgress.js";
+import QItemSection from "quasar/src/components/item/QItemSection.js";
+import QItem from "quasar/src/components/item/QItem.js";
+import QList from "quasar/src/components/item/QList.js";
+import QMenu from "quasar/src/components/menu/QMenu.js";
+import QForm from "quasar/src/components/form/QForm.js";
+import useQuasar from "quasar/src/composables/use-quasar/use-quasar.js";
+import QImg from "quasar/src/components/img/QImg.js";
 import { useRouter } from "vue-router";
+import QTooltip from "quasar/src/components/tooltip/QTooltip.js";
+import QToggle from "quasar/src/components/toggle/QToggle.js";
+import ClosePopup from "quasar/src/directives/close-popup/ClosePopup.js";
+import QRadio from "quasar/src/components/radio/QRadio.js";
+import QFile from "quasar/src/components/file/QFile.js";
 import { boot } from "quasar/wrappers";
+import Cookies from "quasar/src/plugins/cookies/Cookies.js";
+import Dark from "quasar/src/plugins/dark/Dark.js";
+import QSelect from "quasar/src/components/select/QSelect.js";
+import QBadge from "quasar/src/components/badge/QBadge.js";
+import QToolbar from "quasar/src/components/toolbar/QToolbar.js";
+import QHeader from "quasar/src/components/header/QHeader.js";
+import QItemLabel from "quasar/src/components/item/QItemLabel.js";
+import QScrollArea from "quasar/src/components/scroll-area/QScrollArea.js";
+import QDrawer from "quasar/src/components/drawer/QDrawer.js";
+import QPageContainer from "quasar/src/components/page/QPageContainer.js";
+import QLayout from "quasar/src/components/layout/QLayout.js";
+import Ripple from "quasar/src/directives/ripple/Ripple.js";
+import QFabAction from "quasar/src/components/fab/QFabAction.js";
+import QFab from "quasar/src/components/fab/QFab.js";
+import QPageSticky from "quasar/src/components/page-sticky/QPageSticky.js";
+import QToolbarTitle from "quasar/src/components/toolbar/QToolbarTitle.js";
+import QTab from "quasar/src/components/tabs/QTab.js";
+import QTabs from "quasar/src/components/tabs/QTabs.js";
+import QTd from "quasar/src/components/table/QTd.js";
+import QChip from "quasar/src/components/chip/QChip.js";
+import QTable from "quasar/src/components/table/QTable.js";
+import QPage from "quasar/src/components/page/QPage.js";
+import QExpansionItem from "quasar/src/components/expansion-item/QExpansionItem.js";
+import QTabPanel from "quasar/src/components/tab-panels/QTabPanel.js";
+import QTabPanels from "quasar/src/components/tab-panels/QTabPanels.js";
+import QBanner from "quasar/src/components/banner/QBanner.js";
+import QEditor from "quasar/src/components/editor/QEditor.js";
 import { defaults as defaults$2, ArcElement, PointElement, BarElement, Chart, CategoryScale, LinearScale, LineElement, LineController, Title, Tooltip, Legend } from "chart.js";
 import { LineChart } from "vue-chart-3";
 const defectoOps$2 = {
@@ -327,28 +379,20 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
       open
     });
     return (_ctx, _cache) => {
-      const _component_q_space = resolveComponent("q-space");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_input = resolveComponent("q-input");
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_checkbox = resolveComponent("q-checkbox");
-      const _component_q_card = resolveComponent("q-card");
-      const _component_q_dialog = resolveComponent("q-dialog");
       return openBlock(), createElementBlock("div", _hoisted_1$o, [
-        createVNode(_component_q_dialog, {
+        createVNode(QDialog, {
           modelValue: dialog.value,
           "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => dialog.value = $event),
           persistent: ""
         }, {
           default: withCtx(() => [
-            createVNode(_component_q_card, null, {
+            createVNode(QCard, null, {
               default: withCtx(() => [
-                createVNode(_component_q_card_section, { class: "row items-center q-pb-none" }, {
+                createVNode(QCardSection, { class: "row items-center q-pb-none" }, {
                   default: withCtx(() => [
                     _cache[7] || (_cache[7] = createElementVNode("div", { class: "text-h6" }, "Tu sesión ha expirado", -1)),
-                    createVNode(_component_q_space),
-                    createVNode(_component_q_btn, {
+                    createVNode(QSpace),
+                    createVNode(QBtn, {
                       icon: "close",
                       flat: "",
                       round: "",
@@ -358,11 +402,11 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
                   ]),
                   _: 1
                 }),
-                createVNode(_component_q_card_section, { class: "q-pt-xs" }, {
+                createVNode(QCardSection, { class: "q-pt-xs" }, {
                   default: withCtx(() => [
                     _cache[9] || (_cache[9] = createElementVNode("p", { class: "q-my-none text-grey" }, "Tu acceso ha caducado", -1)),
                     _cache[10] || (_cache[10] = createElementVNode("p", { class: "q-mt-none q-pb-md text-grey" }, "pero no te preocupes, ¡es fácil retomarlo!!!", -1)),
-                    withDirectives(createVNode(_component_q_input, {
+                    withDirectives(createVNode(QInput, {
                       modelValue: username.value,
                       "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => username.value = $event),
                       modelModifiers: { trim: true },
@@ -370,7 +414,7 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
                     }, null, 8, ["modelValue"]), [
                       [vShow, false]
                     ]),
-                    createVNode(_component_q_input, {
+                    createVNode(QInput, {
                       outlined: "",
                       square: "",
                       class: "q-pb-xs",
@@ -385,17 +429,17 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
                       rules: [(val) => val && val.length > 0 || "dato obligatorio"]
                     }, {
                       prepend: withCtx(() => [
-                        createVNode(_component_q_icon, { name: "key" })
+                        createVNode(QIcon, { name: "key" })
                       ]),
                       append: withCtx(() => [
-                        createVNode(_component_q_btn, {
+                        createVNode(QBtn, {
                           flat: "",
                           dense: "",
                           size: "small",
                           onClick: _cache[1] || (_cache[1] = ($event) => changePWD())
                         }, {
                           default: withCtx(() => [
-                            createVNode(_component_q_icon, { name: "visibility" })
+                            createVNode(QIcon, { name: "visibility" })
                           ]),
                           _: 1
                         })
@@ -404,7 +448,7 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
                     }, 8, ["type", "modelValue", "color", "rules"]),
                     createElementVNode("div", _hoisted_2$g, [
                       createElementVNode("div", _hoisted_3$f, [
-                        createVNode(_component_q_checkbox, {
+                        createVNode(QCheckbox, {
                           modelValue: refresh.value,
                           "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => refresh.value = $event),
                           class: "text-grey",
@@ -417,7 +461,7 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
                         }, null, 8, ["modelValue"])
                       ]),
                       accept_oauth.value ? (openBlock(), createElementBlock("div", _hoisted_4$a, [
-                        createVNode(_component_q_btn, {
+                        createVNode(QBtn, {
                           flat: "",
                           class: "q-mt-none q-pr-xs",
                           size: "sm",
@@ -426,7 +470,7 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
                           onClick: _cache[4] || (_cache[4] = ($event) => googleLogin())
                         }, {
                           default: withCtx(() => [
-                            createVNode(_component_q_icon, {
+                            createVNode(QIcon, {
                               name: "hive",
                               size: "xs",
                               left: ""
@@ -437,7 +481,7 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
                         }, 8, ["loading"])
                       ])) : createCommentVNode("", true)
                     ]),
-                    createVNode(_component_q_btn, {
+                    createVNode(QBtn, {
                       disable: loading.value,
                       icon: "person",
                       label: "Ingresar",
@@ -800,42 +844,34 @@ const _sfc_main$D = /* @__PURE__ */ defineComponent({
       open
     });
     return (_ctx, _cache) => {
-      const _component_q_avatar = resolveComponent("q-avatar");
-      const _component_q_space = resolveComponent("q-space");
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_separator = resolveComponent("q-separator");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_card_actions = resolveComponent("q-card-actions");
-      const _component_q_card = resolveComponent("q-card");
-      const _component_q_dialog = resolveComponent("q-dialog");
-      return openBlock(), createBlock(_component_q_dialog, {
+      return openBlock(), createBlock(QDialog, {
         modelValue: alert.value,
         "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => alert.value = $event),
         persistent: "",
         square: ""
       }, {
         default: withCtx(() => [
-          createVNode(_component_q_card, {
+          createVNode(QCard, {
             class: "neon-card neon-card--gold",
             style: { "min-width": "500px" }
           }, {
             default: withCtx(() => [
-              createVNode(_component_q_card_section, { class: "row items-center q-pb-xs" }, {
+              createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_avatar, { size: "26px" }, {
+                  createVNode(QAvatar, { size: "26px" }, {
                     default: withCtx(() => _cache[2] || (_cache[2] = [
                       createElementVNode("img", { src: "https://cdn-icons-png.flaticon.com/512/559/559384.png" }, null, -1)
                     ])),
                     _: 1
                   }),
                   _cache[3] || (_cache[3] = createElementVNode("div", { class: "q-ml-sm text-h6 neon-logo" }, "AVISOS Y NOTIFICACIONES DEL SISTEMA:", -1)),
-                  createVNode(_component_q_space)
+                  createVNode(QSpace)
                 ]),
                 _: 1
               }),
-              createVNode(_component_q_card_section, { class: "q-pt-none" }, {
+              createVNode(QCardSection, { class: "q-pt-none" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_separator, {
+                  createVNode(QSeparator, {
                     size: "xs",
                     class: "q-py-none"
                   }),
@@ -856,9 +892,9 @@ const _sfc_main$D = /* @__PURE__ */ defineComponent({
                 ]),
                 _: 1
               }),
-              createVNode(_component_q_card_actions, { align: "center" }, {
+              createVNode(QCardActions, { align: "center" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_btn, {
+                  createVNode(QBtn, {
                     flat: "",
                     label: "aceptar",
                     square: "",
@@ -2497,9 +2533,8 @@ const _export_sfc = (sfc, props) => {
 const _sfc_main$C = {};
 const _hoisted_1$m = { class: "text-center q-pt-none q-pb-sm" };
 function _sfc_render$7(_ctx, _cache) {
-  const _component_q_img = resolveComponent("q-img");
   return openBlock(), createElementBlock("div", _hoisted_1$m, [
-    createVNode(_component_q_img, {
+    createVNode(QImg, {
       src: "wapiton.png",
       alt: "logo",
       style: { "width": "100px" }
@@ -2595,19 +2630,8 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
       }, 700);
     });
     return (_ctx, _cache) => {
-      const _component_q_linear_progress = resolveComponent("q-linear-progress");
-      const _component_q_item_section = resolveComponent("q-item-section");
-      const _component_q_item = resolveComponent("q-item");
-      const _component_q_list = resolveComponent("q-list");
-      const _component_q_menu = resolveComponent("q-menu");
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_input = resolveComponent("q-input");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_form = resolveComponent("q-form");
-      const _component_q_card = resolveComponent("q-card");
       return openBlock(), createElementBlock(Fragment, null, [
-        !showing.value ? (openBlock(), createBlock(_component_q_linear_progress, {
+        !showing.value ? (openBlock(), createBlock(QLinearProgress, {
           key: 0,
           dark: "",
           rounded: "",
@@ -2617,33 +2641,33 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
           size: "xs"
         })) : createCommentVNode("", true),
         withDirectives(createElementVNode("div", _hoisted_1$l, [
-          createVNode(_component_q_card, {
+          createVNode(QCard, {
             class: "neon-card neon-card--purple",
             square: "",
             flat: "",
             bordered: ""
           }, {
             default: withCtx(() => [
-              createVNode(_component_q_card_section, { class: "text-center q-pb-none" }, {
+              createVNode(QCardSection, { class: "text-center q-pb-none" }, {
                 default: withCtx(() => [
                   _cache[7] || (_cache[7] = createElementVNode("h5", { class: "q-mb-none q-mt-sm neon-logo" }, "Acceder al sistema", -1)),
                   createVNode(app_login_logo),
-                  createVNode(_component_q_menu, {
+                  createVNode(QMenu, {
                     "touch-position": "",
                     "context-menu": ""
                   }, {
                     default: withCtx(() => [
-                      createVNode(_component_q_list, {
+                      createVNode(QList, {
                         dense: "",
                         style: { "min-width": "100px" }
                       }, {
                         default: withCtx(() => [
-                          createVNode(_component_q_item, {
+                          createVNode(QItem, {
                             clickable: "",
                             onClick: _cache[0] || (_cache[0] = ($event) => clearsite())
                           }, {
                             default: withCtx(() => [
-                              createVNode(_component_q_item_section, null, {
+                              createVNode(QItemSection, null, {
                                 default: withCtx(() => _cache[6] || (_cache[6] = [
                                   createTextVNode("Clear site data")
                                 ])),
@@ -2661,15 +2685,15 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
                 ]),
                 _: 1
               }),
-              createVNode(_component_q_card_section, { class: "q-mt-none q-pt-none q-px-xl" }, {
+              createVNode(QCardSection, { class: "q-mt-none q-pt-none q-px-xl" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_form, {
+                  createVNode(QForm, {
                     onSubmit: _cache[4] || (_cache[4] = ($event) => onSubmit()),
                     onReset,
                     class: "q-gutter-md"
                   }, {
                     default: withCtx(() => [
-                      createVNode(_component_q_input, {
+                      createVNode(QInput, {
                         filled: "",
                         modelValue: username.value,
                         "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => username.value = $event),
@@ -2681,11 +2705,11 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
                         rules: [(val) => val && val.length > 0 || "dato obligatorio"]
                       }, {
                         prepend: withCtx(() => [
-                          createVNode(_component_q_icon, { name: "person" })
+                          createVNode(QIcon, { name: "person" })
                         ]),
                         _: 1
                       }, 8, ["modelValue", "color", "rules"]),
-                      createVNode(_component_q_input, {
+                      createVNode(QInput, {
                         filled: "",
                         type: pwd.value,
                         modelValue: clave.value,
@@ -2698,17 +2722,17 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
                         rules: [(val) => val && val.length > 0 || "dato obligatorio"]
                       }, {
                         prepend: withCtx(() => [
-                          createVNode(_component_q_icon, { name: "key" })
+                          createVNode(QIcon, { name: "key" })
                         ]),
                         append: withCtx(() => [
-                          createVNode(_component_q_btn, {
+                          createVNode(QBtn, {
                             flat: "",
                             dense: "",
                             size: "small",
                             onClick: _cache[2] || (_cache[2] = ($event) => changePWD())
                           }, {
                             default: withCtx(() => [
-                              createVNode(_component_q_icon, { name: "visibility" })
+                              createVNode(QIcon, { name: "visibility" })
                             ]),
                             _: 1
                           })
@@ -2716,7 +2740,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
                         _: 1
                       }, 8, ["type", "modelValue", "color", "rules"]),
                       createElementVNode("div", _hoisted_2$e, [
-                        loading.value ? (openBlock(), createBlock(_component_q_linear_progress, {
+                        loading.value ? (openBlock(), createBlock(QLinearProgress, {
                           key: 0,
                           dark: "",
                           rounded: "",
@@ -2724,7 +2748,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
                           color: "secondary",
                           class: "q-mb-sm"
                         })) : createCommentVNode("", true),
-                        createVNode(_component_q_btn, {
+                        createVNode(QBtn, {
                           class: "neon-btn-primary",
                           disable: loading.value,
                           icon: "person",
@@ -2741,7 +2765,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
                   }),
                   accept_oauth.value ? (openBlock(), createElementBlock("div", _hoisted_3$e, [
                     createElementVNode("div", _hoisted_4$9, [
-                      createVNode(_component_q_btn, {
+                      createVNode(QBtn, {
                         flat: "",
                         class: "q-mt-md q-pr-xs",
                         size: "sm",
@@ -2750,7 +2774,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
                         onClick: _cache[5] || (_cache[5] = ($event) => googleLogin())
                       }, {
                         default: withCtx(() => [
-                          createVNode(_component_q_icon, {
+                          createVNode(QIcon, {
                             name: "hive",
                             size: "xs",
                             left: ""
@@ -2906,35 +2930,30 @@ const _hoisted_1$k = {
   align: "right"
 };
 function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_q_card_section = resolveComponent("q-card-section");
   const _component_LTileLayer = resolveComponent("LTileLayer");
   const _component_LMarker = resolveComponent("LMarker");
   const _component_LMap = resolveComponent("LMap");
-  const _component_q_linear_progress = resolveComponent("q-linear-progress");
-  const _component_q_btn = resolveComponent("q-btn");
-  const _component_q_card = resolveComponent("q-card");
-  const _component_q_dialog = resolveComponent("q-dialog");
-  return openBlock(), createBlock(_component_q_dialog, {
+  return openBlock(), createBlock(QDialog, {
     modelValue: $setup.alert,
     "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $setup.alert = $event),
     persistent: "",
     square: ""
   }, {
     default: withCtx(() => [
-      createVNode(_component_q_card, {
+      createVNode(QCard, {
         flat: "",
         bordered: "",
         "vv-on:click": "checkClickSession()",
         style: { "min-width": "300px", "width": "500px" }
       }, {
         default: withCtx(() => [
-          createVNode(_component_q_card_section, { class: "q-pb-none" }, {
+          createVNode(QCardSection, { class: "q-pb-none" }, {
             default: withCtx(() => _cache[3] || (_cache[3] = [
               createElementVNode("div", { class: "text-h6 q-my-none" }, "Ubicacion geografica", -1)
             ])),
             _: 1
           }),
-          createVNode(_component_q_card_section, { class: "q-py-none" }, {
+          createVNode(QCardSection, { class: "q-py-none" }, {
             default: withCtx(() => [
               $setup.showMap ? (openBlock(), createBlock(_component_LMap, {
                 key: 0,
@@ -2958,10 +2977,10 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
             ]),
             _: 1
           }),
-          createVNode(_component_q_card_section, { class: "q-pt-none" }, {
+          createVNode(QCardSection, { class: "q-pt-none" }, {
             default: withCtx(() => [
               createElementVNode("div", _hoisted_1$k, [
-                $setup.loading ? (openBlock(), createBlock(_component_q_linear_progress, {
+                $setup.loading ? (openBlock(), createBlock(QLinearProgress, {
                   key: 0,
                   dark: "",
                   rounded: "",
@@ -2969,7 +2988,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
                   color: "secondary",
                   class: "q-mb-sm"
                 })) : createCommentVNode("", true),
-                createVNode(_component_q_btn, {
+                createVNode(QBtn, {
                   class: "q-mr-xs",
                   label: "limpiar",
                   color: "negative",
@@ -2978,7 +2997,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
                   flat: "",
                   onClick: _cache[0] || (_cache[0] = ($event) => $setup.limpiar())
                 }),
-                createVNode(_component_q_btn, {
+                createVNode(QBtn, {
                   label: "cerrar",
                   color: "positive",
                   icon: "check",
@@ -3160,46 +3179,33 @@ const _hoisted_17$2 = {
   align: "right"
 };
 function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_q_card_section = resolveComponent("q-card-section");
-  const _component_q_img = resolveComponent("q-img");
-  const _component_q_input = resolveComponent("q-input");
-  const _component_q_radio = resolveComponent("q-radio");
-  const _component_q_icon = resolveComponent("q-icon");
-  const _component_q_tooltip = resolveComponent("q-tooltip");
-  const _component_q_file = resolveComponent("q-file");
-  const _component_q_btn = resolveComponent("q-btn");
-  const _component_q_separator = resolveComponent("q-separator");
-  const _component_q_linear_progress = resolveComponent("q-linear-progress");
-  const _component_q_form = resolveComponent("q-form");
-  const _component_q_card = resolveComponent("q-card");
   const _component_Geo = resolveComponent("Geo");
-  const _component_q_dialog = resolveComponent("q-dialog");
-  return openBlock(), createBlock(_component_q_dialog, {
+  return openBlock(), createBlock(QDialog, {
     modelValue: $setup.alert,
     "onUpdate:modelValue": _cache[14] || (_cache[14] = ($event) => $setup.alert = $event),
     persistent: "",
     square: ""
   }, {
     default: withCtx(() => [
-      createVNode(_component_q_card, {
+      createVNode(QCard, {
         flat: "",
         bordered: "",
         "vv-on:click": "checkClickSession()"
       }, {
         default: withCtx(() => [
-          createVNode(_component_q_card_section, null, {
+          createVNode(QCardSection, null, {
             default: withCtx(() => _cache[15] || (_cache[15] = [
               createElementVNode("div", { class: "text-h6" }, " Editar Información Personal ", -1)
             ])),
             _: 1
           }),
-          createVNode(_component_q_card_section, { class: "q-pt-none" }, {
+          createVNode(QCardSection, { class: "q-pt-none" }, {
             default: withCtx(() => [
-              createVNode(_component_q_form, { onSubmit: $setup.onSubmit }, {
+              createVNode(QForm, { onSubmit: $setup.onSubmit }, {
                 default: withCtx(() => [
                   createElementVNode("div", _hoisted_1$j, [
                     createElementVNode("div", _hoisted_2$d, [
-                      $setup.foto_64 ? (openBlock(), createBlock(_component_q_img, {
+                      $setup.foto_64 ? (openBlock(), createBlock(QImg, {
                         key: 0,
                         class: "zoomer",
                         src: $setup.foto_64,
@@ -3207,7 +3213,7 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
                       }, null, 8, ["src"])) : createCommentVNode("", true)
                     ]),
                     createElementVNode("div", _hoisted_3$d, [
-                      createVNode(_component_q_input, {
+                      createVNode(QInput, {
                         outlined: "",
                         modelValue: $setup.input.nombres,
                         "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.input.nombres = $event),
@@ -3220,7 +3226,7 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
                       }, null, 8, ["modelValue", "rules"])
                     ]),
                     createElementVNode("div", _hoisted_4$8, [
-                      createVNode(_component_q_input, {
+                      createVNode(QInput, {
                         outlined: "",
                         modelValue: $setup.input.apellido1,
                         "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.input.apellido1 = $event),
@@ -3233,7 +3239,7 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
                       }, null, 8, ["modelValue", "rules"])
                     ]),
                     createElementVNode("div", _hoisted_5$6, [
-                      createVNode(_component_q_input, {
+                      createVNode(QInput, {
                         outlined: "",
                         modelValue: $setup.input.apellido2,
                         "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $setup.input.apellido2 = $event),
@@ -3245,7 +3251,7 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
                       }, null, 8, ["modelValue", "rules"])
                     ]),
                     createElementVNode("div", _hoisted_6$5, [
-                      createVNode(_component_q_input, {
+                      createVNode(QInput, {
                         outlined: "",
                         modelValue: $setup.input.celular,
                         "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $setup.input.celular = $event),
@@ -3257,7 +3263,7 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
                       }, null, 8, ["modelValue", "rules"])
                     ]),
                     createElementVNode("div", _hoisted_7$3, [
-                      createVNode(_component_q_input, {
+                      createVNode(QInput, {
                         outlined: "",
                         modelValue: $setup.input.correo,
                         "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => $setup.input.correo = $event),
@@ -3269,7 +3275,7 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
                       }, null, 8, ["modelValue", "rules"])
                     ]),
                     createElementVNode("div", _hoisted_8$3, [
-                      createVNode(_component_q_input, {
+                      createVNode(QInput, {
                         outlined: "",
                         modelValue: $setup.input.documento,
                         "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => $setup.input.documento = $event),
@@ -3281,7 +3287,7 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
                       }, null, 8, ["modelValue", "rules"])
                     ]),
                     createElementVNode("div", _hoisted_9$3, [
-                      createVNode(_component_q_input, {
+                      createVNode(QInput, {
                         outlined: "",
                         modelValue: $setup.input.direccion,
                         "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => $setup.input.direccion = $event),
@@ -3293,13 +3299,13 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
                       }, null, 8, ["modelValue", "rules"])
                     ]),
                     createElementVNode("div", _hoisted_10$2, [
-                      createVNode(_component_q_radio, {
+                      createVNode(QRadio, {
                         modelValue: $setup.input.sexo,
                         "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => $setup.input.sexo = $event),
                         val: "F",
                         label: "F"
                       }, null, 8, ["modelValue"]),
-                      createVNode(_component_q_radio, {
+                      createVNode(QRadio, {
                         modelValue: $setup.input.sexo,
                         "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => $setup.input.sexo = $event),
                         val: "M",
@@ -3307,7 +3313,7 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
                       }, null, 8, ["modelValue"])
                     ]),
                     createElementVNode("div", _hoisted_11$2, [
-                      createVNode(_component_q_file, {
+                      createVNode(QFile, {
                         style: { "min-width": "50px" },
                         clearable: "",
                         modelValue: $setup.foto_file,
@@ -3326,10 +3332,10 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
                         onRejected: $setup.onRejected
                       }, {
                         prepend: withCtx(() => [
-                          createVNode(_component_q_icon, { name: "upload" })
+                          createVNode(QIcon, { name: "upload" })
                         ]),
                         default: withCtx(() => [
-                          createVNode(_component_q_tooltip, null, {
+                          createVNode(QTooltip, null, {
                             default: withCtx(() => _cache[16] || (_cache[16] = [
                               createTextVNode(" Seleccionar foto de perfil ")
                             ])),
@@ -3340,7 +3346,7 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
                       }, 8, ["modelValue", "disable", "onRejected"])
                     ]),
                     createElementVNode("div", _hoisted_12$2, [
-                      createVNode(_component_q_btn, {
+                      createVNode(QBtn, {
                         color: "grey",
                         icon: "fmd_good",
                         dense: "",
@@ -3357,13 +3363,13 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
                     ])
                   ]),
                   createElementVNode("div", _hoisted_14$2, [
-                    createVNode(_component_q_separator, {
+                    createVNode(QSeparator, {
                       color: "green",
                       class: "q-mt-md q-mb-xs"
                     }),
                     createElementVNode("div", _hoisted_15$2, [
                       createElementVNode("div", _hoisted_16$2, [
-                        createVNode(_component_q_input, {
+                        createVNode(QInput, {
                           outlined: "",
                           modelValue: $setup.input.password,
                           "onUpdate:modelValue": _cache[12] || (_cache[12] = ($event) => $setup.input.password = $event),
@@ -3378,7 +3384,7 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
                     ])
                   ]),
                   createElementVNode("div", _hoisted_17$2, [
-                    $setup.loading ? (openBlock(), createBlock(_component_q_linear_progress, {
+                    $setup.loading ? (openBlock(), createBlock(QLinearProgress, {
                       key: 0,
                       dark: "",
                       rounded: "",
@@ -3386,7 +3392,7 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
                       color: "secondary",
                       class: "q-mb-sm"
                     })) : createCommentVNode("", true),
-                    createVNode(_component_q_btn, {
+                    createVNode(QBtn, {
                       disable: $setup.loading,
                       label: "Guardar",
                       class: "q-mr-xs",
@@ -3396,7 +3402,7 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
                       square: "",
                       outline: ""
                     }, null, 8, ["disable"]),
-                    createVNode(_component_q_btn, {
+                    createVNode(QBtn, {
                       disable: $setup.loading,
                       label: "cerrar",
                       color: "negative",
@@ -3550,37 +3556,29 @@ const _hoisted_9$2 = {
   style: { "white-space": "nowrap" }
 };
 function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_q_avatar = resolveComponent("q-avatar");
-  const _component_q_tooltip = resolveComponent("q-tooltip");
-  const _component_q_toggle = resolveComponent("q-toggle");
-  const _component_q_btn = resolveComponent("q-btn");
   const _component_extension_btn = resolveComponent("extension_btn");
-  const _component_q_separator = resolveComponent("q-separator");
-  const _component_q_img = resolveComponent("q-img");
-  const _component_q_menu = resolveComponent("q-menu");
   const _component_EditarPerfil = resolveComponent("EditarPerfil");
-  const _directive_close_popup = resolveDirective("close-popup");
   return openBlock(), createElementBlock("div", _hoisted_1$i, [
-    createVNode(_component_q_btn, {
+    createVNode(QBtn, {
       flat: "",
       class: "q-pl-xs q-pr-none",
       onClick: $setup.subscribir
     }, {
       default: withCtx(() => [
-        createVNode(_component_q_avatar, { size: "26px" }, {
+        createVNode(QAvatar, { size: "26px" }, {
           default: withCtx(() => _cache[3] || (_cache[3] = [
             createElementVNode("img", { src: "https://cdn.quasar.dev/img/boy-avatar.png" }, null, -1)
           ])),
           _: 1
         }),
         createElementVNode("span", _hoisted_2$c, toDisplayString($setup.datos.username), 1),
-        createVNode(_component_q_tooltip, null, {
+        createVNode(QTooltip, null, {
           default: withCtx(() => _cache[4] || (_cache[4] = [
             createTextVNode(" Perfil ")
           ])),
           _: 1
         }),
-        createVNode(_component_q_menu, { square: "" }, {
+        createVNode(QMenu, { square: "" }, {
           default: withCtx(() => [
             createElementVNode("div", _hoisted_3$c, [
               createElementVNode("div", _hoisted_4$7, [
@@ -3588,7 +3586,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                 createElementVNode("p", _hoisted_5$5, toDisplayString($setup.datos.usuario), 1),
                 createElementVNode("p", _hoisted_6$4, toDisplayString($setup.parseFecha($setup.datos.last_login)), 1),
                 createElementVNode("p", _hoisted_7$2, toDisplayString($setup.datos.roles), 1),
-                createVNode(_component_q_toggle, {
+                createVNode(QToggle, {
                   modelValue: $setup.store.thema_cuaderno,
                   "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.store.thema_cuaderno = $event),
                   color: "primary",
@@ -3596,7 +3594,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                   "unchecked-icon": "brightness_7",
                   "checked-icon": "dark_mode"
                 }, null, 8, ["modelValue"]),
-                withDirectives(createVNode(_component_q_btn, {
+                withDirectives(createVNode(QBtn, {
                   color: "green",
                   label: "Editar",
                   outline: "",
@@ -3606,19 +3604,19 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                   stretch: "",
                   onClick: _cache[1] || (_cache[1] = ($event) => $setup.openEdit())
                 }, null, 512), [
-                  [_directive_close_popup]
+                  [ClosePopup]
                 ]),
                 createVNode(_component_extension_btn)
               ]),
-              createVNode(_component_q_separator, {
+              createVNode(QSeparator, {
                 vertical: "",
                 inset: "",
                 class: "q-mx-lg"
               }),
               createElementVNode("div", _hoisted_8$2, [
-                createVNode(_component_q_avatar, { size: "72px" }, {
+                createVNode(QAvatar, { size: "72px" }, {
                   default: withCtx(() => [
-                    $setup.foto_64 ? (openBlock(), createBlock(_component_q_img, {
+                    $setup.foto_64 ? (openBlock(), createBlock(QImg, {
                       key: 0,
                       src: $setup.foto_64,
                       "spinner-color": "white"
@@ -3628,7 +3626,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                 }),
                 _cache[6] || (_cache[6] = createElementVNode("p", null, null, -1)),
                 createElementVNode("div", _hoisted_9$2, toDisplayString($setup.datos.usuario), 1),
-                withDirectives(createVNode(_component_q_btn, {
+                withDirectives(createVNode(QBtn, {
                   color: "negative",
                   label: "Salir",
                   icon: "block",
@@ -3638,7 +3636,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                   stretch: "",
                   onClick: _cache[2] || (_cache[2] = ($event) => $setup.logout())
                 }, null, 512), [
-                  [_directive_close_popup]
+                  [ClosePopup]
                 ])
               ])
             ])
@@ -3707,8 +3705,7 @@ const _sfc_main$w = /* @__PURE__ */ defineComponent({
       void getmesnuss();
     });
     return (_ctx, _cache) => {
-      const _component_q_select = resolveComponent("q-select");
-      return show.value ? (openBlock(), createBlock(_component_q_select, {
+      return show.value ? (openBlock(), createBlock(QSelect, {
         key: 0,
         options: rolesunidad.value,
         modelValue: rol_unidad.value,
@@ -3806,43 +3803,34 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
       open
     });
     return (_ctx, _cache) => {
-      const _component_q_space = resolveComponent("q-space");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_separator = resolveComponent("q-separator");
-      const _component_q_input = resolveComponent("q-input");
-      const _component_q_card_actions = resolveComponent("q-card-actions");
-      const _component_q_card = resolveComponent("q-card");
-      const _component_q_dialog = resolveComponent("q-dialog");
-      const _directive_close_popup = resolveDirective("close-popup");
-      return openBlock(), createBlock(_component_q_dialog, {
+      return openBlock(), createBlock(QDialog, {
         modelValue: alert.value,
         "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => alert.value = $event),
         persistent: "",
         square: ""
       }, {
         default: withCtx(() => [
-          createVNode(_component_q_card, { xstyle: "min-width: 630px" }, {
+          createVNode(QCard, { xstyle: "min-width: 630px" }, {
             default: withCtx(() => [
-              createVNode(_component_q_card_section, { class: "row items-center q-pb-xs" }, {
+              createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
                 default: withCtx(() => [
                   _cache[5] || (_cache[5] = createElementVNode("div", { class: "text-h6" }, "Sacar Nuevo Ticket", -1)),
-                  createVNode(_component_q_space),
-                  withDirectives((openBlock(), createBlock(_component_q_btn, { flat: "" }, {
+                  createVNode(QSpace),
+                  withDirectives((openBlock(), createBlock(QBtn, { flat: "" }, {
                     default: withCtx(() => _cache[4] || (_cache[4] = [
                       createElementVNode("b", null, "x", -1)
                     ])),
                     _: 1
                   })), [
-                    [_directive_close_popup]
+                    [ClosePopup]
                   ])
                 ]),
                 _: 1
               }),
-              createVNode(_component_q_card_section, { class: "q-pt-none" }, {
+              createVNode(QCardSection, { class: "q-pt-none" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_separator, { class: "q-mt-none q-mb-lg" }),
-                  createVNode(_component_q_input, {
+                  createVNode(QSeparator, { class: "q-mt-none q-mb-lg" }),
+                  createVNode(QInput, {
                     modelValue: problema.value,
                     "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => problema.value = $event),
                     modelModifiers: { trim: true },
@@ -3860,16 +3848,16 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
                 ]),
                 _: 1
               }),
-              createVNode(_component_q_card_actions, { align: "right" }, {
+              createVNode(QCardActions, { align: "right" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_btn, {
+                  createVNode(QBtn, {
                     flat: "",
                     loading: loading.value,
                     label: "cerrar",
                     color: "grey",
                     onClick: _cache[1] || (_cache[1] = ($event) => close())
                   }, null, 8, ["loading"]),
-                  createVNode(_component_q_btn, {
+                  createVNode(QBtn, {
                     flat: "",
                     loading: loading.value,
                     label: "Reportar",
@@ -3897,16 +3885,13 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
       refReportBug.value.open();
     };
     return (_ctx, _cache) => {
-      const _component_q_fab_action = resolveComponent("q-fab-action");
-      const _component_q_fab = resolveComponent("q-fab");
-      const _component_q_page_sticky = resolveComponent("q-page-sticky");
       return openBlock(), createElementBlock(Fragment, null, [
-        createVNode(_component_q_page_sticky, {
+        createVNode(QPageSticky, {
           position: "bottom-right",
           offset: [18, 32]
         }, {
           default: withCtx(() => [
-            createVNode(_component_q_fab, {
+            createVNode(QFab, {
               modelValue: fabRight.value,
               "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => fabRight.value = $event),
               "vertical-actions-align": "right",
@@ -3916,7 +3901,7 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
               direction: "up"
             }, {
               default: withCtx(() => [
-                createVNode(_component_q_fab_action, {
+                createVNode(QFabAction, {
                   square: "",
                   "label-position": "left",
                   color: "orange",
@@ -3940,9 +3925,8 @@ const _sfc_main$t = /* @__PURE__ */ defineComponent({
 });
 const _sfc_main$s = {};
 function _sfc_render$2(_ctx, _cache) {
-  const _component_q_toolbar_title = resolveComponent("q-toolbar-title");
   return openBlock(), createElementBlock("div", null, [
-    createVNode(_component_q_toolbar_title, {
+    createVNode(QToolbarTitle, {
       shrink: "",
       class: "text-weight-bold neon-logo"
     }, {
@@ -3956,8 +3940,7 @@ function _sfc_render$2(_ctx, _cache) {
 const app_name = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$2]]);
 const _sfc_main$r = {};
 function _sfc_render$1(_ctx, _cache) {
-  const _component_q_img = resolveComponent("q-img");
-  return openBlock(), createBlock(_component_q_img, {
+  return openBlock(), createBlock(QImg, {
     src: "wapiton.png",
     alt: "logo",
     style: { "height": "20px", "width": "20px" }
@@ -3978,9 +3961,9 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     const foto_64 = ref("");
     const refusuarios_conectados = ref();
     const router = useRouter();
-    const Login = defineAsyncComponent(() => import("./login-index-CUOMmsf0.js"));
+    const Login = defineAsyncComponent(() => import("./login-index-CsmMCJ7k.js"));
     const usuarios_conectados = defineAsyncComponent(
-      () => import("./usuarios_conectados-DoW0VN66.js")
+      () => import("./usuarios_conectados-DQedHGot.js")
     );
     const showConectados = ref(false);
     const pendingOpenConectados = ref(false);
@@ -4038,41 +4021,20 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
       }
     });
     return (_ctx, _cache) => {
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_tooltip = resolveComponent("q-tooltip");
-      const _component_q_badge = resolveComponent("q-badge");
-      const _component_q_space = resolveComponent("q-space");
-      const _component_q_toggle = resolveComponent("q-toggle");
-      const _component_q_toolbar = resolveComponent("q-toolbar");
-      const _component_q_header = resolveComponent("q-header");
-      const _component_q_img = resolveComponent("q-img");
-      const _component_q_avatar = resolveComponent("q-avatar");
-      const _component_q_item = resolveComponent("q-item");
-      const _component_q_linear_progress = resolveComponent("q-linear-progress");
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_item_section = resolveComponent("q-item-section");
-      const _component_q_item_label = resolveComponent("q-item-label");
-      const _component_q_separator = resolveComponent("q-separator");
-      const _component_q_list = resolveComponent("q-list");
-      const _component_q_scroll_area = resolveComponent("q-scroll-area");
-      const _component_q_drawer = resolveComponent("q-drawer");
       const _component_router_view = resolveComponent("router-view");
-      const _component_q_page_container = resolveComponent("q-page-container");
-      const _component_q_layout = resolveComponent("q-layout");
-      const _directive_ripple = resolveDirective("ripple");
-      return openBlock(), createBlock(_component_q_layout, {
+      return openBlock(), createBlock(QLayout, {
         view: "hHh Lpr lff",
         container: "",
         style: { "height": "100vh" }
       }, {
         default: withCtx(() => [
-          createVNode(_component_q_header, {
+          createVNode(QHeader, {
             class: normalizeClass(_ctx.$q.dark.isActive ? "dark-hea" : "bg-primary")
           }, {
             default: withCtx(() => [
-              createVNode(_component_q_toolbar, { class: "text-toolbar" }, {
+              createVNode(QToolbar, { class: "text-toolbar" }, {
                 default: withCtx(() => [
-                  unref(store).dataUser.usuario ? (openBlock(), createBlock(_component_q_btn, {
+                  unref(store).dataUser.usuario ? (openBlock(), createBlock(QBtn, {
                     key: 0,
                     flat: "",
                     dense: "",
@@ -4082,7 +4044,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
                     icon: "menu"
                   })) : createCommentVNode("", true),
                   createVNode(app_logo),
-                  _ctx.$q.screen.gt.xs && unref(store).dataUser.usuario ? (openBlock(), createBlock(_component_q_btn, {
+                  _ctx.$q.screen.gt.xs && unref(store).dataUser.usuario ? (openBlock(), createBlock(QBtn, {
                     key: 1,
                     flat: "",
                     "no-caps": "",
@@ -4096,7 +4058,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   })) : createCommentVNode("", true),
-                  createVNode(_component_q_badge, {
+                  createVNode(QBadge, {
                     rounded: "",
                     color: unref(colorWs)(unref(store).ws_noti_status),
                     id: "tuto_icon_ws",
@@ -4104,7 +4066,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx(() => [
                       _ctx.$q.screen.width > 600 ? (openBlock(), createElementBlock("span", _hoisted_1$g, toDisplayString(unref(store).ws_total_conectados) + " conexiones ", 1)) : (openBlock(), createElementBlock("span", _hoisted_2$b, toDisplayString(unref(store).ws_total_conectados), 1)),
-                      createVNode(_component_q_tooltip, { class: "bg-purple" }, {
+                      createVNode(QTooltip, { class: "bg-purple" }, {
                         default: withCtx(() => [
                           createElementVNode("span", null, "Estado de notificaciones (" + toDisplayString(unref(store).ws_conectados) + ") ", 1)
                         ]),
@@ -4113,12 +4075,12 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   }, 8, ["color"]),
-                  createVNode(_component_q_space),
+                  createVNode(QSpace),
                   unref(store).dataUser.usuario ? (openBlock(), createBlock(_sfc_main$w, {
                     key: 2,
                     id: "tuto_rol_select"
                   })) : createCommentVNode("", true),
-                  createVNode(_component_q_toggle, {
+                  createVNode(QToggle, {
                     modelValue: _ctx.$q.dark.isActive,
                     "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => _ctx.$q.dark.isActive = $event),
                     color: _ctx.$q.dark ? "black" : "white",
@@ -4142,7 +4104,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
             ]),
             _: 1
           }, 8, ["class"]),
-          unref(store).dataUser.usuario ? (openBlock(), createBlock(_component_q_drawer, {
+          unref(store).dataUser.usuario ? (openBlock(), createBlock(QDrawer, {
             key: 0,
             modelValue: leftDrawerOpen.value,
             "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => leftDrawerOpen.value = $event),
@@ -4152,18 +4114,18 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
             width: 240
           }, {
             default: withCtx(() => [
-              createVNode(_component_q_scroll_area, { class: "fit" }, {
+              createVNode(QScrollArea, { class: "fit" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_list, {
+                  createVNode(QList, {
                     padding: "",
                     id: "tuto_menu_element"
                   }, {
                     default: withCtx(() => [
-                      createVNode(_component_q_item, { class: "justify-center" }, {
+                      createVNode(QItem, { class: "justify-center" }, {
                         default: withCtx(() => [
-                          foto_64.value ? (openBlock(), createBlock(_component_q_avatar, { key: 0 }, {
+                          foto_64.value ? (openBlock(), createBlock(QAvatar, { key: 0 }, {
                             default: withCtx(() => [
-                              createVNode(_component_q_img, {
+                              createVNode(QImg, {
                                 src: foto_64.value,
                                 "spinner-color": "white"
                               }, null, 8, ["src"])
@@ -4173,7 +4135,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
                         ]),
                         _: 1
                       }),
-                      unref(store).loading_menus ? (openBlock(), createBlock(_component_q_linear_progress, {
+                      unref(store).loading_menus ? (openBlock(), createBlock(QLinearProgress, {
                         key: 0,
                         dark: "",
                         size: "xs",
@@ -4187,24 +4149,24 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
                             return openBlock(), createElementBlock(Fragment, {
                               key: link.text
                             }, [
-                              withDirectives((openBlock(), createBlock(_component_q_item, {
+                              withDirectives((openBlock(), createBlock(QItem, {
                                 clickable: "",
                                 to: link.path,
                                 "active-class": "text-secondary"
                               }, {
                                 default: withCtx(() => [
-                                  createVNode(_component_q_item_section, { avatar: "" }, {
+                                  createVNode(QItemSection, { avatar: "" }, {
                                     default: withCtx(() => [
-                                      createVNode(_component_q_icon, {
+                                      createVNode(QIcon, {
                                         color: _ctx.$q.dark.isActive ? "grey" : link.color,
                                         name: link.icon
                                       }, null, 8, ["color", "name"])
                                     ]),
                                     _: 2
                                   }, 1024),
-                                  createVNode(_component_q_item_section, null, {
+                                  createVNode(QItemSection, null, {
                                     default: withCtx(() => [
-                                      createVNode(_component_q_item_label, null, {
+                                      createVNode(QItemLabel, null, {
                                         default: withCtx(() => [
                                           createTextVNode(toDisplayString(link.label), 1)
                                         ]),
@@ -4213,9 +4175,9 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
                                     ]),
                                     _: 2
                                   }, 1024),
-                                  createVNode(_component_q_item_section, { avatar: "" }, {
+                                  createVNode(QItemSection, { avatar: "" }, {
                                     default: withCtx(() => [
-                                      createVNode(_component_q_avatar, {
+                                      createVNode(QAvatar, {
                                         size: "md",
                                         icon: "arrow_right"
                                       })
@@ -4225,9 +4187,9 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
                                 ]),
                                 _: 2
                               }, 1032, ["to"])), [
-                                [_directive_ripple]
+                                [Ripple]
                               ]),
-                              Number(i) + 1 == t.length ? (openBlock(), createBlock(_component_q_separator, {
+                              Number(i) + 1 == t.length ? (openBlock(), createBlock(QSeparator, {
                                 key: 0,
                                 class: "q-my-md"
                               })) : createCommentVNode("", true)
@@ -4253,7 +4215,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
             ref_key: "refusuarios_conectados",
             ref: refusuarios_conectados
           }, null, 512)) : createCommentVNode("", true),
-          createVNode(_component_q_page_container, null, {
+          createVNode(QPageContainer, null, {
             default: withCtx(() => [
               !unref(store).dataUser.usuario ? (openBlock(), createBlock(unref(Login), { key: 0 })) : (openBlock(), createBlock(_component_router_view, { key: 1 })),
               createVNode(_sfc_main$t)
@@ -4473,43 +4435,21 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
       $q.dark.set(true);
     });
     return (_ctx, _cache) => {
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_tab = resolveComponent("q-tab");
-      const _component_q_tabs = resolveComponent("q-tabs");
-      const _component_q_space = resolveComponent("q-space");
-      const _component_q_avatar = resolveComponent("q-avatar");
-      const _component_q_toolbar = resolveComponent("q-toolbar");
-      const _component_q_header = resolveComponent("q-header");
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_card = resolveComponent("q-card");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_td = resolveComponent("q-td");
-      const _component_q_chip = resolveComponent("q-chip");
-      const _component_q_tooltip = resolveComponent("q-tooltip");
-      const _component_q_table = resolveComponent("q-table");
-      const _component_q_page = resolveComponent("q-page");
-      const _component_q_page_container = resolveComponent("q-page-container");
-      const _component_q_layout = resolveComponent("q-layout");
-      const _component_q_input = resolveComponent("q-input");
-      const _component_q_select = resolveComponent("q-select");
-      const _component_q_card_actions = resolveComponent("q-card-actions");
-      const _component_q_dialog = resolveComponent("q-dialog");
-      const _directive_close_popup = resolveDirective("close-popup");
       return openBlock(), createElementBlock(Fragment, null, [
-        createVNode(_component_q_layout, {
+        createVNode(QLayout, {
           view: "hHh LpR fFf",
           class: "neon-layout"
         }, {
           default: withCtx(() => [
-            createVNode(_component_q_header, {
+            createVNode(QHeader, {
               class: "neon-header",
               elevated: ""
             }, {
               default: withCtx(() => [
-                createVNode(_component_q_toolbar, { style: { "min-height": "56px", "padding": "0 20px", "gap": "12px" } }, {
+                createVNode(QToolbar, { style: { "min-height": "56px", "padding": "0 20px", "gap": "12px" } }, {
                   default: withCtx(() => [
                     createElementVNode("div", _hoisted_1$f, [
-                      createVNode(_component_q_icon, {
+                      createVNode(QIcon, {
                         name: "music_note",
                         color: "pink",
                         size: "22px",
@@ -4518,7 +4458,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                       _cache[11] || (_cache[11] = createElementVNode("span", { class: "neon-logo" }, "NIGHTFLOW", -1)),
                       _cache[12] || (_cache[12] = createElementVNode("span", { class: "neon-logo-badge" }, "AR", -1))
                     ]),
-                    createVNode(_component_q_tabs, {
+                    createVNode(QTabs, {
                       modelValue: activeTab.value,
                       "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => activeTab.value = $event),
                       class: "neon-nav-tabs",
@@ -4528,7 +4468,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx(() => [
                         (openBlock(), createElementBlock(Fragment, null, renderList(navItems, (item) => {
-                          return createVNode(_component_q_tab, {
+                          return createVNode(QTab, {
                             key: item.name,
                             name: item.name,
                             icon: item.icon,
@@ -4538,12 +4478,12 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                       ]),
                       _: 1
                     }, 8, ["modelValue"]),
-                    createVNode(_component_q_space),
+                    createVNode(QSpace),
                     _cache[13] || (_cache[13] = createElementVNode("div", { class: "neon-user-info q-mr-sm" }, [
                       createElementVNode("span", { class: "neon-username" }, "Admin"),
                       createElementVNode("span", { class: "neon-caja-label" }, "Caja: $0")
                     ], -1)),
-                    createVNode(_component_q_avatar, {
+                    createVNode(QAvatar, {
                       class: "neon-avatar",
                       size: "38px",
                       icon: "person"
@@ -4554,9 +4494,9 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
               ]),
               _: 1
             }),
-            createVNode(_component_q_page_container, null, {
+            createVNode(QPageContainer, null, {
               default: withCtx(() => [
-                createVNode(_component_q_page, { style: { "padding": "28px 24px", "max-width": "1200px", "margin": "0 auto" } }, {
+                createVNode(QPage, { style: { "padding": "28px 24px", "max-width": "1200px", "margin": "0 auto" } }, {
                   default: withCtx(() => [
                     _cache[27] || (_cache[27] = createElementVNode("div", { class: "q-mb-lg neon-fade-in" }, [
                       createElementVNode("h1", { class: "neon-title q-ma-none" }, "Dashboard"),
@@ -4564,12 +4504,12 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                     ], -1)),
                     createElementVNode("div", _hoisted_2$a, [
                       createElementVNode("div", _hoisted_3$a, [
-                        createVNode(_component_q_card, {
+                        createVNode(QCard, {
                           class: "neon-card neon-card--purple",
                           flat: ""
                         }, {
                           default: withCtx(() => [
-                            createVNode(_component_q_card_section, {
+                            createVNode(QCardSection, {
                               class: "row items-start justify-between no-wrap",
                               style: { "padding": "20px" }
                             }, {
@@ -4578,7 +4518,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                                   _cache[15] || (_cache[15] = createElementVNode("div", { class: "neon-metric-label" }, "Reservas Hoy", -1)),
                                   createElementVNode("div", _hoisted_4$6, toDisplayString(metrics.value.reservasHoy), 1),
                                   createElementVNode("div", _hoisted_5$4, [
-                                    createVNode(_component_q_icon, {
+                                    createVNode(QIcon, {
                                       name: "arrow_upward",
                                       size: "12px"
                                     }),
@@ -4586,7 +4526,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                                   ])
                                 ]),
                                 createElementVNode("div", _hoisted_6$3, [
-                                  createVNode(_component_q_icon, {
+                                  createVNode(QIcon, {
                                     name: "event_seat",
                                     size: "22px"
                                   })
@@ -4599,12 +4539,12 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                         })
                       ]),
                       createElementVNode("div", _hoisted_7$1, [
-                        createVNode(_component_q_card, {
+                        createVNode(QCard, {
                           class: "neon-card neon-card--cyan",
                           flat: ""
                         }, {
                           default: withCtx(() => [
-                            createVNode(_component_q_card_section, {
+                            createVNode(QCardSection, {
                               class: "row items-start justify-between no-wrap",
                               style: { "padding": "20px" }
                             }, {
@@ -4615,7 +4555,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                                   createElementVNode("div", _hoisted_9$1, "Capacidad total: " + toDisplayString(metrics.value.totalMesas), 1)
                                 ]),
                                 createElementVNode("div", _hoisted_10$1, [
-                                  createVNode(_component_q_icon, {
+                                  createVNode(QIcon, {
                                     name: "percent",
                                     size: "22px"
                                   })
@@ -4628,12 +4568,12 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                         })
                       ]),
                       createElementVNode("div", _hoisted_11$1, [
-                        createVNode(_component_q_card, {
+                        createVNode(QCard, {
                           class: "neon-card neon-card--green",
                           flat: ""
                         }, {
                           default: withCtx(() => [
-                            createVNode(_component_q_card_section, {
+                            createVNode(QCardSection, {
                               class: "row items-start justify-between no-wrap",
                               style: { "padding": "20px" }
                             }, {
@@ -4642,7 +4582,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                                   _cache[18] || (_cache[18] = createElementVNode("div", { class: "neon-metric-label" }, "Ingresos Est.", -1)),
                                   createElementVNode("div", _hoisted_12$1, "$ " + toDisplayString(formatNumber2(metrics.value.ingresos)), 1),
                                   createElementVNode("div", _hoisted_13$1, [
-                                    createVNode(_component_q_icon, {
+                                    createVNode(QIcon, {
                                       name: "arrow_upward",
                                       size: "12px"
                                     }),
@@ -4650,7 +4590,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                                   ])
                                 ]),
                                 createElementVNode("div", _hoisted_14$1, [
-                                  createVNode(_component_q_icon, {
+                                  createVNode(QIcon, {
                                     name: "attach_money",
                                     size: "22px"
                                   })
@@ -4663,12 +4603,12 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                         })
                       ]),
                       createElementVNode("div", _hoisted_15$1, [
-                        createVNode(_component_q_card, {
+                        createVNode(QCard, {
                           class: "neon-card neon-card--gold neon-pulse-gold",
                           flat: ""
                         }, {
                           default: withCtx(() => [
-                            createVNode(_component_q_card_section, {
+                            createVNode(QCardSection, {
                               class: "row items-start justify-between no-wrap",
                               style: { "padding": "20px" }
                             }, {
@@ -4679,7 +4619,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                                   _cache[20] || (_cache[20] = createElementVNode("div", { class: "neon-metric-sub" }, "Mesas exclusivas", -1))
                                 ]),
                                 createElementVNode("div", _hoisted_17$1, [
-                                  createVNode(_component_q_icon, {
+                                  createVNode(QIcon, {
                                     name: "workspace_premium",
                                     size: "22px"
                                   })
@@ -4694,31 +4634,31 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                     ]),
                     createElementVNode("div", _hoisted_18$1, [
                       createElementVNode("div", _hoisted_19$1, [
-                        createVNode(_component_q_card, {
+                        createVNode(QCard, {
                           class: "neon-card",
                           flat: "",
                           style: { "height": "100%" }
                         }, {
                           default: withCtx(() => [
-                            createVNode(_component_q_card_section, { class: "neon-card-section" }, {
+                            createVNode(QCardSection, { class: "neon-card-section" }, {
                               default: withCtx(() => [
                                 _cache[21] || (_cache[21] = createElementVNode("div", { class: "neon-card-title q-mb-md" }, "Acciones Rápidas", -1)),
                                 createElementVNode("div", _hoisted_20$1, [
-                                  createVNode(_component_q_btn, {
+                                  createVNode(QBtn, {
                                     class: "neon-btn-primary full-width",
                                     icon: "add",
                                     label: "Nueva Reserva",
                                     onClick: openNuevaReserva,
                                     "no-caps": ""
                                   }),
-                                  createVNode(_component_q_btn, {
+                                  createVNode(QBtn, {
                                     class: "neon-btn-secondary full-width",
                                     icon: "visibility",
                                     label: "Ver Mapa de Mesas",
                                     onClick: _cache[1] || (_cache[1] = ($event) => activeTab.value = "mesas"),
                                     "no-caps": ""
                                   }),
-                                  createVNode(_component_q_btn, {
+                                  createVNode(QBtn, {
                                     class: "neon-btn-purple full-width",
                                     icon: "calendar_month",
                                     label: "Crear Evento",
@@ -4734,12 +4674,12 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                         })
                       ]),
                       createElementVNode("div", _hoisted_21, [
-                        createVNode(_component_q_card, {
+                        createVNode(QCard, {
                           class: "neon-card",
                           flat: ""
                         }, {
                           default: withCtx(() => [
-                            createVNode(_component_q_card_section, { class: "neon-card-section" }, {
+                            createVNode(QCardSection, { class: "neon-card-section" }, {
                               default: withCtx(() => [
                                 createElementVNode("div", _hoisted_22, [
                                   _cache[23] || (_cache[23] = createElementVNode("span", { class: "neon-card-title" }, "Reservas Recientes", -1)),
@@ -4748,13 +4688,13 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                                     onClick: _cache[2] || (_cache[2] = ($event) => activeTab.value = "reservas")
                                   }, [
                                     _cache[22] || (_cache[22] = createTextVNode(" Ver todas ")),
-                                    createVNode(_component_q_icon, {
+                                    createVNode(QIcon, {
                                       name: "arrow_forward",
                                       size: "14px"
                                     })
                                   ])
                                 ]),
-                                createVNode(_component_q_table, {
+                                createVNode(QTable, {
                                   rows: reservasRecientes.value,
                                   columns: columnas2,
                                   class: "neon-table",
@@ -4764,7 +4704,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                                   "row-key": "id"
                                 }, {
                                   "body-cell-cliente": withCtx((props) => [
-                                    createVNode(_component_q_td, { props }, {
+                                    createVNode(QTd, { props }, {
                                       default: withCtx(() => [
                                         createElementVNode("div", _hoisted_23, toDisplayString(props.row.cliente), 1)
                                       ]),
@@ -4772,9 +4712,9 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                                     }, 1032, ["props"])
                                   ]),
                                   "body-cell-mesa": withCtx((props) => [
-                                    createVNode(_component_q_td, { props }, {
+                                    createVNode(QTd, { props }, {
                                       default: withCtx(() => [
-                                        createVNode(_component_q_chip, {
+                                        createVNode(QChip, {
                                           class: normalizeClass([
                                             "neon-chip",
                                             props.row.esVip ? "neon-chip--gold" : "neon-chip--purple"
@@ -4783,7 +4723,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                                           outline: ""
                                         }, {
                                           default: withCtx(() => [
-                                            props.row.esVip ? (openBlock(), createBlock(_component_q_icon, {
+                                            props.row.esVip ? (openBlock(), createBlock(QIcon, {
                                               key: 0,
                                               name: "workspace_premium",
                                               size: "10px",
@@ -4798,7 +4738,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                                     }, 1032, ["props"])
                                   ]),
                                   "body-cell-hora": withCtx((props) => [
-                                    createVNode(_component_q_td, { props }, {
+                                    createVNode(QTd, { props }, {
                                       default: withCtx(() => [
                                         createElementVNode("span", _hoisted_24, toDisplayString(props.row.hora), 1)
                                       ]),
@@ -4806,7 +4746,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                                     }, 1032, ["props"])
                                   ]),
                                   "body-cell-estado": withCtx((props) => [
-                                    createVNode(_component_q_td, { props }, {
+                                    createVNode(QTd, { props }, {
                                       default: withCtx(() => [
                                         createElementVNode("span", {
                                           class: normalizeClass(["neon-badge", `neon-badge--${props.row.estado.toLowerCase()}`])
@@ -4816,12 +4756,12 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                                     }, 1032, ["props"])
                                   ]),
                                   "body-cell-accion": withCtx((props) => [
-                                    createVNode(_component_q_td, {
+                                    createVNode(QTd, {
                                       props,
                                       class: "text-center"
                                     }, {
                                       default: withCtx(() => [
-                                        createVNode(_component_q_btn, {
+                                        createVNode(QBtn, {
                                           class: "neon-btn-icon",
                                           icon: "visibility",
                                           flat: "",
@@ -4831,7 +4771,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                                           onClick: ($event) => verReserva(props.row)
                                         }, {
                                           default: withCtx(() => [
-                                            createVNode(_component_q_tooltip, { class: "bg-purple-9 text-caption" }, {
+                                            createVNode(QTooltip, { class: "bg-purple-9 text-caption" }, {
                                               default: withCtx(() => _cache[24] || (_cache[24] = [
                                                 createTextVNode("Ver detalle")
                                               ])),
@@ -4856,12 +4796,12 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                     ]),
                     createElementVNode("div", _hoisted_25, [
                       createElementVNode("div", _hoisted_26, [
-                        createVNode(_component_q_card, {
+                        createVNode(QCard, {
                           class: "neon-card",
                           flat: ""
                         }, {
                           default: withCtx(() => [
-                            createVNode(_component_q_card_section, { class: "neon-card-section" }, {
+                            createVNode(QCardSection, { class: "neon-card-section" }, {
                               default: withCtx(() => [
                                 _cache[26] || (_cache[26] = createElementVNode("div", { class: "row items-center justify-between q-mb-md" }, [
                                   createElementVNode("span", { class: "neon-card-title" }, "Mapa de Mesas — Noche actual"),
@@ -4886,12 +4826,12 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                                         style: { "position": "relative" },
                                         onClick: ($event) => clickMesa(mesa)
                                       }, [
-                                        createVNode(_component_q_icon, {
+                                        createVNode(QIcon, {
                                           name: mesa.esVip ? "workspace_premium" : "table_restaurant",
                                           size: "18px"
                                         }, null, 8, ["name"]),
                                         createElementVNode("span", null, toDisplayString(mesa.numero), 1),
-                                        createVNode(_component_q_tooltip, { class: "bg-grey-9 text-caption" }, {
+                                        createVNode(QTooltip, { class: "bg-grey-9 text-caption" }, {
                                           default: withCtx(() => [
                                             createTextVNode(toDisplayString(mesa.numero) + " · " + toDisplayString(mesa.estado) + " · Cap. " + toDisplayString(mesa.capacidad), 1)
                                           ]),
@@ -4918,31 +4858,31 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
           ]),
           _: 1
         }),
-        createVNode(_component_q_dialog, {
+        createVNode(QDialog, {
           modelValue: showNuevaReserva.value,
           "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => showNuevaReserva.value = $event),
           class: "neon-dialog-card"
         }, {
           default: withCtx(() => [
-            createVNode(_component_q_card, { style: { "min-width": "420px", "max-width": "520px", "width": "100%" } }, {
+            createVNode(QCard, { style: { "min-width": "420px", "max-width": "520px", "width": "100%" } }, {
               default: withCtx(() => [
                 createElementVNode("div", _hoisted_30, [
                   createElementVNode("div", _hoisted_31, [
                     _cache[28] || (_cache[28] = createElementVNode("span", { class: "neon-dialog-title" }, "Nueva Reserva", -1)),
-                    withDirectives(createVNode(_component_q_btn, {
+                    withDirectives(createVNode(QBtn, {
                       class: "neon-btn-icon",
                       icon: "close",
                       flat: "",
                       round: "",
                       dense: ""
                     }, null, 512), [
-                      [_directive_close_popup]
+                      [ClosePopup]
                     ])
                   ])
                 ]),
-                createVNode(_component_q_card_section, { style: { "padding": "20px", "display": "flex", "flex-direction": "column", "gap": "16px" } }, {
+                createVNode(QCardSection, { style: { "padding": "20px", "display": "flex", "flex-direction": "column", "gap": "16px" } }, {
                   default: withCtx(() => [
-                    createVNode(_component_q_input, {
+                    createVNode(QInput, {
                       modelValue: form.value.cliente,
                       "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => form.value.cliente = $event),
                       label: "Nombre del cliente",
@@ -4951,11 +4891,11 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                       dense: ""
                     }, {
                       prepend: withCtx(() => [
-                        createVNode(_component_q_icon, { name: "person" })
+                        createVNode(QIcon, { name: "person" })
                       ]),
                       _: 1
                     }, 8, ["modelValue"]),
-                    createVNode(_component_q_input, {
+                    createVNode(QInput, {
                       modelValue: form.value.telefono,
                       "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => form.value.telefono = $event),
                       label: "Teléfono",
@@ -4964,13 +4904,13 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                       dense: ""
                     }, {
                       prepend: withCtx(() => [
-                        createVNode(_component_q_icon, { name: "phone" })
+                        createVNode(QIcon, { name: "phone" })
                       ]),
                       _: 1
                     }, 8, ["modelValue"]),
                     createElementVNode("div", _hoisted_32, [
                       createElementVNode("div", _hoisted_33, [
-                        createVNode(_component_q_input, {
+                        createVNode(QInput, {
                           modelValue: form.value.fecha,
                           "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => form.value.fecha = $event),
                           label: "Fecha",
@@ -4981,7 +4921,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                         }, null, 8, ["modelValue"])
                       ]),
                       createElementVNode("div", _hoisted_34, [
-                        createVNode(_component_q_input, {
+                        createVNode(QInput, {
                           modelValue: form.value.hora,
                           "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => form.value.hora = $event),
                           label: "Hora",
@@ -4992,7 +4932,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                         }, null, 8, ["modelValue"])
                       ])
                     ]),
-                    createVNode(_component_q_select, {
+                    createVNode(QSelect, {
                       modelValue: form.value.mesa,
                       "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => form.value.mesa = $event),
                       options: opcionesMesas.value,
@@ -5003,11 +4943,11 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                       "popup-content-class": "neon-select-menu"
                     }, {
                       prepend: withCtx(() => [
-                        createVNode(_component_q_icon, { name: "table_restaurant" })
+                        createVNode(QIcon, { name: "table_restaurant" })
                       ]),
                       _: 1
                     }, 8, ["modelValue", "options"]),
-                    createVNode(_component_q_input, {
+                    createVNode(QInput, {
                       modelValue: form.value.personas,
                       "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => form.value.personas = $event),
                       label: "Cantidad de personas",
@@ -5018,11 +4958,11 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                       min: "1"
                     }, {
                       prepend: withCtx(() => [
-                        createVNode(_component_q_icon, { name: "group" })
+                        createVNode(QIcon, { name: "group" })
                       ]),
                       _: 1
                     }, 8, ["modelValue"]),
-                    createVNode(_component_q_input, {
+                    createVNode(QInput, {
                       modelValue: form.value.notas,
                       "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => form.value.notas = $event),
                       label: "Notas (opcional)",
@@ -5036,19 +4976,19 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
                   ]),
                   _: 1
                 }),
-                createVNode(_component_q_card_actions, {
+                createVNode(QCardActions, {
                   align: "right",
                   style: { "padding": "12px 20px 20px", "gap": "10px" }
                 }, {
                   default: withCtx(() => [
-                    withDirectives(createVNode(_component_q_btn, {
+                    withDirectives(createVNode(QBtn, {
                       class: "neon-btn-secondary",
                       label: "Cancelar",
                       "no-caps": ""
                     }, null, 512), [
-                      [_directive_close_popup]
+                      [ClosePopup]
                     ]),
-                    createVNode(_component_q_btn, {
+                    createVNode(QBtn, {
                       class: "neon-btn-primary",
                       label: "Confirmar Reserva",
                       "no-caps": "",
@@ -5076,29 +5016,20 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
     const env = process.env;
     const toggleLeftDrawer = () => leftDrawerOpen.value = !leftDrawerOpen.value;
     return (_ctx, _cache) => {
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_space = resolveComponent("q-space");
-      const _component_q_toggle = resolveComponent("q-toggle");
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_tooltip = resolveComponent("q-tooltip");
-      const _component_q_toolbar = resolveComponent("q-toolbar");
-      const _component_q_header = resolveComponent("q-header");
-      const _component_q_page_container = resolveComponent("q-page-container");
-      const _component_q_layout = resolveComponent("q-layout");
-      return openBlock(), createBlock(_component_q_layout, {
+      return openBlock(), createBlock(QLayout, {
         view: "hHh Lpr lff",
         container: "",
         style: { "height": "100vh" },
         class: "shadow-0"
       }, {
         default: withCtx(() => [
-          createVNode(_component_q_header, {
+          createVNode(QHeader, {
             class: normalizeClass(_ctx.$q.dark.isActive ? "dark-hea" : "bg-primary")
           }, {
             default: withCtx(() => [
-              createVNode(_component_q_toolbar, null, {
+              createVNode(QToolbar, null, {
                 default: withCtx(() => [
-                  unref(store).dataUser.usuario ? (openBlock(), createBlock(_component_q_btn, {
+                  unref(store).dataUser.usuario ? (openBlock(), createBlock(QBtn, {
                     key: 0,
                     flat: "",
                     dense: "",
@@ -5108,7 +5039,7 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
                     icon: "menu"
                   })) : createCommentVNode("", true),
                   createVNode(app_logo),
-                  createVNode(_component_q_btn, {
+                  createVNode(QBtn, {
                     flat: "",
                     "no-caps": "",
                     "no-wrap": "",
@@ -5120,15 +5051,15 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_q_space),
-                  createVNode(_component_q_toggle, {
+                  createVNode(QSpace),
+                  createVNode(QToggle, {
                     modelValue: _ctx.$q.dark.isActive,
                     "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.$q.dark.isActive = $event),
                     color: "white",
                     "unchecked-icon": "brightness_7",
                     "checked-icon": "dark_mode"
                   }, null, 8, ["modelValue"]),
-                  unref(env).SHOW_LOGIN_BUTTON ? (openBlock(), createBlock(_component_q_btn, {
+                  unref(env).SHOW_LOGIN_BUTTON ? (openBlock(), createBlock(QBtn, {
                     key: 1,
                     flat: "",
                     "no-caps": "",
@@ -5137,8 +5068,8 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
                     to: "/login"
                   }, {
                     default: withCtx(() => [
-                      createVNode(_component_q_icon, { name: "person" }),
-                      createVNode(_component_q_tooltip, null, {
+                      createVNode(QIcon, { name: "person" }),
+                      createVNode(QTooltip, null, {
                         default: withCtx(() => _cache[1] || (_cache[1] = [
                           createTextVNode(" Ingresar al sistema ")
                         ])),
@@ -5153,7 +5084,7 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
             ]),
             _: 1
           }, 8, ["class"]),
-          createVNode(_component_q_page_container, null, {
+          createVNode(QPageContainer, null, {
             default: withCtx(() => [
               createVNode(Landing)
             ]),
@@ -5253,37 +5184,31 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
       emit("clicked", flag, row.row);
     };
     return (_ctx, _cache) => {
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_item_section = resolveComponent("q-item-section");
-      const _component_q_item = resolveComponent("q-item");
-      const _component_q_list = resolveComponent("q-list");
-      const _component_q_menu = resolveComponent("q-menu");
-      const _component_q_btn = resolveComponent("q-btn");
       return openBlock(), createElementBlock("div", null, [
-        createVNode(_component_q_btn, {
+        createVNode(QBtn, {
           size: "xs",
           flat: "",
           icon: "more_vert"
         }, {
           default: withCtx(() => [
-            createVNode(_component_q_menu, {
+            createVNode(QMenu, {
               "transition-show": "flip-right",
               fit: ""
             }, {
               default: withCtx(() => [
-                createVNode(_component_q_list, null, {
+                createVNode(QList, null, {
                   default: withCtx(() => [
                     (openBlock(), createElementBlock(Fragment, null, renderList(botones, (b, i) => {
-                      return createVNode(_component_q_item, {
+                      return createVNode(QItem, {
                         key: i,
                         dense: "",
                         clickable: "",
                         onClick: ($event) => clickbtn(b.flag, __props.props)
                       }, {
                         default: withCtx(() => [
-                          createVNode(_component_q_item_section, { avatar: "" }, {
+                          createVNode(QItemSection, { avatar: "" }, {
                             default: withCtx(() => [
-                              createVNode(_component_q_icon, {
+                              createVNode(QIcon, {
                                 name: b.icon,
                                 size: "xs",
                                 right: "",
@@ -5292,7 +5217,7 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
                             ]),
                             _: 2
                           }, 1024),
-                          createVNode(_component_q_item_section, null, {
+                          createVNode(QItemSection, null, {
                             default: withCtx(() => [
                               createTextVNode(toDisplayString(b.text), 1)
                             ]),
@@ -5355,46 +5280,37 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
       open
     });
     return (_ctx, _cache) => {
-      const _component_q_space = resolveComponent("q-space");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_separator = resolveComponent("q-separator");
-      const _component_q_table = resolveComponent("q-table");
-      const _component_q_card_actions = resolveComponent("q-card-actions");
-      const _component_q_card = resolveComponent("q-card");
-      const _component_q_dialog = resolveComponent("q-dialog");
-      const _directive_close_popup = resolveDirective("close-popup");
-      return openBlock(), createBlock(_component_q_dialog, {
+      return openBlock(), createBlock(QDialog, {
         modelValue: alert.value,
         "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => alert.value = $event),
         persistent: "",
         square: ""
       }, {
         default: withCtx(() => [
-          createVNode(_component_q_card, { xstyle: "min-width: 630px" }, {
+          createVNode(QCard, { xstyle: "min-width: 630px" }, {
             default: withCtx(() => [
-              createVNode(_component_q_card_section, { class: "row items-center q-pb-xs" }, {
+              createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
                 default: withCtx(() => [
                   _cache[6] || (_cache[6] = createElementVNode("div", { class: "text-h6" }, "Selecciona la unidad y asigne el rol ", -1)),
-                  createVNode(_component_q_space),
-                  withDirectives((openBlock(), createBlock(_component_q_btn, { flat: "" }, {
+                  createVNode(QSpace),
+                  withDirectives((openBlock(), createBlock(QBtn, { flat: "" }, {
                     default: withCtx(() => _cache[5] || (_cache[5] = [
                       createElementVNode("b", null, "x", -1)
                     ])),
                     _: 1
                   })), [
-                    [_directive_close_popup]
+                    [ClosePopup]
                   ])
                 ]),
                 _: 1
               }),
-              createVNode(_component_q_card_section, { class: "q-pt-none" }, {
+              createVNode(QCardSection, { class: "q-pt-none" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_separator, { class: "q-mt-none q-mb-lg" }),
+                  createVNode(QSeparator, { class: "q-mt-none q-mb-lg" }),
                   createElementVNode("div", _hoisted_1$e, [
                     createElementVNode("div", _hoisted_2$9, [
                       _cache[7] || (_cache[7] = createElementVNode("b", { class: "text-primary" }, "Seleccione una unidad:", -1)),
-                      createVNode(_component_q_table, {
+                      createVNode(QTable, {
                         rows: unidades.value,
                         columns: unref(columns_unidades),
                         flat: "",
@@ -5410,7 +5326,7 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
                     ]),
                     createElementVNode("div", _hoisted_3$9, [
                       _cache[8] || (_cache[8] = createElementVNode("b", { class: "text-primary" }, "Asigne un rol:", -1)),
-                      createVNode(_component_q_table, {
+                      createVNode(QTable, {
                         rows: roles.value,
                         columns: unref(columns_roles),
                         flat: "",
@@ -5428,15 +5344,15 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
                 ]),
                 _: 1
               }),
-              createVNode(_component_q_card_actions, { align: "right" }, {
+              createVNode(QCardActions, { align: "right" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_btn, {
+                  createVNode(QBtn, {
                     flat: "",
                     label: "OK",
                     color: "primary",
                     onClick: _cache[2] || (_cache[2] = ($event) => select())
                   }),
-                  createVNode(_component_q_btn, {
+                  createVNode(QBtn, {
                     flat: "",
                     label: "cerrar",
                     color: "primary",
@@ -5709,26 +5625,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
       open
     });
     return (_ctx, _cache) => {
-      const _component_q_space = resolveComponent("q-space");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_img = resolveComponent("q-img");
-      const _component_q_input = resolveComponent("q-input");
-      const _component_q_radio = resolveComponent("q-radio");
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_tooltip = resolveComponent("q-tooltip");
-      const _component_q_file = resolveComponent("q-file");
-      const _component_q_td = resolveComponent("q-td");
-      const _component_q_table = resolveComponent("q-table");
-      const _component_q_expansion_item = resolveComponent("q-expansion-item");
-      const _component_q_list = resolveComponent("q-list");
-      const _component_q_separator = resolveComponent("q-separator");
-      const _component_q_card_actions = resolveComponent("q-card-actions");
-      const _component_q_form = resolveComponent("q-form");
-      const _component_q_card = resolveComponent("q-card");
-      const _component_q_dialog = resolveComponent("q-dialog");
-      const _directive_close_popup = resolveDirective("close-popup");
-      return openBlock(), createBlock(_component_q_dialog, {
+      return openBlock(), createBlock(QDialog, {
         modelValue: alert.value,
         "onUpdate:modelValue": _cache[17] || (_cache[17] = ($event) => alert.value = $event),
         persistent: "",
@@ -5736,35 +5633,35 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
         "full-width": ""
       }, {
         default: withCtx(() => [
-          createVNode(_component_q_card, null, {
+          createVNode(QCard, null, {
             default: withCtx(() => [
-              createVNode(_component_q_form, {
+              createVNode(QForm, {
                 onSubmit,
                 class: "q-gutter-md"
               }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_card_section, { class: "row items-center q-pb-xs" }, {
+                  createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
                     default: withCtx(() => [
                       createElementVNode("div", _hoisted_1$d, toDisplayString(input.value.id ? "Editar" : "Registrar"), 1),
-                      createVNode(_component_q_space),
-                      withDirectives((openBlock(), createBlock(_component_q_btn, { flat: "" }, {
+                      createVNode(QSpace),
+                      withDirectives((openBlock(), createBlock(QBtn, { flat: "" }, {
                         default: withCtx(() => _cache[18] || (_cache[18] = [
                           createElementVNode("b", null, "x", -1)
                         ])),
                         _: 1
                       })), [
-                        [_directive_close_popup]
+                        [ClosePopup]
                       ])
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_q_card_section, { class: "q-pt-none" }, {
+                  createVNode(QCardSection, { class: "q-pt-none" }, {
                     default: withCtx(() => [
                       createElementVNode("div", _hoisted_2$8, [
                         createElementVNode("div", _hoisted_3$8, [
                           createElementVNode("div", _hoisted_4$5, [
                             createElementVNode("div", _hoisted_5$3, [
-                              foto_64.value ? (openBlock(), createBlock(_component_q_img, {
+                              foto_64.value ? (openBlock(), createBlock(QImg, {
                                 key: 0,
                                 class: "zoomer",
                                 src: foto_64.value,
@@ -5772,7 +5669,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                               }, null, 8, ["src"])) : createCommentVNode("", true)
                             ]),
                             createElementVNode("div", _hoisted_6$2, [
-                              createVNode(_component_q_input, {
+                              createVNode(QInput, {
                                 outlined: "",
                                 modelValue: input.value.nombres,
                                 "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => input.value.nombres = $event),
@@ -5785,7 +5682,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                               }, null, 8, ["modelValue", "rules"])
                             ]),
                             createElementVNode("div", _hoisted_7, [
-                              createVNode(_component_q_input, {
+                              createVNode(QInput, {
                                 outlined: "",
                                 modelValue: input.value.apellido1,
                                 "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => input.value.apellido1 = $event),
@@ -5798,7 +5695,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                               }, null, 8, ["modelValue", "rules"])
                             ]),
                             createElementVNode("div", _hoisted_8, [
-                              createVNode(_component_q_input, {
+                              createVNode(QInput, {
                                 outlined: "",
                                 modelValue: input.value.apellido2,
                                 "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => input.value.apellido2 = $event),
@@ -5811,7 +5708,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                               }, null, 8, ["modelValue", "rules"])
                             ]),
                             createElementVNode("div", _hoisted_9, [
-                              createVNode(_component_q_input, {
+                              createVNode(QInput, {
                                 outlined: "",
                                 modelValue: input.value.username,
                                 "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => input.value.username = $event),
@@ -5824,7 +5721,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                               }, null, 8, ["modelValue", "rules"])
                             ]),
                             createElementVNode("div", _hoisted_10, [
-                              createVNode(_component_q_input, {
+                              createVNode(QInput, {
                                 outlined: "",
                                 modelValue: input.value.password,
                                 "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => input.value.password = $event),
@@ -5837,7 +5734,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                               }, null, 8, ["modelValue", "rules"])
                             ]),
                             createElementVNode("div", _hoisted_11, [
-                              createVNode(_component_q_input, {
+                              createVNode(QInput, {
                                 outlined: "",
                                 modelValue: input.value.documento,
                                 "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => input.value.documento = $event),
@@ -5850,7 +5747,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                               }, null, 8, ["modelValue", "rules"])
                             ]),
                             createElementVNode("div", _hoisted_12, [
-                              createVNode(_component_q_input, {
+                              createVNode(QInput, {
                                 outlined: "",
                                 modelValue: input.value.celular,
                                 "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => input.value.celular = $event),
@@ -5863,13 +5760,13 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                               }, null, 8, ["modelValue", "rules"])
                             ]),
                             createElementVNode("div", _hoisted_13, [
-                              createVNode(_component_q_radio, {
+                              createVNode(QRadio, {
                                 modelValue: input.value.sexo,
                                 "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => input.value.sexo = $event),
                                 val: "F",
                                 label: "F"
                               }, null, 8, ["modelValue"]),
-                              createVNode(_component_q_radio, {
+                              createVNode(QRadio, {
                                 modelValue: input.value.sexo,
                                 "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => input.value.sexo = $event),
                                 val: "M",
@@ -5877,7 +5774,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                               }, null, 8, ["modelValue"])
                             ]),
                             createElementVNode("div", _hoisted_14, [
-                              createVNode(_component_q_input, {
+                              createVNode(QInput, {
                                 outlined: "",
                                 modelValue: input.value.correo,
                                 "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => input.value.correo = $event),
@@ -5890,7 +5787,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                               }, null, 8, ["modelValue", "rules"])
                             ]),
                             createElementVNode("div", _hoisted_15, [
-                              createVNode(_component_q_input, {
+                              createVNode(QInput, {
                                 outlined: "",
                                 modelValue: input.value.direccion,
                                 "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => input.value.direccion = $event),
@@ -5903,7 +5800,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                               }, null, 8, ["modelValue", "rules"])
                             ]),
                             createElementVNode("div", _hoisted_16, [
-                              createVNode(_component_q_file, {
+                              createVNode(QFile, {
                                 style: { "min-width": "50px" },
                                 clearable: "",
                                 modelValue: foto_file.value,
@@ -5922,10 +5819,10 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                                 onRejected
                               }, {
                                 prepend: withCtx(() => [
-                                  createVNode(_component_q_icon, { name: "upload" })
+                                  createVNode(QIcon, { name: "upload" })
                                 ]),
                                 default: withCtx(() => [
-                                  createVNode(_component_q_tooltip, null, {
+                                  createVNode(QTooltip, null, {
                                     default: withCtx(() => _cache[19] || (_cache[19] = [
                                       createTextVNode(" Seleccionar foto de perfil ")
                                     ])),
@@ -5936,7 +5833,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                               }, 8, ["modelValue", "disable"])
                             ]),
                             createElementVNode("div", _hoisted_17, [
-                              createVNode(_component_q_btn, {
+                              createVNode(QBtn, {
                                 color: "grey",
                                 icon: "fmd_good",
                                 dense: "",
@@ -5954,7 +5851,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                           ])
                         ]),
                         createElementVNode("div", _hoisted_19, [
-                          createVNode(_component_q_btn, {
+                          createVNode(QBtn, {
                             dense: "",
                             outline: "",
                             color: "primary",
@@ -5966,12 +5863,12 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                             ])),
                             _: 1
                           }),
-                          createVNode(_component_q_list, {
+                          createVNode(QList, {
                             bordered: "",
                             class: "rounded-borders q-mt-sm"
                           }, {
                             default: withCtx(() => [
-                              createVNode(_component_q_expansion_item, {
+                              createVNode(QExpansionItem, {
                                 "expand-separator": "",
                                 icon: "home_work",
                                 label: "unidades -> rol",
@@ -5982,7 +5879,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                                 "default-opened": ""
                               }, {
                                 default: withCtx(() => [
-                                  createVNode(_component_q_table, {
+                                  createVNode(QTable, {
                                     rows: rol_unidades.value,
                                     columns: unref(columns_rolunidad),
                                     flat: "",
@@ -5993,9 +5890,9 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                                     "row-key": "id"
                                   }, {
                                     "body-cell-opt": withCtx((props) => [
-                                      createVNode(_component_q_td, { props }, {
+                                      createVNode(QTd, { props }, {
                                         default: withCtx(() => [
-                                          createVNode(_component_q_btn, {
+                                          createVNode(QBtn, {
                                             flat: "",
                                             dense: "",
                                             size: "xs",
@@ -6017,12 +5914,12 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                           })
                         ]),
                         createElementVNode("div", _hoisted_20, [
-                          createVNode(_component_q_list, {
+                          createVNode(QList, {
                             bordered: "",
                             class: "rounded-borders"
                           }, {
                             default: withCtx(() => [
-                              createVNode(_component_q_expansion_item, {
+                              createVNode(QExpansionItem, {
                                 "expand-separator": "",
                                 icon: "admin_panel_settings",
                                 label: "Permisos global",
@@ -6032,7 +5929,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                                 dark: ""
                               }, {
                                 default: withCtx(() => [
-                                  createVNode(_component_q_table, {
+                                  createVNode(QTable, {
                                     rows: permisos.value,
                                     columns: unref(columns_permisos$1),
                                     flat: "",
@@ -6049,8 +5946,8 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                                 ]),
                                 _: 1
                               }),
-                              createVNode(_component_q_separator),
-                              createVNode(_component_q_expansion_item, {
+                              createVNode(QSeparator),
+                              createVNode(QExpansionItem, {
                                 "expand-separator": "",
                                 icon: "folder_shared",
                                 label: "Menus global",
@@ -6060,7 +5957,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                                 dark: ""
                               }, {
                                 default: withCtx(() => [
-                                  createVNode(_component_q_table, {
+                                  createVNode(QTable, {
                                     rows: menus.value,
                                     columns: unref(columns_menus$1),
                                     flat: "",
@@ -6085,9 +5982,9 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_q_card_actions, { align: "right" }, {
+                  createVNode(QCardActions, { align: "right" }, {
                     default: withCtx(() => [
-                      createVNode(_component_q_btn, {
+                      createVNode(QBtn, {
                         outline: "",
                         loading: loading.value,
                         label: "aceptar",
@@ -6096,7 +5993,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                         type: "submit",
                         color: "positive"
                       }, null, 8, ["loading"]),
-                      withDirectives(createVNode(_component_q_btn, {
+                      withDirectives(createVNode(QBtn, {
                         outline: "",
                         disable: loading.value,
                         label: "cerrar",
@@ -6104,7 +6001,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
                         icon: "close",
                         color: "negative"
                       }, null, 8, ["disable"]), [
-                        [_directive_close_popup]
+                        [ClosePopup]
                       ])
                     ]),
                     _: 1
@@ -6187,17 +6084,9 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
       await getdatos();
     });
     return (_ctx, _cache) => {
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_toggle = resolveComponent("q-toggle");
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_input = resolveComponent("q-input");
-      const _component_q_select = resolveComponent("q-select");
-      const _component_q_td = resolveComponent("q-td");
-      const _component_q_table = resolveComponent("q-table");
-      const _component_q_page = resolveComponent("q-page");
-      return openBlock(), createBlock(_component_q_page, { class: "q-pa-xs" }, {
+      return openBlock(), createBlock(QPage, { class: "q-pa-xs" }, {
         default: withCtx(() => [
-          createVNode(_component_q_table, {
+          createVNode(QTable, {
             rows: rows.value,
             columns: unref(columns$4),
             "visible-columns": visibleColumns.value,
@@ -6211,13 +6100,13 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
           }, {
             "top-left": withCtx(() => [
               _cache[6] || (_cache[6] = createElementVNode("b", null, "Usuarios", -1)),
-              createVNode(_component_q_btn, {
+              createVNode(QBtn, {
                 icon: "refresh",
                 dense: "",
                 flat: "",
                 onClick: _cache[0] || (_cache[0] = ($event) => getdatos())
               }),
-              createVNode(_component_q_toggle, {
+              createVNode(QToggle, {
                 modelValue: more_datos.value,
                 "onUpdate:modelValue": [
                   _cache[1] || (_cache[1] = ($event) => more_datos.value = $event),
@@ -6229,7 +6118,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
               }, null, 8, ["modelValue"])
             ]),
             "top-right": withCtx(() => [
-              createVNode(_component_q_input, {
+              createVNode(QInput, {
                 outlined: "",
                 dense: "",
                 debounce: "300",
@@ -6239,14 +6128,14 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
                 clearable: ""
               }, {
                 append: withCtx(() => [
-                  createVNode(_component_q_icon, {
+                  createVNode(QIcon, {
                     size: "xs",
                     name: "search"
                   })
                 ]),
                 _: 1
               }, 8, ["modelValue"]),
-              createVNode(_component_q_select, {
+              createVNode(QSelect, {
                 modelValue: rol.value,
                 "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => rol.value = $event),
                 options: roles.value,
@@ -6254,7 +6143,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
                 dense: "",
                 clearable: ""
               }, null, 8, ["modelValue", "options"]),
-              createVNode(_component_q_btn, {
+              createVNode(QBtn, {
                 color: "green",
                 icon: "add",
                 outline: "",
@@ -6268,7 +6157,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
               })
             ]),
             "body-cell-index": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createTextVNode(toDisplayString(props.rowIndex + 1), 1)
                 ]),
@@ -6276,7 +6165,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
               }, 1032, ["props"])
             ]),
             "body-cell-foto_url": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   props.row.foto64 ? (openBlock(), createElementBlock("img", {
                     key: 0,
@@ -6289,7 +6178,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
               }, 1032, ["props"])
             ]),
             "body-cell-fecha_registro": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createTextVNode(toDisplayString(unref(parseFecha)(props.row.fecha_registro)), 1)
                 ]),
@@ -6297,7 +6186,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
               }, 1032, ["props"])
             ]),
             "body-cell-fecha_update": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createTextVNode(toDisplayString(unref(parseFecha)(props.row.fecha_update)), 1)
                 ]),
@@ -6305,7 +6194,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
               }, 1032, ["props"])
             ]),
             "body-cell-last_login": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createTextVNode(toDisplayString(unref(parseFecha)(props.row.last_login)), 1)
                 ]),
@@ -6313,7 +6202,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
               }, 1032, ["props"])
             ]),
             "body-cell-opt": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createVNode(_sfc_main$n, {
                     props,
@@ -6373,37 +6262,31 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
       emit("clicked", flag, row.row);
     };
     return (_ctx, _cache) => {
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_item_section = resolveComponent("q-item-section");
-      const _component_q_item = resolveComponent("q-item");
-      const _component_q_list = resolveComponent("q-list");
-      const _component_q_menu = resolveComponent("q-menu");
-      const _component_q_btn = resolveComponent("q-btn");
       return openBlock(), createElementBlock("div", null, [
-        createVNode(_component_q_btn, {
+        createVNode(QBtn, {
           size: "xs",
           flat: "",
           icon: "more_vert"
         }, {
           default: withCtx(() => [
-            createVNode(_component_q_menu, {
+            createVNode(QMenu, {
               "transition-show": "flip-right",
               fit: ""
             }, {
               default: withCtx(() => [
-                createVNode(_component_q_list, null, {
+                createVNode(QList, null, {
                   default: withCtx(() => [
                     (openBlock(), createElementBlock(Fragment, null, renderList(botones, (b, i) => {
-                      return createVNode(_component_q_item, {
+                      return createVNode(QItem, {
                         key: i,
                         dense: "",
                         clickable: "",
                         onClick: ($event) => clickbtn(b.flag, __props.props)
                       }, {
                         default: withCtx(() => [
-                          createVNode(_component_q_item_section, { avatar: "" }, {
+                          createVNode(QItemSection, { avatar: "" }, {
                             default: withCtx(() => [
-                              createVNode(_component_q_icon, {
+                              createVNode(QIcon, {
                                 name: b.icon,
                                 size: "xs",
                                 right: "",
@@ -6412,7 +6295,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
                             ]),
                             _: 2
                           }, 1024),
-                          createVNode(_component_q_item_section, null, {
+                          createVNode(QItemSection, null, {
                             default: withCtx(() => [
                               createTextVNode(toDisplayString(b.text), 1)
                             ]),
@@ -6534,53 +6417,40 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
       open
     });
     return (_ctx, _cache) => {
-      const _component_q_space = resolveComponent("q-space");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_input = resolveComponent("q-input");
-      const _component_q_table = resolveComponent("q-table");
-      const _component_q_expansion_item = resolveComponent("q-expansion-item");
-      const _component_q_separator = resolveComponent("q-separator");
-      const _component_q_list = resolveComponent("q-list");
-      const _component_q_card_actions = resolveComponent("q-card-actions");
-      const _component_q_form = resolveComponent("q-form");
-      const _component_q_card = resolveComponent("q-card");
-      const _component_q_dialog = resolveComponent("q-dialog");
-      const _directive_close_popup = resolveDirective("close-popup");
-      return openBlock(), createBlock(_component_q_dialog, {
+      return openBlock(), createBlock(QDialog, {
         modelValue: alert.value,
         "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => alert.value = $event),
         persistent: "",
         square: ""
       }, {
         default: withCtx(() => [
-          createVNode(_component_q_card, { xstyle: "min-width: 400px" }, {
+          createVNode(QCard, { xstyle: "min-width: 400px" }, {
             default: withCtx(() => [
-              createVNode(_component_q_form, {
+              createVNode(QForm, {
                 onSubmit,
                 class: "q-gutter-md"
               }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_card_section, { class: "row items-center q-pb-xs" }, {
+                  createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
                     default: withCtx(() => [
                       createElementVNode("div", _hoisted_1$b, toDisplayString(input.value.id ? "Editar" : "Registrar"), 1),
-                      createVNode(_component_q_space),
-                      withDirectives((openBlock(), createBlock(_component_q_btn, { flat: "" }, {
+                      createVNode(QSpace),
+                      withDirectives((openBlock(), createBlock(QBtn, { flat: "" }, {
                         default: withCtx(() => _cache[6] || (_cache[6] = [
                           createElementVNode("b", null, "x", -1)
                         ])),
                         _: 1
                       })), [
-                        [_directive_close_popup]
+                        [ClosePopup]
                       ])
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_q_card_section, { class: "q-py-none" }, {
+                  createVNode(QCardSection, { class: "q-py-none" }, {
                     default: withCtx(() => [
                       createElementVNode("div", _hoisted_2$7, [
                         createElementVNode("div", _hoisted_3$7, [
-                          createVNode(_component_q_input, {
+                          createVNode(QInput, {
                             outlined: "",
                             modelValue: input.value.nombre,
                             "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => input.value.nombre = $event),
@@ -6591,7 +6461,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
                             counter: "",
                             rules: [(val) => val && val.length > 0 || "campo obligatorio"]
                           }, null, 8, ["modelValue", "rules"]),
-                          createVNode(_component_q_input, {
+                          createVNode(QInput, {
                             outlined: "",
                             modelValue: input.value.descripcion,
                             "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => input.value.descripcion = $event),
@@ -6602,7 +6472,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
                             counter: "",
                             rules: [(val) => val && val.length > 0 || "campo obligatorio"]
                           }, null, 8, ["modelValue", "rules"]),
-                          createVNode(_component_q_input, {
+                          createVNode(QInput, {
                             outlined: "",
                             type: "number",
                             modelValue: input.value.jerarquia,
@@ -6615,12 +6485,12 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
                           }, null, 8, ["modelValue", "rules"])
                         ]),
                         createElementVNode("div", _hoisted_4$4, [
-                          createVNode(_component_q_list, {
+                          createVNode(QList, {
                             bordered: "",
                             class: "rounded-borders"
                           }, {
                             default: withCtx(() => [
-                              createVNode(_component_q_expansion_item, {
+                              createVNode(QExpansionItem, {
                                 "expand-separator": "",
                                 icon: "perm_identity",
                                 label: "Menus para este rol",
@@ -6630,7 +6500,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
                                 dark: ""
                               }, {
                                 default: withCtx(() => [
-                                  createVNode(_component_q_table, {
+                                  createVNode(QTable, {
                                     rows: menus.value,
                                     columns: unref(columns_menus),
                                     flat: "",
@@ -6647,8 +6517,8 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
                                 ]),
                                 _: 1
                               }),
-                              createVNode(_component_q_separator),
-                              createVNode(_component_q_expansion_item, {
+                              createVNode(QSeparator),
+                              createVNode(QExpansionItem, {
                                 "expand-separator": "",
                                 icon: "perm_identity",
                                 label: "Permisos para este rol",
@@ -6658,7 +6528,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
                                 dark: ""
                               }, {
                                 default: withCtx(() => [
-                                  createVNode(_component_q_table, {
+                                  createVNode(QTable, {
                                     rows: permisos.value,
                                     columns: unref(columns_permisos),
                                     flat: "",
@@ -6683,9 +6553,9 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_q_card_actions, { align: "right" }, {
+                  createVNode(QCardActions, { align: "right" }, {
                     default: withCtx(() => [
-                      createVNode(_component_q_btn, {
+                      createVNode(QBtn, {
                         outline: "",
                         loading: loading.value,
                         label: "aceptar",
@@ -6694,7 +6564,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
                         type: "submit",
                         color: "positive"
                       }, null, 8, ["loading"]),
-                      withDirectives(createVNode(_component_q_btn, {
+                      withDirectives(createVNode(QBtn, {
                         outline: "",
                         disable: loading.value,
                         label: "cerrar",
@@ -6702,7 +6572,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
                         icon: "close",
                         color: "negative"
                       }, null, 8, ["disable"]), [
-                        [_directive_close_popup]
+                        [ClosePopup]
                       ])
                     ]),
                     _: 1
@@ -6745,15 +6615,9 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
       await getdatos();
     });
     return (_ctx, _cache) => {
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_input = resolveComponent("q-input");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_td = resolveComponent("q-td");
-      const _component_q_table = resolveComponent("q-table");
-      const _component_q_page = resolveComponent("q-page");
-      return openBlock(), createBlock(_component_q_page, { class: "q-pa-xs" }, {
+      return openBlock(), createBlock(QPage, { class: "q-pa-xs" }, {
         default: withCtx(() => [
-          createVNode(_component_q_table, {
+          createVNode(QTable, {
             title: "Roles",
             rows: rows.value,
             columns: unref(columns$3),
@@ -6767,7 +6631,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
             "rows-per-page-options": [0]
           }, {
             "top-right": withCtx(() => [
-              createVNode(_component_q_input, {
+              createVNode(QInput, {
                 outlined: "",
                 dense: "",
                 debounce: "300",
@@ -6777,14 +6641,14 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
                 clearable: ""
               }, {
                 append: withCtx(() => [
-                  createVNode(_component_q_icon, {
+                  createVNode(QIcon, {
                     size: "xs",
                     name: "search"
                   })
                 ]),
                 _: 1
               }, 8, ["modelValue"]),
-              createVNode(_component_q_btn, {
+              createVNode(QBtn, {
                 color: "green",
                 icon: "add",
                 outline: "",
@@ -6798,7 +6662,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
               })
             ]),
             "body-cell-index": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createTextVNode(toDisplayString(props.rowIndex + 1), 1)
                 ]),
@@ -6806,7 +6670,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
               }, 1032, ["props"])
             ]),
             "body-cell-fecha_registro": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createTextVNode(toDisplayString(unref(parseFecha)(props.row.fecha_registro)), 1)
                 ]),
@@ -6814,7 +6678,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
               }, 1032, ["props"])
             ]),
             "body-cell-opt": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createVNode(_sfc_main$j, {
                     props,
@@ -6862,37 +6726,31 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
       emit("clicked", flag, row.row);
     };
     return (_ctx, _cache) => {
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_item_section = resolveComponent("q-item-section");
-      const _component_q_item = resolveComponent("q-item");
-      const _component_q_list = resolveComponent("q-list");
-      const _component_q_menu = resolveComponent("q-menu");
-      const _component_q_btn = resolveComponent("q-btn");
       return openBlock(), createElementBlock("div", null, [
-        createVNode(_component_q_btn, {
+        createVNode(QBtn, {
           size: "xs",
           flat: "",
           icon: "more_vert"
         }, {
           default: withCtx(() => [
-            createVNode(_component_q_menu, {
+            createVNode(QMenu, {
               "transition-show": "flip-right",
               fit: ""
             }, {
               default: withCtx(() => [
-                createVNode(_component_q_list, null, {
+                createVNode(QList, null, {
                   default: withCtx(() => [
                     (openBlock(), createElementBlock(Fragment, null, renderList(botones, (b, i) => {
-                      return createVNode(_component_q_item, {
+                      return createVNode(QItem, {
                         key: i,
                         dense: "",
                         clickable: "",
                         onClick: ($event) => clickbtn(b.flag, __props.props)
                       }, {
                         default: withCtx(() => [
-                          createVNode(_component_q_item_section, { avatar: "" }, {
+                          createVNode(QItemSection, { avatar: "" }, {
                             default: withCtx(() => [
-                              createVNode(_component_q_icon, {
+                              createVNode(QIcon, {
                                 name: b.icon,
                                 size: "xs",
                                 right: "",
@@ -6901,7 +6759,7 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
                             ]),
                             _: 2
                           }, 1024),
-                          createVNode(_component_q_item_section, null, {
+                          createVNode(QItemSection, null, {
                             default: withCtx(() => [
                               createTextVNode(toDisplayString(b.text), 1)
                             ]),
@@ -6987,49 +6845,40 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       open
     });
     return (_ctx, _cache) => {
-      const _component_q_space = resolveComponent("q-space");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_input = resolveComponent("q-input");
-      const _component_q_card_actions = resolveComponent("q-card-actions");
-      const _component_q_form = resolveComponent("q-form");
-      const _component_q_card = resolveComponent("q-card");
-      const _component_q_dialog = resolveComponent("q-dialog");
-      const _directive_close_popup = resolveDirective("close-popup");
-      return openBlock(), createBlock(_component_q_dialog, {
+      return openBlock(), createBlock(QDialog, {
         modelValue: alert.value,
         "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => alert.value = $event),
         persistent: "",
         square: ""
       }, {
         default: withCtx(() => [
-          createVNode(_component_q_card, { xstyle: "min-width: 600px" }, {
+          createVNode(QCard, { xstyle: "min-width: 600px" }, {
             default: withCtx(() => [
-              createVNode(_component_q_form, {
+              createVNode(QForm, {
                 onSubmit,
                 class: "q-gutter-md"
               }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_card_section, { class: "row items-center q-pb-xs" }, {
+                  createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
                     default: withCtx(() => [
                       createElementVNode("div", _hoisted_1$a, toDisplayString(input.value.id ? "Editar" : "Registrar"), 1),
-                      createVNode(_component_q_space),
-                      withDirectives((openBlock(), createBlock(_component_q_btn, { flat: "" }, {
+                      createVNode(QSpace),
+                      withDirectives((openBlock(), createBlock(QBtn, { flat: "" }, {
                         default: withCtx(() => _cache[5] || (_cache[5] = [
                           createElementVNode("b", null, "x", -1)
                         ])),
                         _: 1
                       })), [
-                        [_directive_close_popup]
+                        [ClosePopup]
                       ])
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_q_card_section, { class: "q-pt-none" }, {
+                  createVNode(QCardSection, { class: "q-pt-none" }, {
                     default: withCtx(() => [
                       createElementVNode("div", _hoisted_2$6, [
                         createElementVNode("div", _hoisted_3$6, [
-                          createVNode(_component_q_input, {
+                          createVNode(QInput, {
                             outlined: "",
                             modelValue: input.value.nombre,
                             "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => input.value.nombre = $event),
@@ -7040,7 +6889,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
                             counter: "",
                             rules: [(val) => val && val.length > 0 || "campo obligatorio"]
                           }, null, 8, ["modelValue", "rules"]),
-                          createVNode(_component_q_input, {
+                          createVNode(QInput, {
                             outlined: "",
                             type: "number",
                             modelValue: input.value.orden,
@@ -7056,7 +6905,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
                           }, null, 8, ["modelValue", "rules"])
                         ]),
                         createElementVNode("div", _hoisted_4$3, [
-                          createVNode(_component_q_input, {
+                          createVNode(QInput, {
                             outlined: "",
                             modelValue: input.value.descripcion,
                             "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => input.value.descripcion = $event),
@@ -7071,7 +6920,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
                           }, null, 8, ["modelValue", "rules"])
                         ]),
                         createElementVNode("div", _hoisted_5$2, [
-                          createVNode(_component_q_btn, {
+                          createVNode(QBtn, {
                             color: "grey",
                             icon: "fmd_good",
                             dense: "",
@@ -7090,9 +6939,9 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_q_card_actions, { align: "right" }, {
+                  createVNode(QCardActions, { align: "right" }, {
                     default: withCtx(() => [
-                      createVNode(_component_q_btn, {
+                      createVNode(QBtn, {
                         outline: "",
                         loading: loading.value,
                         label: "aceptar",
@@ -7101,7 +6950,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
                         type: "submit",
                         color: "positive"
                       }, null, 8, ["loading"]),
-                      withDirectives(createVNode(_component_q_btn, {
+                      withDirectives(createVNode(QBtn, {
                         outline: "",
                         disable: loading.value,
                         label: "cerrar",
@@ -7109,7 +6958,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
                         icon: "close",
                         color: "negative"
                       }, null, 8, ["disable"]), [
-                        [_directive_close_popup]
+                        [ClosePopup]
                       ])
                     ]),
                     _: 1
@@ -7156,15 +7005,9 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
       await getdatos();
     });
     return (_ctx, _cache) => {
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_input = resolveComponent("q-input");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_td = resolveComponent("q-td");
-      const _component_q_table = resolveComponent("q-table");
-      const _component_q_page = resolveComponent("q-page");
-      return openBlock(), createBlock(_component_q_page, { class: "q-pa-xs" }, {
+      return openBlock(), createBlock(QPage, { class: "q-pa-xs" }, {
         default: withCtx(() => [
-          createVNode(_component_q_table, {
+          createVNode(QTable, {
             title: "Unidades",
             rows: rows.value,
             columns: unref(columns$2),
@@ -7178,7 +7021,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
             "rows-per-page-options": [0]
           }, {
             "top-right": withCtx(() => [
-              createVNode(_component_q_input, {
+              createVNode(QInput, {
                 outlined: "",
                 dense: "",
                 debounce: "300",
@@ -7188,14 +7031,14 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
                 clearable: ""
               }, {
                 append: withCtx(() => [
-                  createVNode(_component_q_icon, {
+                  createVNode(QIcon, {
                     size: "xs",
                     name: "search"
                   })
                 ]),
                 _: 1
               }, 8, ["modelValue"]),
-              createVNode(_component_q_btn, {
+              createVNode(QBtn, {
                 color: "green",
                 icon: "add",
                 outline: "",
@@ -7209,7 +7052,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
               })
             ]),
             "body-cell-index": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createTextVNode(toDisplayString(props.rowIndex + 1), 1)
                 ]),
@@ -7217,7 +7060,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
               }, 1032, ["props"])
             ]),
             "body-cell-fecha_registro": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createTextVNode(toDisplayString(unref(parseFecha)(props.row.fecha_registro)), 1)
                 ]),
@@ -7225,7 +7068,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
               }, 1032, ["props"])
             ]),
             "body-cell-opt": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createVNode(_sfc_main$g, {
                     props,
@@ -7328,43 +7171,34 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
       open
     });
     return (_ctx, _cache) => {
-      const _component_q_space = resolveComponent("q-space");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_separator = resolveComponent("q-separator");
-      const _component_q_input = resolveComponent("q-input");
-      const _component_q_card_actions = resolveComponent("q-card-actions");
-      const _component_q_card = resolveComponent("q-card");
-      const _component_q_dialog = resolveComponent("q-dialog");
-      const _directive_close_popup = resolveDirective("close-popup");
-      return openBlock(), createBlock(_component_q_dialog, {
+      return openBlock(), createBlock(QDialog, {
         modelValue: alert.value,
         "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => alert.value = $event),
         persistent: "",
         square: ""
       }, {
         default: withCtx(() => [
-          createVNode(_component_q_card, { xstyle: "min-width: 630px" }, {
+          createVNode(QCard, { xstyle: "min-width: 630px" }, {
             default: withCtx(() => [
-              createVNode(_component_q_card_section, { class: "row items-center q-pb-xs" }, {
+              createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
                 default: withCtx(() => [
                   _cache[5] || (_cache[5] = createElementVNode("div", { class: "text-h6" }, "Responder Ticket", -1)),
-                  createVNode(_component_q_space),
-                  withDirectives((openBlock(), createBlock(_component_q_btn, { flat: "" }, {
+                  createVNode(QSpace),
+                  withDirectives((openBlock(), createBlock(QBtn, { flat: "" }, {
                     default: withCtx(() => _cache[4] || (_cache[4] = [
                       createElementVNode("b", null, "x", -1)
                     ])),
                     _: 1
                   })), [
-                    [_directive_close_popup]
+                    [ClosePopup]
                   ])
                 ]),
                 _: 1
               }),
-              createVNode(_component_q_card_section, { class: "q-pt-none" }, {
+              createVNode(QCardSection, { class: "q-pt-none" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_separator, { class: "q-mt-none q-mb-lg" }),
-                  createVNode(_component_q_input, {
+                  createVNode(QSeparator, { class: "q-mt-none q-mb-lg" }),
+                  createVNode(QInput, {
                     modelValue: respuesta.value,
                     "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => respuesta.value = $event),
                     modelModifiers: { trim: true },
@@ -7382,16 +7216,16 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
                 ]),
                 _: 1
               }),
-              createVNode(_component_q_card_actions, { align: "right" }, {
+              createVNode(QCardActions, { align: "right" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_btn, {
+                  createVNode(QBtn, {
                     flat: "",
                     loading: loading.value,
                     label: "cerrar",
                     color: "grey",
                     onClick: _cache[1] || (_cache[1] = ($event) => close())
                   }, null, 8, ["loading"]),
-                  createVNode(_component_q_btn, {
+                  createVNode(QBtn, {
                     flat: "",
                     loading: loading.value,
                     label: "responder",
@@ -7440,41 +7274,33 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
       open
     });
     return (_ctx, _cache) => {
-      const _component_q_space = resolveComponent("q-space");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_separator = resolveComponent("q-separator");
-      const _component_q_card_actions = resolveComponent("q-card-actions");
-      const _component_q_card = resolveComponent("q-card");
-      const _component_q_dialog = resolveComponent("q-dialog");
-      const _directive_close_popup = resolveDirective("close-popup");
-      return openBlock(), createBlock(_component_q_dialog, {
+      return openBlock(), createBlock(QDialog, {
         modelValue: alert.value,
         "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => alert.value = $event),
         persistent: "",
         square: ""
       }, {
         default: withCtx(() => [
-          createVNode(_component_q_card, { xstyle: "min-width: 630px" }, {
+          createVNode(QCard, { xstyle: "min-width: 630px" }, {
             default: withCtx(() => [
-              createVNode(_component_q_card_section, { class: "row items-center q-pb-xs" }, {
+              createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
                 default: withCtx(() => [
                   _cache[4] || (_cache[4] = createElementVNode("div", { class: "text-h6" }, "Cerrar el ticket", -1)),
-                  createVNode(_component_q_space),
-                  withDirectives((openBlock(), createBlock(_component_q_btn, { flat: "" }, {
+                  createVNode(QSpace),
+                  withDirectives((openBlock(), createBlock(QBtn, { flat: "" }, {
                     default: withCtx(() => _cache[3] || (_cache[3] = [
                       createElementVNode("b", null, "x", -1)
                     ])),
                     _: 1
                   })), [
-                    [_directive_close_popup]
+                    [ClosePopup]
                   ])
                 ]),
                 _: 1
               }),
-              createVNode(_component_q_card_section, { class: "q-pt-none" }, {
+              createVNode(QCardSection, { class: "q-pt-none" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_separator, { class: "q-mt-none q-mb-lg" }),
+                  createVNode(QSeparator, { class: "q-mt-none q-mb-lg" }),
                   createElementVNode("p", null, [
                     _cache[5] || (_cache[5] = createTextVNode(" Al cerrar el ticket ")),
                     createElementVNode("b", null, toDisplayString(item.value.id), 1),
@@ -7483,16 +7309,16 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
                 ]),
                 _: 1
               }),
-              createVNode(_component_q_card_actions, { align: "right" }, {
+              createVNode(QCardActions, { align: "right" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_btn, {
+                  createVNode(QBtn, {
                     flat: "",
                     loading: loading.value,
                     label: "Cerrar ticket",
                     color: "red",
                     onClick: _cache[0] || (_cache[0] = ($event) => select())
                   }, null, 8, ["loading"]),
-                  createVNode(_component_q_btn, {
+                  createVNode(QBtn, {
                     flat: "",
                     loading: loading.value,
                     label: "volver",
@@ -7552,41 +7378,33 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
       open
     });
     return (_ctx, _cache) => {
-      const _component_q_space = resolveComponent("q-space");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_separator = resolveComponent("q-separator");
-      const _component_q_card_actions = resolveComponent("q-card-actions");
-      const _component_q_card = resolveComponent("q-card");
-      const _component_q_dialog = resolveComponent("q-dialog");
-      const _directive_close_popup = resolveDirective("close-popup");
-      return openBlock(), createBlock(_component_q_dialog, {
+      return openBlock(), createBlock(QDialog, {
         modelValue: alert.value,
         "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => alert.value = $event),
         persistent: "",
         square: ""
       }, {
         default: withCtx(() => [
-          createVNode(_component_q_card, { xstyle: "min-width: 630px" }, {
+          createVNode(QCard, { xstyle: "min-width: 630px" }, {
             default: withCtx(() => [
-              createVNode(_component_q_card_section, { class: "row items-center q-pb-xs" }, {
+              createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
                 default: withCtx(() => [
                   _cache[3] || (_cache[3] = createElementVNode("div", { class: "text-h6" }, "Detalles del ticket", -1)),
-                  createVNode(_component_q_space),
-                  withDirectives((openBlock(), createBlock(_component_q_btn, { flat: "" }, {
+                  createVNode(QSpace),
+                  withDirectives((openBlock(), createBlock(QBtn, { flat: "" }, {
                     default: withCtx(() => _cache[2] || (_cache[2] = [
                       createElementVNode("b", null, "x", -1)
                     ])),
                     _: 1
                   })), [
-                    [_directive_close_popup]
+                    [ClosePopup]
                   ])
                 ]),
                 _: 1
               }),
-              createVNode(_component_q_card_section, { class: "q-pt-none" }, {
+              createVNode(QCardSection, { class: "q-pt-none" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_separator, { class: "q-mt-none q-mb-lg" }),
+                  createVNode(QSeparator, { class: "q-mt-none q-mb-lg" }),
                   createElementVNode("p", _hoisted_1$9, [
                     _cache[4] || (_cache[4] = createElementVNode("b", null, "Numero ticket:", -1)),
                     createTextVNode(" " + toDisplayString(ticket.value.id), 1)
@@ -7603,7 +7421,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
                     _cache[7] || (_cache[7] = createElementVNode("b", null, "Reportado el:", -1)),
                     createTextVNode(" " + toDisplayString(unref(parseFecha)(ticket.value.fecha_registro)), 1)
                   ]),
-                  createVNode(_component_q_separator),
+                  createVNode(QSeparator),
                   _cache[16] || (_cache[16] = createElementVNode("small", null, "Interaccion:", -1)),
                   (openBlock(true), createElementBlock(Fragment, null, renderList(ticket.value.respuestas, (r, ind) => {
                     return openBlock(), createElementBlock("div", { key: ind }, [
@@ -7624,16 +7442,16 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
                       ]))
                     ]);
                   }), 128)),
-                  createVNode(_component_q_separator)
+                  createVNode(QSeparator)
                 ]),
                 _: 1
               }),
-              createVNode(_component_q_card_actions, {
+              createVNode(QCardActions, {
                 align: "right",
                 class: "q-pt-none"
               }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_btn, {
+                  createVNode(QBtn, {
                     flat: "",
                     loading: loading.value,
                     label: "cerrar",
@@ -7690,18 +7508,8 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
       console.log("mis tickets");
     });
     return (_ctx, _cache) => {
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_toggle = resolveComponent("q-toggle");
-      const _component_q_td = resolveComponent("q-td");
-      const _component_q_banner = resolveComponent("q-banner");
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_item_section = resolveComponent("q-item-section");
-      const _component_q_item = resolveComponent("q-item");
-      const _component_q_list = resolveComponent("q-list");
-      const _component_q_menu = resolveComponent("q-menu");
-      const _component_q_table = resolveComponent("q-table");
       return openBlock(), createElementBlock("div", _hoisted_1$8, [
-        createVNode(_component_q_table, {
+        createVNode(QTable, {
           title: "",
           class: "my-sticky-header-table",
           "visible-columns": visibleColumns.value,
@@ -7711,13 +7519,13 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
           "row-key": "name"
         }, {
           "top-left": withCtx(() => [
-            createVNode(_component_q_btn, {
+            createVNode(QBtn, {
               icon: "refresh",
               dense: "",
               flat: "",
               onClick: _cache[0] || (_cache[0] = ($event) => listar())
             }),
-            createVNode(_component_q_toggle, {
+            createVNode(QToggle, {
               modelValue: more_datos.value,
               "onUpdate:modelValue": [
                 _cache[1] || (_cache[1] = ($event) => more_datos.value = $event),
@@ -7729,7 +7537,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
             }, null, 8, ["modelValue"])
           ]),
           "body-cell-index": withCtx((props) => [
-            createVNode(_component_q_td, { props }, {
+            createVNode(QTd, { props }, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(props.rowIndex + 1), 1)
               ]),
@@ -7737,7 +7545,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
             }, 1032, ["props"])
           ]),
           "body-cell-problema": withCtx((props) => [
-            createVNode(_component_q_td, {
+            createVNode(QTd, {
               props,
               style: { "min-width": "350px" }
             }, {
@@ -7748,7 +7556,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
             }, 1032, ["props"])
           ]),
           "body-cell-respuesta": withCtx((props) => [
-            createVNode(_component_q_td, {
+            createVNode(QTd, {
               props,
               style: { "min-width": "250px" }
             }, {
@@ -7759,9 +7567,9 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
             }, 1032, ["props"])
           ]),
           "body-cell-estado": withCtx((props) => [
-            createVNode(_component_q_td, { props }, {
+            createVNode(QTd, { props }, {
               default: withCtx(() => [
-                createVNode(_component_q_banner, {
+                createVNode(QBanner, {
                   dense: "",
                   "inline-actions": "",
                   class: "q-py-none text-center text-black",
@@ -7777,7 +7585,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
             }, 1032, ["props"])
           ]),
           "body-cell-fecha_registro": withCtx((props) => [
-            createVNode(_component_q_td, { props }, {
+            createVNode(QTd, { props }, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(unref(parseFecha)(props.row.fecha_registro)), 1)
               ]),
@@ -7785,7 +7593,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
             }, 1032, ["props"])
           ]),
           "body-cell-respondido": withCtx((props) => [
-            createVNode(_component_q_td, { props }, {
+            createVNode(QTd, { props }, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(unref(parseFecha)(props.row.respondido)), 1)
               ]),
@@ -7793,30 +7601,30 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
             }, 1032, ["props"])
           ]),
           "body-cell-opt": withCtx((props) => [
-            createVNode(_component_q_td, { props }, {
+            createVNode(QTd, { props }, {
               default: withCtx(() => [
-                createVNode(_component_q_btn, {
+                createVNode(QBtn, {
                   size: "xs",
                   flat: "",
                   icon: "more_vert"
                 }, {
                   default: withCtx(() => [
-                    createVNode(_component_q_menu, {
+                    createVNode(QMenu, {
                       "transition-show": "flip-right",
                       fit: ""
                     }, {
                       default: withCtx(() => [
-                        createVNode(_component_q_list, null, {
+                        createVNode(QList, null, {
                           default: withCtx(() => [
-                            createVNode(_component_q_item, {
+                            createVNode(QItem, {
                               dense: "",
                               clickable: "",
                               onClick: ($event) => verticket(props.row)
                             }, {
                               default: withCtx(() => [
-                                createVNode(_component_q_item_section, { avatar: "" }, {
+                                createVNode(QItemSection, { avatar: "" }, {
                                   default: withCtx(() => [
-                                    createVNode(_component_q_icon, {
+                                    createVNode(QIcon, {
                                       name: "visibility",
                                       size: "xs",
                                       right: "",
@@ -7825,7 +7633,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                                   ]),
                                   _: 1
                                 }),
-                                createVNode(_component_q_item_section, null, {
+                                createVNode(QItemSection, null, {
                                   default: withCtx(() => _cache[3] || (_cache[3] = [
                                     createTextVNode("Ver")
                                   ])),
@@ -7834,16 +7642,16 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                               ]),
                               _: 2
                             }, 1032, ["onClick"]),
-                            props.row.estado != "cerrado" ? (openBlock(), createBlock(_component_q_item, {
+                            props.row.estado != "cerrado" ? (openBlock(), createBlock(QItem, {
                               key: 0,
                               dense: "",
                               clickable: "",
                               onClick: ($event) => responder(props.row)
                             }, {
                               default: withCtx(() => [
-                                createVNode(_component_q_item_section, { avatar: "" }, {
+                                createVNode(QItemSection, { avatar: "" }, {
                                   default: withCtx(() => [
-                                    createVNode(_component_q_icon, {
+                                    createVNode(QIcon, {
                                       name: "edit",
                                       size: "xs",
                                       right: "",
@@ -7852,7 +7660,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                                   ]),
                                   _: 1
                                 }),
-                                createVNode(_component_q_item_section, null, {
+                                createVNode(QItemSection, null, {
                                   default: withCtx(() => _cache[4] || (_cache[4] = [
                                     createTextVNode("Responder")
                                   ])),
@@ -7861,16 +7669,16 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                               ]),
                               _: 2
                             }, 1032, ["onClick"])) : createCommentVNode("", true),
-                            props.row.estado != "cerrado" ? (openBlock(), createBlock(_component_q_item, {
+                            props.row.estado != "cerrado" ? (openBlock(), createBlock(QItem, {
                               key: 1,
                               dense: "",
                               clickable: "",
                               onClick: ($event) => cerrarticket(props.row)
                             }, {
                               default: withCtx(() => [
-                                createVNode(_component_q_item_section, { avatar: "" }, {
+                                createVNode(QItemSection, { avatar: "" }, {
                                   default: withCtx(() => [
-                                    createVNode(_component_q_icon, {
+                                    createVNode(QIcon, {
                                       name: "close",
                                       size: "xs",
                                       right: "",
@@ -7879,7 +7687,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
                                   ]),
                                   _: 1
                                 }),
-                                createVNode(_component_q_item_section, null, {
+                                createVNode(QItemSection, null, {
                                   default: withCtx(() => _cache[5] || (_cache[5] = [
                                     createTextVNode("Cerrar")
                                   ])),
@@ -7953,17 +7761,8 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
       console.log("mis tickets");
     });
     return (_ctx, _cache) => {
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_td = resolveComponent("q-td");
-      const _component_q_banner = resolveComponent("q-banner");
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_item_section = resolveComponent("q-item-section");
-      const _component_q_item = resolveComponent("q-item");
-      const _component_q_list = resolveComponent("q-list");
-      const _component_q_menu = resolveComponent("q-menu");
-      const _component_q_table = resolveComponent("q-table");
       return openBlock(), createElementBlock("div", _hoisted_1$7, [
-        createVNode(_component_q_table, {
+        createVNode(QTable, {
           title: "",
           class: "my-sticky-header-table",
           dense: "",
@@ -7972,7 +7771,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
           "row-key": "name"
         }, {
           "top-left": withCtx(() => [
-            createVNode(_component_q_btn, {
+            createVNode(QBtn, {
               icon: "refresh",
               dense: "",
               flat: "",
@@ -7980,7 +7779,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             })
           ]),
           "body-cell-index": withCtx((props) => [
-            createVNode(_component_q_td, { props }, {
+            createVNode(QTd, { props }, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(props.rowIndex + 1), 1)
               ]),
@@ -7988,7 +7787,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             }, 1032, ["props"])
           ]),
           "body-cell-problema": withCtx((props) => [
-            createVNode(_component_q_td, {
+            createVNode(QTd, {
               props,
               style: { "min-width": "350px" }
             }, {
@@ -7999,7 +7798,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             }, 1032, ["props"])
           ]),
           "body-cell-respuesta": withCtx((props) => [
-            createVNode(_component_q_td, {
+            createVNode(QTd, {
               props,
               style: { "min-width": "250px" }
             }, {
@@ -8010,9 +7809,9 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             }, 1032, ["props"])
           ]),
           "body-cell-estado": withCtx((props) => [
-            createVNode(_component_q_td, { props }, {
+            createVNode(QTd, { props }, {
               default: withCtx(() => [
-                createVNode(_component_q_banner, {
+                createVNode(QBanner, {
                   dense: "",
                   "inline-actions": "",
                   class: "q-py-none text-center text-black",
@@ -8028,7 +7827,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             }, 1032, ["props"])
           ]),
           "body-cell-fecha_registro": withCtx((props) => [
-            createVNode(_component_q_td, { props }, {
+            createVNode(QTd, { props }, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(unref(parseFecha)(props.row.fecha_registro)), 1)
               ]),
@@ -8036,7 +7835,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             }, 1032, ["props"])
           ]),
           "body-cell-respondido": withCtx((props) => [
-            createVNode(_component_q_td, { props }, {
+            createVNode(QTd, { props }, {
               default: withCtx(() => [
                 createTextVNode(toDisplayString(unref(parseFecha)(props.row.respondido)), 1)
               ]),
@@ -8044,30 +7843,30 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             }, 1032, ["props"])
           ]),
           "body-cell-opt": withCtx((props) => [
-            createVNode(_component_q_td, { props }, {
+            createVNode(QTd, { props }, {
               default: withCtx(() => [
-                createVNode(_component_q_btn, {
+                createVNode(QBtn, {
                   size: "xs",
                   flat: "",
                   icon: "more_vert"
                 }, {
                   default: withCtx(() => [
-                    createVNode(_component_q_menu, {
+                    createVNode(QMenu, {
                       "transition-show": "flip-right",
                       fit: ""
                     }, {
                       default: withCtx(() => [
-                        createVNode(_component_q_list, null, {
+                        createVNode(QList, null, {
                           default: withCtx(() => [
-                            createVNode(_component_q_item, {
+                            createVNode(QItem, {
                               dense: "",
                               clickable: "",
                               onClick: ($event) => verticket(props.row)
                             }, {
                               default: withCtx(() => [
-                                createVNode(_component_q_item_section, { avatar: "" }, {
+                                createVNode(QItemSection, { avatar: "" }, {
                                   default: withCtx(() => [
-                                    createVNode(_component_q_icon, {
+                                    createVNode(QIcon, {
                                       name: "visibility",
                                       size: "xs",
                                       right: "",
@@ -8076,7 +7875,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                                   ]),
                                   _: 1
                                 }),
-                                createVNode(_component_q_item_section, null, {
+                                createVNode(QItemSection, null, {
                                   default: withCtx(() => _cache[1] || (_cache[1] = [
                                     createTextVNode("Ver")
                                   ])),
@@ -8085,16 +7884,16 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                               ]),
                               _: 2
                             }, 1032, ["onClick"]),
-                            props.row.estado != "cerrado" ? (openBlock(), createBlock(_component_q_item, {
+                            props.row.estado != "cerrado" ? (openBlock(), createBlock(QItem, {
                               key: 0,
                               dense: "",
                               clickable: "",
                               onClick: ($event) => responder(props.row)
                             }, {
                               default: withCtx(() => [
-                                createVNode(_component_q_item_section, { avatar: "" }, {
+                                createVNode(QItemSection, { avatar: "" }, {
                                   default: withCtx(() => [
-                                    createVNode(_component_q_icon, {
+                                    createVNode(QIcon, {
                                       name: "edit",
                                       size: "xs",
                                       right: "",
@@ -8103,7 +7902,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                                   ]),
                                   _: 1
                                 }),
-                                createVNode(_component_q_item_section, null, {
+                                createVNode(QItemSection, null, {
                                   default: withCtx(() => _cache[2] || (_cache[2] = [
                                     createTextVNode("Responder")
                                   ])),
@@ -8112,16 +7911,16 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                               ]),
                               _: 2
                             }, 1032, ["onClick"])) : createCommentVNode("", true),
-                            props.row.estado != "cerrado" ? (openBlock(), createBlock(_component_q_item, {
+                            props.row.estado != "cerrado" ? (openBlock(), createBlock(QItem, {
                               key: 1,
                               dense: "",
                               clickable: "",
                               onClick: ($event) => cerrarticket(props.row)
                             }, {
                               default: withCtx(() => [
-                                createVNode(_component_q_item_section, { avatar: "" }, {
+                                createVNode(QItemSection, { avatar: "" }, {
                                   default: withCtx(() => [
-                                    createVNode(_component_q_icon, {
+                                    createVNode(QIcon, {
                                       name: "close",
                                       size: "xs",
                                       right: "",
@@ -8130,7 +7929,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                                   ]),
                                   _: 1
                                 }),
-                                createVNode(_component_q_item_section, null, {
+                                createVNode(QItemSection, null, {
                                   default: withCtx(() => _cache[3] || (_cache[3] = [
                                     createTextVNode("Cerrar")
                                   ])),
@@ -8178,13 +7977,8 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const tab = ref("mails");
     return (_ctx, _cache) => {
-      const _component_q_tab = resolveComponent("q-tab");
-      const _component_q_tabs = resolveComponent("q-tabs");
-      const _component_q_separator = resolveComponent("q-separator");
-      const _component_q_tab_panel = resolveComponent("q-tab-panel");
-      const _component_q_tab_panels = resolveComponent("q-tab-panels");
       return openBlock(), createElementBlock("div", _hoisted_1$6, [
-        createVNode(_component_q_tabs, {
+        createVNode(QTabs, {
           modelValue: tab.value,
           "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => tab.value = $event),
           dense: "",
@@ -8195,12 +7989,12 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
           "narrow-indicator": ""
         }, {
           default: withCtx(() => [
-            createVNode(_component_q_tab, {
+            createVNode(QTab, {
               name: "mails",
               icon: "confirmation_number",
               label: "Mis tickets"
             }),
-            createVNode(_component_q_tab, {
+            createVNode(QTab, {
               name: "alarms",
               icon: "local_activity",
               label: "Tickets general"
@@ -8208,14 +8002,14 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
           ]),
           _: 1
         }, 8, ["modelValue"]),
-        createVNode(_component_q_separator),
-        createVNode(_component_q_tab_panels, {
+        createVNode(QSeparator),
+        createVNode(QTabPanels, {
           modelValue: tab.value,
           "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => tab.value = $event),
           animated: ""
         }, {
           default: withCtx(() => [
-            createVNode(_component_q_tab_panel, {
+            createVNode(QTabPanel, {
               name: "mails",
               class: "q-pa-none"
             }, {
@@ -8224,7 +8018,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
               ]),
               _: 1
             }),
-            createVNode(_component_q_tab_panel, {
+            createVNode(QTabPanel, {
               name: "alarms",
               class: "q-pa-none"
             }, {
@@ -8325,37 +8119,31 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
       emit("clicked", flag, row.row);
     };
     return (_ctx, _cache) => {
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_item_section = resolveComponent("q-item-section");
-      const _component_q_item = resolveComponent("q-item");
-      const _component_q_list = resolveComponent("q-list");
-      const _component_q_menu = resolveComponent("q-menu");
-      const _component_q_btn = resolveComponent("q-btn");
       return openBlock(), createElementBlock("div", null, [
-        createVNode(_component_q_btn, {
+        createVNode(QBtn, {
           size: "xs",
           flat: "",
           icon: "more_vert"
         }, {
           default: withCtx(() => [
-            createVNode(_component_q_menu, {
+            createVNode(QMenu, {
               "transition-show": "flip-right",
               fit: ""
             }, {
               default: withCtx(() => [
-                createVNode(_component_q_list, null, {
+                createVNode(QList, null, {
                   default: withCtx(() => [
                     (openBlock(), createElementBlock(Fragment, null, renderList(botones, (b, i) => {
-                      return createVNode(_component_q_item, {
+                      return createVNode(QItem, {
                         key: i,
                         dense: "",
                         clickable: "",
                         onClick: ($event) => clickbtn(b.flag, __props.props)
                       }, {
                         default: withCtx(() => [
-                          createVNode(_component_q_item_section, { avatar: "" }, {
+                          createVNode(QItemSection, { avatar: "" }, {
                             default: withCtx(() => [
-                              createVNode(_component_q_icon, {
+                              createVNode(QIcon, {
                                 name: b.icon,
                                 size: "xs",
                                 right: "",
@@ -8364,7 +8152,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
                             ]),
                             _: 2
                           }, 1024),
-                          createVNode(_component_q_item_section, null, {
+                          createVNode(QItemSection, null, {
                             default: withCtx(() => [
                               createTextVNode(toDisplayString(b.text), 1)
                             ]),
@@ -8451,50 +8239,40 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
       open
     });
     return (_ctx, _cache) => {
-      const _component_q_space = resolveComponent("q-space");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_editor = resolveComponent("q-editor");
-      const _component_q_input = resolveComponent("q-input");
-      const _component_q_card_actions = resolveComponent("q-card-actions");
-      const _component_q_form = resolveComponent("q-form");
-      const _component_q_card = resolveComponent("q-card");
-      const _component_q_dialog = resolveComponent("q-dialog");
-      const _directive_close_popup = resolveDirective("close-popup");
-      return openBlock(), createBlock(_component_q_dialog, {
+      return openBlock(), createBlock(QDialog, {
         modelValue: alert.value,
         "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => alert.value = $event),
         persistent: "",
         square: ""
       }, {
         default: withCtx(() => [
-          createVNode(_component_q_card, { xstyle: "min-width: 600px" }, {
+          createVNode(QCard, { xstyle: "min-width: 600px" }, {
             default: withCtx(() => [
-              createVNode(_component_q_form, {
+              createVNode(QForm, {
                 onSubmit,
                 class: "q-gutter-md"
               }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_card_section, { class: "row items-center q-pb-xs" }, {
+                  createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
                     default: withCtx(() => [
                       createElementVNode("div", _hoisted_1$5, toDisplayString(input.value.id ? "Editar" : "Registrar"), 1),
-                      createVNode(_component_q_space),
-                      withDirectives((openBlock(), createBlock(_component_q_btn, { flat: "" }, {
+                      createVNode(QSpace),
+                      withDirectives((openBlock(), createBlock(QBtn, { flat: "" }, {
                         default: withCtx(() => _cache[4] || (_cache[4] = [
                           createElementVNode("b", null, "x", -1)
                         ])),
                         _: 1
                       })), [
-                        [_directive_close_popup]
+                        [ClosePopup]
                       ])
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_q_card_section, { class: "q-py-none" }, {
+                  createVNode(QCardSection, { class: "q-py-none" }, {
                     default: withCtx(() => [
                       createElementVNode("div", _hoisted_2$2, [
                         createElementVNode("div", _hoisted_3$2, [
-                          createVNode(_component_q_editor, {
+                          createVNode(QEditor, {
                             counter: "",
                             outlined: "",
                             modelValue: input.value.mensaje,
@@ -8504,7 +8282,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
                           }, null, 8, ["modelValue", "definitions", "toolbar"])
                         ]),
                         createElementVNode("div", _hoisted_4$1, [
-                          createVNode(_component_q_input, {
+                          createVNode(QInput, {
                             outlined: "",
                             type: "datetime-local",
                             modelValue: input.value.desde,
@@ -8517,7 +8295,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
                           }, null, 8, ["modelValue", "rules"])
                         ]),
                         createElementVNode("div", _hoisted_5, [
-                          createVNode(_component_q_input, {
+                          createVNode(QInput, {
                             outlined: "",
                             type: "datetime-local",
                             modelValue: input.value.hasta,
@@ -8532,9 +8310,9 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
                     ]),
                     _: 1
                   }),
-                  createVNode(_component_q_card_actions, { align: "right" }, {
+                  createVNode(QCardActions, { align: "right" }, {
                     default: withCtx(() => [
-                      createVNode(_component_q_btn, {
+                      createVNode(QBtn, {
                         outline: "",
                         loading: loading.value,
                         label: "aceptar",
@@ -8543,7 +8321,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
                         type: "submit",
                         color: "positive"
                       }, null, 8, ["loading"]),
-                      withDirectives(createVNode(_component_q_btn, {
+                      withDirectives(createVNode(QBtn, {
                         outline: "",
                         disable: loading.value,
                         label: "cerrar",
@@ -8551,7 +8329,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
                         icon: "close",
                         color: "negative"
                       }, null, 8, ["disable"]), [
-                        [_directive_close_popup]
+                        [ClosePopup]
                       ])
                     ]),
                     _: 1
@@ -8595,15 +8373,9 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
       await getdatos();
     });
     return (_ctx, _cache) => {
-      const _component_q_icon = resolveComponent("q-icon");
-      const _component_q_input = resolveComponent("q-input");
-      const _component_q_btn = resolveComponent("q-btn");
-      const _component_q_td = resolveComponent("q-td");
-      const _component_q_table = resolveComponent("q-table");
-      const _component_q_page = resolveComponent("q-page");
-      return openBlock(), createBlock(_component_q_page, { class: "q-pa-xs" }, {
+      return openBlock(), createBlock(QPage, { class: "q-pa-xs" }, {
         default: withCtx(() => [
-          createVNode(_component_q_table, {
+          createVNode(QTable, {
             title: "Notificaciones",
             rows: rows.value,
             columns: unref(columns),
@@ -8617,7 +8389,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
             "rows-per-page-options": [0]
           }, {
             "top-right": withCtx(() => [
-              createVNode(_component_q_input, {
+              createVNode(QInput, {
                 outlined: "",
                 dense: "",
                 debounce: "300",
@@ -8627,14 +8399,14 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
                 clearable: ""
               }, {
                 append: withCtx(() => [
-                  createVNode(_component_q_icon, {
+                  createVNode(QIcon, {
                     size: "xs",
                     name: "search"
                   })
                 ]),
                 _: 1
               }, 8, ["modelValue"]),
-              createVNode(_component_q_btn, {
+              createVNode(QBtn, {
                 color: "green",
                 icon: "add",
                 outline: "",
@@ -8648,7 +8420,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
               })
             ]),
             "body-cell-index": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createTextVNode(toDisplayString(props.rowIndex + 1), 1)
                 ]),
@@ -8656,7 +8428,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
               }, 1032, ["props"])
             ]),
             "body-cell-mensaje": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createElementVNode("p", {
                     class: "q-my-none",
@@ -8668,7 +8440,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
               }, 1032, ["props"])
             ]),
             "body-cell-desde": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createTextVNode(toDisplayString(unref(parseFecha)(props.row.desde)), 1)
                 ]),
@@ -8676,7 +8448,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
               }, 1032, ["props"])
             ]),
             "body-cell-hasta": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createTextVNode(toDisplayString(unref(parseFecha)(props.row.hasta)), 1)
                 ]),
@@ -8684,7 +8456,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
               }, 1032, ["props"])
             ]),
             "body-cell-fecha_registro": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createTextVNode(toDisplayString(unref(parseFecha)(props.row.fecha_registro)), 1)
                 ]),
@@ -8692,7 +8464,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
               }, 1032, ["props"])
             ]),
             "body-cell-opt": withCtx((props) => [
-              createVNode(_component_q_td, { props }, {
+              createVNode(QTd, { props }, {
                 default: withCtx(() => [
                   createVNode(_sfc_main$7, {
                     props,
@@ -8744,8 +8516,6 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
       void get();
     });
     return (_ctx, _cache) => {
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_card = resolveComponent("q-card");
       return openBlock(), createElementBlock("div", _hoisted_1$3, [
         createElementVNode("div", _hoisted_2$1, [
           (openBlock(true), createElementBlock(Fragment, null, renderList(reporte1.value, (r, i) => {
@@ -8753,14 +8523,14 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
               class: "col-xs-6 col-sm-3 col-lg-2 col-xl-1 neon-fade-in neon-fade-in--d1",
               key: i
             }, [
-              createVNode(_component_q_card, {
+              createVNode(QCard, {
                 class: "neon-card neon-card--cyan",
                 square: "",
                 flat: "",
                 style: normalizeStyle(colores.value)
               }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_card_section, { class: "q-px-none q-py-xs" }, {
+                  createVNode(QCardSection, { class: "q-px-none q-py-xs" }, {
                     default: withCtx(() => [
                       createElementVNode("div", _hoisted_3$1, toDisplayString(r.nombre), 1),
                       createElementVNode("div", _hoisted_4, toDisplayString(r.valor), 1)
@@ -11225,13 +10995,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       window.removeEventListener("resize", size);
     });
     return (_ctx, _cache) => {
-      const _component_q_card_section = resolveComponent("q-card-section");
-      const _component_q_card = resolveComponent("q-card");
-      const _component_q_expansion_item = resolveComponent("q-expansion-item");
-      const _component_q_page = resolveComponent("q-page");
-      return openBlock(), createBlock(_component_q_page, { class: "q-pa-md q-mb-xl" }, {
+      return openBlock(), createBlock(QPage, { class: "q-pa-md q-mb-xl" }, {
         default: withCtx(() => [
-          is_tuto.value ? (openBlock(), createBlock(_component_q_expansion_item, {
+          is_tuto.value ? (openBlock(), createBlock(QExpansionItem, {
             key: 0,
             id: "tuto_video_tutorial",
             modelValue: expanded.value,
@@ -11243,9 +11009,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             caption: "Haz click aqui para ver un video tutorial del sistema"
           }, {
             default: withCtx(() => [
-              createVNode(_component_q_card, { class: "neon-card neon-card--gold" }, {
+              createVNode(QCard, { class: "neon-card neon-card--gold" }, {
                 default: withCtx(() => [
-                  createVNode(_component_q_card_section, { class: "text-center" }, {
+                  createVNode(QCardSection, { class: "text-center" }, {
                     default: withCtx(() => [
                       expanded.value ? (openBlock(), createElementBlock("iframe", {
                         key: 0,

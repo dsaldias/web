@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { quasar } from '@quasar/vite-plugin'
 import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
 
@@ -8,6 +9,7 @@ import { resolve } from 'path'
 export default defineConfig({
   plugins: [
     vue(),
+    quasar({ sassVariables: false }), // resuelve q-btn etc. a imports de 'quasar' en el dist
     dts({
       include: ['src'],
       exclude: ['src/pages', 'src/router', 'src/boot', 'src/stores/app'],
