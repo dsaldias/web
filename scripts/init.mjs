@@ -106,20 +106,42 @@ export default routes
 
 // ─── .env ───────────────────────────────────────────────────────────────────
 const env = `# URLs del servidor RBAC (github.com/dsaldias/server)
-GRAPHQL_AUTH=http://localhost:8038/query_auth
-GRAPHQL_APP=http://localhost:8038/query
-GRAPHQL_WSS=ws://localhost:8038/ws
-GRAPHQL_WSS_APP=ws://localhost:8038/ws_app
+GRAPHQL_AUTH=https://auth.sladia.site/query_auth
+GRAPHQL_APP=https://auth.sladia.site/query
+GRAPHQL_WSS=wss://auth.sladia.site/ws
+GRAPHQL_WSS_APP=wss://auth.sladia.site/ws_app
+GRAPHQL_SSE_APP=https://auth.sladia.site/sse
 
 # Debe coincidir con DECODE_PASS_KEY del .env del servidor
-DECODE_PASS_KEY=
+DECODE_PASS_KEY=Lf5puh9aSuWEmh9Hx1ctoGSn8Qb5kYnn5lM+RBi7e3c=
 
 # Features
 NOTIFICACIONES_SUBS=si
 SHOW_TIME_LABEL=si
 SHOW_LANDING_PAGE=si
-ACCEPT_OAUTH=no
+SHOW_TUTO_VIDEO=si
+SHOW_DASH_REPORTE1=si
+SHOW_DASH_REPORTE2=si
+SHOW_DASH_APP=si
+ACCEPT_OAUTH=si
+KEEP_CLIMA=
 SHOW_ROL_SELECT=si
+SHOW_LOGIN_BUTTON=si
+
+TUTO_VIDEO_URL='https://www.youtube.com/embed/4lbOl3r2dQA?autoplay=1&start=12&rel=0&loop=1&playlist=4lbOl3r2dQA'
+SHOW_TOUR_TUTO=1
+
+COOKIE_THEME_NAME=quasar-theme-auth_x
+XDATAUSER_ROLUNIDAD=xrolunidad_auth_x
+XSESIONKEY_NAME=xskey-auth_x
+XSESION_TIME=xskeytime-auth_x
+XSESION_LABEL=xskeylabel-auth_x
+XDATAUSER_NAME=xdataUser-auth_x
+XMENUS_NAME=xmenus-auth_x
+XTHEMA_CUADERNO=xthema_cuarderno-auth_x
+X_CLIMA=xclima-auth_x
+API_MAPS=AIzaSyD2muOLjhasMAyrYPsn-jNkNMCmmIdP86A
+LAST_DARK_STATE=quasar-last-dark-state_x
 `
 
 // ─── Parchear quasar.config.ts ───────────────────────────────────────────────
@@ -149,7 +171,7 @@ console.log('\n🚀 Inicializando proyecto con @dsaldias/auth-web...\n')
 escribir('src/App.vue',                   appVue,  true) // siempre reemplaza el default de Quasar
 escribir('src/boot/auth.ts',              bootAuth)
 escribir('src/router/rutas-app.ts',       rutasApp)
-escribir('src/router/routes.ts',          routes)
+escribir('src/router/routes.ts',          routes, true) // siempre reemplaza el default de Quasar
 escribir('.env',                           env)
 patchQuasarConfig()
 
