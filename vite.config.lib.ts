@@ -1,11 +1,19 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
 
 // Build de librería — separado del build de Quasar (quasar build)
 // Uso: vite build --config vite.config.lib.ts
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    dts({
+      include: ['src'],
+      exclude: ['src/pages', 'src/router', 'src/boot', 'src/stores/app'],
+      tsconfigPath: resolve(__dirname, 'tsconfig.json'),
+    }),
+  ],
   resolve: {
     alias: {
       src: resolve(__dirname, 'src'),
