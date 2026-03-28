@@ -1,5 +1,5 @@
 import { defineComponent, openBlock, createBlock } from "vue";
-import { _ as _sfc_main$1 } from "./index-CP9hjurq.js";
+import { _ as _sfc_main$1 } from "./index-DwR18291.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "login-index",
   setup(__props) {

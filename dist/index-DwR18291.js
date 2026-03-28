@@ -1355,7 +1355,10 @@ const AuthPlugin = {
     Dark.set(Cookies.get(cookieName) === "true");
     watch(
       () => Dark.isActive,
-      (val) => Cookies.set(cookieName, String(val))
+      (val) => {
+        Dark.set(val);
+        Cookies.set(cookieName, String(val));
+      }
     );
   }
 };
@@ -3969,9 +3972,9 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     const foto_64 = ref("");
     const refusuarios_conectados = ref();
     const router = useRouter();
-    const Login = defineAsyncComponent(() => import("./login-index-FV91dZba.js"));
+    const Login = defineAsyncComponent(() => import("./login-index-D8nSmSPs.js"));
     const usuarios_conectados = defineAsyncComponent(
-      () => import("./usuarios_conectados-CA9O8iNz.js")
+      () => import("./usuarios_conectados-Cdt89ANa.js")
     );
     const showConectados = ref(false);
     const pendingOpenConectados = ref(false);

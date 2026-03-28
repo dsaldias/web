@@ -8,7 +8,7 @@ import QCardActions from "quasar/src/components/card/QCardActions.js";
 import QCard from "quasar/src/components/card/QCard.js";
 import QDialog from "quasar/src/components/dialog/QDialog.js";
 import { defineComponent, ref, openBlock, createBlock, withCtx, createVNode, createElementVNode, createTextVNode, toDisplayString, unref } from "vue";
-import { p as parseFecha, U as UsuariosService } from "./index-CP9hjurq.js";
+import { p as parseFecha, U as UsuariosService } from "./index-DwR18291.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "usuarios_conectados",
   setup(__props, { expose: __expose }) {
