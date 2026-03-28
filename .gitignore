@@ -1,4 +1,5 @@
 src-pwa/
 node_modules/
+CLAUDE.md
 .env
 yarn.lock

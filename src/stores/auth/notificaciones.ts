@@ -77,7 +77,9 @@ const iniciarSubscripcion = () => {
       // const delay = Math.min(3000 * (subscriptionRef.value?.retryCount || 1), 30000) // Máximo 30 segundos
       const delay = 15000
       retryTimeout.value = setTimeout(iniciarSubscripcion, delay)
-      subscriptionRef.value!.retryCount = (subscriptionRef.value?.retryCount || 0) + 1
+      if (subscriptionRef.value) {
+        subscriptionRef.value.retryCount = (subscriptionRef.value?.retryCount || 0) + 1
+      }
     },
   })
 }
