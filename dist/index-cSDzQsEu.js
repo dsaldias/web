@@ -1889,7 +1889,9 @@ const iniciarSubscripcion = () => {
       msg.value = err.message || "Error en la suscripción";
       const delay = 15e3;
       retryTimeout.value = setTimeout(iniciarSubscripcion, delay);
-      subscriptionRef.value.retryCount = (((_a = subscriptionRef.value) == null ? void 0 : _a.retryCount) || 0) + 1;
+      if (subscriptionRef.value) {
+        subscriptionRef.value.retryCount = (((_a = subscriptionRef.value) == null ? void 0 : _a.retryCount) || 0) + 1;
+      }
     }
   });
 };
@@ -3961,9 +3963,9 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     const foto_64 = ref("");
     const refusuarios_conectados = ref();
     const router = useRouter();
-    const Login = defineAsyncComponent(() => import("./login-index-CsmMCJ7k.js"));
+    const Login = defineAsyncComponent(() => import("./login-index-hUva-Se0.js"));
     const usuarios_conectados = defineAsyncComponent(
-      () => import("./usuarios_conectados-DQedHGot.js")
+      () => import("./usuarios_conectados-DzI0skAI.js")
     );
     const showConectados = ref(false);
     const pendingOpenConectados = ref(false);
