@@ -1,3 +1,1135 @@
+/*
+ * clubes-neon.css  — v2.0
+ * Librería de estilos oscuros para sistemas de gestión nocturna
+ * ─────────────────────────────────────────────────────────────
+ * ✅ ACTIVACIÓN:  Solo cuando Quasar está en dark mode
+ *                 → body.body--dark (clase nativa de Quasar v2)
+ * ✅ PREFIJO:     Todas las clases usan neon- para evitar colisiones
+ * ✅ ADITIVIDAD:  Las clases se agregan JUNTO a las de Quasar,
+ *                 no las reemplazan. Ejemplo:
+ *                   <q-card class="neon-card">
+ *                   <q-btn  class="neon-btn-primary">
+ *                   <q-chip class="neon-chip neon-chip--gold">
+ * ✅ PORTABILIDAD: Compatible con cualquier proyecto Vue 3 + Quasar v2
+ * ─────────────────────────────────────────────────────────────
+ * Activar dark en boot o App.vue:
+ *   import { Dark } from 'quasar'
+ *   Dark.set(true)    → neon activo
+ *   Dark.set(false)   → neon ignorado
+ *   Dark.toggle()     → alterna
+ */
+
+/* ══════════════════════════════════════════════════════
+   @keyframes — Inocuos fuera de dark mode, solo se
+   ejecutan cuando body--dark los invoca con animation:
+   ══════════════════════════════════════════════════════ */
+@keyframes neonFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes neonShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes neonPulseOpacity {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 1;   }
+}
+
+/* ══════════════════════════════════════════════════════
+   TOKENS — Solo disponibles en dark mode
+   ══════════════════════════════════════════════════════ */
+body.body--dark {
+  /* Fondos */
+  --neon-bg-base: #07070f;
+  --neon-bg-surface: #0f0f1e;
+  --neon-bg-card: #131327;
+  --neon-bg-card-alt: #1a1a33;
+  --neon-bg-input: #1c1c38;
+
+  /* Colores neon */
+  --neon-purple: #a855f7;
+  --neon-purple-light: #c084fc;
+  --neon-purple-dark: #7c3aed;
+  --neon-cyan: #22d3ee;
+  --neon-cyan-dark: #0891b2;
+  --neon-green: #10b981;
+  --neon-green-light: #34d399;
+  --neon-gold: #f59e0b;
+  --neon-gold-light: #fbbf24;
+  --neon-pink: #ec4899;
+  --neon-pink-dark: #be185d;
+
+  /* Gradientes */
+  --neon-grad-purple: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+  --neon-grad-cyan: linear-gradient(135deg, #0891b2 0%, #22d3ee 100%);
+  --neon-grad-green: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  --neon-grad-gold: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+  --neon-grad-action: linear-gradient(135deg, #be185d 0%, #ec4899 60%, #a855f7 100%);
+
+  /* Glows */
+  --neon-glow-purple: 0 0 20px rgba(168, 85, 247, 0.4);
+  --neon-glow-cyan: 0 0 20px rgba(34, 211, 238, 0.4);
+  --neon-glow-green: 0 0 20px rgba(16, 185, 129, 0.4);
+  --neon-glow-gold: 0 0 20px rgba(245, 158, 11, 0.4);
+  --neon-glow-pink: 0 0 20px rgba(236, 72, 153, 0.4);
+  --neon-shadow-card: 0 4px 24px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.8);
+
+  /* Bordes */
+  --neon-border-subtle: rgba(255, 255, 255, 0.06);
+  --neon-border-card: rgba(255, 255, 255, 0.09);
+  --neon-border-glow: rgba(168, 85, 247, 0.35);
+
+  /* Tipografía */
+  --neon-font-display: 'Exo 2', 'Rajdhani', sans-serif;
+  --neon-font-body: 'DM Sans', 'Nunito', sans-serif;
+  --neon-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Textos */
+  --neon-text-primary: #f1f0ff;
+  --neon-text-secondary: #a09dc0;
+  --neon-text-muted: #5c5a7a;
+  --neon-text-on-neon: #ffffff;
+
+  /* Geometría */
+  --neon-radius-sm: 6px;
+  --neon-radius-md: 12px;
+  --neon-radius-lg: 18px;
+  --neon-radius-xl: 24px;
+  --neon-radius-pill: 999px;
+  --neon-transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Estados de reserva */
+  --neon-status-confirmada: #10b981;
+  --neon-status-pendiente: #f59e0b;
+  --neon-status-cancelada: #ef4444;
+  --neon-status-no-show: #6b7280;
+  --neon-status-finalizada: #8b5cf6;
+}
+
+/* ══════════════════════════════════════════════════════
+   LAYOUT — Fondo base de la aplicación
+   Uso: <q-layout class="neon-layout">
+        <q-page  class="neon-page">
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-layout,
+body.body--dark .neon-page {
+  background-color: var(--neon-bg-base) !important;
+  color: var(--neon-text-primary) !important;
+  font-family: var(--neon-font-body) !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   HEADER / NAVBAR
+   Uso: <q-header class="neon-header">
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-header {
+  background: var(--neon-bg-surface) !important;
+  border-bottom: 1px solid var(--neon-border-subtle) !important;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5) !important;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+}
+
+/* ══════════════════════════════════════════════════════
+   LOGO
+   Uso: <span class="neon-logo">NIGHTFLOW</span>
+        <span class="neon-logo-badge">AR</span>
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-logo {
+  font-family: var(--neon-font-display) !important;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  background: linear-gradient(
+    90deg,
+    var(--neon-pink) 0%,
+    var(--neon-purple-light) 50%,
+    var(--neon-cyan) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.body--dark .neon-logo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 6px;
+  border-radius: var(--neon-radius-sm);
+  background: var(--neon-purple-dark);
+  color: var(--neon-purple-light);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-left: 6px;
+  border: 1px solid var(--neon-purple);
+  /* Resetear el gradient-clip heredado del logo */
+  -webkit-text-fill-color: var(--neon-purple-light);
+  background-clip: unset;
+  -webkit-background-clip: unset;
+}
+
+/* ══════════════════════════════════════════════════════
+   NAV TABS
+   Uso: <q-tabs class="neon-nav-tabs">
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-nav-tabs .q-tabs__content {
+  gap: 4px;
+}
+
+body.body--dark .neon-nav-tabs .q-tab {
+  color: var(--neon-text-secondary) !important;
+  font-family: var(--neon-font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0 14px;
+  border-radius: var(--neon-radius-sm);
+  transition: var(--neon-transition);
+  min-height: 36px;
+}
+
+body.body--dark .neon-nav-tabs .q-tab:hover {
+  color: var(--neon-text-primary) !important;
+  background: var(--neon-border-subtle);
+}
+
+body.body--dark .neon-nav-tabs .q-tab--active {
+  color: var(--neon-text-primary) !important;
+  background: rgba(168, 85, 247, 0.15) !important;
+  box-shadow: inset 0 0 0 1px rgba(168, 85, 247, 0.3);
+}
+
+body.body--dark .neon-nav-tabs .q-tab__indicator {
+  display: none !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   INFO DE USUARIO EN HEADER
+   Uso: <div class="neon-user-info">
+          <span class="neon-username">Admin</span>
+          <span class="neon-caja-label">Caja: $0</span>
+        </div>
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.2;
+}
+
+body.body--dark .neon-username {
+  color: var(--neon-text-primary);
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+body.body--dark .neon-caja-label {
+  color: var(--neon-text-muted);
+  font-size: 0.7rem;
+}
+
+/* ══════════════════════════════════════════════════════
+   AVATAR
+   Uso: <q-avatar class="neon-avatar">
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-avatar {
+  background: var(--neon-grad-purple) !important;
+  box-shadow: var(--neon-glow-purple) !important;
+  cursor: pointer;
+  transition: var(--neon-transition);
+}
+
+body.body--dark .neon-avatar:hover {
+  box-shadow: 0 0 28px rgba(168, 85, 247, 0.65) !important;
+  transform: scale(1.05);
+}
+
+/* ══════════════════════════════════════════════════════
+   DRAWER / SIDEBAR
+   Uso: <q-drawer class="neon-drawer">
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-drawer {
+  background: var(--neon-bg-surface) !important;
+  border-right: 1px solid var(--neon-border-subtle) !important;
+}
+
+body.body--dark .neon-drawer .q-item {
+  color: var(--neon-text-secondary);
+  border-radius: var(--neon-radius-sm);
+  margin: 2px 8px;
+  transition: var(--neon-transition);
+}
+
+body.body--dark .neon-drawer .q-item:hover {
+  background: var(--neon-border-subtle) !important;
+  color: var(--neon-text-primary);
+}
+
+body.body--dark .neon-drawer .q-item--active {
+  background: rgba(168, 85, 247, 0.15) !important;
+  color: var(--neon-purple-light) !important;
+  box-shadow: inset 0 0 0 1px rgba(168, 85, 247, 0.25);
+}
+
+/* ══════════════════════════════════════════════════════
+   TIPOGRAFÍA DE PÁGINA
+   Uso: <h1 class="neon-title">  <p class="neon-subtitle">
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-title {
+  font-family: var(--neon-font-display) !important;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: var(--neon-text-primary) !important;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+body.body--dark .neon-subtitle {
+  color: var(--neon-text-secondary) !important;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+body.body--dark .neon-text-primary {
+  color: var(--neon-text-primary) !important;
+}
+body.body--dark .neon-text-secondary {
+  color: var(--neon-text-secondary) !important;
+}
+body.body--dark .neon-text-muted {
+  color: var(--neon-text-muted) !important;
+}
+body.body--dark .neon-font-display {
+  font-family: var(--neon-font-display) !important;
+}
+body.body--dark .neon-font-mono {
+  font-family: var(--neon-font-mono) !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   TARJETAS — Base
+   Uso: <q-card class="neon-card">
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-card {
+  background: var(--neon-bg-card) !important;
+  border-radius: var(--neon-radius-lg) !important;
+  border: 1px solid var(--neon-border-card) !important;
+  box-shadow: var(--neon-shadow-card) !important;
+  color: var(--neon-text-primary) !important;
+}
+
+body.body--dark .neon-card-title {
+  font-family: var(--neon-font-display) !important;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--neon-text-primary) !important;
+  letter-spacing: 0.02em;
+}
+
+/* ══════════════════════════════════════════════════════
+   TARJETAS — Variantes KPI / Métricas
+   Uso: <q-card class="neon-card neon-card--purple">
+        Variantes: --purple  --cyan  --green  --gold  --pink
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-card--purple,
+body.body--dark .neon-card--cyan,
+body.body--dark .neon-card--green,
+body.body--dark .neon-card--gold,
+body.body--dark .neon-card--pink {
+  position: relative;
+  overflow: hidden;
+  transition: var(--neon-transition);
+}
+
+/* Capa de glow interno al hacer hover */
+body.body--dark .neon-card--purple::before,
+body.body--dark .neon-card--cyan::before,
+body.body--dark .neon-card--green::before,
+body.body--dark .neon-card--gold::before,
+body.body--dark .neon-card--pink::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+body.body--dark .neon-card--purple:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--neon-shadow-card), var(--neon-glow-purple) !important;
+}
+body.body--dark .neon-card--cyan:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--neon-shadow-card), var(--neon-glow-cyan) !important;
+}
+body.body--dark .neon-card--green:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--neon-shadow-card), var(--neon-glow-green) !important;
+}
+body.body--dark .neon-card--gold:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--neon-shadow-card), var(--neon-glow-gold) !important;
+}
+body.body--dark .neon-card--pink:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--neon-shadow-card), var(--neon-glow-pink) !important;
+}
+
+body.body--dark .neon-card--purple {
+  border-color: rgba(168, 85, 247, 0.4) !important;
+}
+body.body--dark .neon-card--cyan {
+  border-color: rgba(34, 211, 238, 0.4) !important;
+}
+body.body--dark .neon-card--green {
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+body.body--dark .neon-card--gold {
+  border-color: rgba(245, 158, 11, 0.4) !important;
+}
+body.body--dark .neon-card--pink {
+  border-color: rgba(236, 72, 153, 0.4) !important;
+}
+
+body.body--dark .neon-card--purple::before {
+  background: radial-gradient(ellipse at top right, rgba(168, 85, 247, 0.12), transparent 70%);
+}
+body.body--dark .neon-card--cyan::before {
+  background: radial-gradient(ellipse at top right, rgba(34, 211, 238, 0.1), transparent 70%);
+}
+body.body--dark .neon-card--green::before {
+  background: radial-gradient(ellipse at top right, rgba(16, 185, 129, 0.1), transparent 70%);
+}
+body.body--dark .neon-card--gold::before {
+  background: radial-gradient(ellipse at top right, rgba(245, 158, 11, 0.1), transparent 70%);
+}
+body.body--dark .neon-card--pink::before {
+  background: radial-gradient(ellipse at top right, rgba(236, 72, 153, 0.1), transparent 70%);
+}
+
+body.body--dark .neon-card--purple:hover::before,
+body.body--dark .neon-card--cyan:hover::before,
+body.body--dark .neon-card--green:hover::before,
+body.body--dark .neon-card--gold:hover::before,
+body.body--dark .neon-card--pink:hover::before {
+  opacity: 1;
+}
+
+/* ══════════════════════════════════════════════════════
+   ÍCONO DE MÉTRICA
+   Uso: <div class="neon-metric-icon neon-metric-icon--purple">
+        Variantes: --purple  --cyan  --green  --gold  --pink
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-metric-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--neon-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+body.body--dark .neon-metric-icon--purple {
+  background: rgba(168, 85, 247, 0.18);
+  color: var(--neon-purple-light);
+}
+body.body--dark .neon-metric-icon--cyan {
+  background: rgba(34, 211, 238, 0.15);
+  color: var(--neon-cyan);
+}
+body.body--dark .neon-metric-icon--green {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--neon-green-light);
+}
+body.body--dark .neon-metric-icon--gold {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--neon-gold-light);
+}
+body.body--dark .neon-metric-icon--pink {
+  background: rgba(236, 72, 153, 0.15);
+  color: var(--neon-pink);
+}
+
+/* ══════════════════════════════════════════════════════
+   MÉTRICAS — Textos internos de KPI
+   Uso: <div class="neon-metric-label">Reservas Hoy</div>
+        <div class="neon-metric-value">4</div>
+        <div class="neon-metric-delta neon-metric-delta--up">↑ 12%</div>
+        <div class="neon-metric-sub">Capacidad: 58</div>
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-metric-label {
+  color: var(--neon-text-secondary);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  margin-bottom: 6px;
+}
+
+body.body--dark .neon-metric-value {
+  font-family: var(--neon-font-display) !important;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 800;
+  color: var(--neon-text-primary);
+  line-height: 1;
+}
+
+body.body--dark .neon-metric-delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+body.body--dark .neon-metric-delta--up {
+  color: var(--neon-green-light);
+}
+body.body--dark .neon-metric-delta--down {
+  color: #f87171;
+}
+
+body.body--dark .neon-metric-sub {
+  color: var(--neon-text-muted);
+  font-size: 0.72rem;
+  margin-top: 4px;
+}
+
+/* ══════════════════════════════════════════════════════
+   BOTONES
+   Uso: <q-btn class="neon-btn-primary">
+        <q-btn class="neon-btn-secondary">
+        <q-btn class="neon-btn-purple">
+        <q-btn class="neon-btn-icon">   ← para botones icono flat
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-btn-primary {
+  background: var(--neon-grad-action) !important;
+  color: var(--neon-text-on-neon) !important;
+  border-radius: var(--neon-radius-md) !important;
+  font-weight: 700 !important;
+  font-size: 0.88rem !important;
+  text-transform: none !important;
+  box-shadow: 0 4px 18px rgba(236, 72, 153, 0.4) !important;
+  transition: var(--neon-transition);
+  border: none !important;
+}
+
+body.body--dark .neon-btn-primary:hover {
+  box-shadow:
+    0 6px 28px rgba(236, 72, 153, 0.65),
+    0 0 0 1px rgba(236, 72, 153, 0.4) !important;
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+body.body--dark .neon-btn-secondary {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--neon-text-primary) !important;
+  border: 1px solid var(--neon-border-card) !important;
+  border-radius: var(--neon-radius-md) !important;
+  font-weight: 600 !important;
+  font-size: 0.88rem !important;
+  text-transform: none !important;
+  transition: var(--neon-transition);
+}
+
+body.body--dark .neon-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: var(--neon-purple) !important;
+  color: var(--neon-purple-light) !important;
+}
+
+body.body--dark .neon-btn-purple {
+  background: rgba(168, 85, 247, 0.12) !important;
+  color: var(--neon-purple-light) !important;
+  border: 1px solid rgba(168, 85, 247, 0.35) !important;
+  border-radius: var(--neon-radius-md) !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  transition: var(--neon-transition);
+}
+
+body.body--dark .neon-btn-purple:hover {
+  background: rgba(168, 85, 247, 0.22) !important;
+  box-shadow: var(--neon-glow-purple) !important;
+}
+
+body.body--dark .neon-btn-icon {
+  background: transparent !important;
+  color: var(--neon-text-muted) !important;
+  border-radius: var(--neon-radius-sm) !important;
+  transition: var(--neon-transition);
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body.body--dark .neon-btn-icon:hover {
+  background: rgba(255, 255, 255, 0.07) !important;
+  color: var(--neon-cyan) !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   TABLA
+   Uso: <q-table class="neon-table">
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-table {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.body--dark .neon-table .q-table__top,
+body.body--dark .neon-table .q-table__bottom {
+  background: transparent !important;
+  color: var(--neon-text-secondary) !important;
+  font-size: 0.8rem;
+}
+
+body.body--dark .neon-table thead tr th {
+  background: rgba(255, 255, 255, 0.03) !important;
+  color: var(--neon-text-muted) !important;
+  font-size: 0.73rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--neon-border-subtle) !important;
+}
+
+body.body--dark .neon-table tbody tr td {
+  color: var(--neon-text-primary) !important;
+  font-size: 0.85rem;
+  border-bottom: 1px solid var(--neon-border-subtle) !important;
+  background: transparent !important;
+  transition: background 0.15s ease;
+}
+
+body.body--dark .neon-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+body.body--dark .neon-table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* Helpers para celdas específicas */
+body.body--dark .neon-table-name {
+  font-weight: 600;
+  color: var(--neon-text-primary) !important;
+}
+
+body.body--dark .neon-table-time {
+  font-family: var(--neon-font-mono);
+  font-size: 0.82rem;
+  color: var(--neon-text-secondary) !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   BADGES DE ESTADO
+   Uso: <span class="neon-badge neon-badge--confirmada">
+        Variantes: --confirmada  --pendiente  --cancelada
+                   --no-show     --finalizada  --vip
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: var(--neon-radius-pill);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border: 1px solid transparent;
+  line-height: 1.4;
+}
+
+body.body--dark .neon-badge--confirmada {
+  color: var(--neon-status-confirmada);
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+body.body--dark .neon-badge--pendiente {
+  color: var(--neon-status-pendiente);
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+body.body--dark .neon-badge--cancelada {
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+body.body--dark .neon-badge--no-show {
+  color: var(--neon-text-muted);
+  background: rgba(107, 114, 128, 0.1);
+  border-color: rgba(107, 114, 128, 0.3);
+}
+
+body.body--dark .neon-badge--finalizada {
+  color: var(--neon-purple-light);
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+body.body--dark .neon-badge--vip {
+  color: var(--neon-gold-light);
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+/* ══════════════════════════════════════════════════════
+   CHIPS / ETIQUETAS
+   Uso: <q-chip class="neon-chip neon-chip--gold">
+        Variantes: --purple  --cyan  --green  --gold  --pink
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-chip {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: var(--neon-text-secondary) !important;
+  border: 1px solid var(--neon-border-subtle) !important;
+  border-radius: var(--neon-radius-pill) !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  height: 24px !important;
+}
+
+body.body--dark .neon-chip--purple {
+  color: var(--neon-purple-light) !important;
+  background: rgba(168, 85, 247, 0.12) !important;
+  border-color: rgba(168, 85, 247, 0.3) !important;
+}
+body.body--dark .neon-chip--cyan {
+  color: var(--neon-cyan) !important;
+  background: rgba(34, 211, 238, 0.1) !important;
+  border-color: rgba(34, 211, 238, 0.3) !important;
+}
+body.body--dark .neon-chip--green {
+  color: var(--neon-green-light) !important;
+  background: rgba(16, 185, 129, 0.1) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+body.body--dark .neon-chip--gold {
+  color: var(--neon-gold-light) !important;
+  background: rgba(245, 158, 11, 0.1) !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+body.body--dark .neon-chip--pink {
+  color: var(--neon-pink) !important;
+  background: rgba(236, 72, 153, 0.1) !important;
+  border-color: rgba(236, 72, 153, 0.3) !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   INPUTS / SELECTS
+   Uso: <q-input   class="neon-input">
+        <q-select  class="neon-input">
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-input .q-field__control {
+  border-radius: var(--neon-radius-md) !important;
+  background: var(--neon-bg-input) !important;
+}
+
+body.body--dark .neon-input .q-field__control:before {
+  border-color: var(--neon-border-card) !important;
+  transition: var(--neon-transition);
+}
+
+body.body--dark .neon-input.q-field--focused .q-field__control:before {
+  border-color: var(--neon-purple) !important;
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+body.body--dark .neon-input .q-field__label {
+  color: var(--neon-text-muted) !important;
+}
+body.body--dark .neon-input.q-field--focused .q-field__label {
+  color: var(--neon-purple-light) !important;
+}
+
+body.body--dark .neon-input .q-field__native,
+body.body--dark .neon-input .q-field__prefix,
+body.body--dark .neon-input .q-field__suffix {
+  color: var(--neon-text-primary) !important;
+}
+
+body.body--dark .neon-input .q-field__append .q-icon,
+body.body--dark .neon-input .q-field__prepend .q-icon {
+  color: var(--neon-text-muted) !important;
+}
+
+/* Menú del q-select — se agrega popup-content-class="neon-select-menu" */
+body.body--dark .neon-select-menu {
+  background: var(--neon-bg-card-alt) !important;
+  border: 1px solid var(--neon-border-card) !important;
+  border-radius: var(--neon-radius-md) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
+}
+
+body.body--dark .neon-select-menu .q-item {
+  color: var(--neon-text-secondary) !important;
+  font-size: 0.85rem;
+  border-radius: var(--neon-radius-sm);
+  margin: 2px 6px;
+}
+
+body.body--dark .neon-select-menu .q-item:hover {
+  background: rgba(168, 85, 247, 0.12) !important;
+  color: var(--neon-text-primary) !important;
+}
+body.body--dark .neon-select-menu .q-item--active {
+  background: rgba(168, 85, 247, 0.2) !important;
+  color: var(--neon-purple-light) !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   DIALOG / MODAL
+   Uso: <q-dialog class="neon-dialog">
+          <q-card  class="neon-dialog-card">
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-dialog-card {
+  background: var(--neon-bg-card) !important;
+  border: 1px solid var(--neon-border-card) !important;
+  border-radius: var(--neon-radius-xl) !important;
+  color: var(--neon-text-primary) !important;
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(168, 85, 247, 0.1) !important;
+}
+
+body.body--dark .neon-dialog-header {
+  border-bottom: 1px solid var(--neon-border-subtle);
+  padding: 18px 24px 14px;
+}
+
+body.body--dark .neon-dialog-title {
+  font-family: var(--neon-font-display) !important;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--neon-text-primary) !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   TABS INTERNOS (dentro de páginas)
+   Uso: <q-tabs class="neon-tabs">
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-tabs {
+  background: transparent !important;
+  border-bottom: 1px solid var(--neon-border-subtle) !important;
+}
+
+body.body--dark .neon-tabs .q-tab {
+  color: var(--neon-text-secondary) !important;
+  font-size: 0.83rem;
+  font-weight: 600;
+  text-transform: none !important;
+  padding: 0 16px;
+  min-height: 44px;
+  border-radius: var(--neon-radius-sm);
+  transition: var(--neon-transition);
+}
+
+body.body--dark .neon-tabs .q-tab:hover {
+  color: var(--neon-text-primary) !important;
+  background: var(--neon-border-subtle);
+}
+
+body.body--dark .neon-tabs .q-tab--active {
+  color: var(--neon-purple-light) !important;
+}
+body.body--dark .neon-tabs .q-tabs__indicator {
+  background: var(--neon-purple) !important;
+  height: 2px;
+  border-radius: 2px 2px 0 0;
+}
+
+/* ══════════════════════════════════════════════════════
+   MAPA DE MESAS
+   Uso: <div class="neon-map">
+          <div class="neon-table-item neon-table-item--disponible">
+          <div class="neon-table-item neon-table-item--ocupada neon-table-item--vip">
+        Variantes estado: --disponible  --ocupada  --reservada  --mantenimiento
+        Modificador VIP:  --vip  (combinable con cualquier estado)
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-map {
+  background: var(--neon-bg-card);
+  border-radius: var(--neon-radius-lg);
+  border: 1px solid var(--neon-border-card);
+  position: relative;
+  min-height: 380px;
+}
+
+body.body--dark .neon-table-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: var(--neon-radius-md);
+  border: 1px solid var(--neon-border-card);
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--neon-transition);
+  width: 68px;
+  height: 68px;
+  gap: 3px;
+  -webkit-user-select: none;
+          user-select: none;
+}
+
+body.body--dark .neon-table-item--disponible {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: var(--neon-green-light);
+}
+
+body.body--dark .neon-table-item--disponible:hover {
+  background: rgba(16, 185, 129, 0.2);
+  box-shadow: var(--neon-glow-green);
+  transform: scale(1.06);
+}
+
+body.body--dark .neon-table-item--ocupada {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #f87171;
+}
+
+body.body--dark .neon-table-item--reservada {
+  background: rgba(168, 85, 247, 0.12);
+  border-color: rgba(168, 85, 247, 0.35);
+  color: var(--neon-purple-light);
+}
+
+body.body--dark .neon-table-item--mantenimiento {
+  background: rgba(107, 114, 128, 0.1);
+  border-color: rgba(107, 114, 128, 0.25);
+  color: var(--neon-text-muted);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* Modificador VIP: se combina con el estado */
+body.body--dark .neon-table-item--vip {
+  border-width: 2px !important;
+  border-color: rgba(245, 158, 11, 0.5) !important;
+  box-shadow: inset 0 0 12px rgba(245, 158, 11, 0.08);
+  color: var(--neon-gold-light) !important;
+  background: rgba(245, 158, 11, 0.08) !important;
+}
+
+body.body--dark .neon-table-item--vip.neon-table-item--ocupada {
+  background: rgba(245, 158, 11, 0.05) !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+  opacity: 0.8;
+}
+
+/* ══════════════════════════════════════════════════════
+   NOTIFICACIONES (clases para q-notify)
+   Uso en $q.notify: classes: 'neon-notify neon-notify--success'
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-notify {
+  border-radius: var(--neon-radius-md) !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+}
+
+body.body--dark .neon-notify--success {
+  background: rgba(16, 185, 129, 0.92) !important;
+  border-left: 3px solid var(--neon-green-light);
+}
+body.body--dark .neon-notify--warning {
+  background: rgba(245, 158, 11, 0.92) !important;
+  border-left: 3px solid var(--neon-gold-light);
+  color: #1a1000 !important;
+}
+body.body--dark .neon-notify--error {
+  background: rgba(239, 68, 68, 0.92) !important;
+  border-left: 3px solid #fca5a5;
+}
+body.body--dark .neon-notify--info {
+  background: rgba(168, 85, 247, 0.92) !important;
+  border-left: 3px solid var(--neon-purple-light);
+}
+
+/* ══════════════════════════════════════════════════════
+   SEPARADOR
+   Uso: <q-separator class="neon-separator">
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-separator {
+  border-color: var(--neon-border-subtle) !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   SKELETON LOADER
+   Uso: <div class="neon-skeleton" style="height:20px">
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--neon-bg-card) 25%,
+    rgba(255, 255, 255, 0.05) 50%,
+    var(--neon-bg-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: neonShimmer 1.5s infinite;
+  border-radius: var(--neon-radius-sm);
+}
+
+/* ══════════════════════════════════════════════════════
+   LINK DE ACCIÓN ("Ver todas →")
+   Uso: <span class="neon-link">Ver todas →</span>
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-link {
+  color: var(--neon-purple-light);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--neon-transition);
+}
+
+body.body--dark .neon-link:hover {
+  color: var(--neon-pink);
+  text-shadow: 0 0 8px rgba(236, 72, 153, 0.5);
+}
+
+/* ══════════════════════════════════════════════════════
+   SCROLLBAR
+   Aplica automáticamente a todo el scroll dentro de dark mode
+   ══════════════════════════════════════════════════════ */
+body.body--dark ::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+body.body--dark ::-webkit-scrollbar-track {
+  background: var(--neon-bg-base);
+}
+body.body--dark ::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.3);
+  border-radius: var(--neon-radius-pill);
+}
+body.body--dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.6);
+}
+
+/* ══════════════════════════════════════════════════════
+   ANIMACIONES DE ENTRADA
+   Uso: <div class="neon-fade-in neon-fade-in--d2">
+        Delays: --d1 (50ms)  --d2 (100ms)  --d3 (150ms)  --d4 (200ms)
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-fade-in {
+  animation: neonFadeIn 0.4s ease forwards;
+}
+
+body.body--dark .neon-fade-in--d1 {
+  animation-delay: 0.05s;
+  opacity: 0;
+}
+body.body--dark .neon-fade-in--d2 {
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+body.body--dark .neon-fade-in--d3 {
+  animation-delay: 0.15s;
+  opacity: 0;
+}
+body.body--dark .neon-fade-in--d4 {
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+/* ══════════════════════════════════════════════════════
+   PULSOS VIP (para mesas/cards activas)
+   Uso: <div class="neon-pulse-gold">  o  neon-pulse-purple
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-pulse-gold {
+  position: relative;
+}
+body.body--dark .neon-pulse-gold::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.65);
+  pointer-events: none;
+  animation: neonPulseOpacity 2.2s ease-in-out infinite;
+}
+
+body.body--dark .neon-pulse-purple {
+  position: relative;
+}
+body.body--dark .neon-pulse-purple::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.65);
+  pointer-events: none;
+  animation: neonPulseOpacity 2.2s ease-in-out infinite;
+}
+
+/* ══════════════════════════════════════════════════════
+   UTILIDADES RÁPIDAS
+   ══════════════════════════════════════════════════════ */
+body.body--dark .neon-surface {
+  background: var(--neon-bg-surface) !important;
+}
+body.body--dark .neon-bg-card {
+  background: var(--neon-bg-card) !important;
+}
+body.body--dark .neon-border {
+  border: 1px solid var(--neon-border-card) !important;
+}
+body.body--dark .neon-rounded {
+  border-radius: var(--neon-radius-lg) !important;
+}
+body.body--dark .neon-glow-purple {
+  box-shadow: var(--neon-glow-purple) !important;
+}
+body.body--dark .neon-glow-cyan {
+  box-shadow: var(--neon-glow-cyan) !important;
+}
+body.body--dark .neon-glow-green {
+  box-shadow: var(--neon-glow-green) !important;
+}
+body.body--dark .neon-glow-gold {
+  box-shadow: var(--neon-glow-gold) !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════ */
+@media (max-width: 599px) {
+  body.body--dark .neon-metric-value {
+    font-size: 1.6rem;
+  }
+  body.body--dark .neon-title {
+    font-size: 1.4rem;
+  }
+
+  body.body--dark .neon-table thead tr th,
+  body.body--dark .neon-table tbody tr td {
+    font-size: 0.78rem !important;
+  }
+}
 
 @property --angle {
   syntax: '<angle>';

@@ -1,3 +1,4 @@
+import 'src/css/club-neon.css'
 import type { App } from 'vue'
 import { watch } from 'vue'
 import { ApolloClient } from '@apollo/client/core'
