@@ -1,12 +1,14 @@
+import { defineComponent, ref, openBlock, createElementBlock, createVNode, withCtx, createElementVNode, withDirectives, vShow, createTextVNode, createCommentVNode, createApp, h, watch, createBlock, Fragment, renderList, toDisplayString, unref, computed, onBeforeMount, onUnmounted, onMounted, defineAsyncComponent, resolveComponent, Transition, normalizeClass, nextTick, normalizeStyle } from "vue";
 import { ApolloClient } from "@apollo/client/core";
 import { useMutation, useQuery, provideApolloClients, ApolloClients, useSubscription } from "@vue/apollo-composable";
+import Dark from "quasar/src/plugins/dark/Dark.js";
+import Cookies from "quasar/src/plugins/cookies/Cookies.js";
 import { createHttpLink, split, InMemoryCache } from "@apollo/client";
 import { parse, Kind, OperationTypeNode } from "graphql";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
 import { defineStore } from "pinia";
-import { defineComponent, ref, openBlock, createElementBlock, createVNode, withCtx, createElementVNode, withDirectives, vShow, createTextVNode, createCommentVNode, createApp, h, watch, createBlock, Fragment, renderList, toDisplayString, unref, computed, onBeforeMount, onUnmounted, onMounted, defineAsyncComponent, resolveComponent, Transition, normalizeClass, nextTick, normalizeStyle } from "vue";
 import Notify from "quasar/src/plugins/notify/Notify.js";
 import Quasar from "quasar/src/vue-plugin.js";
 import QSpace from "quasar/src/components/space/QSpace.js";
@@ -37,8 +39,6 @@ import ClosePopup from "quasar/src/directives/close-popup/ClosePopup.js";
 import QRadio from "quasar/src/components/radio/QRadio.js";
 import QFile from "quasar/src/components/file/QFile.js";
 import { boot } from "quasar/wrappers";
-import Cookies from "quasar/src/plugins/cookies/Cookies.js";
-import Dark from "quasar/src/plugins/dark/Dark.js";
 import QSelect from "quasar/src/components/select/QSelect.js";
 import QBadge from "quasar/src/components/badge/QBadge.js";
 import QToolbar from "quasar/src/components/toolbar/QToolbar.js";
@@ -1351,6 +1351,12 @@ const AuthPlugin = {
     };
     provideApolloClients(apolloClients);
     app.provide(ApolloClients, apolloClients);
+    const cookieName = config2.cookieThemeName || "quasar-theme-auth";
+    Dark.set(Cookies.get(cookieName) === "true");
+    watch(
+      () => Dark.isActive,
+      (val) => Cookies.set(cookieName, String(val))
+    );
   }
 };
 function isFunction(value) {
@@ -3963,9 +3969,9 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     const foto_64 = ref("");
     const refusuarios_conectados = ref();
     const router = useRouter();
-    const Login = defineAsyncComponent(() => import("./login-index-hUva-Se0.js"));
+    const Login = defineAsyncComponent(() => import("./login-index-FV91dZba.js"));
     const usuarios_conectados = defineAsyncComponent(
-      () => import("./usuarios_conectados-DzI0skAI.js")
+      () => import("./usuarios_conectados-CA9O8iNz.js")
     );
     const showConectados = ref(false);
     const pendingOpenConectados = ref(false);

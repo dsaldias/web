@@ -1,6 +1,8 @@
 import type { App } from 'vue'
+import { watch } from 'vue'
 import { ApolloClient } from '@apollo/client/core'
 import { ApolloClients, provideApolloClients } from '@vue/apollo-composable'
+import { Dark, Cookies } from 'quasar'
 import { getClientOptions } from 'src/apollo'
 import { getClientOptionsApp } from 'src/apollo/indexapp'
 import { setConfig, type AuthConfig } from 'src/config'
@@ -26,5 +28,13 @@ export const AuthPlugin = {
 
     provideApolloClients(apolloClients)
     app.provide(ApolloClients, apolloClients)
+
+    // Inicializar dark mode desde cookie
+    const cookieName = config.cookieThemeName || 'quasar-theme-auth'
+    Dark.set(Cookies.get(cookieName) === 'true')
+    watch(
+      () => Dark.isActive,
+      (val) => Cookies.set(cookieName, String(val)),
+    )
   },
 }

@@ -4,6 +4,7 @@ export interface AuthConfig {
   wss: string
   wssApp: string
   decodePassKey: string
+  cookieThemeName?: string  // nombre de la cookie para persistir dark mode (default: 'quasar-theme-auth')
 }
 
 let _config: AuthConfig | null = null
