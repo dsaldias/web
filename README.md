@@ -1,40 +1,75 @@
-# Sistema web (web)
+# @dsaldias/auth-web
 
-Sistema web de acceso
+Sistema RBAC (control de acceso basado en roles) para Vue 3 + Quasar 2, distribuido como librería instalable desde GitHub.
 
-## Install the dependencies
+## Usar como librería en un proyecto Quasar
+
+### 1. Crear el proyecto consumidor
+
 ```bash
-yarn
-# or
-npm install
+yarn create quasar
+yarn install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+### 2. Instalar la librería
+
 ```bash
-quasar dev
+yarn add git+ssh://git@github.com/dsaldias/web.git
 ```
 
+### 3. Inicializar
 
-### Lint the files
 ```bash
-yarn lint
-# or
-npm run lint
+npx auth-web-init
 ```
 
+Genera automáticamente:
 
-### Format the files
+| Archivo | Descripción |
+| --- | --- |
+| `src/App.vue` | Monta las suscripciones WebSocket de notificaciones |
+| `src/boot/auth.ts` | Registra `AuthPlugin` con los endpoints del servidor |
+| `src/router/routes.ts` | Rutas RBAC (usuarios, roles, unidades, tickets, etc.) |
+| `src/router/rutas-app.ts` | Archivo vacío para las rutas propias de tu app |
+| `.env` | Variables de entorno con URLs del servidor RBAC |
+
+También parchea `quasar.config.ts` para agregar `'auth'` al array `boot`.
+
+### 4. Levantar
+
 ```bash
-yarn format
-# or
-npm run format
+quasar dev -m pwa
 ```
 
+---
 
-### Build the app for production
+## Estructura para el proyecto consumidor
+
+- **Rutas propias** → `src/router/rutas-app.ts`
+- **Páginas propias** → `src/pages/app/`
+
+## Actualizar la librería en el consumidor
+
+Después de hacer cambios en este repo y pushear:
+
 ```bash
-quasar build
+# En este repo — compilar y pushear
+npm run build:lib
+git add dist && git commit -m "build" && git push
+
+# En el proyecto consumidor
+yarn upgrade @dsaldias/auth-web
 ```
 
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+---
+
+## Desarrollo de esta librería
+
+```bash
+quasar dev -m pwa   # Levantar en modo standalone
+npm run build:lib   # Compilar dist/ para distribución
+npm run lint        # ESLint
+npm run format      # Prettier
+```
+
+Los endpoints GraphQL se configuran en `.env` (ver `.env-default` para la lista completa de variables).
