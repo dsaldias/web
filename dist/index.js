@@ -1878,7 +1878,10 @@ boot(() => {
 	setTheme(v);
 	watch(() => Dark.isActive, (val) => {
 		Dark.set(val);
-		Cookies.set(cookie_name, "" + val);
+		Cookies.set(cookie_name, "" + val, {
+			path: "/",
+			expires: 365
+		});
 		setTheme(val);
 	});
 });
