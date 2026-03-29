@@ -37,7 +37,10 @@ export const AuthPlugin = {
     // los componentes ya estén montados cuando Dark.set dispare.
     const isDark = Cookies.get(cookieName) === 'true'
     if (isDark) document.body.classList.add('body--dark')
-    setTimeout(() => Dark.set(isDark), 900)
+    setTimeout(() => {
+      Dark.set(isDark)
+      window.alert(isDark)
+    }, 3900)
 
     // MutationObserver: detecta el cambio de body--dark directamente en el DOM.
     // Más fiable que watch(() => Dark.isActive) cuando el plugin corre como librería
@@ -46,7 +49,9 @@ export const AuthPlugin = {
       Cookies.set(cookieName, String(isDark), cookieOpts)
       const meta = document.querySelector('meta[name=theme-color]')
       if (meta) {
-        const primary = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim()
+        const primary = getComputedStyle(document.documentElement)
+          .getPropertyValue('--primary')
+          .trim()
         meta.setAttribute('content', isDark ? '#040b25' : primary)
       }
     }
