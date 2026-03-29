@@ -12,7 +12,8 @@
   "exports": {
     ".": {
       "import": "./dist/index.js"
-    }
+    },
+    "./style": "./dist/style.css"
   },
   "files": [
     "dist",
@@ -25,7 +26,7 @@
     "dev": "quasar dev",
     "build": "quasar build",
     "build:lib": "vite build --config vite.config.lib.ts",
-    "postinstall": "quasar prepare"
+    "postinstall": "node -e \"const fs=require('fs');if(fs.existsSync('quasar.config.ts'))require('child_process').execSync('quasar prepare',{stdio:'inherit'});\""
   },
   "peerDependencies": {
     "@apollo/client": ">=3.8",
