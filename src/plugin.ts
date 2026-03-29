@@ -32,14 +32,16 @@ export const AuthPlugin = {
     // Inicializar dark mode desde cookie
     const cookieName = config.cookieThemeName || 'quasar-theme-auth'
     const cookieOpts = { expires: 365, path: '/' }
-    // Agregar body--dark inmediatamente (CSS, sin flash) y aplicar el
-    // estado reactivo después del mount con setTimeout para que todos
-    // los componentes ya estén montados cuando Dark.set dispare.
     const isDark = Cookies.get(cookieName) === 'true'
+    // Añadir clase inmediatamente para que el CSS dark funcione sin flash
     if (isDark) document.body.classList.add('body--dark')
+    // Usar $q.dark.set() vía globalProperties — mismo path que el toggle,
+    // garantiza que sea la instancia correcta de Quasar del consumidor.
     setTimeout(() => {
-      Dark.set(isDark) 
-    }, 30)
+      const $q = app.config.globalProperties.$q as { dark: { set: (v: boolean) => void } } | undefined
+      if ($q?.dark) $q.dark.set(isDark)
+      else Dark.set(isDark)
+    }, 0)
 
     // MutationObserver: detecta el cambio de body--dark directamente en el DOM.
     // Más fiable que watch(() => Dark.isActive) cuando el plugin corre como librería
