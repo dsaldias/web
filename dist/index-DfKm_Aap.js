@@ -3972,9 +3972,9 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     const foto_64 = ref("");
     const refusuarios_conectados = ref();
     const router = useRouter();
-    const Login = defineAsyncComponent(() => import("./login-index-D8nSmSPs.js"));
+    const Login = defineAsyncComponent(() => import("./login-index-x955Lw65.js"));
     const usuarios_conectados = defineAsyncComponent(
-      () => import("./usuarios_conectados-Cdt89ANa.js")
+      () => import("./usuarios_conectados-B_G4nZC2.js")
     );
     const showConectados = ref(false);
     const pendingOpenConectados = ref(false);
@@ -4092,13 +4092,13 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
                     id: "tuto_rol_select"
                   })) : createCommentVNode("", true),
                   createVNode(QToggle, {
-                    modelValue: _ctx.$q.dark.isActive,
-                    "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => _ctx.$q.dark.isActive = $event),
+                    "model-value": _ctx.$q.dark.isActive,
+                    "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => unref(Dark).set($event)),
                     color: _ctx.$q.dark ? "black" : "white",
                     "unchecked-icon": "brightness_7",
                     "checked-icon": "dark_mode",
                     id: "tuto_mode_dark"
-                  }, null, 8, ["modelValue", "color"]),
+                  }, null, 8, ["model-value", "color"]),
                   unref(store).dataUser.usuario && show_time.value ? (openBlock(), createElementBlock("small", {
                     key: 3,
                     innerHTML: unref(store).tiempoSession,
