@@ -8,5 +8,6 @@ export default boot(({ app }) => {
     wss: process.env.GRAPHQL_WSS + '',
     wssApp: process.env.GRAPHQL_WSS_APP + '',
     decodePassKey: process.env.DECODE_PASS_KEY + '',
+    cookieThemeName: process.env.COOKIE_THEME_NAME || '',
   })
 })
