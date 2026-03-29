@@ -139,8 +139,7 @@ body.body--dark .neon-header {
   background: var(--neon-bg-surface) !important;
   border-bottom: 1px solid var(--neon-border-subtle) !important;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5) !important;
-  -webkit-backdrop-filter: blur(4px);
-          backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }
 
 /* ══════════════════════════════════════════════════════
@@ -1864,7 +1863,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 @media print {
 	/* Prevent printers from removing background-images of controls. */
 	.leaflet-control {
-		-webkit-print-color-adjust: exact;
 		print-color-adjust: exact;
 		}
 	}
+/*$vite$:1*/

@@ -1,6 +1,6 @@
 // @ts-ignore
 try {
-  self['workbox:core:7.2.0'] && _();
+  self['workbox:core:7.3.0'] && _();
 } catch (e) {}
 
 /*
@@ -572,7 +572,7 @@ const logger = (() => {
 
 // @ts-ignore
 try {
-  self['workbox:routing:7.2.0'] && _();
+  self['workbox:routing:7.3.0'] && _();
 } catch (e) {}
 
 /*
@@ -1322,7 +1322,7 @@ function waitUntil(event, asyncFn) {
 
 // @ts-ignore
 try {
-  self['workbox:precaching:7.2.0'] && _();
+  self['workbox:precaching:7.3.0'] && _();
 } catch (e) {}
 
 /*
@@ -1767,7 +1767,7 @@ function timeout(ms) {
 
 // @ts-ignore
 try {
-  self['workbox:strategies:7.2.0'] && _();
+  self['workbox:strategies:7.3.0'] && _();
 } catch (e) {}
 
 /*
@@ -1781,7 +1781,7 @@ function toRequest(input) {
   return typeof input === 'string' ? new Request(input) : input;
 }
 /**
- * A class created every time a Strategy instance instance calls
+ * A class created every time a Strategy instance calls
  * {@link workbox-strategies.Strategy~handle} or
  * {@link workbox-strategies.Strategy~handleAll} that wraps all fetch and
  * cache actions around plugin callbacks and keeps track of when the strategy
@@ -2185,7 +2185,7 @@ class StrategyHandler {
   /**
    * Adds a promise to the
    * [extend lifetime promises]{@link https://w3c.github.io/ServiceWorker/#extendableevent-extend-lifetime-promises}
-   * of the event event associated with the request being handled (usually a
+   * of the event associated with the request being handled (usually a
    * `FetchEvent`).
    *
    * Note: you can await
@@ -2206,13 +2206,17 @@ class StrategyHandler {
    *
    * Note: any work done after `doneWaiting()` settles should be manually
    * passed to an event's `waitUntil()` method (not this handler's
-   * `waitUntil()` method), otherwise the service worker thread my be killed
+   * `waitUntil()` method), otherwise the service worker thread may be killed
    * prior to your work completing.
    */
   async doneWaiting() {
-    let promise;
-    while (promise = this._extendLifetimePromises.shift()) {
-      await promise;
+    while (this._extendLifetimePromises.length) {
+      const promises = this._extendLifetimePromises.splice(0);
+      const result = await Promise.allSettled(promises);
+      const firstRejection = result.find(i => i.status === 'rejected');
+      if (firstRejection) {
+        throw firstRejection.reason;
+      }
     }
   }
   /**
@@ -3312,50 +3316,50 @@ precacheAndRoute([{
   "url": "favicon.ico",
   "revision": "2b527a8583b49b18e16ebf511d4b2ba1"
 }, {
-  "url": "icons/apple-icon-120x120.png",
-  "revision": "d082235f6e6d2109e84e397f66fa868d"
-}, {
-  "url": "icons/apple-icon-152x152.png",
-  "revision": "3c728ce3e709b7395be487becf76283a"
-}, {
-  "url": "icons/apple-icon-167x167.png",
-  "revision": "3fec89672a18e4b402ede58646917c2d"
-}, {
-  "url": "icons/apple-icon-180x180.png",
-  "revision": "aa47843bd47f34b7ca4b99f65dd25955"
-}, {
-  "url": "icons/favicon-128x128.png",
-  "revision": "78019c48a134d382dbd422438f9e1b20"
-}, {
-  "url": "icons/favicon-16x16.png",
-  "revision": "761e765868eecef2ebd0b13c940638b9"
-}, {
-  "url": "icons/favicon-32x32.png",
-  "revision": "97b3d0baa17ff470e44c7d7140e95831"
-}, {
-  "url": "icons/favicon-96x96.png",
-  "revision": "843e91119f7b6fa3302891ddde33f9ae"
-}, {
-  "url": "icons/icon-128x128.png",
-  "revision": "ab92df0270f054ca388127c9703a4911"
-}, {
-  "url": "icons/icon-192x192.png",
-  "revision": "7659f0d3e9602e71811f8b7cf2ce0e8e"
-}, {
-  "url": "icons/icon-256x256.png",
-  "revision": "cf5ad3498fb6fda43bdafd3c6ce9b824"
-}, {
-  "url": "icons/icon-384x384.png",
-  "revision": "fdfc1b3612b6833a27a7b260c9990247"
-}, {
-  "url": "icons/icon-512x512.png",
-  "revision": "2c2dc987945806196bd18cb6028d8bf4"
+  "url": "icons/safari-pinned-tab.svg",
+  "revision": "3e4c3730b00c89591de9505efb73afd3"
 }, {
   "url": "icons/ms-icon-144x144.png",
   "revision": "8de1b0e67a62b881cd22d935f102a0e6"
 }, {
-  "url": "icons/safari-pinned-tab.svg",
-  "revision": "3e4c3730b00c89591de9505efb73afd3"
+  "url": "icons/icon-512x512.png",
+  "revision": "2c2dc987945806196bd18cb6028d8bf4"
+}, {
+  "url": "icons/icon-384x384.png",
+  "revision": "fdfc1b3612b6833a27a7b260c9990247"
+}, {
+  "url": "icons/icon-256x256.png",
+  "revision": "cf5ad3498fb6fda43bdafd3c6ce9b824"
+}, {
+  "url": "icons/icon-192x192.png",
+  "revision": "7659f0d3e9602e71811f8b7cf2ce0e8e"
+}, {
+  "url": "icons/icon-128x128.png",
+  "revision": "ab92df0270f054ca388127c9703a4911"
+}, {
+  "url": "icons/favicon-96x96.png",
+  "revision": "843e91119f7b6fa3302891ddde33f9ae"
+}, {
+  "url": "icons/favicon-32x32.png",
+  "revision": "97b3d0baa17ff470e44c7d7140e95831"
+}, {
+  "url": "icons/favicon-16x16.png",
+  "revision": "761e765868eecef2ebd0b13c940638b9"
+}, {
+  "url": "icons/favicon-128x128.png",
+  "revision": "78019c48a134d382dbd422438f9e1b20"
+}, {
+  "url": "icons/apple-icon-180x180.png",
+  "revision": "aa47843bd47f34b7ca4b99f65dd25955"
+}, {
+  "url": "icons/apple-icon-167x167.png",
+  "revision": "3fec89672a18e4b402ede58646917c2d"
+}, {
+  "url": "icons/apple-icon-152x152.png",
+  "revision": "3c728ce3e709b7395be487becf76283a"
+}, {
+  "url": "icons/apple-icon-120x120.png",
+  "revision": "d082235f6e6d2109e84e397f66fa868d"
 }], {});
 cleanupOutdatedCaches();
 //# sourceMappingURL=sw.js.map
