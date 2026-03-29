@@ -193,6 +193,12 @@ var AuthPlugin = { install(app, config) {
 	effectScope(true).run(() => {
 		watch(() => Dark.isActive, (val) => {
 			Cookies.set(cookieName, String(val), cookieOpts);
+			const metaThemeColor = document.querySelector("meta[name=theme-color]");
+			if (metaThemeColor) {
+				const pColor = getComputedStyle(document.documentElement).getPropertyValue("--primary").trim();
+				const color = val ? "#040b25" : pColor;
+				metaThemeColor.setAttribute("content", color);
+			}
 		});
 	});
 } };
