@@ -1,5 +1,5 @@
-import { D as parseFecha } from "./user-DzLedFNN.js";
-import { t as UsuariosService } from "./usuariosService-BmCVm4OD.js";
+import { D as parseFecha } from "./user-jN3O9LXh.js";
+import { t as UsuariosService } from "./usuariosService-DQ1W3FaM.js";
 import { createBlock, createElementVNode, createTextVNode, createVNode, defineComponent, openBlock, ref, toDisplayString, unref, withCtx } from "vue";
 import QSpace from "quasar/src/components/space/QSpace.js";
 import QBtn from "quasar/src/components/btn/QBtn.js";

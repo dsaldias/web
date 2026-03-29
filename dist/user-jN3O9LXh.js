@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from "@vue/apollo-composable";
-import Notify from "quasar/src/plugins/notify/Notify.js";
 import { parse } from "graphql";
 import { defineStore } from "pinia";
 import { Fragment, computed, createApp, createBlock, createCommentVNode, createElementBlock, createElementVNode, createTextVNode, createVNode, defineComponent, h, openBlock, ref, renderList, toDisplayString, unref, vShow, watch, withCtx, withDirectives } from "vue";
+import Notify from "quasar/src/plugins/notify/Notify.js";
 import Quasar from "quasar/src/vue-plugin.js";
 import QSpace from "quasar/src/components/space/QSpace.js";
 import QBtn from "quasar/src/components/btn/QBtn.js";

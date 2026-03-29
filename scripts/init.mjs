@@ -192,15 +192,27 @@ function patchQuasarConfig() {
   // 2. framework.plugins: ensure Notify, Cookies, Meta
   const requiredPlugins = ['Notify', 'Cookies', 'Meta']
   for (const plugin of requiredPlugins) {
-    if (!src.includes(`'${plugin}'`) && !src.includes(`"${plugin}"`)) {
-      // Insert before closing bracket of plugins array
+    if (src.includes(`'${plugin}'`) || src.includes(`"${plugin}"`)) continue
+
+    // Try to append to existing plugins array (handles single-line and multi-line)
+    const pluginsMatch = src.match(/plugins\s*:\s*\[/)
+    if (pluginsMatch) {
       src = src.replace(
         /plugins\s*:\s*\[([^\]]*)\]/,
         (_m, inner) => `plugins: [${inner.trimEnd()}${inner.trim() ? ', ' : ''}'${plugin}']`
       )
       ok(`quasar.config.ts → plugin '${plugin}' agregado`)
-      changed = true
+    } else {
+      // No plugins key — add it inside framework: {}
+      const fwMatch = src.match(/framework\s*:\s*\{/)
+      if (fwMatch) {
+        src = src.replace(/framework\s*:\s*\{/, `framework: {\n      plugins: ['${plugin}'],`)
+        ok(`quasar.config.ts → plugins: ['${plugin}'] creado en framework`)
+      } else {
+        warn(`quasar.config.ts → no se pudo agregar plugin '${plugin}': no hay framework ni plugins key`)
+      }
     }
+    changed = true
   }
 
   // 3. css array: ensure auth-web.scss and tuto_driver.scss are included

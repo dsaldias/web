@@ -2,7 +2,7 @@ import 'src/css/club-neon.css'
 import type { App } from 'vue'
 import { ApolloClient } from '@apollo/client/core'
 import { ApolloClients, provideApolloClients } from '@vue/apollo-composable'
-import { Dark, Cookies, Notify } from 'quasar'
+import { Dark, Cookies } from 'quasar'
 import { getClientOptions } from 'src/apollo'
 import { getClientOptionsApp } from 'src/apollo/indexapp'
 import { setConfig, type AuthConfig } from 'src/config'
@@ -12,13 +12,6 @@ export { type AuthConfig } from 'src/config'
 export const AuthPlugin = {
   install(app: App, config: AuthConfig) {
     setConfig(config)
-
-    // Ensure Notify plugin is initialized — consumer may not list it in quasar.config plugins
-    const $q = app.config.globalProperties.$q as any
-    const notifyPlugin = Notify as any
-    if ($q && typeof notifyPlugin.install === 'function') {
-      notifyPlugin.install({ $q, cfg: {} })
-    }
 
     const options = getClientOptions(config.graphqlAuth, config.wss)
     const apolloClient = new ApolloClient(options)
@@ -45,7 +38,9 @@ export const AuthPlugin = {
     // Usar $q.dark.set() vía globalProperties — mismo path que el toggle,
     // garantiza que sea la instancia correcta de Quasar del consumidor.
     setTimeout(() => {
-      const $q = app.config.globalProperties.$q as { dark: { set: (v: boolean) => void } } | undefined
+      const $q = app.config.globalProperties.$q as
+        | { dark: { set: (v: boolean) => void } }
+        | undefined
       if ($q?.dark) $q.dark.set(isDark)
       else Dark.set(isDark)
     }, 0)

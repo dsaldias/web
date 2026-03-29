@@ -1,17 +1,17 @@
-import { A as toHomePath, C as chartAreaBorder, D as parseFecha, E as parseErrors, O as parseTextError, S as ajustarFechaUTC, T as mostrarNotifyError, _ as cargarMenus, a as avisos_show_default, b as setConfig, c as mutar$1, d as __extends, f as __read, g as re_login_default, h as mostrarRelogin, i as mostrarAviso, j as toast1, k as parseTextErrorWs, l as query$1, m as __values, o as NotisService, p as __spreadArray, r as eventBus, s as defectoOps$1, t as useLoginStore, u as lib_default, w as defectoOps$2, x as ajustarFechaLocal, y as encriptarString } from "./user-DzLedFNN.js";
-import { n as sql_usuarios, t as UsuariosService } from "./usuariosService-BmCVm4OD.js";
-import { t as LoginView_default } from "./LoginView-DokQn44U.js";
+import { A as toHomePath, C as chartAreaBorder, D as parseFecha, E as parseErrors, O as parseTextError, S as ajustarFechaUTC, T as mostrarNotifyError, _ as cargarMenus, a as avisos_show_default, b as setConfig, c as mutar$1, d as __extends, f as __read, g as re_login_default, h as mostrarRelogin, i as mostrarAviso, j as toast1, k as parseTextErrorWs, l as query$1, m as __values, o as NotisService, p as __spreadArray, r as eventBus, s as defectoOps$1, t as useLoginStore, u as lib_default, w as defectoOps$2, x as ajustarFechaLocal, y as encriptarString } from "./user-jN3O9LXh.js";
+import { n as sql_usuarios, t as UsuariosService } from "./usuariosService-DQ1W3FaM.js";
+import { t as LoginView_default } from "./LoginView-Cxz8hVb1.js";
 import { ApolloClient } from "@apollo/client/core";
 import { ApolloClients, provideApolloClients, useMutation, useQuery, useSubscription } from "@vue/apollo-composable";
 import Dark from "quasar/src/plugins/dark/Dark.js";
 import Cookies from "quasar/src/plugins/cookies/Cookies.js";
-import Notify from "quasar/src/plugins/notify/Notify.js";
 import { InMemoryCache, createHttpLink, split } from "@apollo/client";
 import { Kind, OperationTypeNode } from "graphql";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
 import { Fragment, Transition, computed, createBlock, createCommentVNode, createElementBlock, createElementVNode, createTextVNode, createVNode, defineAsyncComponent, defineComponent, nextTick, normalizeClass, normalizeStyle, onBeforeMount, onMounted, onUnmounted, openBlock, ref, renderList, resolveComponent, toDisplayString, unref, watch, withCtx, withDirectives } from "vue";
+import Notify from "quasar/src/plugins/notify/Notify.js";
 import QSpace from "quasar/src/components/space/QSpace.js";
 import QBtn from "quasar/src/components/btn/QBtn.js";
 import QCardSection from "quasar/src/components/card/QCardSection.js";
@@ -174,12 +174,6 @@ function getClientOptionsApp(url, url_wa) {
 //#region src/plugin.ts
 var AuthPlugin = { install(app, config) {
 	setConfig(config);
-	const $q = app.config.globalProperties.$q;
-	const notifyPlugin = Notify;
-	if ($q && typeof notifyPlugin.install === "function") notifyPlugin.install({
-		$q,
-		cfg: {}
-	});
 	const apolloClient = new ApolloClient(getClientOptions(config.graphqlAuth, config.wss));
 	const apolloClientApp = new ApolloClient(getClientOptionsApp(config.graphqlApp, config.wssApp));
 	const apolloClients = {
@@ -784,11 +778,11 @@ var iniciarSubscripcion = () => {
 };
 var datitos = async (datos) => {
 	if (!datos) return;
-	const { useLoginStore } = await import("./user-DzLedFNN.js").then((n) => n.n);
+	const { useLoginStore } = await import("./user-jN3O9LXh.js").then((n) => n.n);
 	useLoginStore().setNotifyData(datos);
 };
 var setconectadosTxt = async (datos) => {
-	const { useLoginStore } = await import("./user-DzLedFNN.js").then((n) => n.n);
+	const { useLoginStore } = await import("./user-jN3O9LXh.js").then((n) => n.n);
 	const store = useLoginStore();
 	store.setWsTotalConectados(datos.total_conectados);
 	store.setWsConectados(datos.conectados);
@@ -2429,8 +2423,8 @@ var MainLayout_default = /* @__PURE__ */ defineComponent({
 		const foto_64 = ref("");
 		const refusuarios_conectados = ref();
 		const router = useRouter();
-		const Login = defineAsyncComponent(() => import("./login-index-B9Oow_gC.js"));
-		const usuarios_conectados = defineAsyncComponent(() => import("./usuarios_conectados-CEfwUxy1.js"));
+		const Login = defineAsyncComponent(() => import("./login-index-D1FPsy0C.js"));
+		const usuarios_conectados = defineAsyncComponent(() => import("./usuarios_conectados-D6Rc4_Ep.js"));
 		const showConectados = ref(false);
 		const pendingOpenConectados = ref(false);
 		const edgeLightRef = ref();
