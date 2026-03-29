@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Notify } from 'quasar'
+import { notifyCreate } from './notifyBridge'
 import { useLoginStore } from './user'
 
 export interface Opciones {
@@ -16,7 +16,7 @@ export function parseErrors(lista: any) {
 }
 
 export function mostrarNotifyError(mensaje: string | undefined, sleep = 3000) {
-  Notify.create({
+  notifyCreate({
     type: 'negative',
     textColor: 'white',
     icon: 'warning',
@@ -26,7 +26,7 @@ export function mostrarNotifyError(mensaje: string | undefined, sleep = 3000) {
 }
 
 export function toast1(mensaje: string) {
-  Notify.create({
+  notifyCreate({
     type: 'positive',
     textColor: 'white',
     icon: 'check',

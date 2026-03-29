@@ -2,7 +2,6 @@ import { useMutation, useQuery } from "@vue/apollo-composable";
 import { parse } from "graphql";
 import { defineStore } from "pinia";
 import { Fragment, computed, createApp, createBlock, createCommentVNode, createElementBlock, createElementVNode, createTextVNode, createVNode, defineComponent, h, openBlock, ref, renderList, toDisplayString, unref, vShow, watch, withCtx, withDirectives } from "vue";
-import Notify from "quasar/src/plugins/notify/Notify.js";
 import Quasar from "quasar/src/vue-plugin.js";
 import QSpace from "quasar/src/components/space/QSpace.js";
 import QBtn from "quasar/src/components/btn/QBtn.js";
@@ -28,13 +27,22 @@ var __exportAll = (all, no_symbols) => {
 	return target;
 };
 //#endregion
+//#region src/stores/auth/notifyBridge.ts
+var _notify = null;
+var setNotifyBridge = (fn) => {
+	_notify = fn;
+};
+var notifyCreate = (opts) => {
+	_notify?.(opts);
+};
+//#endregion
 //#region src/stores/auth/utils.ts
 var defectoOps$1 = { showNotyError: true };
 function parseErrors(lista) {
 	mostrarNotifyError(lista.map((m) => m.message));
 }
 function mostrarNotifyError(mensaje, sleep = 3e3) {
-	Notify.create({
+	notifyCreate({
 		type: "negative",
 		textColor: "white",
 		icon: "warning",
@@ -43,7 +51,7 @@ function mostrarNotifyError(mensaje, sleep = 3e3) {
 	});
 }
 function toast1(mensaje) {
-	Notify.create({
+	notifyCreate({
 		type: "positive",
 		textColor: "white",
 		icon: "check",
@@ -966,4 +974,4 @@ var useLoginStore = defineStore("userstore", {
 	}
 });
 //#endregion
-export { toHomePath as A, chartAreaBorder as C, parseFecha as D, parseErrors as E, parseTextError as O, ajustarFechaUTC as S, mostrarNotifyError as T, cargarMenus as _, avisos_show_default as a, setConfig as b, mutar as c, __extends as d, __read as f, re_login_default as g, mostrarRelogin as h, mostrarAviso as i, toast1 as j, parseTextErrorWs as k, query as l, __values as m, user_exports as n, NotisService as o, __spreadArray as p, eventBus as r, defectoOps as s, useLoginStore as t, lib_default as u, LoginService as v, defectoOps$1 as w, ajustarFechaLocal as x, encriptarString as y };
+export { toHomePath as A, chartAreaBorder as C, parseFecha as D, parseErrors as E, notifyCreate as M, setNotifyBridge as N, parseTextError as O, ajustarFechaUTC as S, mostrarNotifyError as T, cargarMenus as _, avisos_show_default as a, setConfig as b, mutar as c, __extends as d, __read as f, re_login_default as g, mostrarRelogin as h, mostrarAviso as i, toast1 as j, parseTextErrorWs as k, query as l, __values as m, user_exports as n, NotisService as o, __spreadArray as p, eventBus as r, defectoOps as s, useLoginStore as t, lib_default as u, LoginService as v, defectoOps$1 as w, ajustarFechaLocal as x, encriptarString as y };

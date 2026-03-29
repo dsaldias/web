@@ -1,6 +1,6 @@
-import { A as toHomePath, C as chartAreaBorder, D as parseFecha, E as parseErrors, O as parseTextError, S as ajustarFechaUTC, T as mostrarNotifyError, _ as cargarMenus, a as avisos_show_default, b as setConfig, c as mutar$1, d as __extends, f as __read, g as re_login_default, h as mostrarRelogin, i as mostrarAviso, j as toast1, k as parseTextErrorWs, l as query$1, m as __values, o as NotisService, p as __spreadArray, r as eventBus, s as defectoOps$1, t as useLoginStore, u as lib_default, w as defectoOps$2, x as ajustarFechaLocal, y as encriptarString } from "./user-jN3O9LXh.js";
-import { n as sql_usuarios, t as UsuariosService } from "./usuariosService-DQ1W3FaM.js";
-import { t as LoginView_default } from "./LoginView-Cxz8hVb1.js";
+import { A as toHomePath, C as chartAreaBorder, D as parseFecha, E as parseErrors, M as notifyCreate, N as setNotifyBridge, O as parseTextError, S as ajustarFechaUTC, T as mostrarNotifyError, _ as cargarMenus, a as avisos_show_default, b as setConfig, c as mutar$1, d as __extends, f as __read, g as re_login_default, h as mostrarRelogin, i as mostrarAviso, j as toast1, k as parseTextErrorWs, l as query$1, m as __values, o as NotisService, p as __spreadArray, r as eventBus, s as defectoOps$1, t as useLoginStore, u as lib_default, w as defectoOps$2, x as ajustarFechaLocal, y as encriptarString } from "./user-1BtAW-kN.js";
+import { n as sql_usuarios, t as UsuariosService } from "./usuariosService-BtLTDkkC.js";
+import { t as LoginView_default } from "./LoginView-rZgjQInn.js";
 import { ApolloClient } from "@apollo/client/core";
 import { ApolloClients, provideApolloClients, useMutation, useQuery, useSubscription } from "@vue/apollo-composable";
 import Dark from "quasar/src/plugins/dark/Dark.js";
@@ -11,7 +11,6 @@ import { getMainDefinition } from "@apollo/client/utilities";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
 import { Fragment, Transition, computed, createBlock, createCommentVNode, createElementBlock, createElementVNode, createTextVNode, createVNode, defineAsyncComponent, defineComponent, nextTick, normalizeClass, normalizeStyle, onBeforeMount, onMounted, onUnmounted, openBlock, ref, renderList, resolveComponent, toDisplayString, unref, watch, withCtx, withDirectives } from "vue";
-import Notify from "quasar/src/plugins/notify/Notify.js";
 import QSpace from "quasar/src/components/space/QSpace.js";
 import QBtn from "quasar/src/components/btn/QBtn.js";
 import QCardSection from "quasar/src/components/card/QCardSection.js";
@@ -38,6 +37,7 @@ import QToggle from "quasar/src/components/toggle/QToggle.js";
 import ClosePopup from "quasar/src/directives/close-popup/ClosePopup.js";
 import QRadio from "quasar/src/components/radio/QRadio.js";
 import QFile from "quasar/src/components/file/QFile.js";
+import Notify from "quasar/src/plugins/notify/Notify.js";
 import { boot } from "quasar/wrappers";
 import QSelect from "quasar/src/components/select/QSelect.js";
 import QBadge from "quasar/src/components/badge/QBadge.js";
@@ -195,6 +195,7 @@ var AuthPlugin = { install(app, config) {
 		const $q = app.config.globalProperties.$q;
 		if ($q?.dark) $q.dark.set(isDark);
 		else Dark.set(isDark);
+		if ($q?.notify) setNotifyBridge((opts) => $q.notify(opts));
 	}, 0);
 	const syncTheme = (isDark) => {
 		Cookies.set(cookieName, String(isDark), cookieOpts);
@@ -764,7 +765,7 @@ var iniciarSubscripcion = () => {
 				datitos(datos);
 			}
 			if (tipo != "conectados") {
-				Notify.create(datanot);
+				notifyCreate(datanot);
 				edgeLightSignal.value++;
 			}
 			if (tipo == "conectados") setconectadosTxt(datos);
@@ -778,11 +779,11 @@ var iniciarSubscripcion = () => {
 };
 var datitos = async (datos) => {
 	if (!datos) return;
-	const { useLoginStore } = await import("./user-jN3O9LXh.js").then((n) => n.n);
+	const { useLoginStore } = await import("./user-1BtAW-kN.js").then((n) => n.n);
 	useLoginStore().setNotifyData(datos);
 };
 var setconectadosTxt = async (datos) => {
-	const { useLoginStore } = await import("./user-jN3O9LXh.js").then((n) => n.n);
+	const { useLoginStore } = await import("./user-1BtAW-kN.js").then((n) => n.n);
 	const store = useLoginStore();
 	store.setWsTotalConectados(datos.total_conectados);
 	store.setWsConectados(datos.conectados);
@@ -2423,8 +2424,8 @@ var MainLayout_default = /* @__PURE__ */ defineComponent({
 		const foto_64 = ref("");
 		const refusuarios_conectados = ref();
 		const router = useRouter();
-		const Login = defineAsyncComponent(() => import("./login-index-D1FPsy0C.js"));
-		const usuarios_conectados = defineAsyncComponent(() => import("./usuarios_conectados-D6Rc4_Ep.js"));
+		const Login = defineAsyncComponent(() => import("./login-index-CUlSJqTk.js"));
+		const usuarios_conectados = defineAsyncComponent(() => import("./usuarios_conectados-LR2oxIlh.js"));
 		const showConectados = ref(false);
 		const pendingOpenConectados = ref(false);
 		const edgeLightRef = ref();

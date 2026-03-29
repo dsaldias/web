@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ref } from 'vue'
 import gql from 'graphql-tag'
-import { Notify } from 'quasar'
+import { notifyCreate } from './notifyBridge'
 import { subs } from 'src/stores/auth/serverws'
 
 const msg = ref('')
@@ -62,7 +62,7 @@ const iniciarSubscripcion = () => {
 
       // Mostrar la notificación
       if (tipo != 'conectados') {
-        Notify.create(datanot)
+        notifyCreate(datanot)
         edgeLightSignal.value++
       }
 

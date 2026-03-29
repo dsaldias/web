@@ -6,6 +6,7 @@ import { Dark, Cookies } from 'quasar'
 import { getClientOptions } from 'src/apollo'
 import { getClientOptionsApp } from 'src/apollo/indexapp'
 import { setConfig, type AuthConfig } from 'src/config'
+import { setNotifyBridge } from 'src/stores/auth/notifyBridge'
 
 export { type AuthConfig } from 'src/config'
 
@@ -37,12 +38,15 @@ export const AuthPlugin = {
     if (isDark) document.body.classList.add('body--dark')
     // Usar $q.dark.set() vía globalProperties — mismo path que el toggle,
     // garantiza que sea la instancia correcta de Quasar del consumidor.
+    // También capturamos $q.notify para el bridge (evita problemas de resolución
+    // de módulo cuando Notify se importa desde la lib vs. el consumer).
     setTimeout(() => {
       const $q = app.config.globalProperties.$q as
-        | { dark: { set: (v: boolean) => void } }
+        | { dark: { set: (v: boolean) => void }; notify: (opts: unknown) => void }
         | undefined
       if ($q?.dark) $q.dark.set(isDark)
       else Dark.set(isDark)
+      if ($q?.notify) setNotifyBridge((opts) => $q.notify(opts))
     }, 0)
 
     // MutationObserver: detecta el cambio de body--dark directamente en el DOM.
