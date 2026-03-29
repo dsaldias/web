@@ -142,7 +142,7 @@ const onSubmit = async (u = null, p = null) => {
     const l = res.login
     console.log('///', l)
 
-    const menuItemsAgrupados = await cargarMenus(l.me.menus)
+    const menuItemsAgrupados = cargarMenus(l.me.menus)
     store.setSessionKey(l.session_key, refresh.value)
     store.setNewSessionTime(l.session_time)
     store.setMenus(menuItemsAgrupados)

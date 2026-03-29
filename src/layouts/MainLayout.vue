@@ -36,22 +36,51 @@
           <q-linear-progress v-if="store.loading_menus" dark size="xs" indeterminate color="secondary" class="q-ma-none q-pa-none" />
 
           <template v-for="t in store.menus">
-            <template v-for="(link, i) in t" :key="link.text">
+            <template v-for="(link, i) in t" :key="link.id">
 
-              <q-item v-ripple clickable :to="link.path" active-class="text-secondary">
+              <!-- Menú padre con hijos -->
+              <q-expansion-item
+                v-if="link.children?.length"
+                :icon="link.icon"
+                :label="link.label"
+                dense
+                expand-separator
+              >
+                <q-item
+                  v-for="child in link.children"
+                  :key="child.id"
+                  v-ripple
+                  clickable
+                  :to="child.path"
+                  active-class="text-primary"
+                  class="q-pl-xl"
+                >
+                  <q-item-section avatar>
+                    <q-icon :name="child.icon" size="xs" />
+                  </q-item-section>
+                  <q-item-section>
+                    <q-item-label>{{ child.label }} </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-expansion-item>
+
+              <!-- Menú hoja -->
+              <q-item
+                v-else
+                v-ripple
+                clickable
+                :to="link.path"
+                active-class="text-primary"
+              >
                 <q-item-section avatar>
-                  <!-- <q-icon :color="link.color" :name="link.icon" /> -->
-                  <q-icon :color="$q.dark.isActive?'grey':link.color" :name="link.icon" />
+                  <q-icon :name="link.icon" />
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label>{{ link.label }}</q-item-label>
-                </q-item-section>
-                <q-item-section avatar>
-                  <q-avatar size="md" icon="arrow_right" />
+                  <q-item-label>{{ link.label }} </q-item-label>
                 </q-item-section>
               </q-item>
 
-              <q-separator v-if="Number(i) + 1 == t.length" class="q-my-md" />
+              <q-separator v-if="Number(i) + 1 == t.length" class="q-my-sm" />
             </template>
           </template>
 

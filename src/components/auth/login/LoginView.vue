@@ -96,7 +96,7 @@ const onSubmit = async (u = null, p = null) => {
     const l = res.login
     useLogin.setSessionKey(l.session_key)
     useLogin.setNewSessionTime(l.session_time)
-    const menuItemsAgrupados = await cargarMenus(l.me.menus)
+    const menuItemsAgrupados = cargarMenus(l.me.menus)
     useLogin.setMenus(menuItemsAgrupados)
     useLogin.setUser(l.me)
 

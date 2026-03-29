@@ -1,7 +1,6 @@
 <template>
-  <q-page class="q-pa-xs">
+  <q-page class="q-pa-sm">
     <q-table
-      title="Notificaciones"
       :rows="rows"
       :columns="columns"
       flat
@@ -12,52 +11,74 @@
       row-key="id"
       hide-pagination
       :rows-per-page-options="[0]"
+      separator="horizontal"
     >
-      <template v-slot:top-right>
-        <q-input outlined dense debounce="300" v-model="filter" placeholder="buscar..." clearable>
-          <template v-slot:append>
-            <q-icon size="xs" name="search" />
-          </template>
-        </q-input>
-        <q-btn color="green" icon="add" outline square @click="onclick('new', null)">
-          registrar
-        </q-btn>
+      <template v-slot:top>
+        <div class="row items-center full-width q-gutter-x-sm">
+          <q-icon name="notifications" color="primary" size="sm" />
+          <span class="text-subtitle1 text-weight-medium">Notificaciones</span>
+          <q-btn icon="refresh" flat round dense @click="getdatos()">
+            <q-tooltip>Recargar</q-tooltip>
+          </q-btn>
+
+          <q-space />
+
+          <q-input
+            outlined
+            dense
+            debounce="300"
+            v-model="filter"
+            placeholder="Buscar..."
+            clearable
+            style="width: 200px"
+          >
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+
+          <q-btn
+            label="Registrar"
+            icon="add"
+            color="primary"
+            unelevated
+            @click="onclick('new', null)"
+          />
+        </div>
       </template>
 
       <template v-slot:body-cell-index="props">
-        <q-td :props="props">
+        <q-td :props="props" class="text-caption" style="opacity:.5">
           {{ props.rowIndex + 1 }}
         </q-td>
       </template>
 
       <template v-slot:body-cell-mensaje="props">
         <q-td :props="props">
-          <p
-            class="q-my-none"
-            style="text-wrap: initial; list-style: none"
-            v-html="props.row.mensaje"
-          ></p>
+          <p class="q-my-none" style="text-wrap: initial; list-style: none" v-html="props.row.mensaje"></p>
         </q-td>
       </template>
 
       <template v-slot:body-cell-desde="props">
-        <q-td :props="props">
+        <q-td :props="props" class="text-caption" style="opacity:.7">
           {{ parseFecha(props.row.desde) }}
         </q-td>
       </template>
+
       <template v-slot:body-cell-hasta="props">
-        <q-td :props="props">
+        <q-td :props="props" class="text-caption" style="opacity:.7">
           {{ parseFecha(props.row.hasta) }}
         </q-td>
       </template>
+
       <template v-slot:body-cell-fecha_registro="props">
-        <q-td :props="props">
+        <q-td :props="props" class="text-caption" style="opacity:.7">
           {{ parseFecha(props.row.fecha_registro) }}
         </q-td>
       </template>
 
       <template v-slot:body-cell-opt="props">
-        <q-td :props="props">
+        <q-td :props="props" auto-width>
           <Botonera :props="props" v-on:clicked="onclick" />
         </q-td>
       </template>

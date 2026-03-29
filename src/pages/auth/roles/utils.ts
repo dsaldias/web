@@ -22,4 +22,5 @@ export const columns_permisos: any = [
 export const columns_menus: any = [
   { name: 'label', field: 'label', label: '', align: 'left' },
   { name: 'path', field: 'path', label: 'path', align: 'left' },
+  // { name: 'padre_id', field: 'padre_id', label: 'padre_id', align: 'left' },
 ]

@@ -55,7 +55,7 @@ const getmesnuss = async () => {
     store.setMenus([])
     const r: any = await meService.me(input)
     if (r && r.me) {
-      const menuItemsAgrupados = await cargarMenus(r.me.menus)
+      const menuItemsAgrupados = cargarMenus(r.me.menus)
       store.setMenus(menuItemsAgrupados)
       store.setUser(r.me)
     }

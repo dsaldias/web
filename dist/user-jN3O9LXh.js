@@ -185,6 +185,7 @@ var LoginService = class {
               color
               grupo
               orden
+              padre_id
             }
             roles {
               rol {
@@ -219,10 +220,17 @@ var LoginService = class {
 //#endregion
 //#region src/stores/auth/menus.ts
 var cargarMenus = (menus = []) => {
-	return menus.reduce((grupos, item) => {
-		const grupoId = item.grupo;
-		const grupoExistente = grupos.find((grupo) => grupo.some((obj) => obj.grupo === grupoId));
-		if (grupoExistente) grupoExistente.push(item);
+	const map = {};
+	menus.forEach((m) => map[m.id] = {
+		...m,
+		children: []
+	});
+	menus.forEach((m) => {
+		if (m.padre_id && map[m.padre_id]) map[m.padre_id].children.push(map[m.id]);
+	});
+	return menus.filter((m) => !m.padre_id).map((m) => map[m.id]).reduce((grupos, item) => {
+		const existing = grupos.find((g) => g.some((o) => o.grupo === item.grupo));
+		if (existing) existing.push(item);
 		else grupos.push([item]);
 		return grupos;
 	}, []);
@@ -284,7 +292,7 @@ var re_login_default = /* @__PURE__ */ defineComponent({
 			if (res.login) {
 				const l = res.login;
 				console.log("///", l);
-				const menuItemsAgrupados = await cargarMenus(l.me.menus);
+				const menuItemsAgrupados = cargarMenus(l.me.menus);
 				store.setSessionKey(l.session_key, refresh.value);
 				store.setNewSessionTime(l.session_time);
 				store.setMenus(menuItemsAgrupados);

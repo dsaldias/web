@@ -11,6 +11,7 @@ export default class MenusService {
           icon
           grupo
           orden
+          padre_id
         }
       }
     `

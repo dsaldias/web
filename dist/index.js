@@ -1,6 +1,6 @@
-import { A as toHomePath, C as chartAreaBorder, D as parseFecha, E as parseErrors, O as parseTextError, S as ajustarFechaUTC, T as mostrarNotifyError, _ as cargarMenus, a as avisos_show_default, b as setConfig, c as mutar$1, d as __extends, f as __read, g as re_login_default, h as mostrarRelogin, i as mostrarAviso, j as toast1, k as parseTextErrorWs, l as query$1, m as __values, o as NotisService, p as __spreadArray, r as eventBus, s as defectoOps$1, t as useLoginStore, u as lib_default, w as defectoOps$2, x as ajustarFechaLocal, y as encriptarString } from "./user-3ifBbU8j.js";
-import { n as sql_usuarios, t as UsuariosService } from "./usuariosService-gSmuoApK.js";
-import { n as _plugin_vue_export_helper_default, t as LoginView_default } from "./LoginView-KYhYuDb3.js";
+import { A as toHomePath, C as chartAreaBorder, D as parseFecha, E as parseErrors, O as parseTextError, S as ajustarFechaUTC, T as mostrarNotifyError, _ as cargarMenus, a as avisos_show_default, b as setConfig, c as mutar$1, d as __extends, f as __read, g as re_login_default, h as mostrarRelogin, i as mostrarAviso, j as toast1, k as parseTextErrorWs, l as query$1, m as __values, o as NotisService, p as __spreadArray, r as eventBus, s as defectoOps$1, t as useLoginStore, u as lib_default, w as defectoOps$2, x as ajustarFechaLocal, y as encriptarString } from "./user-jN3O9LXh.js";
+import { n as sql_usuarios, t as UsuariosService } from "./usuariosService-DQ1W3FaM.js";
+import { t as LoginView_default } from "./LoginView-Cxz8hVb1.js";
 import { ApolloClient } from "@apollo/client/core";
 import { ApolloClients, provideApolloClients, useMutation, useQuery, useSubscription } from "@vue/apollo-composable";
 import Dark from "quasar/src/plugins/dark/Dark.js";
@@ -44,6 +44,7 @@ import QBadge from "quasar/src/components/badge/QBadge.js";
 import QToolbar from "quasar/src/components/toolbar/QToolbar.js";
 import QHeader from "quasar/src/components/header/QHeader.js";
 import QItemLabel from "quasar/src/components/item/QItemLabel.js";
+import QExpansionItem from "quasar/src/components/expansion-item/QExpansionItem.js";
 import QScrollArea from "quasar/src/components/scroll-area/QScrollArea.js";
 import QDrawer from "quasar/src/components/drawer/QDrawer.js";
 import QPageContainer from "quasar/src/components/page/QPageContainer.js";
@@ -59,7 +60,6 @@ import QTd from "quasar/src/components/table/QTd.js";
 import QChip from "quasar/src/components/chip/QChip.js";
 import QTable from "quasar/src/components/table/QTable.js";
 import QPage from "quasar/src/components/page/QPage.js";
-import QExpansionItem from "quasar/src/components/expansion-item/QExpansionItem.js";
 import QTabPanel from "quasar/src/components/tab-panels/QTabPanel.js";
 import QTabPanels from "quasar/src/components/tab-panels/QTabPanels.js";
 import QBanner from "quasar/src/components/banner/QBanner.js";
@@ -778,11 +778,11 @@ var iniciarSubscripcion = () => {
 };
 var datitos = async (datos) => {
 	if (!datos) return;
-	const { useLoginStore } = await import("./user-3ifBbU8j.js").then((n) => n.n);
+	const { useLoginStore } = await import("./user-jN3O9LXh.js").then((n) => n.n);
 	useLoginStore().setNotifyData(datos);
 };
 var setconectadosTxt = async (datos) => {
-	const { useLoginStore } = await import("./user-3ifBbU8j.js").then((n) => n.n);
+	const { useLoginStore } = await import("./user-jN3O9LXh.js").then((n) => n.n);
 	const store = useLoginStore();
 	store.setWsTotalConectados(datos.total_conectados);
 	store.setWsConectados(datos.conectados);
@@ -940,6 +940,7 @@ var MeService = class {
             color
             grupo
             orden
+            padre_id
           }
           roles {
             rol {
@@ -1018,6 +1019,7 @@ var RolesService = class {
             id
             label
             path
+            padre_id
           }
         }
       }
@@ -1124,6 +1126,7 @@ var MenusService = class {
           icon
           grupo
           orden
+          padre_id
         }
       }
     `, {}).then((d) => d).catch((e) => e);
@@ -1379,12 +1382,19 @@ var geo_modalbk_vue_vue_type_script_lang_default = {
 	}
 };
 //#endregion
+//#region \0plugin-vue:export-helper
+var _plugin_vue_export_helper_default = (sfc, props) => {
+	const target = sfc.__vccOpts || sfc;
+	for (const [key, val] of props) target[key] = val;
+	return target;
+};
+//#endregion
 //#region src/components/auth/geo/geo_modalbk.vue
-var _hoisted_1$20 = {
+var _hoisted_1$21 = {
 	class: "q-mt-md",
 	align: "right"
 };
-function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
 	const _component_LTileLayer = resolveComponent("LTileLayer");
 	const _component_LMarker = resolveComponent("LMarker");
 	const _component_LMap = resolveComponent("LMap");
@@ -1436,7 +1446,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
 					_: 1
 				}),
 				createVNode(QCardSection, { class: "q-pt-none" }, {
-					default: withCtx(() => [createElementVNode("div", _hoisted_1$20, [
+					default: withCtx(() => [createElementVNode("div", _hoisted_1$21, [
 						$setup.loading ? (openBlock(), createBlock(QLinearProgress, {
 							key: 0,
 							dark: "",
@@ -1471,7 +1481,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
 		_: 1
 	}, 8, ["modelValue"]);
 }
-var geo_modalbk_default = /* @__PURE__ */ _plugin_vue_export_helper_default(geo_modalbk_vue_vue_type_script_lang_default, [["render", _sfc_render$6]]);
+var geo_modalbk_default = /* @__PURE__ */ _plugin_vue_export_helper_default(geo_modalbk_vue_vue_type_script_lang_default, [["render", _sfc_render$4]]);
 //#endregion
 //#region src/stores/auth/zoomer.js
 var init_zoomer = () => {
@@ -1611,221 +1621,239 @@ var editar_perfil_vue_vue_type_script_lang_default = {
 };
 //#endregion
 //#region src/components/auth/perfil/editar_perfil.vue
-var _hoisted_1$19 = { class: "row q-col-gutter-xs justify-center" };
-var _hoisted_2$13 = { class: "col-xs-12 col-sm-8" };
+var _hoisted_1$20 = { class: "row q-col-gutter-sm" };
+var _hoisted_2$15 = { class: "col-xs-12 flex flex-center" };
 var _hoisted_3$13 = { class: "col-xs-12 col-sm-6" };
 var _hoisted_4$8 = { class: "col-xs-12 col-sm-6" };
 var _hoisted_5$6 = { class: "col-xs-12 col-sm-6" };
-var _hoisted_6$5 = { class: "col-xs-12 col-sm-6" };
-var _hoisted_7$3 = { class: "col-xs-12 col-sm-6" };
-var _hoisted_8$3 = { class: "col-xs-12 col-sm-6" };
-var _hoisted_9$3 = { class: "col-xs-12 col-sm-12" };
-var _hoisted_10$2 = { class: "col-xs-12 col-sm-12" };
-var _hoisted_11$2 = { class: "col-xs-12 col-sm-12" };
-var _hoisted_12$2 = { class: "col-xs-12 col-sm-12 q-pt-md" };
-var _hoisted_13$2 = { class: "q-pl-md" };
-var _hoisted_14$2 = { "vv-show": "!input.oauth_id" };
-var _hoisted_15$2 = { class: "row" };
-var _hoisted_16$2 = { class: "col-xs-12 col-sm-12" };
-var _hoisted_17$2 = {
-	class: "q-mt-md",
-	align: "right"
+var _hoisted_6$6 = { class: "col-xs-12 col-sm-6" };
+var _hoisted_7$4 = { class: "col-xs-12 col-sm-6" };
+var _hoisted_8$4 = { class: "col-xs-12 col-sm-6" };
+var _hoisted_9$4 = { class: "col-xs-12" };
+var _hoisted_10$3 = { class: "col-xs-12 row items-center q-gutter-x-sm" };
+var _hoisted_11$3 = { class: "col-xs-12 col-sm-8" };
+var _hoisted_12$2 = { class: "col-xs-12 col-sm-4 row items-center q-gutter-x-xs" };
+var _hoisted_13$2 = {
+	class: "text-caption",
+	style: { "opacity": ".6" }
 };
-function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+var _hoisted_14$2 = { class: "col-xs-12" };
+var _hoisted_15$2 = { class: "row justify-end q-gutter-x-sm q-mt-md" };
+function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
 	const _component_Geo = resolveComponent("Geo");
 	return openBlock(), createBlock(QDialog, {
 		modelValue: $setup.alert,
-		"onUpdate:modelValue": _cache[14] || (_cache[14] = ($event) => $setup.alert = $event),
+		"onUpdate:modelValue": _cache[15] || (_cache[15] = ($event) => $setup.alert = $event),
 		persistent: "",
-		square: ""
+		style: {
+			"width": "min(580px, 95vw)",
+			"max-width": "95vw"
+		}
 	}, {
 		default: withCtx(() => [createVNode(QCard, {
 			flat: "",
 			bordered: "",
-			"vv-on:click": "checkClickSession()"
+			style: { "width": "100%" }
 		}, {
-			default: withCtx(() => [createVNode(QCardSection, null, {
-				default: withCtx(() => [..._cache[15] || (_cache[15] = [createElementVNode("div", { class: "text-h6" }, " Editar Información Personal ", -1)])]),
-				_: 1
-			}), createVNode(QCardSection, { class: "q-pt-none" }, {
-				default: withCtx(() => [createVNode(QForm, { onSubmit: $setup.onSubmit }, {
+			default: withCtx(() => [
+				createVNode(QCardSection, { class: "row items-center q-py-sm q-px-md" }, {
 					default: withCtx(() => [
-						createElementVNode("div", _hoisted_1$19, [
-							createElementVNode("div", _hoisted_2$13, [$setup.foto_64 ? (openBlock(), createBlock(QImg, {
-								key: 0,
-								class: "zoomer",
-								src: $setup.foto_64,
-								"spinner-color": "white"
-							}, null, 8, ["src"])) : createCommentVNode("", true)]),
-							createElementVNode("div", _hoisted_3$13, [createVNode(QInput, {
-								outlined: "",
-								modelValue: $setup.input.nombres,
-								"onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.input.nombres = $event),
-								modelModifiers: { trim: true },
-								label: "* Nombres:",
-								required: "",
-								"lazy-rules": "",
-								dense: "",
-								rules: [(val) => $setup.validaciones.val_nombre(val)]
-							}, null, 8, ["modelValue", "rules"])]),
-							createElementVNode("div", _hoisted_4$8, [createVNode(QInput, {
-								outlined: "",
-								modelValue: $setup.input.apellido1,
-								"onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.input.apellido1 = $event),
-								modelModifiers: { trim: true },
-								label: "* Apellido 1:",
-								required: "",
-								"lazy-rules": "",
-								dense: "",
-								rules: [(val) => $setup.validaciones.val_apellido1(val)]
-							}, null, 8, ["modelValue", "rules"])]),
-							createElementVNode("div", _hoisted_5$6, [createVNode(QInput, {
-								outlined: "",
-								modelValue: $setup.input.apellido2,
-								"onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $setup.input.apellido2 = $event),
-								modelModifiers: { trim: true },
-								label: "Apellido 2:",
-								dense: "",
-								"lazy-rules": "",
-								rules: [(val) => $setup.validaciones.val_apellido2(val)]
-							}, null, 8, ["modelValue", "rules"])]),
-							createElementVNode("div", _hoisted_6$5, [createVNode(QInput, {
-								outlined: "",
-								modelValue: $setup.input.celular,
-								"onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $setup.input.celular = $event),
-								modelModifiers: { trim: true },
-								label: "Celular:",
-								dense: "",
-								"lazy-rules": "",
-								rules: [(val) => $setup.validaciones.val_celular(val)]
-							}, null, 8, ["modelValue", "rules"])]),
-							createElementVNode("div", _hoisted_7$3, [createVNode(QInput, {
-								outlined: "",
-								modelValue: $setup.input.correo,
-								"onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => $setup.input.correo = $event),
-								modelModifiers: { trim: true },
-								label: "Correo:",
-								dense: "",
-								"lazy-rules": "",
-								rules: [(val) => $setup.validaciones.val_correo(val)]
-							}, null, 8, ["modelValue", "rules"])]),
-							createElementVNode("div", _hoisted_8$3, [createVNode(QInput, {
-								outlined: "",
-								modelValue: $setup.input.documento,
-								"onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => $setup.input.documento = $event),
-								modelModifiers: { trim: true },
-								label: "Documento:",
-								dense: "",
-								"lazy-rules": "",
-								rules: [(val) => $setup.validaciones.val_documento(val)]
-							}, null, 8, ["modelValue", "rules"])]),
-							createElementVNode("div", _hoisted_9$3, [createVNode(QInput, {
-								outlined: "",
-								modelValue: $setup.input.direccion,
-								"onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => $setup.input.direccion = $event),
-								modelModifiers: { trim: true },
-								label: "Direccion:",
-								dense: "",
-								"lazy-rules": "",
-								rules: [(val) => $setup.validaciones.val_direccion(val)]
-							}, null, 8, ["modelValue", "rules"])]),
-							createElementVNode("div", _hoisted_10$2, [createVNode(QRadio, {
-								modelValue: $setup.input.sexo,
-								"onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => $setup.input.sexo = $event),
-								val: "F",
-								label: "F"
-							}, null, 8, ["modelValue"]), createVNode(QRadio, {
-								modelValue: $setup.input.sexo,
-								"onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => $setup.input.sexo = $event),
-								val: "M",
-								label: "M"
-							}, null, 8, ["modelValue"])]),
-							createElementVNode("div", _hoisted_11$2, [createVNode(QFile, {
-								style: { "min-width": "50px" },
-								clearable: "",
-								modelValue: $setup.foto_file,
-								"onUpdate:modelValue": [_cache[9] || (_cache[9] = ($event) => $setup.foto_file = $event), _cache[10] || (_cache[10] = ($event) => $setup.filevalue($event))],
-								dense: "",
-								accept: "image/*",
-								disable: $setup.loading,
-								square: "",
-								outlined: "",
-								color: "orange",
-								label: "Seleccionar foto de perfil (2MB)",
-								"max-file-size": "2097152",
-								onRejected: $setup.onRejected
-							}, {
-								prepend: withCtx(() => [createVNode(QIcon, { name: "upload" })]),
-								default: withCtx(() => [createVNode(QTooltip, null, {
-									default: withCtx(() => [..._cache[16] || (_cache[16] = [createTextVNode(" Seleccionar foto de perfil ", -1)])]),
-									_: 1
-								})]),
-								_: 1
-							}, 8, [
-								"modelValue",
-								"disable",
-								"onRejected"
-							])]),
-							createElementVNode("div", _hoisted_12$2, [createVNode(QBtn, {
-								color: "grey",
-								icon: "fmd_good",
-								dense: "",
-								square: "",
-								outline: "",
-								onClick: _cache[11] || (_cache[11] = ($event) => $setup.openGeo())
-							}, {
-								default: withCtx(() => [..._cache[17] || (_cache[17] = [createTextVNode(" Ubicacion geografica ", -1)])]),
-								_: 1
-							}), createElementVNode("small", _hoisted_13$2, toDisplayString($setup.input.latitud) + " " + toDisplayString($setup.input.longitud), 1)])
-						]),
-						createElementVNode("div", _hoisted_14$2, [createVNode(QSeparator, {
-							color: "green",
-							class: "q-mt-md q-mb-xs"
-						}), createElementVNode("div", _hoisted_15$2, [createElementVNode("div", _hoisted_16$2, [createVNode(QInput, {
-							outlined: "",
-							modelValue: $setup.input.password,
-							"onUpdate:modelValue": _cache[12] || (_cache[12] = ($event) => $setup.input.password = $event),
-							modelModifiers: { trim: true },
-							label: "Cambiar clave de acceso:",
+						createVNode(QIcon, {
+							name: "manage_accounts",
+							color: "primary",
+							class: "q-mr-sm"
+						}),
+						_cache[16] || (_cache[16] = createElementVNode("span", { class: "text-subtitle1 text-weight-medium" }, "Editar información personal", -1)),
+						createVNode(QSpace),
+						createVNode(QBtn, {
+							flat: "",
+							round: "",
 							dense: "",
-							"lazy-rules": "",
-							rules: [(val) => $setup.validaciones.val_password_opc(val)],
-							hint: "recuerde iniciar session con la nueva clave."
-						}, null, 8, ["modelValue", "rules"])])])]),
-						createElementVNode("div", _hoisted_17$2, [
-							$setup.loading ? (openBlock(), createBlock(QLinearProgress, {
-								key: 0,
-								dark: "",
-								rounded: "",
-								indeterminate: "",
-								color: "secondary",
-								class: "q-mb-sm"
-							})) : createCommentVNode("", true),
-							createVNode(QBtn, {
-								disable: $setup.loading,
-								label: "Guardar",
-								class: "q-mr-xs",
-								icon: "done",
-								type: "submit",
-								color: "positive",
-								square: "",
-								outline: ""
-							}, null, 8, ["disable"]),
-							createVNode(QBtn, {
-								disable: $setup.loading,
-								label: "cerrar",
-								color: "negative",
-								icon: "close",
-								square: "",
-								outline: "",
-								onClick: _cache[13] || (_cache[13] = ($event) => $setup.cerrar())
-							}, null, 8, ["disable"])
-						])
+							icon: "close",
+							onClick: _cache[0] || (_cache[0] = ($event) => $setup.cerrar())
+						})
 					]),
 					_: 1
-				}, 8, ["onSubmit"])]),
-				_: 1
-			})]),
+				}),
+				createVNode(QSeparator),
+				createVNode(QCardSection, null, {
+					default: withCtx(() => [createVNode(QForm, { onSubmit: $setup.onSubmit }, {
+						default: withCtx(() => [
+							createElementVNode("div", _hoisted_1$20, [
+								createElementVNode("div", _hoisted_2$15, [createVNode(QAvatar, { size: "90px" }, {
+									default: withCtx(() => [$setup.foto_64 ? (openBlock(), createBlock(QImg, {
+										key: 0,
+										class: "zoomer",
+										src: $setup.foto_64,
+										"spinner-color": "white"
+									}, null, 8, ["src"])) : (openBlock(), createBlock(QIcon, {
+										key: 1,
+										name: "person",
+										size: "60px",
+										color: "grey-4"
+									}))]),
+									_: 1
+								})]),
+								createElementVNode("div", _hoisted_3$13, [createVNode(QInput, {
+									outlined: "",
+									modelValue: $setup.input.nombres,
+									"onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.input.nombres = $event),
+									modelModifiers: { trim: true },
+									label: "* Nombres",
+									required: "",
+									"lazy-rules": "",
+									dense: "",
+									rules: [(val) => $setup.validaciones.val_nombre(val)]
+								}, null, 8, ["modelValue", "rules"])]),
+								createElementVNode("div", _hoisted_4$8, [createVNode(QInput, {
+									outlined: "",
+									modelValue: $setup.input.apellido1,
+									"onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $setup.input.apellido1 = $event),
+									modelModifiers: { trim: true },
+									label: "* Apellido 1",
+									required: "",
+									"lazy-rules": "",
+									dense: "",
+									rules: [(val) => $setup.validaciones.val_apellido1(val)]
+								}, null, 8, ["modelValue", "rules"])]),
+								createElementVNode("div", _hoisted_5$6, [createVNode(QInput, {
+									outlined: "",
+									modelValue: $setup.input.apellido2,
+									"onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $setup.input.apellido2 = $event),
+									modelModifiers: { trim: true },
+									label: "Apellido 2",
+									dense: "",
+									"lazy-rules": "",
+									rules: [(val) => $setup.validaciones.val_apellido2(val)]
+								}, null, 8, ["modelValue", "rules"])]),
+								createElementVNode("div", _hoisted_6$6, [createVNode(QInput, {
+									outlined: "",
+									modelValue: $setup.input.celular,
+									"onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => $setup.input.celular = $event),
+									modelModifiers: { trim: true },
+									label: "Celular",
+									dense: "",
+									"lazy-rules": "",
+									rules: [(val) => $setup.validaciones.val_celular(val)]
+								}, null, 8, ["modelValue", "rules"])]),
+								createElementVNode("div", _hoisted_7$4, [createVNode(QInput, {
+									outlined: "",
+									modelValue: $setup.input.correo,
+									"onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => $setup.input.correo = $event),
+									modelModifiers: { trim: true },
+									label: "Correo",
+									dense: "",
+									"lazy-rules": "",
+									rules: [(val) => $setup.validaciones.val_correo(val)]
+								}, null, 8, ["modelValue", "rules"])]),
+								createElementVNode("div", _hoisted_8$4, [createVNode(QInput, {
+									outlined: "",
+									modelValue: $setup.input.documento,
+									"onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => $setup.input.documento = $event),
+									modelModifiers: { trim: true },
+									label: "Documento",
+									dense: "",
+									"lazy-rules": "",
+									rules: [(val) => $setup.validaciones.val_documento(val)]
+								}, null, 8, ["modelValue", "rules"])]),
+								createElementVNode("div", _hoisted_9$4, [createVNode(QInput, {
+									outlined: "",
+									modelValue: $setup.input.direccion,
+									"onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => $setup.input.direccion = $event),
+									modelModifiers: { trim: true },
+									label: "Dirección",
+									dense: "",
+									"lazy-rules": "",
+									rules: [(val) => $setup.validaciones.val_direccion(val)]
+								}, null, 8, ["modelValue", "rules"])]),
+								createElementVNode("div", _hoisted_10$3, [
+									_cache[17] || (_cache[17] = createElementVNode("span", { class: "text-caption text-weight-medium" }, "Sexo:", -1)),
+									createVNode(QRadio, {
+										modelValue: $setup.input.sexo,
+										"onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => $setup.input.sexo = $event),
+										val: "F",
+										label: "F",
+										dense: ""
+									}, null, 8, ["modelValue"]),
+									createVNode(QRadio, {
+										modelValue: $setup.input.sexo,
+										"onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => $setup.input.sexo = $event),
+										val: "M",
+										label: "M",
+										dense: ""
+									}, null, 8, ["modelValue"])
+								]),
+								createElementVNode("div", _hoisted_11$3, [createVNode(QFile, {
+									clearable: "",
+									modelValue: $setup.foto_file,
+									"onUpdate:modelValue": [_cache[10] || (_cache[10] = ($event) => $setup.foto_file = $event), _cache[11] || (_cache[11] = ($event) => $setup.filevalue($event))],
+									dense: "",
+									accept: "image/*",
+									disable: $setup.loading,
+									outlined: "",
+									color: "primary",
+									label: "Foto de perfil (máx. 2MB)",
+									"max-file-size": "2097152",
+									onRejected: $setup.onRejected
+								}, {
+									prepend: withCtx(() => [createVNode(QIcon, { name: "photo_camera" })]),
+									_: 1
+								}, 8, [
+									"modelValue",
+									"disable",
+									"onRejected"
+								])]),
+								createElementVNode("div", _hoisted_12$2, [createVNode(QBtn, {
+									color: "primary",
+									icon: "fmd_good",
+									flat: "",
+									"no-caps": "",
+									onClick: _cache[12] || (_cache[12] = ($event) => $setup.openGeo())
+								}, {
+									default: withCtx(() => [..._cache[18] || (_cache[18] = [createTextVNode("Ubicación", -1)])]),
+									_: 1
+								}), createElementVNode("span", _hoisted_13$2, toDisplayString($setup.input.latitud) + " " + toDisplayString($setup.input.longitud), 1)]),
+								createElementVNode("div", _hoisted_14$2, [createVNode(QSeparator, { class: "q-mb-sm" }), createVNode(QInput, {
+									outlined: "",
+									modelValue: $setup.input.password,
+									"onUpdate:modelValue": _cache[13] || (_cache[13] = ($event) => $setup.input.password = $event),
+									modelModifiers: { trim: true },
+									label: "Nueva contraseña (opcional)",
+									dense: "",
+									"lazy-rules": "",
+									rules: [(val) => $setup.validaciones.val_password_opc(val)],
+									hint: "Si cambias la clave, deberás iniciar sesión nuevamente."
+								}, null, 8, ["modelValue", "rules"])])
+							]),
+							$setup.loading ? (openBlock(), createBlock(QLinearProgress, {
+								key: 0,
+								indeterminate: "",
+								color: "primary",
+								class: "q-mt-md"
+							})) : createCommentVNode("", true),
+							createElementVNode("div", _hoisted_15$2, [createVNode(QBtn, {
+								flat: "",
+								"no-caps": "",
+								disable: $setup.loading,
+								label: "Cerrar",
+								icon: "close",
+								color: "negative",
+								onClick: _cache[14] || (_cache[14] = ($event) => $setup.cerrar())
+							}, null, 8, ["disable"]), createVNode(QBtn, {
+								unelevated: "",
+								"no-caps": "",
+								disable: $setup.loading,
+								label: "Guardar",
+								icon: "check",
+								type: "submit",
+								color: "positive"
+							}, null, 8, ["disable"])])
+						]),
+						_: 1
+					}, 8, ["onSubmit"])]),
+					_: 1
+				})
+			]),
 			_: 1
 		}), createVNode(_component_Geo, {
 			ref: "refGeo",
@@ -1834,14 +1862,14 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
 		_: 1
 	}, 8, ["modelValue"]);
 }
-var editar_perfil_default = /* @__PURE__ */ _plugin_vue_export_helper_default(editar_perfil_vue_vue_type_script_lang_default, [["render", _sfc_render$5]]);
+var editar_perfil_default = /* @__PURE__ */ _plugin_vue_export_helper_default(editar_perfil_vue_vue_type_script_lang_default, [["render", _sfc_render$3]]);
 //#endregion
 //#region src/components/app/ext/perfil/extension_btn.vue
-var _sfc_main$3 = {};
-function _sfc_render$4(_ctx, _cache) {
+var _sfc_main$1 = {};
+function _sfc_render$2(_ctx, _cache) {
 	return openBlock(), createElementBlock("div");
 }
-var extension_btn_default = /* @__PURE__ */ _plugin_vue_export_helper_default(_sfc_main$3, [["render", _sfc_render$4]]);
+var extension_btn_default = /* @__PURE__ */ _plugin_vue_export_helper_default(_sfc_main$1, [["render", _sfc_render$2]]);
 boot(() => {
 	const cookie_name = process.env.COOKIE_THEME_NAME || "";
 	const v = Cookies.get(cookie_name) == "true";
@@ -1942,96 +1970,117 @@ var boton_perfil_vue_vue_type_script_lang_default = {
 };
 //#endregion
 //#region src/components/auth/perfil/boton_perfil.vue
-var _hoisted_1$18 = { class: "q-pa-none q-ma-none" };
-var _hoisted_2$12 = {
+var _hoisted_1$19 = { class: "q-pa-none q-ma-none" };
+var _hoisted_2$14 = {
+	key: 1,
+	src: "https://cdn.quasar.dev/img/boy-avatar.png"
+};
+var _hoisted_3$12 = {
 	class: "q-ml-xs ellipsis",
 	style: { "max-width": "9em" }
 };
-var _hoisted_3$12 = { class: "row no-wrap q-pa-md" };
 var _hoisted_4$7 = {
-	class: "column",
-	style: { "min-width": "130px" }
+	class: "row no-wrap",
+	style: { "min-width": "320px" }
 };
-var _hoisted_5$5 = { class: "q-mt-none q-mb-xs" };
-var _hoisted_6$4 = { class: "q-mt-none q-mb-xs" };
-var _hoisted_7$2 = { class: "q-mt-none q-mb-xs" };
-var _hoisted_8$2 = {
-	class: "column items-center",
-	style: { "min-width": "99px" }
+var _hoisted_5$5 = {
+	class: "column q-pa-md",
+	style: {
+		"min-width": "160px",
+		"flex": "1"
+	}
 };
-var _hoisted_9$2 = {
-	class: "text-subtitle1 q-mt-md q-mb-xs",
-	style: { "white-space": "nowrap" }
+var _hoisted_6$5 = { class: "text-body2 q-mb-xs" };
+var _hoisted_7$3 = {
+	class: "text-caption",
+	style: { "opacity": ".6" }
 };
-function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+var _hoisted_8$3 = { class: "text-caption text-primary q-mb-md" };
+var _hoisted_9$3 = {
+	class: "column items-center justify-between q-pa-md",
+	style: { "min-width": "110px" }
+};
+var _hoisted_10$2 = {
+	key: 1,
+	src: "https://cdn.quasar.dev/img/boy-avatar.png"
+};
+var _hoisted_11$2 = {
+	class: "text-caption text-center q-mt-sm q-mb-md",
+	style: {
+		"white-space": "nowrap",
+		"opacity": ".7"
+	}
+};
+function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
 	const _component_extension_btn = resolveComponent("extension_btn");
 	const _component_EditarPerfil = resolveComponent("EditarPerfil");
-	return openBlock(), createElementBlock("div", _hoisted_1$18, [createVNode(QBtn, {
+	return openBlock(), createElementBlock("div", _hoisted_1$19, [createVNode(QBtn, {
 		flat: "",
 		class: "q-pl-xs q-pr-none",
 		onClick: $setup.subscribir
 	}, {
 		default: withCtx(() => [
 			createVNode(QAvatar, { size: "26px" }, {
-				default: withCtx(() => [..._cache[3] || (_cache[3] = [createElementVNode("img", { src: "https://cdn.quasar.dev/img/boy-avatar.png" }, null, -1)])]),
+				default: withCtx(() => [$setup.foto_64 ? (openBlock(), createBlock(QImg, {
+					key: 0,
+					src: $setup.foto_64
+				}, null, 8, ["src"])) : (openBlock(), createElementBlock("img", _hoisted_2$14))]),
 				_: 1
 			}),
-			createElementVNode("span", _hoisted_2$12, toDisplayString($setup.datos.username), 1),
+			createElementVNode("span", _hoisted_3$12, toDisplayString($setup.datos.username), 1),
+			createVNode(QIcon, {
+				name: "arrow_drop_down",
+				size: "xs"
+			}),
 			createVNode(QTooltip, null, {
-				default: withCtx(() => [..._cache[4] || (_cache[4] = [createTextVNode(" Perfil ", -1)])]),
+				default: withCtx(() => [..._cache[3] || (_cache[3] = [createTextVNode("Perfil", -1)])]),
 				_: 1
 			}),
-			createVNode(QMenu, { square: "" }, {
-				default: withCtx(() => [createElementVNode("div", _hoisted_3$12, [
-					createElementVNode("div", _hoisted_4$7, [
-						_cache[5] || (_cache[5] = createElementVNode("div", { class: "text-h6 q-mb-md" }, "Mi Perfil", -1)),
-						createElementVNode("p", _hoisted_5$5, toDisplayString($setup.datos.usuario), 1),
-						createElementVNode("p", _hoisted_6$4, toDisplayString($setup.parseFecha($setup.datos.last_login)), 1),
-						createElementVNode("p", _hoisted_7$2, toDisplayString($setup.datos.roles), 1),
+			createVNode(QMenu, null, {
+				default: withCtx(() => [createElementVNode("div", _hoisted_4$7, [
+					createElementVNode("div", _hoisted_5$5, [
+						_cache[4] || (_cache[4] = createElementVNode("div", { class: "text-subtitle2 text-weight-medium q-mb-xs" }, "Mi Perfil", -1)),
+						createVNode(QSeparator, { class: "q-mb-sm" }),
+						createElementVNode("div", _hoisted_6$5, toDisplayString($setup.datos.usuario), 1),
+						createElementVNode("div", _hoisted_7$3, toDisplayString($setup.parseFecha($setup.datos.last_login)), 1),
+						createElementVNode("div", _hoisted_8$3, toDisplayString($setup.datos.roles), 1),
 						createVNode(QToggle, {
 							modelValue: $setup.store.thema_cuaderno,
 							"onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.store.thema_cuaderno = $event),
 							color: "primary",
 							dense: "",
 							"unchecked-icon": "brightness_7",
-							"checked-icon": "dark_mode"
+							"checked-icon": "dark_mode",
+							label: "Tema cuaderno",
+							class: "text-caption q-mb-sm"
 						}, null, 8, ["modelValue"]),
 						withDirectives(createVNode(QBtn, {
-							color: "green",
-							label: "Editar",
-							outline: "",
+							flat: "",
+							"no-caps": "",
 							icon: "edit",
-							square: "",
-							size: "sm",
-							stretch: "",
+							label: "Editar perfil",
+							align: "left",
 							onClick: _cache[1] || (_cache[1] = ($event) => $setup.openEdit())
 						}, null, 512), [[ClosePopup]]),
 						createVNode(_component_extension_btn)
 					]),
-					createVNode(QSeparator, {
-						vertical: "",
-						inset: "",
-						class: "q-mx-lg"
-					}),
-					createElementVNode("div", _hoisted_8$2, [
-						createVNode(QAvatar, { size: "72px" }, {
+					createVNode(QSeparator, { vertical: "" }),
+					createElementVNode("div", _hoisted_9$3, [
+						createVNode(QAvatar, { size: "80px" }, {
 							default: withCtx(() => [$setup.foto_64 ? (openBlock(), createBlock(QImg, {
 								key: 0,
 								src: $setup.foto_64,
 								"spinner-color": "white"
-							}, null, 8, ["src"])) : createCommentVNode("", true)]),
+							}, null, 8, ["src"])) : (openBlock(), createElementBlock("img", _hoisted_10$2))]),
 							_: 1
 						}),
-						_cache[6] || (_cache[6] = createElementVNode("p", null, null, -1)),
-						createElementVNode("div", _hoisted_9$2, toDisplayString($setup.datos.usuario), 1),
+						createElementVNode("div", _hoisted_11$2, toDisplayString($setup.datos.username), 1),
 						withDirectives(createVNode(QBtn, {
-							color: "negative",
-							label: "Salir",
-							icon: "block",
-							square: "",
 							outline: "",
-							size: "sm",
-							stretch: "",
+							"no-caps": "",
+							color: "negative",
+							icon: "logout",
+							label: "Salir",
 							onClick: _cache[2] || (_cache[2] = ($event) => $setup.logout())
 						}, null, 512), [[ClosePopup]])
 					])
@@ -2042,7 +2091,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
 		_: 1
 	}, 8, ["onClick"]), createVNode(_component_EditarPerfil, { ref: "refEditarPerfil" }, null, 512)]);
 }
-var boton_perfil_default = /* @__PURE__ */ _plugin_vue_export_helper_default(boton_perfil_vue_vue_type_script_lang_default, [["render", _sfc_render$3]]);
+var boton_perfil_default = /* @__PURE__ */ _plugin_vue_export_helper_default(boton_perfil_vue_vue_type_script_lang_default, [["render", _sfc_render$1]]);
 //#endregion
 //#region src/components/auth/roles/roles-select.vue
 var roles_select_default = /* @__PURE__ */ defineComponent({
@@ -2076,7 +2125,7 @@ var roles_select_default = /* @__PURE__ */ defineComponent({
 				store.setMenus([]);
 				const r = await meService.me(input);
 				if (r && r.me) {
-					const menuItemsAgrupados = await cargarMenus(r.me.menus);
+					const menuItemsAgrupados = cargarMenus(r.me.menus);
 					store.setMenus(menuItemsAgrupados);
 					store.setUser(r.me);
 				}
@@ -2122,7 +2171,7 @@ var roles_select_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/components/auth/EdgeLight.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$17 = {
+var _hoisted_1$18 = {
 	key: 0,
 	class: "edge-light"
 };
@@ -2144,7 +2193,7 @@ var EdgeLight_default = /* @__PURE__ */ _plugin_vue_export_helper_default(/* @__
 		__expose({ trigger });
 		return (_ctx, _cache) => {
 			return openBlock(), createBlock(Transition, { name: "edge" }, {
-				default: withCtx(() => [active.value ? (openBlock(), createElementBlock("div", _hoisted_1$17)) : createCommentVNode("", true)]),
+				default: withCtx(() => [active.value ? (openBlock(), createElementBlock("div", _hoisted_1$18)) : createCommentVNode("", true)]),
 				_: 1
 			});
 		};
@@ -2199,54 +2248,75 @@ var ReportBug_default = /* @__PURE__ */ defineComponent({
 		return (_ctx, _cache) => {
 			return openBlock(), createBlock(QDialog, {
 				modelValue: alert.value,
-				"onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => alert.value = $event),
+				"onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => alert.value = $event),
 				persistent: "",
-				square: ""
+				style: {
+					"width": "min(560px, 95vw)",
+					"max-width": "95vw"
+				}
 			}, {
-				default: withCtx(() => [createVNode(QCard, { xstyle: "min-width: 630px" }, {
+				default: withCtx(() => [createVNode(QCard, {
+					flat: "",
+					bordered: "",
+					style: { "width": "100%" }
+				}, {
 					default: withCtx(() => [
-						createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
+						createVNode(QCardSection, { class: "row items-center q-py-sm q-px-md" }, {
 							default: withCtx(() => [
-								_cache[5] || (_cache[5] = createElementVNode("div", { class: "text-h6" }, "Sacar Nuevo Ticket", -1)),
+								createVNode(QIcon, {
+									name: "confirmation_number",
+									color: "primary",
+									class: "q-mr-sm"
+								}),
+								_cache[5] || (_cache[5] = createElementVNode("span", { class: "text-subtitle1 text-weight-medium" }, "Nuevo ticket", -1)),
 								createVNode(QSpace),
-								withDirectives((openBlock(), createBlock(QBtn, { flat: "" }, {
-									default: withCtx(() => [..._cache[4] || (_cache[4] = [createElementVNode("b", null, "x", -1)])]),
-									_: 1
-								})), [[ClosePopup]])
+								createVNode(QBtn, {
+									flat: "",
+									round: "",
+									dense: "",
+									icon: "close",
+									onClick: _cache[0] || (_cache[0] = ($event) => close())
+								})
 							]),
 							_: 1
 						}),
-						createVNode(QCardSection, { class: "q-pt-none" }, {
-							default: withCtx(() => [createVNode(QSeparator, { class: "q-mt-none q-mb-lg" }), createVNode(QInput, {
+						createVNode(QSeparator),
+						createVNode(QCardSection, null, {
+							default: withCtx(() => [createVNode(QInput, {
 								modelValue: problema.value,
-								"onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => problema.value = $event),
+								"onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => problema.value = $event),
 								modelModifiers: { trim: true },
 								outlined: "",
-								square: "",
 								dense: "",
-								label: "Describa el problema aqui:",
-								placeholder: "no mas de 512 caracteres",
+								label: "Describe el problema",
+								placeholder: "máximo 512 caracteres",
 								type: "textarea",
-								rows: "12",
-								cols: "50",
+								rows: "10",
 								counter: "",
 								rules: [(val) => val_pro(val)]
 							}, null, 8, ["modelValue", "rules"])]),
 							_: 1
 						}),
-						createVNode(QCardActions, { align: "right" }, {
+						createVNode(QSeparator),
+						createVNode(QCardActions, {
+							align: "right",
+							class: "q-pa-sm"
+						}, {
 							default: withCtx(() => [createVNode(QBtn, {
 								flat: "",
+								"no-caps": "",
 								loading: loading.value,
-								label: "cerrar",
-								color: "grey",
-								onClick: _cache[1] || (_cache[1] = ($event) => close())
+								label: "Cerrar",
+								color: "negative",
+								onClick: _cache[2] || (_cache[2] = ($event) => close())
 							}, null, 8, ["loading"]), createVNode(QBtn, {
-								flat: "",
+								unelevated: "",
+								"no-caps": "",
 								loading: loading.value,
 								label: "Reportar",
-								color: "green",
-								onClick: _cache[2] || (_cache[2] = ($event) => select())
+								icon: "send",
+								color: "primary",
+								onClick: _cache[3] || (_cache[3] = ($event) => select())
 							}, null, 8, ["loading"])]),
 							_: 1
 						})
@@ -2302,35 +2372,43 @@ var FabButton_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/components/app/ext/name/app_name.vue
-var _sfc_main$2 = {};
-function _sfc_render$2(_ctx, _cache) {
-	return openBlock(), createElementBlock("div", null, [createVNode(QToolbarTitle, {
-		shrink: "",
-		class: "text-weight-bold neon-logo"
-	}, {
-		default: withCtx(() => [..._cache[0] || (_cache[0] = [createTextVNode(" Auth ", -1)])]),
-		_: 1
-	})]);
-}
-var app_name_default = /* @__PURE__ */ _plugin_vue_export_helper_default(_sfc_main$2, [["render", _sfc_render$2]]);
+var app_name_default = /* @__PURE__ */ defineComponent({
+	__name: "app_name",
+	setup(__props) {
+		const name = ref(process.env.APP_NAME);
+		return (_ctx, _cache) => {
+			return openBlock(), createElementBlock("div", null, [createVNode(QToolbarTitle, {
+				shrink: "",
+				class: "text-weight-bold neon-logo"
+			}, {
+				default: withCtx(() => [createTextVNode(toDisplayString(name.value), 1)]),
+				_: 1
+			})]);
+		};
+	}
+});
 //#endregion
 //#region src/components/app/ext/logo/app_logo.vue
-var _sfc_main$1 = {};
-function _sfc_render$1(_ctx, _cache) {
-	return openBlock(), createBlock(QImg, {
-		src: "wapiton.png",
-		alt: "logo",
-		style: {
-			"height": "20px",
-			"width": "20px"
-		}
-	});
-}
-var app_logo_default = /* @__PURE__ */ _plugin_vue_export_helper_default(_sfc_main$1, [["render", _sfc_render$1]]);
+var app_logo_default = /* @__PURE__ */ defineComponent({
+	__name: "app_logo",
+	setup(__props) {
+		const logo = ref(process.env.APP_LOGO);
+		return (_ctx, _cache) => {
+			return openBlock(), createBlock(QImg, {
+				src: logo.value,
+				alt: "logo",
+				style: {
+					"height": "20px",
+					"width": "20px"
+				}
+			}, null, 8, ["src"]);
+		};
+	}
+});
 //#endregion
 //#region src/layouts/MainLayout.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$16 = { key: 0 };
-var _hoisted_2$11 = { key: 1 };
+var _hoisted_1$17 = { key: 0 };
+var _hoisted_2$13 = { key: 1 };
 var _hoisted_3$11 = ["innerHTML"];
 //#endregion
 //#region src/layouts/MainLayout.vue
@@ -2345,8 +2423,8 @@ var MainLayout_default = /* @__PURE__ */ defineComponent({
 		const foto_64 = ref("");
 		const refusuarios_conectados = ref();
 		const router = useRouter();
-		const Login = defineAsyncComponent(() => import("./login-index-DZ6mJCW0.js"));
-		const usuarios_conectados = defineAsyncComponent(() => import("./usuarios_conectados-CnNcaOZU.js"));
+		const Login = defineAsyncComponent(() => import("./login-index-D1FPsy0C.js"));
+		const usuarios_conectados = defineAsyncComponent(() => import("./usuarios_conectados-D6Rc4_Ep.js"));
 		const showConectados = ref(false);
 		const pendingOpenConectados = ref(false);
 		const edgeLightRef = ref();
@@ -2426,7 +2504,7 @@ var MainLayout_default = /* @__PURE__ */ defineComponent({
 									id: "tuto_icon_ws",
 									onDblclick: _cache[1] || (_cache[1] = ($event) => openConectados())
 								}, {
-									default: withCtx(() => [_ctx.$q.screen.width > 600 ? (openBlock(), createElementBlock("span", _hoisted_1$16, toDisplayString(unref(store).ws_total_conectados) + " conexiones ", 1)) : (openBlock(), createElementBlock("span", _hoisted_2$11, toDisplayString(unref(store).ws_total_conectados), 1)), createVNode(QTooltip, { class: "bg-purple" }, {
+									default: withCtx(() => [_ctx.$q.screen.width > 600 ? (openBlock(), createElementBlock("span", _hoisted_1$17, toDisplayString(unref(store).ws_total_conectados) + " conexiones ", 1)) : (openBlock(), createElementBlock("span", _hoisted_2$13, toDisplayString(unref(store).ws_total_conectados), 1)), createVNode(QTooltip, { class: "bg-purple" }, {
 										default: withCtx(() => [createElementVNode("span", null, "Estado de notificaciones (" + toDisplayString(unref(store).ws_conectados) + ") ", 1)]),
 										_: 1
 									})]),
@@ -2495,38 +2573,58 @@ var MainLayout_default = /* @__PURE__ */ defineComponent({
 									})) : createCommentVNode("", true),
 									(openBlock(true), createElementBlock(Fragment, null, renderList(unref(store).menus, (t) => {
 										return openBlock(), createElementBlock(Fragment, null, [(openBlock(true), createElementBlock(Fragment, null, renderList(t, (link, i) => {
-											return openBlock(), createElementBlock(Fragment, { key: link.text }, [withDirectives((openBlock(), createBlock(QItem, {
-												clickable: "",
-												to: link.path,
-												"active-class": "text-secondary"
+											return openBlock(), createElementBlock(Fragment, { key: link.id }, [link.children?.length ? (openBlock(), createBlock(QExpansionItem, {
+												key: 0,
+												icon: link.icon,
+												label: link.label,
+												dense: "",
+												"expand-separator": ""
 											}, {
-												default: withCtx(() => [
-													createVNode(QItemSection, { avatar: "" }, {
-														default: withCtx(() => [createVNode(QIcon, {
-															color: _ctx.$q.dark.isActive ? "grey" : link.color,
-															name: link.icon
-														}, null, 8, ["color", "name"])]),
-														_: 2
-													}, 1024),
-													createVNode(QItemSection, null, {
-														default: withCtx(() => [createVNode(QItemLabel, null, {
-															default: withCtx(() => [createTextVNode(toDisplayString(link.label), 1)]),
+												default: withCtx(() => [(openBlock(true), createElementBlock(Fragment, null, renderList(link.children, (child) => {
+													return withDirectives((openBlock(), createBlock(QItem, {
+														key: child.id,
+														clickable: "",
+														to: child.path,
+														"active-class": "text-primary",
+														class: "q-pl-xl"
+													}, {
+														default: withCtx(() => [createVNode(QItemSection, { avatar: "" }, {
+															default: withCtx(() => [createVNode(QIcon, {
+																name: child.icon,
+																size: "xs"
+															}, null, 8, ["name"])]),
+															_: 2
+														}, 1024), createVNode(QItemSection, null, {
+															default: withCtx(() => [createVNode(QItemLabel, null, {
+																default: withCtx(() => [createTextVNode(toDisplayString(child.label), 1)]),
+																_: 2
+															}, 1024)]),
 															_: 2
 														}, 1024)]),
 														_: 2
-													}, 1024),
-													createVNode(QItemSection, { avatar: "" }, {
-														default: withCtx(() => [createVNode(QAvatar, {
-															size: "md",
-															icon: "arrow_right"
-														})]),
-														_: 1
-													})
-												]),
+													}, 1032, ["to"])), [[Ripple]]);
+												}), 128))]),
+												_: 2
+											}, 1032, ["icon", "label"])) : withDirectives((openBlock(), createBlock(QItem, {
+												key: 1,
+												clickable: "",
+												to: link.path,
+												"active-class": "text-primary"
+											}, {
+												default: withCtx(() => [createVNode(QItemSection, { avatar: "" }, {
+													default: withCtx(() => [createVNode(QIcon, { name: link.icon }, null, 8, ["name"])]),
+													_: 2
+												}, 1024), createVNode(QItemSection, null, {
+													default: withCtx(() => [createVNode(QItemLabel, null, {
+														default: withCtx(() => [createTextVNode(toDisplayString(link.label), 1)]),
+														_: 2
+													}, 1024)]),
+													_: 2
+												}, 1024)]),
 												_: 2
 											}, 1032, ["to"])), [[Ripple]]), Number(i) + 1 == t.length ? (openBlock(), createBlock(QSeparator, {
-												key: 0,
-												class: "q-my-md"
+												key: 2,
+												class: "q-my-sm"
 											})) : createCommentVNode("", true)], 64);
 										}), 128))], 64);
 									}), 256))
@@ -2558,15 +2656,15 @@ var MainLayout_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/components/auth/landing/landing-index.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$15 = { class: "row items-center no-wrap q-mr-md" };
-var _hoisted_2$10 = { class: "row q-col-gutter-md q-mb-lg" };
+var _hoisted_1$16 = { class: "row items-center no-wrap q-mr-md" };
+var _hoisted_2$12 = { class: "row q-col-gutter-md q-mb-lg" };
 var _hoisted_3$10 = { class: "col-12 col-sm-6 col-lg-3 neon-fade-in neon-fade-in--d1" };
 var _hoisted_4$6 = { class: "neon-metric-value" };
 var _hoisted_5$4 = { class: "neon-metric-delta neon-metric-delta--up" };
-var _hoisted_6$3 = { class: "neon-metric-icon neon-metric-icon--purple" };
-var _hoisted_7$1 = { class: "col-12 col-sm-6 col-lg-3 neon-fade-in neon-fade-in--d2" };
-var _hoisted_8$1 = { class: "neon-metric-value" };
-var _hoisted_9$1 = { class: "neon-metric-sub" };
+var _hoisted_6$4 = { class: "neon-metric-icon neon-metric-icon--purple" };
+var _hoisted_7$2 = { class: "col-12 col-sm-6 col-lg-3 neon-fade-in neon-fade-in--d2" };
+var _hoisted_8$2 = { class: "neon-metric-value" };
+var _hoisted_9$2 = { class: "neon-metric-sub" };
 var _hoisted_10$1 = { class: "neon-metric-icon neon-metric-icon--cyan" };
 var _hoisted_11$1 = { class: "col-12 col-sm-6 col-lg-3 neon-fade-in neon-fade-in--d3" };
 var _hoisted_12$1 = { class: "neon-metric-value" };
@@ -2920,7 +3018,7 @@ var landing_index_default = /* @__PURE__ */ _plugin_vue_export_helper_default(/*
 						"gap": "12px"
 					} }, {
 						default: withCtx(() => [
-							createElementVNode("div", _hoisted_1$15, [
+							createElementVNode("div", _hoisted_1$16, [
 								createVNode(QIcon, {
 									name: "music_note",
 									color: "pink",
@@ -2971,7 +3069,7 @@ var landing_index_default = /* @__PURE__ */ _plugin_vue_export_helper_default(/*
 					} }, {
 						default: withCtx(() => [
 							_cache[27] || (_cache[27] = createElementVNode("div", { class: "q-mb-lg neon-fade-in" }, [createElementVNode("h1", { class: "neon-title q-ma-none" }, "Dashboard"), createElementVNode("p", { class: "neon-subtitle q-ma-none" }, "Vista general de la noche de hoy")], -1)),
-							createElementVNode("div", _hoisted_2$10, [
+							createElementVNode("div", _hoisted_2$12, [
 								createElementVNode("div", _hoisted_3$10, [createVNode(QCard, {
 									class: "neon-card neon-card--purple",
 									flat: ""
@@ -2987,7 +3085,7 @@ var landing_index_default = /* @__PURE__ */ _plugin_vue_export_helper_default(/*
 												name: "arrow_upward",
 												size: "12px"
 											}), _cache[14] || (_cache[14] = createTextVNode(" 12% vs ayer ", -1))])
-										]), createElementVNode("div", _hoisted_6$3, [createVNode(QIcon, {
+										]), createElementVNode("div", _hoisted_6$4, [createVNode(QIcon, {
 											name: "event_seat",
 											size: "22px"
 										})])]),
@@ -2995,7 +3093,7 @@ var landing_index_default = /* @__PURE__ */ _plugin_vue_export_helper_default(/*
 									})]),
 									_: 1
 								})]),
-								createElementVNode("div", _hoisted_7$1, [createVNode(QCard, {
+								createElementVNode("div", _hoisted_7$2, [createVNode(QCard, {
 									class: "neon-card neon-card--cyan",
 									flat: ""
 								}, {
@@ -3005,8 +3103,8 @@ var landing_index_default = /* @__PURE__ */ _plugin_vue_export_helper_default(/*
 									}, {
 										default: withCtx(() => [createElementVNode("div", null, [
 											_cache[16] || (_cache[16] = createElementVNode("div", { class: "neon-metric-label" }, "Ocupación", -1)),
-											createElementVNode("div", _hoisted_8$1, toDisplayString(metrics.value.ocupacion) + "%", 1),
-											createElementVNode("div", _hoisted_9$1, "Capacidad total: " + toDisplayString(metrics.value.totalMesas), 1)
+											createElementVNode("div", _hoisted_8$2, toDisplayString(metrics.value.ocupacion) + "%", 1),
+											createElementVNode("div", _hoisted_9$2, "Capacidad total: " + toDisplayString(metrics.value.totalMesas), 1)
 										]), createElementVNode("div", _hoisted_10$1, [createVNode(QIcon, {
 											name: "percent",
 											size: "22px"
@@ -3706,8 +3804,8 @@ var botonera_opt_default$3 = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/usuarios/rol-unidad-select.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$14 = { class: "row q-col-gutter-sm" };
-var _hoisted_2$9 = { class: "col-xs-12 col-sm-5" };
+var _hoisted_1$15 = { class: "row q-col-gutter-sm" };
+var _hoisted_2$11 = { class: "col-xs-12 col-sm-5" };
 var _hoisted_3$9 = { class: "col-xs-12 col-sm-7" };
 //#endregion
 //#region src/pages/auth/usuarios/rol-unidad-select.vue
@@ -3773,7 +3871,7 @@ var rol_unidad_select_default = /* @__PURE__ */ defineComponent({
 							_: 1
 						}),
 						createVNode(QCardSection, { class: "q-pt-none" }, {
-							default: withCtx(() => [createVNode(QSeparator, { class: "q-mt-none q-mb-lg" }), createElementVNode("div", _hoisted_1$14, [createElementVNode("div", _hoisted_2$9, [_cache[7] || (_cache[7] = createElementVNode("b", { class: "text-primary" }, "Seleccione una unidad:", -1)), createVNode(QTable, {
+							default: withCtx(() => [createVNode(QSeparator, { class: "q-mt-none q-mb-lg" }), createElementVNode("div", _hoisted_1$15, [createElementVNode("div", _hoisted_2$11, [_cache[7] || (_cache[7] = createElementVNode("b", { class: "text-primary" }, "Seleccione una unidad:", -1)), createVNode(QTable, {
 								rows: unidades.value,
 								columns: unref(columns_unidades),
 								flat: "",
@@ -3859,24 +3957,27 @@ var val_apellido2 = (val) => {
 };
 //#endregion
 //#region src/pages/auth/usuarios/registrar-upd.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$13 = { class: "text-h6" };
-var _hoisted_2$8 = { class: "row q-col-gutter-sm" };
+var _hoisted_1$14 = { class: "text-subtitle1 text-weight-medium" };
+var _hoisted_2$10 = { class: "row q-col-gutter-md" };
 var _hoisted_3$8 = { class: "col-xs-12 col-lg-4 col-sm-6" };
 var _hoisted_4$5 = { class: "row q-col-gutter-xs" };
 var _hoisted_5$3 = { class: "col-xs-12 col-sm-9 items-center" };
-var _hoisted_6$2 = { class: "col-xs-12 col-sm-4" };
-var _hoisted_7 = { class: "col-xs-12 col-sm-4" };
-var _hoisted_8 = { class: "col-xs-12 col-sm-4" };
-var _hoisted_9 = { class: "col-xs-12 col-sm-6" };
+var _hoisted_6$3 = { class: "col-xs-12 col-sm-4" };
+var _hoisted_7$1 = { class: "col-xs-12 col-sm-4" };
+var _hoisted_8$1 = { class: "col-xs-12 col-sm-4" };
+var _hoisted_9$1 = { class: "col-xs-12 col-sm-6" };
 var _hoisted_10 = { class: "col-xs-12 col-sm-6" };
 var _hoisted_11 = { class: "col-xs-12 col-sm-4" };
 var _hoisted_12 = { class: "col-xs-12 col-sm-4" };
-var _hoisted_13 = { class: "col-xs-12 col-sm-4" };
+var _hoisted_13 = { class: "col-xs-12 col-sm-4 row items-center q-gutter-x-sm" };
 var _hoisted_14 = { class: "col-xs-12 col-sm-6" };
 var _hoisted_15 = { class: "col-xs-12 col-sm-6" };
 var _hoisted_16 = { class: "col-xs-12 col-sm-6" };
-var _hoisted_17 = { class: "col-xs-12 col-sm-6" };
-var _hoisted_18 = { class: "q-pl-md" };
+var _hoisted_17 = { class: "col-xs-12 col-sm-6 row items-center q-gutter-x-xs" };
+var _hoisted_18 = {
+	class: "text-caption",
+	style: { "opacity": ".6" }
+};
 var _hoisted_19 = { class: "col-xs-12 col-lg-4 col-sm-6" };
 var _hoisted_20 = { class: "col-xs-12 col-lg-4 col-sm-6" };
 //#endregion
@@ -4083,75 +4184,93 @@ var registrar_upd_default$3 = /* @__PURE__ */ defineComponent({
 				modelValue: alert.value,
 				"onUpdate:modelValue": _cache[17] || (_cache[17] = ($event) => alert.value = $event),
 				persistent: "",
-				square: "",
-				"full-width": ""
+				"full-width": "",
+				style: { "max-width": "98vw" }
 			}, {
 				default: withCtx(() => [
-					createVNode(QCard, null, {
-						default: withCtx(() => [createVNode(QForm, {
-							onSubmit,
-							class: "q-gutter-md"
-						}, {
+					createVNode(QCard, {
+						flat: "",
+						bordered: ""
+					}, {
+						default: withCtx(() => [createVNode(QForm, { onSubmit }, {
 							default: withCtx(() => [
-								createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
+								createVNode(QCardSection, { class: "row items-center q-py-sm q-px-md" }, {
 									default: withCtx(() => [
-										createElementVNode("div", _hoisted_1$13, toDisplayString(input.value.id ? "Editar" : "Registrar"), 1),
+										createVNode(QIcon, {
+											name: input.value.id ? "edit" : "person_add",
+											color: "primary",
+											class: "q-mr-sm"
+										}, null, 8, ["name"]),
+										createElementVNode("span", _hoisted_1$14, toDisplayString(input.value.id ? "Editar usuario" : "Registrar usuario"), 1),
 										createVNode(QSpace),
-										withDirectives((openBlock(), createBlock(QBtn, { flat: "" }, {
-											default: withCtx(() => [..._cache[18] || (_cache[18] = [createElementVNode("b", null, "x", -1)])]),
-											_: 1
-										})), [[ClosePopup]])
+										withDirectives(createVNode(QBtn, {
+											flat: "",
+											round: "",
+											dense: "",
+											icon: "close"
+										}, null, 512), [[ClosePopup]])
 									]),
 									_: 1
 								}),
-								createVNode(QCardSection, { class: "q-pt-none" }, {
-									default: withCtx(() => [createElementVNode("div", _hoisted_2$8, [
-										createElementVNode("div", _hoisted_3$8, [createElementVNode("div", _hoisted_4$5, [
+								createVNode(QSeparator),
+								createVNode(QCardSection, { class: "q-pt-sm" }, {
+									default: withCtx(() => [createElementVNode("div", _hoisted_2$10, [
+										createElementVNode("div", _hoisted_3$8, [_cache[20] || (_cache[20] = createElementVNode("div", {
+											class: "text-caption text-weight-medium text-primary q-mb-xs",
+											style: {
+												"letter-spacing": ".05em",
+												"text-transform": "uppercase"
+											}
+										}, " Datos personales ", -1)), createElementVNode("div", _hoisted_4$5, [
 											createElementVNode("div", _hoisted_5$3, [foto_64.value ? (openBlock(), createBlock(QImg, {
 												key: 0,
-												class: "zoomer",
+												class: "zoomer rounded-borders",
 												src: foto_64.value,
-												"spinner-color": "white"
+												"spinner-color": "white",
+												style: {
+													"max-height": "120px",
+													"object-fit": "cover"
+												}
 											}, null, 8, ["src"])) : createCommentVNode("", true)]),
-											createElementVNode("div", _hoisted_6$2, [createVNode(QInput, {
+											createElementVNode("div", _hoisted_6$3, [createVNode(QInput, {
 												outlined: "",
 												modelValue: input.value.nombres,
 												"onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => input.value.nombres = $event),
 												modelModifiers: { trim: true },
-												label: "* nombres:",
+												label: "* Nombres",
 												dense: "",
 												"lazy-rules": "",
 												counter: "",
 												rules: [(val) => val && val.length > 0 || "campo obligatorio"]
 											}, null, 8, ["modelValue", "rules"])]),
-											createElementVNode("div", _hoisted_7, [createVNode(QInput, {
+											createElementVNode("div", _hoisted_7$1, [createVNode(QInput, {
 												outlined: "",
 												modelValue: input.value.apellido1,
 												"onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => input.value.apellido1 = $event),
 												modelModifiers: { trim: true },
-												label: "* apellido1:",
+												label: "* Apellido 1",
 												dense: "",
 												"lazy-rules": "",
 												counter: "",
 												rules: [(val) => val && val.length > 0 || "campo obligatorio"]
 											}, null, 8, ["modelValue", "rules"])]),
-											createElementVNode("div", _hoisted_8, [createVNode(QInput, {
+											createElementVNode("div", _hoisted_8$1, [createVNode(QInput, {
 												outlined: "",
 												modelValue: input.value.apellido2,
 												"onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => input.value.apellido2 = $event),
 												modelModifiers: { trim: true },
-												label: "apellido2:",
+												label: "Apellido 2",
 												dense: "",
 												"lazy-rules": "",
 												counter: "",
 												rules: [(val) => unref(val_apellido2)(val)]
 											}, null, 8, ["modelValue", "rules"])]),
-											createElementVNode("div", _hoisted_9, [createVNode(QInput, {
+											createElementVNode("div", _hoisted_9$1, [createVNode(QInput, {
 												outlined: "",
 												modelValue: input.value.username,
 												"onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => input.value.username = $event),
 												modelModifiers: { trim: true },
-												label: "* username:",
+												label: "* Username",
 												dense: "",
 												"lazy-rules": "",
 												counter: "",
@@ -4162,7 +4281,7 @@ var registrar_upd_default$3 = /* @__PURE__ */ defineComponent({
 												modelValue: input.value.password,
 												"onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => input.value.password = $event),
 												modelModifiers: { trim: true },
-												label: "* password:",
+												label: "* Password",
 												dense: "",
 												"lazy-rules": "",
 												counter: "",
@@ -4173,7 +4292,7 @@ var registrar_upd_default$3 = /* @__PURE__ */ defineComponent({
 												modelValue: input.value.documento,
 												"onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => input.value.documento = $event),
 												modelModifiers: { trim: true },
-												label: "documento:",
+												label: "Documento",
 												dense: "",
 												"lazy-rules": "",
 												counter: "",
@@ -4184,29 +4303,35 @@ var registrar_upd_default$3 = /* @__PURE__ */ defineComponent({
 												modelValue: input.value.celular,
 												"onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => input.value.celular = $event),
 												modelModifiers: { trim: true },
-												label: "celular:",
+												label: "Celular",
 												dense: "",
 												"lazy-rules": "",
 												counter: "",
 												rules: [(val) => unref(val_celular)(val)]
 											}, null, 8, ["modelValue", "rules"])]),
-											createElementVNode("div", _hoisted_13, [createVNode(QRadio, {
-												modelValue: input.value.sexo,
-												"onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => input.value.sexo = $event),
-												val: "F",
-												label: "F"
-											}, null, 8, ["modelValue"]), createVNode(QRadio, {
-												modelValue: input.value.sexo,
-												"onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => input.value.sexo = $event),
-												val: "M",
-												label: "M"
-											}, null, 8, ["modelValue"])]),
+											createElementVNode("div", _hoisted_13, [
+												_cache[18] || (_cache[18] = createElementVNode("span", { class: "text-caption text-weight-medium" }, "Sexo:", -1)),
+												createVNode(QRadio, {
+													modelValue: input.value.sexo,
+													"onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => input.value.sexo = $event),
+													val: "F",
+													label: "F",
+													dense: ""
+												}, null, 8, ["modelValue"]),
+												createVNode(QRadio, {
+													modelValue: input.value.sexo,
+													"onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => input.value.sexo = $event),
+													val: "M",
+													label: "M",
+													dense: ""
+												}, null, 8, ["modelValue"])
+											]),
 											createElementVNode("div", _hoisted_14, [createVNode(QInput, {
 												outlined: "",
 												modelValue: input.value.correo,
 												"onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => input.value.correo = $event),
 												modelModifiers: { trim: true },
-												label: "correo:",
+												label: "Correo",
 												dense: "",
 												"lazy-rules": "",
 												counter: "",
@@ -4217,185 +4342,190 @@ var registrar_upd_default$3 = /* @__PURE__ */ defineComponent({
 												modelValue: input.value.direccion,
 												"onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => input.value.direccion = $event),
 												modelModifiers: { trim: true },
-												label: "direccion:",
+												label: "Dirección",
 												dense: "",
 												"lazy-rules": "",
 												counter: "",
 												rules: [(val) => unref(val_direccion)(val)]
 											}, null, 8, ["modelValue", "rules"])]),
 											createElementVNode("div", _hoisted_16, [createVNode(QFile, {
-												style: { "min-width": "50px" },
 												clearable: "",
 												modelValue: foto_file.value,
 												"onUpdate:modelValue": [_cache[11] || (_cache[11] = ($event) => foto_file.value = $event), _cache[12] || (_cache[12] = ($event) => filevalue($event))],
 												dense: "",
 												accept: "image/*",
 												disable: loading.value,
-												square: "",
 												outlined: "",
-												color: "orange",
-												label: "Seleccionar foto de perfil (2MB)",
+												color: "primary",
+												label: "Foto de perfil (máx. 2MB)",
 												"max-file-size": "2097152",
 												onRejected
 											}, {
-												prepend: withCtx(() => [createVNode(QIcon, { name: "upload" })]),
-												default: withCtx(() => [createVNode(QTooltip, null, {
-													default: withCtx(() => [..._cache[19] || (_cache[19] = [createTextVNode(" Seleccionar foto de perfil ", -1)])]),
-													_: 1
-												})]),
+												prepend: withCtx(() => [createVNode(QIcon, { name: "photo_camera" })]),
 												_: 1
 											}, 8, ["modelValue", "disable"])]),
 											createElementVNode("div", _hoisted_17, [createVNode(QBtn, {
-												color: "grey",
+												color: "primary",
 												icon: "fmd_good",
 												dense: "",
-												square: "",
-												outline: "",
+												flat: "",
 												onClick: _cache[13] || (_cache[13] = ($event) => openGeo())
 											}, {
-												default: withCtx(() => [..._cache[20] || (_cache[20] = [createTextVNode(" Ubicacion geografica ", -1)])]),
+												default: withCtx(() => [..._cache[19] || (_cache[19] = [createTextVNode(" Ubicación ", -1)])]),
 												_: 1
-											}), createElementVNode("small", _hoisted_18, toDisplayString(input.value.latitud) + " " + toDisplayString(input.value.longitud), 1)])
+											}), createElementVNode("span", _hoisted_18, toDisplayString(input.value.latitud) + " " + toDisplayString(input.value.longitud), 1)])
 										])]),
-										createElementVNode("div", _hoisted_19, [createVNode(QBtn, {
-											dense: "",
-											outline: "",
-											color: "primary",
-											icon: "home",
-											onClick: _cache[14] || (_cache[14] = ($event) => openrolunidad())
-										}, {
-											default: withCtx(() => [..._cache[21] || (_cache[21] = [createTextVNode(" Asignar unidad y rol ", -1)])]),
-											_: 1
-										}), createVNode(QList, {
+										createElementVNode("div", _hoisted_19, [
+											_cache[22] || (_cache[22] = createElementVNode("div", {
+												class: "text-caption text-weight-medium text-primary q-mb-xs",
+												style: {
+													"letter-spacing": ".05em",
+													"text-transform": "uppercase"
+												}
+											}, " Unidad y Rol ", -1)),
+											createVNode(QBtn, {
+												unelevated: "",
+												color: "primary",
+												icon: "add_home_work",
+												class: "q-mb-sm",
+												onClick: _cache[14] || (_cache[14] = ($event) => openrolunidad())
+											}, {
+												default: withCtx(() => [..._cache[21] || (_cache[21] = [createTextVNode(" Asignar unidad y rol ", -1)])]),
+												_: 1
+											}),
+											createVNode(QList, {
+												bordered: "",
+												separator: "",
+												class: "rounded-borders"
+											}, {
+												default: withCtx(() => [createVNode(QExpansionItem, {
+													"expand-separator": "",
+													icon: "home_work",
+													label: "Unidades → Rol",
+													caption: "obligatorio",
+													dense: "",
+													"default-opened": "",
+													"header-class": "text-primary"
+												}, {
+													default: withCtx(() => [createVNode(QTable, {
+														rows: rol_unidades.value,
+														columns: unref(columns_rolunidad),
+														flat: "",
+														dense: "",
+														"hide-pagination": "",
+														"rows-per-page-options": [0],
+														"row-key": "id"
+													}, {
+														"body-cell-opt": withCtx((props) => [createVNode(QTd, {
+															props,
+															"auto-width": ""
+														}, {
+															default: withCtx(() => [createVNode(QBtn, {
+																flat: "",
+																dense: "",
+																icon: "delete_outline",
+																color: "negative",
+																onClick: ($event) => quitrolunidad(props.row)
+															}, null, 8, ["onClick"])]),
+															_: 2
+														}, 1032, ["props"])]),
+														_: 1
+													}, 8, ["rows", "columns"])]),
+													_: 1
+												})]),
+												_: 1
+											})
+										]),
+										createElementVNode("div", _hoisted_20, [_cache[23] || (_cache[23] = createElementVNode("div", {
+											class: "text-caption text-weight-medium text-primary q-mb-xs",
+											style: {
+												"letter-spacing": ".05em",
+												"text-transform": "uppercase"
+											}
+										}, " Permisos globales ", -1)), createVNode(QList, {
 											bordered: "",
-											class: "rounded-borders q-mt-sm"
+											separator: "",
+											class: "rounded-borders"
 										}, {
 											default: withCtx(() => [createVNode(QExpansionItem, {
 												"expand-separator": "",
-												icon: "home_work",
-												label: "unidades -> rol",
-												class: "bg-primary",
-												caption: "obligatorio",
+												icon: "admin_panel_settings",
+												label: "Permisos",
+												caption: "opcional",
 												dense: "",
-												dark: "",
-												"default-opened": ""
+												"header-class": "text-primary"
 											}, {
 												default: withCtx(() => [createVNode(QTable, {
-													rows: rol_unidades.value,
-													columns: unref(columns_rolunidad),
+													rows: permisos.value,
+													columns: unref(columns_permisos$1),
 													flat: "",
 													dense: "",
-													square: "",
+													loading: loading_permisos.value,
 													"hide-pagination": "",
 													"rows-per-page-options": [0],
-													"row-key": "id"
-												}, {
-													"body-cell-opt": withCtx((props) => [createVNode(QTd, { props }, {
-														default: withCtx(() => [createVNode(QBtn, {
-															flat: "",
-															dense: "",
-															size: "xs",
-															icon: "delete",
-															color: "red",
-															onClick: ($event) => quitrolunidad(props.row)
-														}, null, 8, ["onClick"])]),
-														_: 2
-													}, 1032, ["props"])]),
-													_: 1
-												}, 8, ["rows", "columns"])]),
+													"row-key": "metodo",
+													selection: "multiple",
+													selected: permisos_select.value,
+													"onUpdate:selected": _cache[15] || (_cache[15] = ($event) => permisos_select.value = $event)
+												}, null, 8, [
+													"rows",
+													"columns",
+													"loading",
+													"selected"
+												])]),
+												_: 1
+											}), createVNode(QExpansionItem, {
+												"expand-separator": "",
+												icon: "folder_shared",
+												label: "Menús",
+												caption: "opcional",
+												dense: "",
+												"header-class": "text-primary"
+											}, {
+												default: withCtx(() => [createVNode(QTable, {
+													rows: menus.value,
+													columns: unref(columns_menus$1),
+													flat: "",
+													dense: "",
+													loading: loading_menus.value,
+													"hide-pagination": "",
+													"rows-per-page-options": [0],
+													"row-key": "id",
+													selection: "multiple",
+													selected: menus_select.value,
+													"onUpdate:selected": _cache[16] || (_cache[16] = ($event) => menus_select.value = $event)
+												}, null, 8, [
+													"rows",
+													"columns",
+													"loading",
+													"selected"
+												])]),
 												_: 1
 											})]),
-											_: 1
-										})]),
-										createElementVNode("div", _hoisted_20, [createVNode(QList, {
-											bordered: "",
-											class: "rounded-borders"
-										}, {
-											default: withCtx(() => [
-												createVNode(QExpansionItem, {
-													"expand-separator": "",
-													icon: "admin_panel_settings",
-													label: "Permisos global",
-													class: "bg-primary",
-													caption: "opcional",
-													dense: "",
-													dark: ""
-												}, {
-													default: withCtx(() => [createVNode(QTable, {
-														rows: permisos.value,
-														columns: unref(columns_permisos$1),
-														flat: "",
-														dense: "",
-														square: "",
-														loading: loading_permisos.value,
-														"hide-pagination": "",
-														"rows-per-page-options": [0],
-														"row-key": "metodo",
-														selection: "multiple",
-														selected: permisos_select.value,
-														"onUpdate:selected": _cache[15] || (_cache[15] = ($event) => permisos_select.value = $event)
-													}, null, 8, [
-														"rows",
-														"columns",
-														"loading",
-														"selected"
-													])]),
-													_: 1
-												}),
-												createVNode(QSeparator),
-												createVNode(QExpansionItem, {
-													"expand-separator": "",
-													icon: "folder_shared",
-													label: "Menus global",
-													class: "bg-primary",
-													caption: "opcional",
-													dense: "",
-													dark: ""
-												}, {
-													default: withCtx(() => [createVNode(QTable, {
-														rows: menus.value,
-														columns: unref(columns_menus$1),
-														flat: "",
-														dense: "",
-														square: "",
-														loading: loading_menus.value,
-														"hide-pagination": "",
-														"rows-per-page-options": [0],
-														"row-key": "id",
-														selection: "multiple",
-														selected: menus_select.value,
-														"onUpdate:selected": _cache[16] || (_cache[16] = ($event) => menus_select.value = $event)
-													}, null, 8, [
-														"rows",
-														"columns",
-														"loading",
-														"selected"
-													])]),
-													_: 1
-												})
-											]),
 											_: 1
 										})])
 									])]),
 									_: 1
 								}),
-								createVNode(QCardActions, { align: "right" }, {
-									default: withCtx(() => [createVNode(QBtn, {
-										outline: "",
+								createVNode(QSeparator),
+								createVNode(QCardActions, {
+									align: "right",
+									class: "q-pa-sm"
+								}, {
+									default: withCtx(() => [withDirectives(createVNode(QBtn, {
+										flat: "",
+										disable: loading.value,
+										label: "Cerrar",
+										icon: "close",
+										color: "negative"
+									}, null, 8, ["disable"]), [[ClosePopup]]), createVNode(QBtn, {
+										unelevated: "",
 										loading: loading.value,
-										label: "aceptar",
-										square: "",
+										label: "Guardar",
 										icon: "check",
 										type: "submit",
 										color: "positive"
-									}, null, 8, ["loading"]), withDirectives(createVNode(QBtn, {
-										outline: "",
-										disable: loading.value,
-										label: "cerrar",
-										square: "",
-										icon: "close",
-										color: "negative"
-									}, null, 8, ["disable"]), [[ClosePopup]])]),
+									}, null, 8, ["loading"])]),
 									_: 1
 								})
 							]),
@@ -4419,7 +4549,8 @@ var registrar_upd_default$3 = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/usuarios/usuarios-index.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$12 = ["src"];
+var _hoisted_1$13 = { class: "row items-center full-width q-gutter-x-sm" };
+var _hoisted_2$9 = ["src"];
 //#endregion
 //#region src/pages/auth/usuarios/usuarios-index.vue
 var usuarios_index_default = /* @__PURE__ */ defineComponent({
@@ -4470,7 +4601,7 @@ var usuarios_index_default = /* @__PURE__ */ defineComponent({
 			await getdatos();
 		});
 		return (_ctx, _cache) => {
-			return openBlock(), createBlock(QPage, { class: "q-pa-xs" }, {
+			return openBlock(), createBlock(QPage, { class: "q-pa-sm" }, {
 				default: withCtx(() => [createVNode(QTable, {
 					rows: rows.value,
 					columns: unref(columns$4),
@@ -4486,38 +4617,48 @@ var usuarios_index_default = /* @__PURE__ */ defineComponent({
 						200,
 						500,
 						1e3
-					]
+					],
+					separator: "horizontal"
 				}, {
-					"top-left": withCtx(() => [
-						_cache[6] || (_cache[6] = createElementVNode("b", null, "Usuarios", -1)),
+					top: withCtx(() => [createElementVNode("div", _hoisted_1$13, [
+						createVNode(QIcon, {
+							name: "manage_accounts",
+							color: "primary",
+							size: "sm"
+						}),
+						_cache[7] || (_cache[7] = createElementVNode("span", { class: "text-subtitle1 text-weight-medium" }, "Usuarios", -1)),
 						createVNode(QBtn, {
 							icon: "refresh",
-							dense: "",
 							flat: "",
+							round: "",
+							dense: "",
 							onClick: _cache[0] || (_cache[0] = ($event) => getdatos())
+						}, {
+							default: withCtx(() => [createVNode(QTooltip, null, {
+								default: withCtx(() => [..._cache[6] || (_cache[6] = [createTextVNode("Recargar", -1)])]),
+								_: 1
+							})]),
+							_: 1
 						}),
 						createVNode(QToggle, {
 							modelValue: more_datos.value,
 							"onUpdate:modelValue": [_cache[1] || (_cache[1] = ($event) => more_datos.value = $event), _cache[2] || (_cache[2] = ($event) => visibleColumns.value = unref(columnas$1)(more_datos.value))],
 							color: "orange",
-							label: "mostrar otros datos",
-							class: "q-my-none"
-						}, null, 8, ["modelValue"])
-					]),
-					"top-right": withCtx(() => [
+							label: "más datos",
+							dense: ""
+						}, null, 8, ["modelValue"]),
+						createVNode(QSpace),
 						createVNode(QInput, {
 							outlined: "",
 							dense: "",
 							debounce: "300",
 							modelValue: filter.value,
 							"onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => filter.value = $event),
-							placeholder: "buscar...",
-							clearable: ""
+							placeholder: "Buscar...",
+							clearable: "",
+							style: { "width": "200px" }
 						}, {
-							append: withCtx(() => [createVNode(QIcon, {
-								size: "xs",
-								name: "search"
-							})]),
+							append: withCtx(() => [createVNode(QIcon, { name: "search" })]),
 							_: 1
 						}, 8, ["modelValue"]),
 						createVNode(QSelect, {
@@ -4526,45 +4667,75 @@ var usuarios_index_default = /* @__PURE__ */ defineComponent({
 							options: roles.value,
 							"option-label": "nombre",
 							dense: "",
-							clearable: ""
+							outlined: "",
+							clearable: "",
+							label: "Filtrar por rol",
+							style: { "width": "180px" }
 						}, null, 8, ["modelValue", "options"]),
 						createVNode(QBtn, {
-							color: "green",
-							icon: "add",
-							outline: "",
-							square: "",
+							label: "Registrar",
+							icon: "person_add",
+							color: "primary",
+							unelevated: "",
 							onClick: _cache[5] || (_cache[5] = ($event) => onclick("new", null))
-						}, {
-							default: withCtx(() => [..._cache[7] || (_cache[7] = [createTextVNode(" registrar ", -1)])]),
-							_: 1
 						})
-					]),
-					"body-cell-index": withCtx((props) => [createVNode(QTd, { props }, {
+					])]),
+					"body-cell-index": withCtx((props) => [createVNode(QTd, {
+						props,
+						class: "text-caption",
+						style: { "opacity": ".5" }
+					}, {
 						default: withCtx(() => [createTextVNode(toDisplayString(props.rowIndex + 1), 1)]),
 						_: 2
 					}, 1032, ["props"])]),
 					"body-cell-foto_url": withCtx((props) => [createVNode(QTd, { props }, {
-						default: withCtx(() => [props.row.foto64 ? (openBlock(), createElementBlock("img", {
+						default: withCtx(() => [props.row.foto64 ? (openBlock(), createBlock(QAvatar, {
 							key: 0,
-							src: props.row.foto64,
-							alt: "perfil",
-							style: { "max-width": "22px" }
-						}, null, 8, _hoisted_1$12)) : createCommentVNode("", true)]),
+							size: "22px"
+						}, {
+							default: withCtx(() => [createElementVNode("img", {
+								src: props.row.foto64,
+								alt: "perfil"
+							}, null, 8, _hoisted_2$9)]),
+							_: 2
+						}, 1024)) : (openBlock(), createBlock(QAvatar, {
+							key: 1,
+							size: "22px",
+							color: "primary",
+							"text-color": "white",
+							icon: "person",
+							"font-size": "12px"
+						}))]),
 						_: 2
 					}, 1032, ["props"])]),
-					"body-cell-fecha_registro": withCtx((props) => [createVNode(QTd, { props }, {
+					"body-cell-fecha_registro": withCtx((props) => [createVNode(QTd, {
+						props,
+						class: "text-caption",
+						style: { "opacity": ".7" }
+					}, {
 						default: withCtx(() => [createTextVNode(toDisplayString(unref(parseFecha)(props.row.fecha_registro)), 1)]),
 						_: 2
 					}, 1032, ["props"])]),
-					"body-cell-fecha_update": withCtx((props) => [createVNode(QTd, { props }, {
+					"body-cell-fecha_update": withCtx((props) => [createVNode(QTd, {
+						props,
+						class: "text-caption",
+						style: { "opacity": ".7" }
+					}, {
 						default: withCtx(() => [createTextVNode(toDisplayString(unref(parseFecha)(props.row.fecha_update)), 1)]),
 						_: 2
 					}, 1032, ["props"])]),
-					"body-cell-last_login": withCtx((props) => [createVNode(QTd, { props }, {
+					"body-cell-last_login": withCtx((props) => [createVNode(QTd, {
+						props,
+						class: "text-caption",
+						style: { "opacity": ".7" }
+					}, {
 						default: withCtx(() => [createTextVNode(toDisplayString(unref(parseFecha)(props.row.last_login)), 1)]),
 						_: 2
 					}, 1032, ["props"])]),
-					"body-cell-opt": withCtx((props) => [createVNode(QTd, { props }, {
+					"body-cell-opt": withCtx((props) => [createVNode(QTd, {
+						props,
+						"auto-width": ""
+					}, {
 						default: withCtx(() => [createVNode(botonera_opt_default$3, {
 							props,
 							onClicked: onclick
@@ -4731,10 +4902,21 @@ var botonera_opt_default$2 = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/roles/registrar-upd.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$11 = { class: "text-h6" };
-var _hoisted_2$7 = { class: "row q-col-gutter-sm" };
+var _hoisted_1$12 = { class: "text-subtitle1 text-weight-medium" };
+var _hoisted_2$8 = { class: "row q-col-gutter-md" };
 var _hoisted_3$7 = { class: "col-xs-12 col-lg-6" };
-var _hoisted_4$4 = { class: "col-xs-12 col-lg-6" };
+var _hoisted_4$4 = { class: "column q-gutter-sm" };
+var _hoisted_5$2 = { class: "col-xs-12 col-lg-6" };
+var _hoisted_6$2 = {
+	key: 0,
+	class: "row items-center q-gutter-x-xs"
+};
+var _hoisted_7 = { class: "text-weight-medium" };
+var _hoisted_8 = {
+	key: 1,
+	class: "row items-center q-gutter-x-xs q-pl-md"
+};
+var _hoisted_9 = { class: "text-caption" };
 //#endregion
 //#region src/pages/auth/roles/registrar-upd.vue
 var registrar_upd_default$2 = /* @__PURE__ */ defineComponent({
@@ -4753,6 +4935,34 @@ var registrar_upd_default$2 = /* @__PURE__ */ defineComponent({
 		const menus = ref([]);
 		const permisos_select = ref([]);
 		const menus_select = ref([]);
+		let syncing = false;
+		watch(menus_select, (newVal) => {
+			if (syncing) return;
+			const all = menus.value;
+			const ids = new Set(newVal.map((x) => x.id));
+			let result = [...newVal];
+			for (const item of newVal) if (item.padre_id && !ids.has(item.padre_id)) {
+				const parent = all.find((m) => m.id === item.padre_id);
+				if (parent) {
+					result.push(parent);
+					ids.add(parent.id);
+				}
+			}
+			result = result.filter((item) => {
+				if (!item.padre_id) {
+					const hijos = all.filter((m) => m.padre_id === item.id);
+					return hijos.length === 0 || hijos.some((h) => ids.has(h.id));
+				}
+				return true;
+			});
+			if (result.length !== newVal.length) {
+				syncing = true;
+				menus_select.value = result;
+				nextTick(() => {
+					syncing = false;
+				});
+			}
+		}, { deep: true });
 		const emit = __emit;
 		const open = async (row) => {
 			alert.value = true;
@@ -4799,6 +5009,16 @@ var registrar_upd_default$2 = /* @__PURE__ */ defineComponent({
 				mostrarNotifyError("seleccione un menu");
 				return;
 			}
+			const selectedIds = new Set(menus_select.value.map((x) => x.id));
+			const padresSeleccionados = menus_select.value.filter((x) => !x.padre_id);
+			for (const padre of padresSeleccionados) {
+				const tieneHijos = menus.value.some((m) => m.padre_id === padre.id);
+				const tieneHijoSeleccionado = menus.value.some((m) => m.padre_id === padre.id && selectedIds.has(m.id));
+				if (tieneHijos && !tieneHijoSeleccionado) {
+					mostrarNotifyError(`El menú "${padre.label}" requiere al menos un submenú seleccionado`);
+					return;
+				}
+			}
 			if (permis.length == 0) {
 				mostrarNotifyError("seleccione un permiso");
 				return;
@@ -4834,33 +5054,51 @@ var registrar_upd_default$2 = /* @__PURE__ */ defineComponent({
 				modelValue: alert.value,
 				"onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => alert.value = $event),
 				persistent: "",
-				square: ""
+				style: {
+					"width": "min(780px, 95vw)",
+					"max-width": "95vw"
+				}
 			}, {
-				default: withCtx(() => [createVNode(QCard, { xstyle: "min-width: 400px" }, {
-					default: withCtx(() => [createVNode(QForm, {
-						onSubmit,
-						class: "q-gutter-md"
-					}, {
+				default: withCtx(() => [createVNode(QCard, {
+					flat: "",
+					bordered: "",
+					style: { "width": "100%" }
+				}, {
+					default: withCtx(() => [createVNode(QForm, { onSubmit }, {
 						default: withCtx(() => [
-							createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
+							createVNode(QCardSection, { class: "row items-center q-py-sm q-px-md" }, {
 								default: withCtx(() => [
-									createElementVNode("div", _hoisted_1$11, toDisplayString(input.value.id ? "Editar" : "Registrar"), 1),
+									createVNode(QIcon, {
+										name: input.value.id ? "edit" : "shield",
+										color: "primary",
+										class: "q-mr-sm"
+									}, null, 8, ["name"]),
+									createElementVNode("span", _hoisted_1$12, toDisplayString(input.value.id ? "Editar rol" : "Registrar rol"), 1),
 									createVNode(QSpace),
-									withDirectives((openBlock(), createBlock(QBtn, { flat: "" }, {
-										default: withCtx(() => [..._cache[6] || (_cache[6] = [createElementVNode("b", null, "x", -1)])]),
-										_: 1
-									})), [[ClosePopup]])
+									withDirectives(createVNode(QBtn, {
+										flat: "",
+										round: "",
+										dense: "",
+										icon: "close"
+									}, null, 512), [[ClosePopup]])
 								]),
 								_: 1
 							}),
-							createVNode(QCardSection, { class: "q-py-none" }, {
-								default: withCtx(() => [createElementVNode("div", _hoisted_2$7, [createElementVNode("div", _hoisted_3$7, [
+							createVNode(QSeparator),
+							createVNode(QCardSection, null, {
+								default: withCtx(() => [createElementVNode("div", _hoisted_2$8, [createElementVNode("div", _hoisted_3$7, [_cache[6] || (_cache[6] = createElementVNode("div", {
+									class: "text-caption text-weight-medium text-primary q-mb-sm",
+									style: {
+										"letter-spacing": ".05em",
+										"text-transform": "uppercase"
+									}
+								}, " Datos del rol ", -1)), createElementVNode("div", _hoisted_4$4, [
 									createVNode(QInput, {
 										outlined: "",
 										modelValue: input.value.nombre,
 										"onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => input.value.nombre = $event),
 										modelModifiers: { trim: true },
-										label: "nombre:",
+										label: "Nombre",
 										dense: "",
 										"lazy-rules": "",
 										counter: "",
@@ -4871,7 +5109,7 @@ var registrar_upd_default$2 = /* @__PURE__ */ defineComponent({
 										modelValue: input.value.descripcion,
 										"onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => input.value.descripcion = $event),
 										modelModifiers: { trim: true },
-										label: "descripcion:",
+										label: "Descripción",
 										dense: "",
 										"lazy-rules": "",
 										counter: "",
@@ -4883,99 +5121,115 @@ var registrar_upd_default$2 = /* @__PURE__ */ defineComponent({
 										modelValue: input.value.jerarquia,
 										"onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => input.value.jerarquia = $event),
 										modelModifiers: { number: true },
-										label: "jerarquia:",
+										label: "Jerarquía",
 										dense: "",
 										"lazy-rules": "",
 										rules: [(val) => val !== null && val !== "" || "campo obligatorio", (val) => val >= 0 && val < 100 || "debe ser mayor a cero"]
 									}, null, 8, ["modelValue", "rules"])
-								]), createElementVNode("div", _hoisted_4$4, [createVNode(QList, {
+								])]), createElementVNode("div", _hoisted_5$2, [_cache[7] || (_cache[7] = createElementVNode("div", {
+									class: "text-caption text-weight-medium text-primary q-mb-sm",
+									style: {
+										"letter-spacing": ".05em",
+										"text-transform": "uppercase"
+									}
+								}, " Accesos ", -1)), createVNode(QList, {
 									bordered: "",
+									separator: "",
 									class: "rounded-borders"
 								}, {
-									default: withCtx(() => [
-										createVNode(QExpansionItem, {
-											"expand-separator": "",
-											icon: "perm_identity",
-											label: "Menus para este rol",
-											class: "bg-primary",
-											caption: "obligatorio",
+									default: withCtx(() => [createVNode(QExpansionItem, {
+										"expand-separator": "",
+										icon: "folder_shared",
+										label: "Menús para este rol",
+										caption: "obligatorio",
+										dense: "",
+										"default-opened": "",
+										"header-class": "text-primary"
+									}, {
+										default: withCtx(() => [createVNode(QTable, {
+											rows: menus.value,
+											columns: unref(columns_menus),
+											flat: "",
 											dense: "",
-											dark: ""
+											loading: loading_menus.value,
+											"hide-pagination": "",
+											"rows-per-page-options": [0],
+											"row-key": "id",
+											selection: "multiple",
+											selected: menus_select.value,
+											"onUpdate:selected": _cache[3] || (_cache[3] = ($event) => menus_select.value = $event)
 										}, {
-											default: withCtx(() => [createVNode(QTable, {
-												rows: menus.value,
-												columns: unref(columns_menus),
-												flat: "",
-												dense: "",
-												square: "",
-												loading: loading_menus.value,
-												"hide-pagination": "",
-												"rows-per-page-options": [0],
-												"row-key": "id",
-												selection: "multiple",
-												selected: menus_select.value,
-												"onUpdate:selected": _cache[3] || (_cache[3] = ($event) => menus_select.value = $event)
-											}, null, 8, [
-												"rows",
-												"columns",
-												"loading",
-												"selected"
-											])]),
+											"body-cell-label": withCtx((props) => [createVNode(QTd, { props }, {
+												default: withCtx(() => [!props.row.padre_id ? (openBlock(), createElementBlock("div", _hoisted_6$2, [createVNode(QIcon, {
+													name: "folder",
+													color: "primary",
+													size: "xs"
+												}), createElementVNode("span", _hoisted_7, toDisplayString(props.row.label), 1)])) : (openBlock(), createElementBlock("div", _hoisted_8, [createVNode(QIcon, {
+													name: "subdirectory_arrow_right",
+													size: "xs",
+													style: { "opacity": ".5" }
+												}), createElementVNode("span", _hoisted_9, toDisplayString(props.row.label), 1)]))]),
+												_: 2
+											}, 1032, ["props"])]),
 											_: 1
-										}),
-										createVNode(QSeparator),
-										createVNode(QExpansionItem, {
-											"expand-separator": "",
-											icon: "perm_identity",
-											label: "Permisos para este rol",
-											class: "bg-primary",
-											caption: "obligatorio",
+										}, 8, [
+											"rows",
+											"columns",
+											"loading",
+											"selected"
+										])]),
+										_: 1
+									}), createVNode(QExpansionItem, {
+										"expand-separator": "",
+										icon: "admin_panel_settings",
+										label: "Permisos para este rol",
+										caption: "obligatorio",
+										dense: "",
+										"header-class": "text-primary"
+									}, {
+										default: withCtx(() => [createVNode(QTable, {
+											rows: permisos.value,
+											columns: unref(columns_permisos),
+											flat: "",
 											dense: "",
-											dark: ""
-										}, {
-											default: withCtx(() => [createVNode(QTable, {
-												rows: permisos.value,
-												columns: unref(columns_permisos),
-												flat: "",
-												dense: "",
-												square: "",
-												loading: loading_permisos.value,
-												"hide-pagination": "",
-												"rows-per-page-options": [0],
-												"row-key": "metodo",
-												selection: "multiple",
-												selected: permisos_select.value,
-												"onUpdate:selected": _cache[4] || (_cache[4] = ($event) => permisos_select.value = $event)
-											}, null, 8, [
-												"rows",
-												"columns",
-												"loading",
-												"selected"
-											])]),
-											_: 1
-										})
-									]),
+											loading: loading_permisos.value,
+											"hide-pagination": "",
+											"rows-per-page-options": [0],
+											"row-key": "metodo",
+											selection: "multiple",
+											selected: permisos_select.value,
+											"onUpdate:selected": _cache[4] || (_cache[4] = ($event) => permisos_select.value = $event)
+										}, null, 8, [
+											"rows",
+											"columns",
+											"loading",
+											"selected"
+										])]),
+										_: 1
+									})]),
 									_: 1
 								})])])]),
 								_: 1
 							}),
-							createVNode(QCardActions, { align: "right" }, {
-								default: withCtx(() => [createVNode(QBtn, {
-									outline: "",
+							createVNode(QSeparator),
+							createVNode(QCardActions, {
+								align: "right",
+								class: "q-pa-sm"
+							}, {
+								default: withCtx(() => [withDirectives(createVNode(QBtn, {
+									flat: "",
+									disable: loading.value,
+									label: "Cerrar",
+									icon: "close",
+									color: "negative"
+								}, null, 8, ["disable"]), [[ClosePopup]]), createVNode(QBtn, {
+									unelevated: "",
 									loading: loading.value,
-									label: "aceptar",
-									square: "",
+									label: "Guardar",
 									icon: "check",
 									type: "submit",
 									color: "positive"
-								}, null, 8, ["loading"]), withDirectives(createVNode(QBtn, {
-									outline: "",
-									disable: loading.value,
-									label: "cerrar",
-									square: "",
-									icon: "close",
-									color: "negative"
-								}, null, 8, ["disable"]), [[ClosePopup]])]),
+								}, null, 8, ["loading"])]),
 								_: 1
 							})
 						]),
@@ -4988,6 +5242,9 @@ var registrar_upd_default$2 = /* @__PURE__ */ defineComponent({
 		};
 	}
 });
+//#endregion
+//#region src/pages/auth/roles/roles-index.vue?vue&type=script&setup=true&lang.ts
+var _hoisted_1$11 = { class: "row items-center full-width q-gutter-x-sm" };
 //#endregion
 //#region src/pages/auth/roles/roles-index.vue
 var roles_index_default = /* @__PURE__ */ defineComponent({
@@ -5013,9 +5270,8 @@ var roles_index_default = /* @__PURE__ */ defineComponent({
 			await getdatos();
 		});
 		return (_ctx, _cache) => {
-			return openBlock(), createBlock(QPage, { class: "q-pa-xs" }, {
+			return openBlock(), createBlock(QPage, { class: "q-pa-sm" }, {
 				default: withCtx(() => [createVNode(QTable, {
-					title: "Roles",
 					rows: rows.value,
 					columns: unref(columns$3),
 					flat: "",
@@ -5025,41 +5281,71 @@ var roles_index_default = /* @__PURE__ */ defineComponent({
 					loading: loading.value,
 					"row-key": "id",
 					"hide-pagination": "",
-					"rows-per-page-options": [0]
+					"rows-per-page-options": [0],
+					separator: "horizontal"
 				}, {
-					"top-right": withCtx(() => [createVNode(QInput, {
-						outlined: "",
-						dense: "",
-						debounce: "300",
-						modelValue: filter.value,
-						"onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => filter.value = $event),
-						placeholder: "buscar...",
-						clearable: ""
+					top: withCtx(() => [createElementVNode("div", _hoisted_1$11, [
+						createVNode(QIcon, {
+							name: "shield",
+							color: "primary",
+							size: "sm"
+						}),
+						_cache[4] || (_cache[4] = createElementVNode("span", { class: "text-subtitle1 text-weight-medium" }, "Roles", -1)),
+						createVNode(QBtn, {
+							icon: "refresh",
+							flat: "",
+							round: "",
+							dense: "",
+							onClick: _cache[0] || (_cache[0] = ($event) => getdatos())
+						}, {
+							default: withCtx(() => [createVNode(QTooltip, null, {
+								default: withCtx(() => [..._cache[3] || (_cache[3] = [createTextVNode("Recargar", -1)])]),
+								_: 1
+							})]),
+							_: 1
+						}),
+						createVNode(QSpace),
+						createVNode(QInput, {
+							outlined: "",
+							dense: "",
+							debounce: "300",
+							modelValue: filter.value,
+							"onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => filter.value = $event),
+							placeholder: "Buscar...",
+							clearable: "",
+							style: { "width": "200px" }
+						}, {
+							append: withCtx(() => [createVNode(QIcon, { name: "search" })]),
+							_: 1
+						}, 8, ["modelValue"]),
+						createVNode(QBtn, {
+							label: "Registrar",
+							icon: "add",
+							color: "primary",
+							unelevated: "",
+							onClick: _cache[2] || (_cache[2] = ($event) => onclick("new", null))
+						})
+					])]),
+					"body-cell-index": withCtx((props) => [createVNode(QTd, {
+						props,
+						class: "text-caption",
+						style: { "opacity": ".5" }
 					}, {
-						append: withCtx(() => [createVNode(QIcon, {
-							size: "xs",
-							name: "search"
-						})]),
-						_: 1
-					}, 8, ["modelValue"]), createVNode(QBtn, {
-						color: "green",
-						icon: "add",
-						outline: "",
-						square: "",
-						onClick: _cache[1] || (_cache[1] = ($event) => onclick("new", null))
-					}, {
-						default: withCtx(() => [..._cache[2] || (_cache[2] = [createTextVNode(" registrar ", -1)])]),
-						_: 1
-					})]),
-					"body-cell-index": withCtx((props) => [createVNode(QTd, { props }, {
 						default: withCtx(() => [createTextVNode(toDisplayString(props.rowIndex + 1), 1)]),
 						_: 2
 					}, 1032, ["props"])]),
-					"body-cell-fecha_registro": withCtx((props) => [createVNode(QTd, { props }, {
+					"body-cell-fecha_registro": withCtx((props) => [createVNode(QTd, {
+						props,
+						class: "text-caption",
+						style: { "opacity": ".7" }
+					}, {
 						default: withCtx(() => [createTextVNode(toDisplayString(unref(parseFecha)(props.row.fecha_registro)), 1)]),
 						_: 2
 					}, 1032, ["props"])]),
-					"body-cell-opt": withCtx((props) => [createVNode(QTd, { props }, {
+					"body-cell-opt": withCtx((props) => [createVNode(QTd, {
+						props,
+						"auto-width": ""
+					}, {
 						default: withCtx(() => [createVNode(botonera_opt_default$2, {
 							props,
 							onClicked: onclick
@@ -5181,12 +5467,15 @@ var botonera_opt_default$1 = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/unidades/registrar-upd.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$10 = { class: "text-h6" };
-var _hoisted_2$6 = { class: "row q-col-gutter-xs" };
-var _hoisted_3$6 = { class: "col-xs-12 col-sm-6" };
-var _hoisted_4$3 = { class: "col-xs-12 col-sm-6" };
-var _hoisted_5$2 = { class: "col-xs-12 col-sm-6" };
-var _hoisted_6$1 = { class: "q-pl-md" };
+var _hoisted_1$10 = { class: "text-subtitle1 text-weight-medium" };
+var _hoisted_2$7 = { class: "row q-col-gutter-md" };
+var _hoisted_3$6 = { class: "col-xs-12 col-sm-6 column q-gutter-sm" };
+var _hoisted_4$3 = { class: "row items-center q-gutter-x-sm" };
+var _hoisted_5$1 = {
+	class: "text-caption",
+	style: { "opacity": ".6" }
+};
+var _hoisted_6$1 = { class: "col-xs-12 col-sm-6" };
 //#endregion
 //#region src/pages/auth/unidades/registrar-upd.vue
 var registrar_upd_default$1 = /* @__PURE__ */ defineComponent({
@@ -5248,92 +5537,104 @@ var registrar_upd_default$1 = /* @__PURE__ */ defineComponent({
 				modelValue: alert.value,
 				"onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => alert.value = $event),
 				persistent: "",
-				square: ""
+				style: {
+					"width": "min(620px, 95vw)",
+					"max-width": "95vw"
+				}
 			}, {
-				default: withCtx(() => [createVNode(QCard, { xstyle: "min-width: 600px" }, {
-					default: withCtx(() => [createVNode(QForm, {
-						onSubmit,
-						class: "q-gutter-md"
-					}, {
+				default: withCtx(() => [createVNode(QCard, {
+					flat: "",
+					bordered: "",
+					style: { "width": "100%" }
+				}, {
+					default: withCtx(() => [createVNode(QForm, { onSubmit }, {
 						default: withCtx(() => [
-							createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
+							createVNode(QCardSection, { class: "row items-center q-py-sm q-px-md" }, {
 								default: withCtx(() => [
-									createElementVNode("div", _hoisted_1$10, toDisplayString(input.value.id ? "Editar" : "Registrar"), 1),
+									createVNode(QIcon, {
+										name: input.value.id ? "edit" : "account_tree",
+										color: "primary",
+										class: "q-mr-sm"
+									}, null, 8, ["name"]),
+									createElementVNode("span", _hoisted_1$10, toDisplayString(input.value.id ? "Editar unidad" : "Registrar unidad"), 1),
 									createVNode(QSpace),
-									withDirectives((openBlock(), createBlock(QBtn, { flat: "" }, {
-										default: withCtx(() => [..._cache[5] || (_cache[5] = [createElementVNode("b", null, "x", -1)])]),
-										_: 1
-									})), [[ClosePopup]])
+									withDirectives(createVNode(QBtn, {
+										flat: "",
+										round: "",
+										dense: "",
+										icon: "close"
+									}, null, 512), [[ClosePopup]])
 								]),
 								_: 1
 							}),
-							createVNode(QCardSection, { class: "q-pt-none" }, {
-								default: withCtx(() => [createElementVNode("div", _hoisted_2$6, [
-									createElementVNode("div", _hoisted_3$6, [createVNode(QInput, {
+							createVNode(QSeparator),
+							createVNode(QCardSection, null, {
+								default: withCtx(() => [createElementVNode("div", _hoisted_2$7, [createElementVNode("div", _hoisted_3$6, [
+									createVNode(QInput, {
 										outlined: "",
 										modelValue: input.value.nombre,
 										"onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => input.value.nombre = $event),
 										modelModifiers: { trim: true },
-										label: "nombre:",
+										label: "Nombre",
 										dense: "",
 										"lazy-rules": "",
 										counter: "",
 										rules: [(val) => val && val.length > 0 || "campo obligatorio"]
-									}, null, 8, ["modelValue", "rules"]), createVNode(QInput, {
+									}, null, 8, ["modelValue", "rules"]),
+									createVNode(QInput, {
 										outlined: "",
 										type: "number",
 										modelValue: input.value.orden,
 										"onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => input.value.orden = $event),
 										modelModifiers: { number: true },
-										label: "orden:",
+										label: "Orden",
 										dense: "",
 										"lazy-rules": "",
 										rules: [(val) => val !== null && val !== "" || "campo obligatorio", (val) => val >= 0 && val < 100 || "debe ser mayor a cero"]
-									}, null, 8, ["modelValue", "rules"])]),
-									createElementVNode("div", _hoisted_4$3, [createVNode(QInput, {
-										outlined: "",
-										modelValue: input.value.descripcion,
-										"onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => input.value.descripcion = $event),
-										modelModifiers: { trim: true },
-										label: "descripcion:",
-										type: "textarea",
-										rows: "5",
-										dense: "",
-										"lazy-rules": "",
-										counter: "",
-										rules: [(val) => val && val.length > 0 || "campo obligatorio"]
-									}, null, 8, ["modelValue", "rules"])]),
-									createElementVNode("div", _hoisted_5$2, [createVNode(QBtn, {
-										color: "grey",
+									}, null, 8, ["modelValue", "rules"]),
+									createElementVNode("div", _hoisted_4$3, [createVNode(QBtn, {
+										color: "primary",
 										icon: "fmd_good",
-										dense: "",
-										square: "",
-										outline: "",
-										onClick: _cache[3] || (_cache[3] = ($event) => openGeo())
+										flat: "",
+										onClick: _cache[2] || (_cache[2] = ($event) => openGeo())
 									}, {
-										default: withCtx(() => [..._cache[6] || (_cache[6] = [createTextVNode(" Ubicacion geografica ", -1)])]),
+										default: withCtx(() => [..._cache[5] || (_cache[5] = [createTextVNode(" Ubicación ", -1)])]),
 										_: 1
-									}), createElementVNode("small", _hoisted_6$1, toDisplayString(input.value.latitud) + " " + toDisplayString(input.value.longitud), 1)])
-								])]),
+									}), createElementVNode("span", _hoisted_5$1, toDisplayString(input.value.latitud) + " " + toDisplayString(input.value.longitud), 1)])
+								]), createElementVNode("div", _hoisted_6$1, [createVNode(QInput, {
+									outlined: "",
+									modelValue: input.value.descripcion,
+									"onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => input.value.descripcion = $event),
+									modelModifiers: { trim: true },
+									label: "Descripción",
+									type: "textarea",
+									rows: "5",
+									dense: "",
+									"lazy-rules": "",
+									counter: "",
+									rules: [(val) => val && val.length > 0 || "campo obligatorio"]
+								}, null, 8, ["modelValue", "rules"])])])]),
 								_: 1
 							}),
-							createVNode(QCardActions, { align: "right" }, {
-								default: withCtx(() => [createVNode(QBtn, {
-									outline: "",
+							createVNode(QSeparator),
+							createVNode(QCardActions, {
+								align: "right",
+								class: "q-pa-sm"
+							}, {
+								default: withCtx(() => [withDirectives(createVNode(QBtn, {
+									flat: "",
+									disable: loading.value,
+									label: "Cerrar",
+									icon: "close",
+									color: "negative"
+								}, null, 8, ["disable"]), [[ClosePopup]]), createVNode(QBtn, {
+									unelevated: "",
 									loading: loading.value,
-									label: "aceptar",
-									square: "",
+									label: "Guardar",
 									icon: "check",
 									type: "submit",
 									color: "positive"
-								}, null, 8, ["loading"]), withDirectives(createVNode(QBtn, {
-									outline: "",
-									disable: loading.value,
-									label: "cerrar",
-									square: "",
-									icon: "close",
-									color: "negative"
-								}, null, 8, ["disable"]), [[ClosePopup]])]),
+								}, null, 8, ["loading"])]),
 								_: 1
 							})
 						]),
@@ -5349,6 +5650,9 @@ var registrar_upd_default$1 = /* @__PURE__ */ defineComponent({
 		};
 	}
 });
+//#endregion
+//#region src/pages/auth/unidades/unidades-index.vue?vue&type=script&setup=true&lang.ts
+var _hoisted_1$9 = { class: "row items-center full-width q-gutter-x-sm" };
 //#endregion
 //#region src/pages/auth/unidades/unidades-index.vue
 var unidades_index_default = /* @__PURE__ */ defineComponent({
@@ -5374,9 +5678,8 @@ var unidades_index_default = /* @__PURE__ */ defineComponent({
 			await getdatos();
 		});
 		return (_ctx, _cache) => {
-			return openBlock(), createBlock(QPage, { class: "q-pa-xs" }, {
+			return openBlock(), createBlock(QPage, { class: "q-pa-sm" }, {
 				default: withCtx(() => [createVNode(QTable, {
-					title: "Unidades",
 					rows: rows.value,
 					columns: unref(columns$2),
 					flat: "",
@@ -5386,41 +5689,71 @@ var unidades_index_default = /* @__PURE__ */ defineComponent({
 					loading: loading.value,
 					"row-key": "id",
 					"hide-pagination": "",
-					"rows-per-page-options": [0]
+					"rows-per-page-options": [0],
+					separator: "horizontal"
 				}, {
-					"top-right": withCtx(() => [createVNode(QInput, {
-						outlined: "",
-						dense: "",
-						debounce: "300",
-						modelValue: filter.value,
-						"onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => filter.value = $event),
-						placeholder: "buscar...",
-						clearable: ""
+					top: withCtx(() => [createElementVNode("div", _hoisted_1$9, [
+						createVNode(QIcon, {
+							name: "account_tree",
+							color: "primary",
+							size: "sm"
+						}),
+						_cache[4] || (_cache[4] = createElementVNode("span", { class: "text-subtitle1 text-weight-medium" }, "Unidades", -1)),
+						createVNode(QBtn, {
+							icon: "refresh",
+							flat: "",
+							round: "",
+							dense: "",
+							onClick: _cache[0] || (_cache[0] = ($event) => getdatos())
+						}, {
+							default: withCtx(() => [createVNode(QTooltip, null, {
+								default: withCtx(() => [..._cache[3] || (_cache[3] = [createTextVNode("Recargar", -1)])]),
+								_: 1
+							})]),
+							_: 1
+						}),
+						createVNode(QSpace),
+						createVNode(QInput, {
+							outlined: "",
+							dense: "",
+							debounce: "300",
+							modelValue: filter.value,
+							"onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => filter.value = $event),
+							placeholder: "Buscar...",
+							clearable: "",
+							style: { "width": "200px" }
+						}, {
+							append: withCtx(() => [createVNode(QIcon, { name: "search" })]),
+							_: 1
+						}, 8, ["modelValue"]),
+						createVNode(QBtn, {
+							label: "Registrar",
+							icon: "add",
+							color: "primary",
+							unelevated: "",
+							onClick: _cache[2] || (_cache[2] = ($event) => onclick("new", null))
+						})
+					])]),
+					"body-cell-index": withCtx((props) => [createVNode(QTd, {
+						props,
+						class: "text-caption",
+						style: { "opacity": ".5" }
 					}, {
-						append: withCtx(() => [createVNode(QIcon, {
-							size: "xs",
-							name: "search"
-						})]),
-						_: 1
-					}, 8, ["modelValue"]), createVNode(QBtn, {
-						color: "green",
-						icon: "add",
-						outline: "",
-						square: "",
-						onClick: _cache[1] || (_cache[1] = ($event) => onclick("new", null))
-					}, {
-						default: withCtx(() => [..._cache[2] || (_cache[2] = [createTextVNode(" registrar ", -1)])]),
-						_: 1
-					})]),
-					"body-cell-index": withCtx((props) => [createVNode(QTd, { props }, {
 						default: withCtx(() => [createTextVNode(toDisplayString(props.rowIndex + 1), 1)]),
 						_: 2
 					}, 1032, ["props"])]),
-					"body-cell-fecha_registro": withCtx((props) => [createVNode(QTd, { props }, {
+					"body-cell-fecha_registro": withCtx((props) => [createVNode(QTd, {
+						props,
+						class: "text-caption",
+						style: { "opacity": ".7" }
+					}, {
 						default: withCtx(() => [createTextVNode(toDisplayString(unref(parseFecha)(props.row.fecha_registro)), 1)]),
 						_: 2
 					}, 1032, ["props"])]),
-					"body-cell-opt": withCtx((props) => [createVNode(QTd, { props }, {
+					"body-cell-opt": withCtx((props) => [createVNode(QTd, {
+						props,
+						"auto-width": ""
+					}, {
 						default: withCtx(() => [createVNode(botonera_opt_default$1, {
 							props,
 							onClicked: onclick
@@ -5754,11 +6087,11 @@ var retirar_ticket_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/tickets/ver_ticket.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$9 = { class: "q-my-none" };
-var _hoisted_2$5 = { class: "q-my-none" };
+var _hoisted_1$8 = { class: "q-my-none" };
+var _hoisted_2$6 = { class: "q-my-none" };
 var _hoisted_3$5 = { class: "q-my-none" };
 var _hoisted_4$2 = { class: "q-my-none" };
-var _hoisted_5$1 = {
+var _hoisted_5 = {
 	key: 0,
 	class: "q-my-none"
 };
@@ -5815,14 +6148,14 @@ var ver_ticket_default = /* @__PURE__ */ defineComponent({
 						createVNode(QCardSection, { class: "q-pt-none" }, {
 							default: withCtx(() => [
 								createVNode(QSeparator, { class: "q-mt-none q-mb-lg" }),
-								createElementVNode("p", _hoisted_1$9, [_cache[4] || (_cache[4] = createElementVNode("b", null, "Numero ticket:", -1)), createTextVNode(" " + toDisplayString(ticket.value.id), 1)]),
-								createElementVNode("p", _hoisted_2$5, [_cache[5] || (_cache[5] = createElementVNode("b", null, "Problema:", -1)), createTextVNode(" " + toDisplayString(ticket.value.problema), 1)]),
+								createElementVNode("p", _hoisted_1$8, [_cache[4] || (_cache[4] = createElementVNode("b", null, "Numero ticket:", -1)), createTextVNode(" " + toDisplayString(ticket.value.id), 1)]),
+								createElementVNode("p", _hoisted_2$6, [_cache[5] || (_cache[5] = createElementVNode("b", null, "Problema:", -1)), createTextVNode(" " + toDisplayString(ticket.value.problema), 1)]),
 								createElementVNode("p", _hoisted_3$5, [_cache[6] || (_cache[6] = createElementVNode("b", null, "Estado:", -1)), createTextVNode(" " + toDisplayString(ticket.value.estado), 1)]),
 								createElementVNode("p", _hoisted_4$2, [_cache[7] || (_cache[7] = createElementVNode("b", null, "Reportado el:", -1)), createTextVNode(" " + toDisplayString(unref(parseFecha)(ticket.value.fecha_registro)), 1)]),
 								createVNode(QSeparator),
 								_cache[16] || (_cache[16] = createElementVNode("small", null, "Interaccion:", -1)),
 								(openBlock(true), createElementBlock(Fragment, null, renderList(ticket.value.respuestas, (r, ind) => {
-									return openBlock(), createElementBlock("div", { key: ind }, [ticket.value.usuario_id == r.usuario_id ? (openBlock(), createElementBlock("p", _hoisted_5$1, [
+									return openBlock(), createElementBlock("div", { key: ind }, [ticket.value.usuario_id == r.usuario_id ? (openBlock(), createElementBlock("p", _hoisted_5, [
 										_cache[8] || (_cache[8] = createElementVNode("b", null, "yo:", -1)),
 										_cache[9] || (_cache[9] = createTextVNode()),
 										_cache[10] || (_cache[10] = createElementVNode("br", null, null, -1)),
@@ -5865,8 +6198,8 @@ var ver_ticket_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/tickets/tickets_1.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$8 = { class: "q-pa-none" };
-var _hoisted_2$4 = { style: { "text-wrap": "wrap" } };
+var _hoisted_1$7 = { class: "q-pa-none" };
+var _hoisted_2$5 = { style: { "text-wrap": "wrap" } };
 var _hoisted_3$4 = { style: { "text-wrap": "wrap" } };
 //#endregion
 //#region src/pages/auth/tickets/tickets_1.vue
@@ -5903,7 +6236,7 @@ var tickets_1_default = /* @__PURE__ */ defineComponent({
 			console.log("mis tickets");
 		});
 		return (_ctx, _cache) => {
-			return openBlock(), createElementBlock("div", _hoisted_1$8, [
+			return openBlock(), createElementBlock("div", _hoisted_1$7, [
 				createVNode(QTable, {
 					title: "",
 					class: "my-sticky-header-table",
@@ -5933,7 +6266,7 @@ var tickets_1_default = /* @__PURE__ */ defineComponent({
 						props,
 						style: { "min-width": "350px" }
 					}, {
-						default: withCtx(() => [createElementVNode("p", _hoisted_2$4, toDisplayString(props.row.problema), 1)]),
+						default: withCtx(() => [createElementVNode("p", _hoisted_2$5, toDisplayString(props.row.problema), 1)]),
 						_: 2
 					}, 1032, ["props"])]),
 					"body-cell-respuesta": withCtx((props) => [createVNode(QTd, {
@@ -6069,8 +6402,8 @@ var tickets_1_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/tickets/tickets_2.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$7 = { class: "q-pa-none" };
-var _hoisted_2$3 = { style: { "text-wrap": "wrap" } };
+var _hoisted_1$6 = { class: "q-pa-none" };
+var _hoisted_2$4 = { style: { "text-wrap": "wrap" } };
 var _hoisted_3$3 = { style: { "text-wrap": "wrap" } };
 //#endregion
 //#region src/pages/auth/tickets/tickets_2.vue
@@ -6100,7 +6433,7 @@ var tickets_2_default = /* @__PURE__ */ defineComponent({
 			console.log("mis tickets");
 		});
 		return (_ctx, _cache) => {
-			return openBlock(), createElementBlock("div", _hoisted_1$7, [
+			return openBlock(), createElementBlock("div", _hoisted_1$6, [
 				createVNode(QTable, {
 					title: "",
 					class: "my-sticky-header-table",
@@ -6123,7 +6456,7 @@ var tickets_2_default = /* @__PURE__ */ defineComponent({
 						props,
 						style: { "min-width": "350px" }
 					}, {
-						default: withCtx(() => [createElementVNode("p", _hoisted_2$3, toDisplayString(props.row.problema), 1)]),
+						default: withCtx(() => [createElementVNode("p", _hoisted_2$4, toDisplayString(props.row.problema), 1)]),
 						_: 2
 					}, 1032, ["props"])]),
 					"body-cell-respuesta": withCtx((props) => [createVNode(QTd, {
@@ -6254,59 +6587,57 @@ var tickets_2_default = /* @__PURE__ */ defineComponent({
 	}
 });
 //#endregion
-//#region src/pages/auth/tickets/tickets_index.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$6 = { class: "q-pa-md" };
-//#endregion
 //#region src/pages/auth/tickets/tickets_index.vue
 var tickets_index_default = /* @__PURE__ */ defineComponent({
 	__name: "tickets_index",
 	setup(__props) {
 		const tab = ref("mails");
 		return (_ctx, _cache) => {
-			return openBlock(), createElementBlock("div", _hoisted_1$6, [
-				createVNode(QTabs, {
-					modelValue: tab.value,
-					"onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => tab.value = $event),
-					dense: "",
-					class: "text-grey bg-primary",
-					"active-color": "white",
-					"indicator-color": "white",
-					align: "justify",
-					"narrow-indicator": ""
-				}, {
-					default: withCtx(() => [createVNode(QTab, {
-						name: "mails",
-						icon: "confirmation_number",
-						label: "Mis tickets"
-					}), createVNode(QTab, {
-						name: "alarms",
-						icon: "local_activity",
-						label: "Tickets general"
-					})]),
-					_: 1
-				}, 8, ["modelValue"]),
-				createVNode(QSeparator),
-				createVNode(QTabPanels, {
-					modelValue: tab.value,
-					"onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => tab.value = $event),
-					animated: ""
-				}, {
-					default: withCtx(() => [createVNode(QTabPanel, {
-						name: "mails",
-						class: "q-pa-none"
+			return openBlock(), createBlock(QPage, { class: "q-pa-sm" }, {
+				default: withCtx(() => [
+					createVNode(QTabs, {
+						modelValue: tab.value,
+						"onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => tab.value = $event),
+						"active-color": "primary",
+						"indicator-color": "primary",
+						align: "left",
+						dense: ""
 					}, {
-						default: withCtx(() => [createVNode(tickets_1_default)]),
+						default: withCtx(() => [createVNode(QTab, {
+							name: "mails",
+							icon: "confirmation_number",
+							label: "Mis tickets"
+						}), createVNode(QTab, {
+							name: "alarms",
+							icon: "local_activity",
+							label: "Tickets general"
+						})]),
 						_: 1
-					}), createVNode(QTabPanel, {
-						name: "alarms",
-						class: "q-pa-none"
+					}, 8, ["modelValue"]),
+					createVNode(QSeparator),
+					createVNode(QTabPanels, {
+						modelValue: tab.value,
+						"onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => tab.value = $event),
+						animated: ""
 					}, {
-						default: withCtx(() => [createVNode(tickets_2_default)]),
+						default: withCtx(() => [createVNode(QTabPanel, {
+							name: "mails",
+							class: "q-pa-none"
+						}, {
+							default: withCtx(() => [createVNode(tickets_1_default)]),
+							_: 1
+						}), createVNode(QTabPanel, {
+							name: "alarms",
+							class: "q-pa-none"
+						}, {
+							default: withCtx(() => [createVNode(tickets_2_default)]),
+							_: 1
+						})]),
 						_: 1
-					})]),
-					_: 1
-				}, 8, ["modelValue"])
-			]);
+					}, 8, ["modelValue"])
+				]),
+				_: 1
+			});
 		};
 	}
 });
@@ -6454,11 +6785,10 @@ var botonera_opt_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/notificaciones/registrar-upd.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$5 = { class: "text-h6" };
-var _hoisted_2$2 = { class: "row q-col-gutter-sm" };
-var _hoisted_3$2 = { class: "col-xs-12" };
-var _hoisted_4$1 = { class: "col-xs-6" };
-var _hoisted_5 = { class: "col-xs-6" };
+var _hoisted_1$5 = { class: "text-subtitle1 text-weight-medium" };
+var _hoisted_2$3 = { class: "row q-col-gutter-md" };
+var _hoisted_3$2 = { class: "col-xs-12 col-sm-6" };
+var _hoisted_4$1 = { class: "col-xs-12 col-sm-6" };
 //#endregion
 //#region src/pages/auth/notificaciones/registrar-upd.vue
 var registrar_upd_default = /* @__PURE__ */ defineComponent({
@@ -6524,80 +6854,88 @@ var registrar_upd_default = /* @__PURE__ */ defineComponent({
 				modelValue: alert.value,
 				"onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => alert.value = $event),
 				persistent: "",
-				square: ""
+				style: {
+					"width": "min(700px, 95vw)",
+					"max-width": "95vw"
+				}
 			}, {
-				default: withCtx(() => [createVNode(QCard, { xstyle: "min-width: 600px" }, {
-					default: withCtx(() => [createVNode(QForm, {
-						onSubmit,
-						class: "q-gutter-md"
-					}, {
+				default: withCtx(() => [createVNode(QCard, {
+					flat: "",
+					bordered: "",
+					style: { "width": "100%" }
+				}, {
+					default: withCtx(() => [createVNode(QForm, { onSubmit }, {
 						default: withCtx(() => [
-							createVNode(QCardSection, { class: "row items-center q-pb-xs" }, {
+							createVNode(QCardSection, { class: "row items-center q-py-sm q-px-md" }, {
 								default: withCtx(() => [
-									createElementVNode("div", _hoisted_1$5, toDisplayString(input.value.id ? "Editar" : "Registrar"), 1),
+									createVNode(QIcon, {
+										name: input.value.id ? "edit" : "notifications",
+										color: "primary",
+										class: "q-mr-sm"
+									}, null, 8, ["name"]),
+									createElementVNode("span", _hoisted_1$5, toDisplayString(input.value.id ? "Editar notificación" : "Registrar notificación"), 1),
 									createVNode(QSpace),
-									withDirectives((openBlock(), createBlock(QBtn, { flat: "" }, {
-										default: withCtx(() => [..._cache[4] || (_cache[4] = [createElementVNode("b", null, "x", -1)])]),
-										_: 1
-									})), [[ClosePopup]])
+									withDirectives(createVNode(QBtn, {
+										flat: "",
+										round: "",
+										dense: "",
+										icon: "close"
+									}, null, 512), [[ClosePopup]])
 								]),
 								_: 1
 							}),
-							createVNode(QCardSection, { class: "q-py-none" }, {
-								default: withCtx(() => [createElementVNode("div", _hoisted_2$2, [
-									createElementVNode("div", _hoisted_3$2, [createVNode(QEditor, {
-										counter: "",
-										outlined: "",
-										modelValue: input.value.mensaje,
-										"onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => input.value.mensaje = $event),
-										definitions: definicion.value,
-										toolbar: unref(toolbar)(_ctx.$q)
-									}, null, 8, [
-										"modelValue",
-										"definitions",
-										"toolbar"
-									])]),
-									createElementVNode("div", _hoisted_4$1, [createVNode(QInput, {
-										outlined: "",
-										type: "datetime-local",
-										modelValue: input.value.desde,
-										"onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => input.value.desde = $event),
-										modelModifiers: { trim: true },
-										label: "desde:",
-										dense: "",
-										"lazy-rules": "",
-										rules: [(val) => val && val.length > 0 || "campo obligatorio"]
-									}, null, 8, ["modelValue", "rules"])]),
-									createElementVNode("div", _hoisted_5, [createVNode(QInput, {
-										outlined: "",
-										type: "datetime-local",
-										modelValue: input.value.hasta,
-										"onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => input.value.hasta = $event),
-										label: "hasta:",
-										dense: "",
-										"lazy-rules": "",
-										rules: [(val) => val && val.length > 0 || "campo obligatorio"]
-									}, null, 8, ["modelValue", "rules"])])
-								])]),
+							createVNode(QSeparator),
+							createVNode(QCardSection, { class: "column q-gutter-md" }, {
+								default: withCtx(() => [createVNode(QEditor, {
+									modelValue: input.value.mensaje,
+									"onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => input.value.mensaje = $event),
+									definitions: definicion.value,
+									toolbar: unref(toolbar)(_ctx.$q)
+								}, null, 8, [
+									"modelValue",
+									"definitions",
+									"toolbar"
+								]), createElementVNode("div", _hoisted_2$3, [createElementVNode("div", _hoisted_3$2, [createVNode(QInput, {
+									outlined: "",
+									type: "datetime-local",
+									modelValue: input.value.desde,
+									"onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => input.value.desde = $event),
+									modelModifiers: { trim: true },
+									label: "Desde",
+									dense: "",
+									"lazy-rules": "",
+									rules: [(val) => val && val.length > 0 || "campo obligatorio"]
+								}, null, 8, ["modelValue", "rules"])]), createElementVNode("div", _hoisted_4$1, [createVNode(QInput, {
+									outlined: "",
+									type: "datetime-local",
+									modelValue: input.value.hasta,
+									"onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => input.value.hasta = $event),
+									label: "Hasta",
+									dense: "",
+									"lazy-rules": "",
+									rules: [(val) => val && val.length > 0 || "campo obligatorio"]
+								}, null, 8, ["modelValue", "rules"])])])]),
 								_: 1
 							}),
-							createVNode(QCardActions, { align: "right" }, {
-								default: withCtx(() => [createVNode(QBtn, {
-									outline: "",
+							createVNode(QSeparator),
+							createVNode(QCardActions, {
+								align: "right",
+								class: "q-pa-sm"
+							}, {
+								default: withCtx(() => [withDirectives(createVNode(QBtn, {
+									flat: "",
+									disable: loading.value,
+									label: "Cerrar",
+									icon: "close",
+									color: "negative"
+								}, null, 8, ["disable"]), [[ClosePopup]]), createVNode(QBtn, {
+									unelevated: "",
 									loading: loading.value,
-									label: "aceptar",
-									square: "",
+									label: "Guardar",
 									icon: "check",
 									type: "submit",
 									color: "positive"
-								}, null, 8, ["loading"]), withDirectives(createVNode(QBtn, {
-									outline: "",
-									disable: loading.value,
-									label: "cerrar",
-									square: "",
-									icon: "close",
-									color: "negative"
-								}, null, 8, ["disable"]), [[ClosePopup]])]),
+								}, null, 8, ["loading"])]),
 								_: 1
 							})
 						]),
@@ -6612,7 +6950,8 @@ var registrar_upd_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/notificaciones/notis-index.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$4 = ["innerHTML"];
+var _hoisted_1$4 = { class: "row items-center full-width q-gutter-x-sm" };
+var _hoisted_2$2 = ["innerHTML"];
 //#endregion
 //#region src/pages/auth/notificaciones/notis-index.vue
 var notis_index_default = /* @__PURE__ */ defineComponent({
@@ -6638,9 +6977,8 @@ var notis_index_default = /* @__PURE__ */ defineComponent({
 			await getdatos();
 		});
 		return (_ctx, _cache) => {
-			return openBlock(), createBlock(QPage, { class: "q-pa-xs" }, {
+			return openBlock(), createBlock(QPage, { class: "q-pa-sm" }, {
 				default: withCtx(() => [createVNode(QTable, {
-					title: "Notificaciones",
 					rows: rows.value,
 					columns: unref(columns),
 					flat: "",
@@ -6650,33 +6988,56 @@ var notis_index_default = /* @__PURE__ */ defineComponent({
 					loading: loading.value,
 					"row-key": "id",
 					"hide-pagination": "",
-					"rows-per-page-options": [0]
+					"rows-per-page-options": [0],
+					separator: "horizontal"
 				}, {
-					"top-right": withCtx(() => [createVNode(QInput, {
-						outlined: "",
-						dense: "",
-						debounce: "300",
-						modelValue: filter.value,
-						"onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => filter.value = $event),
-						placeholder: "buscar...",
-						clearable: ""
+					top: withCtx(() => [createElementVNode("div", _hoisted_1$4, [
+						createVNode(QIcon, {
+							name: "notifications",
+							color: "primary",
+							size: "sm"
+						}),
+						_cache[4] || (_cache[4] = createElementVNode("span", { class: "text-subtitle1 text-weight-medium" }, "Notificaciones", -1)),
+						createVNode(QBtn, {
+							icon: "refresh",
+							flat: "",
+							round: "",
+							dense: "",
+							onClick: _cache[0] || (_cache[0] = ($event) => getdatos())
+						}, {
+							default: withCtx(() => [createVNode(QTooltip, null, {
+								default: withCtx(() => [..._cache[3] || (_cache[3] = [createTextVNode("Recargar", -1)])]),
+								_: 1
+							})]),
+							_: 1
+						}),
+						createVNode(QSpace),
+						createVNode(QInput, {
+							outlined: "",
+							dense: "",
+							debounce: "300",
+							modelValue: filter.value,
+							"onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => filter.value = $event),
+							placeholder: "Buscar...",
+							clearable: "",
+							style: { "width": "200px" }
+						}, {
+							append: withCtx(() => [createVNode(QIcon, { name: "search" })]),
+							_: 1
+						}, 8, ["modelValue"]),
+						createVNode(QBtn, {
+							label: "Registrar",
+							icon: "add",
+							color: "primary",
+							unelevated: "",
+							onClick: _cache[2] || (_cache[2] = ($event) => onclick("new", null))
+						})
+					])]),
+					"body-cell-index": withCtx((props) => [createVNode(QTd, {
+						props,
+						class: "text-caption",
+						style: { "opacity": ".5" }
 					}, {
-						append: withCtx(() => [createVNode(QIcon, {
-							size: "xs",
-							name: "search"
-						})]),
-						_: 1
-					}, 8, ["modelValue"]), createVNode(QBtn, {
-						color: "green",
-						icon: "add",
-						outline: "",
-						square: "",
-						onClick: _cache[1] || (_cache[1] = ($event) => onclick("new", null))
-					}, {
-						default: withCtx(() => [..._cache[2] || (_cache[2] = [createTextVNode(" registrar ", -1)])]),
-						_: 1
-					})]),
-					"body-cell-index": withCtx((props) => [createVNode(QTd, { props }, {
 						default: withCtx(() => [createTextVNode(toDisplayString(props.rowIndex + 1), 1)]),
 						_: 2
 					}, 1032, ["props"])]),
@@ -6688,22 +7049,37 @@ var notis_index_default = /* @__PURE__ */ defineComponent({
 								"list-style": "none"
 							},
 							innerHTML: props.row.mensaje
-						}, null, 8, _hoisted_1$4)]),
+						}, null, 8, _hoisted_2$2)]),
 						_: 2
 					}, 1032, ["props"])]),
-					"body-cell-desde": withCtx((props) => [createVNode(QTd, { props }, {
+					"body-cell-desde": withCtx((props) => [createVNode(QTd, {
+						props,
+						class: "text-caption",
+						style: { "opacity": ".7" }
+					}, {
 						default: withCtx(() => [createTextVNode(toDisplayString(unref(parseFecha)(props.row.desde)), 1)]),
 						_: 2
 					}, 1032, ["props"])]),
-					"body-cell-hasta": withCtx((props) => [createVNode(QTd, { props }, {
+					"body-cell-hasta": withCtx((props) => [createVNode(QTd, {
+						props,
+						class: "text-caption",
+						style: { "opacity": ".7" }
+					}, {
 						default: withCtx(() => [createTextVNode(toDisplayString(unref(parseFecha)(props.row.hasta)), 1)]),
 						_: 2
 					}, 1032, ["props"])]),
-					"body-cell-fecha_registro": withCtx((props) => [createVNode(QTd, { props }, {
+					"body-cell-fecha_registro": withCtx((props) => [createVNode(QTd, {
+						props,
+						class: "text-caption",
+						style: { "opacity": ".7" }
+					}, {
 						default: withCtx(() => [createTextVNode(toDisplayString(unref(parseFecha)(props.row.fecha_registro)), 1)]),
 						_: 2
 					}, 1032, ["props"])]),
-					"body-cell-opt": withCtx((props) => [createVNode(QTd, { props }, {
+					"body-cell-opt": withCtx((props) => [createVNode(QTd, {
+						props,
+						"auto-width": ""
+					}, {
 						default: withCtx(() => [createVNode(botonera_opt_default, {
 							props,
 							onClicked: onclick

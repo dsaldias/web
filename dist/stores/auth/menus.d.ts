@@ -1,1 +1,1 @@
-export declare const cargarMenus: (menus?: never[]) => any;
+export declare const cargarMenus: (menus?: any[]) => any[];

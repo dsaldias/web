@@ -1,79 +1,92 @@
 <template>
-  <q-dialog v-model="alert" persistent square full-width>
-    <q-card>
-      <q-form @submit="onSubmit" class="q-gutter-md">
-        <q-card-section class="row items-center q-pb-xs">
-          <div class="text-h6">{{ input.id ? 'Editar' : 'Registrar' }}</div>
+  <q-dialog v-model="alert" persistent full-width style="max-width: 98vw">
+    <q-card flat bordered>
+      <q-form @submit="onSubmit">
+
+        <!-- Header -->
+        <q-card-section class="row items-center q-py-sm q-px-md">
+          <q-icon :name="input.id ? 'edit' : 'person_add'" color="primary" class="q-mr-sm" />
+          <span class="text-subtitle1 text-weight-medium">{{ input.id ? 'Editar usuario' : 'Registrar usuario' }}</span>
           <q-space />
-          <q-btn flat v-close-popup> <b>x</b> </q-btn>
+          <q-btn flat round dense icon="close" v-close-popup />
         </q-card-section>
 
-        <q-card-section class="q-pt-none">
-          <div class="row q-col-gutter-sm">
+        <q-separator />
+
+        <q-card-section class="q-pt-sm">
+          <div class="row q-col-gutter-md">
+
+            <!-- Col 1: datos personales -->
             <div class="col-xs-12 col-lg-4 col-sm-6">
+              <div class="text-caption text-weight-medium text-primary q-mb-xs" style="letter-spacing:.05em; text-transform:uppercase">
+                Datos personales
+              </div>
               <div class="row q-col-gutter-xs">
                 <div class="col-xs-12 col-sm-9 items-center">
-                  <q-img class="zoomer" v-if="foto_64" :src="foto_64" spinner-color="white" />
+                  <q-img class="zoomer rounded-borders" v-if="foto_64" :src="foto_64" spinner-color="white" style="max-height:120px; object-fit:cover" />
                 </div>
                 <div class="col-xs-12 col-sm-4">
-                  <q-input outlined v-model.trim="input.nombres" label="* nombres:" dense lazy-rules counter :rules="[(val) => (val && val.length > 0) || 'campo obligatorio']" />
+                  <q-input outlined v-model.trim="input.nombres" label="* Nombres" dense lazy-rules counter :rules="[(val) => (val && val.length > 0) || 'campo obligatorio']" />
                 </div>
                 <div class="col-xs-12 col-sm-4">
-                  <q-input outlined v-model.trim="input.apellido1" label="* apellido1:" dense lazy-rules counter :rules="[(val) => (val && val.length > 0) || 'campo obligatorio']" />
+                  <q-input outlined v-model.trim="input.apellido1" label="* Apellido 1" dense lazy-rules counter :rules="[(val) => (val && val.length > 0) || 'campo obligatorio']" />
                 </div>
                 <div class="col-xs-12 col-sm-4">
-                  <q-input outlined v-model.trim="input.apellido2" label="apellido2:" dense lazy-rules counter :rules="[(val) => val_apellido2(val)]" />
+                  <q-input outlined v-model.trim="input.apellido2" label="Apellido 2" dense lazy-rules counter :rules="[(val) => val_apellido2(val)]" />
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                  <q-input outlined v-model.trim="input.username" label="* username:" dense lazy-rules counter :rules="[(val) => (val && val.length > 0) || 'campo obligatorio']" />
+                  <q-input outlined v-model.trim="input.username" label="* Username" dense lazy-rules counter :rules="[(val) => (val && val.length > 0) || 'campo obligatorio']" />
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                  <q-input outlined v-model.trim="input.password" label="* password:" dense lazy-rules counter :rules="[(val) => val_password(val, input)]" />
+                  <q-input outlined v-model.trim="input.password" label="* Password" dense lazy-rules counter :rules="[(val) => val_password(val, input)]" />
                 </div>
                 <div class="col-xs-12 col-sm-4">
-                  <q-input outlined v-model.trim="input.documento" label="documento:" dense lazy-rules counter :rules="[(val) => val_documento(val)]" />
+                  <q-input outlined v-model.trim="input.documento" label="Documento" dense lazy-rules counter :rules="[(val) => val_documento(val)]" />
                 </div>
                 <div class="col-xs-12 col-sm-4">
-                  <q-input outlined v-model.trim="input.celular" label="celular:" dense lazy-rules counter :rules="[(val) => val_celular(val)]" />
+                  <q-input outlined v-model.trim="input.celular" label="Celular" dense lazy-rules counter :rules="[(val) => val_celular(val)]" />
                 </div>
-                <div class="col-xs-12 col-sm-4">
-                  <q-radio v-model="input.sexo" val="F" label="F" />
-                  <q-radio v-model="input.sexo" val="M" label="M" />
-                </div>
-                <div class="col-xs-12 col-sm-6">
-                  <q-input outlined v-model.trim="input.correo" label="correo:" dense lazy-rules counter :rules="[(val) => val_correo(val)]" />
+                <div class="col-xs-12 col-sm-4 row items-center q-gutter-x-sm">
+                  <span class="text-caption text-weight-medium">Sexo:</span>
+                  <q-radio v-model="input.sexo" val="F" label="F" dense />
+                  <q-radio v-model="input.sexo" val="M" label="M" dense />
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                  <q-input outlined v-model.trim="input.direccion" label="direccion:" dense lazy-rules counter :rules="[(val) => val_direccion(val)]" />
+                  <q-input outlined v-model.trim="input.correo" label="Correo" dense lazy-rules counter :rules="[(val) => val_correo(val)]" />
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                  <q-file style="min-width: 50px" clearable v-model="foto_file" dense accept="image/*" :disable="loading" square outlined color="orange" label="Seleccionar foto de perfil (2MB)" max-file-size="2097152" @update:model-value="filevalue($event)" @rejected="onRejected"  >
+                  <q-input outlined v-model.trim="input.direccion" label="Dirección" dense lazy-rules counter :rules="[(val) => val_direccion(val)]" />
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                  <q-file clearable v-model="foto_file" dense accept="image/*" :disable="loading" outlined color="primary" label="Foto de perfil (máx. 2MB)" max-file-size="2097152" @update:model-value="filevalue($event)" @rejected="onRejected">
                     <template v-slot:prepend>
-                      <q-icon name="upload" />
+                      <q-icon name="photo_camera" />
                     </template>
-                    <q-tooltip> Seleccionar foto de perfil </q-tooltip>
                   </q-file>
                 </div>
-                <div class="col-xs-12 col-sm-6">
-                  <q-btn color="grey" icon="fmd_good" dense square outline @click="openGeo()">
-                    Ubicacion geografica
+                <div class="col-xs-12 col-sm-6 row items-center q-gutter-x-xs">
+                  <q-btn color="primary" icon="fmd_good" dense flat @click="openGeo()">
+                    Ubicación
                   </q-btn>
-                  <small class="q-pl-md"> {{ input.latitud }} {{ input.longitud }} </small>
+                  <span class="text-caption" style="opacity:.6"> {{ input.latitud }} {{ input.longitud }} </span>
                 </div>
               </div>
             </div>
 
+            <!-- Col 2: unidad y rol -->
             <div class="col-xs-12 col-lg-4 col-sm-6">
-              <q-btn dense outline color="primary" icon="home" @click="openrolunidad()">
+              <div class="text-caption text-weight-medium text-primary q-mb-xs" style="letter-spacing:.05em; text-transform:uppercase">
+                Unidad y Rol
+              </div>
+              <q-btn unelevated color="primary" icon="add_home_work" class="q-mb-sm" @click="openrolunidad()">
                 Asignar unidad y rol
               </q-btn>
-              <q-list bordered class="rounded-borders q-mt-sm">
-                <q-expansion-item expand-separator icon="home_work" label="unidades -> rol" class="bg-primary" caption="obligatorio" dense dark default-opened >
-                  <q-table :rows="rol_unidades" :columns="columns_rolunidad" flat dense square hide-pagination :rows-per-page-options="[0]" row-key="id" >
+              <q-list bordered separator class="rounded-borders">
+                <q-expansion-item expand-separator icon="home_work" label="Unidades → Rol" caption="obligatorio" dense default-opened header-class="text-primary">
+                  <q-table :rows="rol_unidades" :columns="columns_rolunidad" flat dense hide-pagination :rows-per-page-options="[0]" row-key="id">
                     <template v-slot:body-cell-opt="props">
-                      <q-td :props="props">
-                        <q-btn flat dense size="xs" icon="delete" color="red" @click="quitrolunidad(props.row)" >
-                        </q-btn>
+                      <q-td :props="props" auto-width>
+                        <q-btn flat dense icon="delete_outline" color="negative" @click="quitrolunidad(props.row)" />
                       </q-td>
                     </template>
                   </q-table>
@@ -81,26 +94,31 @@
               </q-list>
             </div>
 
+            <!-- Col 3: permisos y menús -->
             <div class="col-xs-12 col-lg-4 col-sm-6">
-              <q-list bordered class="rounded-borders">
-                <q-expansion-item expand-separator icon="admin_panel_settings" label="Permisos global" class="bg-primary" caption="opcional" dense dark >
-                  <q-table :rows="permisos" :columns="columns_permisos" flat dense square :loading="loading_permisos" hide-pagination :rows-per-page-options="[0]" row-key="metodo" selection="multiple" v-model:selected="permisos_select" />
+              <div class="text-caption text-weight-medium text-primary q-mb-xs" style="letter-spacing:.05em; text-transform:uppercase">
+                Permisos globales
+              </div>
+              <q-list bordered separator class="rounded-borders">
+                <q-expansion-item expand-separator icon="admin_panel_settings" label="Permisos" caption="opcional" dense header-class="text-primary">
+                  <q-table :rows="permisos" :columns="columns_permisos" flat dense :loading="loading_permisos" hide-pagination :rows-per-page-options="[0]" row-key="metodo" selection="multiple" v-model:selected="permisos_select" />
                 </q-expansion-item>
-
-                <q-separator />
-
-                <q-expansion-item expand-separator icon="folder_shared" label="Menus global" class="bg-primary" caption="opcional" dense dark >
-                  <q-table :rows="menus" :columns="columns_menus" flat dense square :loading="loading_menus" hide-pagination :rows-per-page-options="[0]" row-key="id" selection="multiple" v-model:selected="menus_select" />
+                <q-expansion-item expand-separator icon="folder_shared" label="Menús" caption="opcional" dense header-class="text-primary">
+                  <q-table :rows="menus" :columns="columns_menus" flat dense :loading="loading_menus" hide-pagination :rows-per-page-options="[0]" row-key="id" selection="multiple" v-model:selected="menus_select" />
                 </q-expansion-item>
               </q-list>
             </div>
+
           </div>
         </q-card-section>
 
-        <q-card-actions align="right">
-          <q-btn outline :loading="loading" label="aceptar" square icon="check" type="submit" color="positive" />
-          <q-btn outline :disable="loading" label="cerrar" square icon="close" color="negative" v-close-popup />
+        <q-separator />
+
+        <q-card-actions align="right" class="q-pa-sm">
+          <q-btn flat :disable="loading" label="Cerrar" icon="close" color="negative" v-close-popup />
+          <q-btn unelevated :loading="loading" label="Guardar" icon="check" type="submit" color="positive" />
         </q-card-actions>
+
       </q-form>
     </q-card>
 

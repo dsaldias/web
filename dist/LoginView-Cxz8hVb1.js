@@ -1,4 +1,4 @@
-import { T as mostrarNotifyError, _ as cargarMenus, t as useLoginStore, v as LoginService } from "./user-3ifBbU8j.js";
+import { T as mostrarNotifyError, _ as cargarMenus, t as useLoginStore, v as LoginService } from "./user-jN3O9LXh.js";
 import { Fragment, createBlock, createCommentVNode, createElementBlock, createElementVNode, createTextVNode, createVNode, defineComponent, onBeforeMount, onMounted, onUnmounted, openBlock, ref, unref, vShow, withCtx, withDirectives } from "vue";
 import QBtn from "quasar/src/components/btn/QBtn.js";
 import QCardSection from "quasar/src/components/card/QCardSection.js";
@@ -14,24 +14,23 @@ import QForm from "quasar/src/components/form/QForm.js";
 import useQuasar from "quasar/src/composables/use-quasar/use-quasar.js";
 import QImg from "quasar/src/components/img/QImg.js";
 import { useRouter } from "vue-router";
-//#region \0plugin-vue:export-helper
-var _plugin_vue_export_helper_default = (sfc, props) => {
-	const target = sfc.__vccOpts || sfc;
-	for (const [key, val] of props) target[key] = val;
-	return target;
-};
+//#region src/components/app/ext/logo/app_login_logo.vue?vue&type=script&setup=true&lang.ts
+var _hoisted_1$1 = { class: "text-center q-pt-none q-pb-sm" };
 //#endregion
 //#region src/components/app/ext/logo/app_login_logo.vue
-var _sfc_main = {};
-var _hoisted_1$1 = { class: "text-center q-pt-none q-pb-sm" };
-function _sfc_render(_ctx, _cache) {
-	return openBlock(), createElementBlock("div", _hoisted_1$1, [createVNode(QImg, {
-		src: "wapiton.png",
-		alt: "logo",
-		style: { "width": "100px" }
-	})]);
-}
-var app_login_logo_default = /* @__PURE__ */ _plugin_vue_export_helper_default(_sfc_main, [["render", _sfc_render]]);
+var app_login_logo_default = /* @__PURE__ */ defineComponent({
+	__name: "app_login_logo",
+	setup(__props) {
+		const logo = ref(process.env.APP_LOGO);
+		return (_ctx, _cache) => {
+			return openBlock(), createElementBlock("div", _hoisted_1$1, [createVNode(QImg, {
+				src: logo.value,
+				alt: "logo",
+				style: { "width": "100px" }
+			}, null, 8, ["src"])]);
+		};
+	}
+});
 //#endregion
 //#region src/components/auth/login/LoginView.vue?vue&type=script&setup=true&lang.ts
 var _hoisted_1 = {
@@ -81,7 +80,7 @@ var LoginView_default = /* @__PURE__ */ defineComponent({
 				const l = res.login;
 				useLogin.setSessionKey(l.session_key);
 				useLogin.setNewSessionTime(l.session_time);
-				const menuItemsAgrupados = await cargarMenus(l.me.menus);
+				const menuItemsAgrupados = cargarMenus(l.me.menus);
 				useLogin.setMenus(menuItemsAgrupados);
 				useLogin.setUser(l.me);
 				setTimeout(() => void reload(), 50);
@@ -264,4 +263,4 @@ var LoginView_default = /* @__PURE__ */ defineComponent({
 	}
 });
 //#endregion
-export { _plugin_vue_export_helper_default as n, LoginView_default as t };
+export { LoginView_default as t };

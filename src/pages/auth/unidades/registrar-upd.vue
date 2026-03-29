@@ -1,43 +1,48 @@
 <template>
-  <q-dialog v-model="alert" persistent square>
-    <q-card xstyle="min-width: 600px">
-      <q-form @submit="onSubmit" class="q-gutter-md">
-        <q-card-section class="row items-center q-pb-xs">
-          <div class="text-h6">{{ input.id ? 'Editar' : 'Registrar' }}</div>
+  <q-dialog v-model="alert" persistent style="width: min(620px, 95vw); max-width: 95vw">
+    <q-card flat bordered style="width: 100%">
+      <q-form @submit="onSubmit">
+
+        <!-- Header -->
+        <q-card-section class="row items-center q-py-sm q-px-md">
+          <q-icon :name="input.id ? 'edit' : 'account_tree'" color="primary" class="q-mr-sm" />
+          <span class="text-subtitle1 text-weight-medium">{{ input.id ? 'Editar unidad' : 'Registrar unidad' }}</span>
           <q-space />
-          <q-btn flat v-close-popup> <b>x</b> </q-btn>
+          <q-btn flat round dense icon="close" v-close-popup />
         </q-card-section>
 
-        <q-card-section class="q-pt-none">
-          <div class="row q-col-gutter-xs">
-            <div class="col-xs-12 col-sm-6">
-              <q-input outlined v-model.trim="input.nombre" label="nombre:" dense lazy-rules counter :rules="[(val) => (val && val.length > 0) || 'campo obligatorio']" />
-              <q-input outlined type="number" v-model.number="input.orden" label="orden:" dense lazy-rules :rules="[
+        <q-separator />
+
+        <q-card-section>
+          <div class="row q-col-gutter-md">
+            <div class="col-xs-12 col-sm-6 column q-gutter-sm">
+              <q-input outlined v-model.trim="input.nombre" label="Nombre" dense lazy-rules counter :rules="[(val) => (val && val.length > 0) || 'campo obligatorio']" />
+              <q-input outlined type="number" v-model.number="input.orden" label="Orden" dense lazy-rules :rules="[
                   (val) => (val !== null && val !== '') || 'campo obligatorio',
                   (val) => (val >= 0 && val < 100) || 'debe ser mayor a cero',
                 ]"
               />
+              <div class="row items-center q-gutter-x-sm">
+                <q-btn color="primary" icon="fmd_good" flat @click="openGeo()">
+                  Ubicación
+                </q-btn>
+                <span class="text-caption" style="opacity:.6">{{ input.latitud }} {{ input.longitud }}</span>
+              </div>
             </div>
 
             <div class="col-xs-12 col-sm-6">
-              <q-input outlined v-model.trim="input.descripcion" label="descripcion:" type="textarea" rows="5" dense lazy-rules counter :rules="[(val) => (val && val.length > 0) || 'campo obligatorio']" />
-            </div>
-
-            <div class="col-xs-12 col-sm-6">
-              <q-btn color="grey" icon="fmd_good" dense square outline @click="openGeo()">
-                Ubicacion geografica
-              </q-btn> 
-              <small class="q-pl-md"> {{ input.latitud }} {{ input.longitud }} </small>
+              <q-input outlined v-model.trim="input.descripcion" label="Descripción" type="textarea" rows="5" dense lazy-rules counter :rules="[(val) => (val && val.length > 0) || 'campo obligatorio']" />
             </div>
           </div>
-          
-          
         </q-card-section>
 
-        <q-card-actions align="right">
-          <q-btn outline :loading="loading" label="aceptar" square icon="check" type="submit" color="positive" />
-          <q-btn outline :disable="loading" label="cerrar" square icon="close" color="negative" v-close-popup />
+        <q-separator />
+
+        <q-card-actions align="right" class="q-pa-sm">
+          <q-btn flat :disable="loading" label="Cerrar" icon="close" color="negative" v-close-popup />
+          <q-btn unelevated :loading="loading" label="Guardar" icon="check" type="submit" color="positive" />
         </q-card-actions>
+
       </q-form>
     </q-card>
 

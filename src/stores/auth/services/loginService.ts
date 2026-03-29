@@ -40,6 +40,7 @@ export default class LoginService {
               color
               grupo
               orden
+              padre_id
             }
             roles {
               rol {

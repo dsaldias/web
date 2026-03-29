@@ -2,34 +2,51 @@
   <div class="q-pa-none q-ma-none">
     <q-btn flat class="q-pl-xs q-pr-none" @click="subscribir">
       <q-avatar size="26px">
-        <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+        <q-img v-if="foto_64" :src="foto_64" />
+        <img v-else src="https://cdn.quasar.dev/img/boy-avatar.png" />
       </q-avatar>
-      <span class="q-ml-xs ellipsis" style="max-width: 9em;"> {{ datos.username }} </span>
-      <q-tooltip> Perfil </q-tooltip>
-      <q-menu square >
-        <div class="row no-wrap q-pa-md">
-          <div class="column" style="min-width: 130px;">
-            <div class="text-h6 q-mb-md">Mi Perfil</div>
-            <p class="q-mt-none q-mb-xs"> {{ datos.usuario }} </p>
-            <p class="q-mt-none q-mb-xs"> {{ parseFecha(datos.last_login) }} </p>
-            <p class="q-mt-none q-mb-xs"> {{ datos.roles }} </p>
-            <q-toggle v-model="store.thema_cuaderno" color="primary" dense unchecked-icon="brightness_7" checked-icon="dark_mode" />
-            <q-btn color="green" label="Editar" outline icon="edit" square size="sm" v-close-popup stretch @click="openEdit()" />
+      <span class="q-ml-xs ellipsis" style="max-width: 9em;">{{ datos.username }}</span>
+      <q-icon name="arrow_drop_down" size="xs" />
+      <q-tooltip>Perfil</q-tooltip>
+      <q-menu>
+        <div class="row no-wrap" style="min-width: 320px">
+
+          <!-- Columna izquierda: info + acciones -->
+          <div class="column q-pa-md" style="min-width: 160px; flex: 1">
+            <div class="text-subtitle2 text-weight-medium q-mb-xs">Mi Perfil</div>
+            <q-separator class="q-mb-sm" />
+            <div class="text-body2 q-mb-xs">{{ datos.usuario }}</div>
+            <div class="text-caption" style="opacity:.6">{{ parseFecha(datos.last_login) }}</div>
+            <div class="text-caption text-primary q-mb-md">{{ datos.roles }}</div>
+
+            <q-toggle
+              v-model="store.thema_cuaderno"
+              color="primary"
+              dense
+              unchecked-icon="brightness_7"
+              checked-icon="dark_mode"
+              label="Tema cuaderno"
+              class="text-caption q-mb-sm"
+            />
+
+            <q-btn flat no-caps icon="edit" label="Editar perfil" align="left" v-close-popup @click="openEdit()" />
             <extension_btn />
           </div>
 
-          <q-separator vertical inset class="q-mx-lg" />
+          <q-separator vertical />
 
-          <div class="column items-center" style="min-width: 99px;">
-            <q-avatar size="72px" >
+          <!-- Columna derecha: avatar + salir -->
+          <div class="column items-center justify-between q-pa-md" style="min-width: 110px">
+            <q-avatar size="80px">
               <q-img v-if="foto_64" :src="foto_64" spinner-color="white" />
+              <img v-else src="https://cdn.quasar.dev/img/boy-avatar.png" />
             </q-avatar>
-
-            <p></p>
-            <div class="text-subtitle1 q-mt-md q-mb-xs" style="white-space: nowrap"> {{ datos.usuario }} </div>
-
-            <q-btn color="negative" label="Salir" icon="block" square outline size="sm" v-close-popup stretch @click="logout()" />
+            <div class="text-caption text-center q-mt-sm q-mb-md" style="white-space: nowrap; opacity:.7">
+              {{ datos.username }}
+            </div>
+            <q-btn outline no-caps color="negative" icon="logout" label="Salir" v-close-popup @click="logout()" />
           </div>
+
         </div>
       </q-menu>
     </q-btn>

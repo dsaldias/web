@@ -1,53 +1,46 @@
 <template>
-  <q-dialog v-model="alert" persistent square>
-    <q-card xstyle="min-width: 500px" class="q-pa-md">
-      <q-card-section class="row items-center q-pb-xs">
-        <div class="q-ml-sm text-h6">Usuarios conectados:</div>
-        <q-space />
-      </q-card-section>
-      <q-card-section class="q-pt-none">
-        <q-separator size="xs" class="q-py-none" />
+  <q-dialog v-model="alert" persistent style="width: min(560px, 95vw); max-width: 95vw">
+    <q-card flat bordered style="width: 100%" class="q-py-md">
 
+      <!-- Header -->
+      <q-card-section class="row items-center q-py-sm q-px-md">
+        <q-icon name="people" color="primary" class="q-mr-sm" />
+        <span class="text-subtitle1 text-weight-medium">Usuarios conectados</span>
+        <q-space />
+        <q-btn flat round dense icon="close" @click="handleCancel()" />
+      </q-card-section>
+
+      <q-separator />
+
+      <q-card-section class="q-pa-none q-mb-md">
         <q-table
           :rows="usuarios"
           :columns="columns"
           row-key="id"
           dense
           flat
-          square
           hide-pagination
           :rows-per-page-options="[0]"
+          separator="horizontal"
         >
+          <template v-slot:body-cell-ind="props">
+            <q-td :props="props" class="text-caption" style="opacity:.5">
+              {{ props.rowIndex + 1 }}
+            </q-td>
+          </template>
           <template v-slot:body-cell-usuario="props">
             <q-td :props="props">
               {{ props.row.nombres }} {{ props.row.apellido1 }} {{ props.row.apellido2 }}
             </q-td>
           </template>
-          <template v-slot:body-cell-ind="props">
-            <q-td :props="props">
-              {{ props.rowIndex + 1 }}
-            </q-td>
-          </template>
           <template v-slot:body-cell-last_login="props">
-            <q-td :props="props">
+            <q-td :props="props" class="text-caption" style="opacity:.7">
               {{ parseFecha(props.row.last_login) }}
             </q-td>
           </template>
         </q-table>
       </q-card-section>
 
-      <q-card-actions :align="'center'">
-        <q-btn
-          :loading="loading"
-          flat
-          label="cerrar"
-          no-caps
-          square
-          icon="check"
-          color="positive"
-          @click="handleCancel()"
-        />
-      </q-card-actions>
     </q-card>
   </q-dialog>
 </template>

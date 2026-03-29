@@ -1,34 +1,37 @@
 <template>
-  <q-dialog v-model="alert" persistent square>
-    <q-card xstyle="min-width: 630px">
-      <q-card-section class="row items-center q-pb-xs">
-        <div class="text-h6">Sacar Nuevo Ticket</div>
+  <q-dialog v-model="alert" persistent style="width: min(560px, 95vw); max-width: 95vw">
+    <q-card flat bordered style="width: 100%">
+
+      <q-card-section class="row items-center q-py-sm q-px-md">
+        <q-icon name="confirmation_number" color="primary" class="q-mr-sm" />
+        <span class="text-subtitle1 text-weight-medium">Nuevo ticket</span>
         <q-space />
-        <q-btn flat v-close-popup> <b>x</b> </q-btn>
+        <q-btn flat round dense icon="close" @click="close()" />
       </q-card-section>
 
-      <q-card-section class="q-pt-none">
-        <q-separator class="q-mt-none q-mb-lg" />
+      <q-separator />
 
+      <q-card-section>
         <q-input
           v-model.trim="problema"
           outlined
-          square
           dense
-          label="Describa el problema aqui:"
-          placeholder="no mas de 512 caracteres"
+          label="Describe el problema"
+          placeholder="máximo 512 caracteres"
           type="textarea"
-          rows="12"
-          cols="50"
+          rows="10"
           counter
           :rules="[(val) => val_pro(val)]"
-        ></q-input>
+        />
       </q-card-section>
 
-      <q-card-actions :align="'right'">
-        <q-btn flat :loading="loading" label="cerrar" color="grey" @click="close()" />
-        <q-btn flat :loading="loading" label="Reportar" color="green" @click="select()" />
+      <q-separator />
+
+      <q-card-actions align="right" class="q-pa-sm">
+        <q-btn flat no-caps :loading="loading" label="Cerrar" color="negative" @click="close()" />
+        <q-btn unelevated no-caps :loading="loading" label="Reportar" icon="send" color="primary" @click="select()" />
       </q-card-actions>
+
     </q-card>
   </q-dialog>
 </template>

@@ -32,6 +32,7 @@ export default class MeService {
             color
             grupo
             orden
+            padre_id
           }
           roles {
             rol {

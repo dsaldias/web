@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-xs">
+  <q-page class="q-pa-sm">
     <q-table
       :rows="rows"
       :columns="columns"
@@ -11,62 +11,97 @@
       :loading="loading"
       row-key="id"
       :rows-per-page-options="[100,200,500,1000]"
+      separator="horizontal"
     >
-      <template v-slot:top-left>
-        <b>Usuarios</b>
-        <q-btn icon="refresh" dense flat @click="getdatos()" />
-        <q-toggle
-          v-model="more_datos"
-          @update:model-value="visibleColumns = columnas(more_datos)"
-          color="orange"
-          label="mostrar otros datos"
-          class="q-my-none"
-        />
-      </template>
+      <template v-slot:top>
+        <div class="row items-center full-width q-gutter-x-sm">
+          <!-- Título -->
+          <q-icon name="manage_accounts" color="primary" size="sm" />
+          <span class="text-subtitle1 text-weight-medium">Usuarios</span>
+          <q-btn icon="refresh" flat round dense @click="getdatos()">
+            <q-tooltip>Recargar</q-tooltip>
+          </q-btn>
 
-      <template v-slot:top-right>
-        <q-input outlined dense debounce="300" v-model="filter" placeholder="buscar..." clearable>
-          <template v-slot:append>
-            <q-icon size="xs" name="search" />
-          </template>
-        </q-input>
-        <q-select v-model="rol" :options="roles" option-label="nombre" dense clearable />
-        <q-btn color="green" icon="add" outline square @click="onclick('new', null)">
-          registrar
-        </q-btn> 
+          <q-toggle
+            v-model="more_datos"
+            @update:model-value="visibleColumns = columnas(more_datos)"
+            color="orange"
+            label="más datos"
+            dense
+          />
+
+          <q-space />
+
+          <q-input
+            outlined
+            dense
+            debounce="300"
+            v-model="filter"
+            placeholder="Buscar..."
+            clearable
+            style="width: 200px"
+          >
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+
+          <q-select
+            v-model="rol"
+            :options="roles"
+            option-label="nombre"
+            dense
+            outlined
+            clearable
+            label="Filtrar por rol"
+            style="width: 180px"
+          />
+
+          <q-btn
+            label="Registrar"
+            icon="person_add"
+            color="primary"
+            unelevated
+            @click="onclick('new', null)"
+          />
+        </div>
       </template>
 
       <template v-slot:body-cell-index="props">
-        <q-td :props="props">
+        <q-td :props="props" class="text-caption" style="opacity:.5">
           {{ props.rowIndex + 1 }}
         </q-td>
       </template>
+
       <template v-slot:body-cell-foto_url="props">
         <q-td :props="props">
-          <img v-if="props.row.foto64" :src="props.row.foto64" alt="perfil" style="max-width: 22px" />
+          <q-avatar size="22px" v-if="props.row.foto64">
+            <img :src="props.row.foto64" alt="perfil" />
+          </q-avatar>
+          <q-avatar size="22px" color="primary" text-color="white" icon="person" font-size="12px" v-else />
         </q-td>
       </template>
 
       <template v-slot:body-cell-fecha_registro="props">
-        <q-td :props="props">
+        <q-td :props="props" class="text-caption" style="opacity:.7">
           {{ parseFecha(props.row.fecha_registro) }}
         </q-td>
       </template>
 
       <template v-slot:body-cell-fecha_update="props">
-        <q-td :props="props">
+        <q-td :props="props" class="text-caption" style="opacity:.7">
           {{ parseFecha(props.row.fecha_update) }}
         </q-td>
       </template>
 
       <template v-slot:body-cell-last_login="props">
-        <q-td :props="props">
+        <q-td :props="props" class="text-caption" style="opacity:.7">
           {{ parseFecha(props.row.last_login) }}
         </q-td>
       </template>
 
       <template v-slot:body-cell-opt="props">
-        <q-td :props="props">
+        <q-td :props="props" auto-width>
           <Botonera :props="props" v-on:clicked="onclick" />
         </q-td>
       </template>

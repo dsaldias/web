@@ -1,13 +1,11 @@
 <template>
-  <div class="q-pa-md">
+  <q-page class="q-pa-sm">
     <q-tabs
       v-model="tab"
+      active-color="primary"
+      indicator-color="primary"
+      align="left"
       dense
-      class="text-grey bg-primary"
-      active-color="white"
-      indicator-color="white"
-      :align="'justify'"
-      narrow-indicator
     >
       <q-tab name="mails" icon="confirmation_number" label="Mis tickets" />
       <q-tab name="alarms" icon="local_activity" label="Tickets general" />
@@ -24,7 +22,7 @@
         <tickets_2 />
       </q-tab-panel>
     </q-tab-panels>
-  </div>
+  </q-page>
 </template>
 
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->

@@ -1,77 +1,82 @@
 <template>
-  <q-dialog v-model="alert" persistent square>
-    <q-card flat bordered vv-on:click="checkClickSession()">
-      <q-card-section>
-        <div class="text-h6"> Editar Información Personal </div>
+  <q-dialog v-model="alert" persistent style="width: min(580px, 95vw); max-width: 95vw">
+    <q-card flat bordered style="width: 100%">
+
+      <!-- Header -->
+      <q-card-section class="row items-center q-py-sm q-px-md">
+        <q-icon name="manage_accounts" color="primary" class="q-mr-sm" />
+        <span class="text-subtitle1 text-weight-medium">Editar información personal</span>
+        <q-space />
+        <q-btn flat round dense icon="close" @click="cerrar()" />
       </q-card-section>
 
-      <q-card-section class="q-pt-none">
+      <q-separator />
+
+      <q-card-section>
         <q-form @submit="onSubmit">
-          <div class="row q-col-gutter-xs justify-center">
-            <div class="col-xs-12 col-sm-8 ">
-              <q-img
-                class="zoomer"
-                v-if="foto_64" :src="foto_64"
-                spinner-color="white"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6">
-              <q-input outlined v-model.trim="input.nombres" label="* Nombres:" required lazy-rules dense :rules="[(val:any) => validaciones.val_nombre(val)]" />
-            </div>
-            <div class="col-xs-12 col-sm-6">
-              <q-input outlined v-model.trim="input.apellido1" label="* Apellido 1:" required lazy-rules dense :rules="[(val) => validaciones.val_apellido1(val)]" />
-            </div>
-            <div class="col-xs-12 col-sm-6">
-              <q-input outlined v-model.trim="input.apellido2" label="Apellido 2:" dense lazy-rules :rules="[(val) => validaciones.val_apellido2(val)]" />
-            </div>
-            <div class="col-xs-12 col-sm-6">
-              <q-input outlined v-model.trim="input.celular" label="Celular:" dense lazy-rules :rules="[(val) => validaciones.val_celular(val)]" />
-            </div>
-            <div class="col-xs-12 col-sm-6">
-              <q-input outlined v-model.trim="input.correo" label="Correo:" dense lazy-rules :rules="[(val) => validaciones.val_correo(val)]" />
-            </div>
-            <div class="col-xs-12 col-sm-6">
-              <q-input outlined v-model.trim="input.documento" label="Documento:" dense lazy-rules :rules="[(val) => validaciones.val_documento(val)]" />
-            </div>
-            <div class="col-xs-12 col-sm-12">
-              <q-input outlined v-model.trim="input.direccion" label="Direccion:" dense lazy-rules :rules="[(val) => validaciones.val_direccion(val)]" />
-            </div>
-            <div class="col-xs-12 col-sm-12">
-              <q-radio v-model="input.sexo" val="F" label="F" />
-              <q-radio v-model="input.sexo" val="M" label="M" />
+          <div class="row q-col-gutter-sm">
+
+            <div class="col-xs-12 flex flex-center">
+              <q-avatar size="90px">
+                <q-img class="zoomer" v-if="foto_64" :src="foto_64" spinner-color="white" />
+                <q-icon v-else name="person" size="60px" color="grey-4" />
+              </q-avatar>
             </div>
 
-            <div class="col-xs-12 col-sm-12">
-              <q-file style="min-width: 50px" clearable v-model="foto_file" dense accept="image/*" :disable="loading" square outlined color="orange" label="Seleccionar foto de perfil (2MB)" max-file-size="2097152" @update:model-value="filevalue($event)" @rejected="onRejected" >
+            <div class="col-xs-12 col-sm-6">
+              <q-input outlined v-model.trim="input.nombres" label="* Nombres" required lazy-rules dense :rules="[(val:any) => validaciones.val_nombre(val)]" />
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <q-input outlined v-model.trim="input.apellido1" label="* Apellido 1" required lazy-rules dense :rules="[(val) => validaciones.val_apellido1(val)]" />
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <q-input outlined v-model.trim="input.apellido2" label="Apellido 2" dense lazy-rules :rules="[(val) => validaciones.val_apellido2(val)]" />
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <q-input outlined v-model.trim="input.celular" label="Celular" dense lazy-rules :rules="[(val) => validaciones.val_celular(val)]" />
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <q-input outlined v-model.trim="input.correo" label="Correo" dense lazy-rules :rules="[(val) => validaciones.val_correo(val)]" />
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <q-input outlined v-model.trim="input.documento" label="Documento" dense lazy-rules :rules="[(val) => validaciones.val_documento(val)]" />
+            </div>
+            <div class="col-xs-12">
+              <q-input outlined v-model.trim="input.direccion" label="Dirección" dense lazy-rules :rules="[(val) => validaciones.val_direccion(val)]" />
+            </div>
+            <div class="col-xs-12 row items-center q-gutter-x-sm">
+              <span class="text-caption text-weight-medium">Sexo:</span>
+              <q-radio v-model="input.sexo" val="F" label="F" dense />
+              <q-radio v-model="input.sexo" val="M" label="M" dense />
+            </div>
+            <div class="col-xs-12 col-sm-8">
+              <q-file clearable v-model="foto_file" dense accept="image/*" :disable="loading" outlined color="primary" label="Foto de perfil (máx. 2MB)" max-file-size="2097152" @update:model-value="filevalue($event)" @rejected="onRejected">
                 <template v-slot:prepend>
-                  <q-icon name="upload" />
+                  <q-icon name="photo_camera" />
                 </template>
-                <q-tooltip> Seleccionar foto de perfil </q-tooltip>
               </q-file>
             </div>
-
-            <div class="col-xs-12 col-sm-12 q-pt-md">
-              <q-btn color="grey" icon="fmd_good" dense square outline @click="openGeo()"> Ubicacion geografica </q-btn>
-              <small class="q-pl-md"> {{ input.latitud }} {{ input.longitud }} </small>
+            <div class="col-xs-12 col-sm-4 row items-center q-gutter-x-xs">
+              <q-btn color="primary" icon="fmd_good" flat no-caps @click="openGeo()">Ubicación</q-btn>
+              <span class="text-caption" style="opacity:.6">{{ input.latitud }} {{ input.longitud }}</span>
             </div>
+
+            <div class="col-xs-12">
+              <q-separator class="q-mb-sm" />
+              <q-input outlined v-model.trim="input.password" label="Nueva contraseña (opcional)" dense lazy-rules :rules="[(val:any) => validaciones.val_password_opc(val)]" hint="Si cambias la clave, deberás iniciar sesión nuevamente." />
+            </div>
+
           </div>
 
-          <div vv-show="!input.oauth_id">
-            <q-separator color="green" class="q-mt-md q-mb-xs" />
-            <div class="row">
-              <div class="col-xs-12 col-sm-12">
-                <q-input outlined v-model.trim="input.password" label="Cambiar clave de acceso:" dense lazy-rules :rules="[(val:any) => validaciones.val_password_opc(val)]" hint="recuerde iniciar session con la nueva clave."/>
-              </div>
-            </div>
-          </div>
+          <q-linear-progress v-if="loading" indeterminate color="primary" class="q-mt-md" />
 
-          <div class="q-mt-md" :align="'right'">
-            <q-linear-progress v-if="loading" dark rounded indeterminate color="secondary" class="q-mb-sm" />
-            <q-btn :disable="loading" label="Guardar" class="q-mr-xs" icon="done" type="submit" color="positive" square outline />
-            <q-btn :disable="loading" label="cerrar" color="negative" icon="close" square outline @click="cerrar()" />
+          <div class="row justify-end q-gutter-x-sm q-mt-md">
+            <q-btn flat no-caps :disable="loading" label="Cerrar" icon="close" color="negative" @click="cerrar()" />
+            <q-btn unelevated no-caps :disable="loading" label="Guardar" icon="check" type="submit" color="positive" />
           </div>
         </q-form>
       </q-card-section>
+
     </q-card>
 
     <Geo ref="refGeo" v-on:onpin="onpin" />
