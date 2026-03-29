@@ -2424,6 +2424,14 @@ var MainLayout_default = /* @__PURE__ */ defineComponent({
 									"checked-icon": "dark_mode",
 									id: "tuto_mode_dark"
 								}, null, 8, ["modelValue", "color"]),
+								createVNode(QToggle, {
+									modelValue: _ctx.$q.dark.isActive,
+									"onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => _ctx.$q.dark.isActive = $event),
+									color: _ctx.$q.dark ? "black" : "white",
+									"unchecked-icon": "brightness_7",
+									"checked-icon": "dark_mode",
+									id: "tuto_mode_dark"
+								}, null, 8, ["modelValue", "color"]),
 								unref(store).dataUser.usuario && show_time.value ? (openBlock(), createElementBlock("small", {
 									key: 3,
 									innerHTML: unref(store).tiempoSession,
@@ -2442,7 +2450,7 @@ var MainLayout_default = /* @__PURE__ */ defineComponent({
 					unref(store).dataUser.usuario ? (openBlock(), createBlock(QDrawer, {
 						key: 0,
 						modelValue: leftDrawerOpen.value,
-						"onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => leftDrawerOpen.value = $event),
+						"onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => leftDrawerOpen.value = $event),
 						"show-if-above": "",
 						bordered: "",
 						breakpoint: 700,

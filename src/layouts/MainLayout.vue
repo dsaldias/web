@@ -6,7 +6,7 @@
 
         <app_logo />
         <q-btn flat no-caps no-wrap class="q-ml-xs" v-if="$q.screen.gt.xs && store.dataUser.usuario" xto="toHome()" @click="toHomeR()" >
-          <app_name /> 
+          <app_name />
         </q-btn>
         <q-badge rounded :color="colorWs(store.ws_noti_status)" id="tuto_icon_ws" @dblclick="openConectados()">
           <span v-if="$q.screen.width > 600"> {{ store.ws_total_conectados }} conexiones </span>
@@ -19,6 +19,7 @@
         <q-space />
         <RolUnidad v-if="store.dataUser.usuario" id="tuto_rol_select"/>
         <q-toggle v-model="$q.dark.isActive" @update:model-value="$q.dark.set($event)" :color="$q.dark?'black':'white'" unchecked-icon="brightness_7" checked-icon="dark_mode" id="tuto_mode_dark"/>
+        <q-toggle v-model="$q.dark.isActive" :color="$q.dark?'black':'white'" unchecked-icon="brightness_7" checked-icon="dark_mode" id="tuto_mode_dark"/>
         <small v-if="store.dataUser.usuario && show_time" v-html="store.tiempoSession" title="fin de sesion" id="tuto_hora_session"> </small>
         <BtnPerfil v-if="store.dataUser.usuario" id="tuto_btn_perfil" />
       </q-toolbar>
@@ -31,12 +32,12 @@
             <q-avatar v-if="foto_64">
               <q-img :src="foto_64" spinner-color="white" />
             </q-avatar>
-          </q-item> 
+          </q-item>
           <q-linear-progress v-if="store.loading_menus" dark size="xs" indeterminate color="secondary" class="q-ma-none q-pa-none" />
 
           <template v-for="t in store.menus">
             <template v-for="(link, i) in t" :key="link.text">
-              
+
               <q-item v-ripple clickable :to="link.path" active-class="text-secondary">
                 <q-item-section avatar>
                   <!-- <q-icon :color="link.color" :name="link.icon" /> -->
@@ -69,7 +70,7 @@
           </q-expansion-item> -->
         </q-list>
       </q-scroll-area>
-    </q-drawer> 
+    </q-drawer>
 
     <EdgeLight ref="edgeLightRef" />
     <usuarios_conectados v-if="showConectados" ref="refusuarios_conectados" />
@@ -77,7 +78,7 @@
     <!-- en el set setSessionKey() se usa cuando relogin -->
     <q-page-container >
       <Login v-if="!store.dataUser.usuario" />
-      <router-view v-else /> 
+      <router-view v-else />
       <FabButton />
     </q-page-container>
   </q-layout>
@@ -106,7 +107,7 @@ const show_time = ref(process.env.SHOW_TIME_LABEL)
 const show_landing = ref(process.env.SHOW_LANDING_PAGE)
 const foto_64 = ref('')
 const refusuarios_conectados = ref()
-const router = useRouter() 
+const router = useRouter()
 const Login = defineAsyncComponent(() => import('pages/auth/login/login-index.vue'))
 const usuarios_conectados = defineAsyncComponent(
   () => import('src/components/app/ext/conectados/usuarios_conectados.vue'),
