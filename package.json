@@ -15,9 +15,13 @@
     },
     "./style": "./dist/auth-web.css"
   },
+  "bin": {
+    "auth-web-init": "./scripts/init.mjs"
+  },
   "files": [
     "dist",
-    "src"
+    "src",
+    "scripts"
   ],
   "scripts": {
     "lint": "eslint -c ./eslint.config.js \"./src*/**/*.{ts,js,cjs,mjs,vue}\"",
