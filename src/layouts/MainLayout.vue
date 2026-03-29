@@ -18,7 +18,7 @@
 
         <q-space />
         <RolUnidad v-if="store.dataUser.usuario" id="tuto_rol_select"/>
-        <q-toggle :model-value="$q.dark.isActive" @update:model-value="$q.dark.set($event)" :color="$q.dark?'black':'white'" unchecked-icon="brightness_7" checked-icon="dark_mode" id="tuto_mode_dark"/>
+        <q-toggle v-model="$q.dark.isActive" @update:model-value="$q.dark.set($event)" :color="$q.dark?'black':'white'" unchecked-icon="brightness_7" checked-icon="dark_mode" id="tuto_mode_dark"/>
         <small v-if="store.dataUser.usuario && show_time" v-html="store.tiempoSession" title="fin de sesion" id="tuto_hora_session"> </small>
         <BtnPerfil v-if="store.dataUser.usuario" id="tuto_btn_perfil" />
       </q-toolbar>
