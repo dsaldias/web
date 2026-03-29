@@ -1,6 +1,6 @@
 import 'src/css/club-neon.css'
 import type { App } from 'vue'
-import { watch, effectScope } from 'vue'
+import { watch } from 'vue'
 import { ApolloClient } from '@apollo/client/core'
 import { ApolloClients, provideApolloClients } from '@vue/apollo-composable'
 import { Dark, Cookies } from 'quasar'
@@ -31,24 +31,20 @@ export const AuthPlugin = {
     app.provide(ApolloClients, apolloClients)
 
     // Inicializar dark mode desde cookie
-    // const cookieName = config.cookieThemeName || 'quasar-theme-auth'
-    const cookieName = process.env.COOKIE_THEME_NAME || ''
+    const cookieName = config.cookieThemeName || 'quasar-theme-auth'
     const cookieOpts = { expires: 365, path: '/' }
     Dark.set(Cookies.get(cookieName) === 'true')
-    effectScope(true).run(() => {
-      watch(
-        () => Dark.isActive,
-        (val) => {
-          Cookies.set(cookieName, String(val), cookieOpts);
-          const metaThemeColor = document.querySelector('meta[name=theme-color]')
-          if (metaThemeColor) {
-            const pColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim()
-            const color = val ? '#040b25' : pColor
-            metaThemeColor.setAttribute('content', color)
-            window.alert(color)
-          }
-         },
-      )
-    })
+    watch(
+      () => Dark.isActive,
+      (val) => {
+        window.alert(val)
+        Cookies.set(cookieName, String(val), cookieOpts)
+        const metaThemeColor = document.querySelector('meta[name=theme-color]')
+        if (metaThemeColor) {
+          const pColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim()
+          metaThemeColor.setAttribute('content', val ? '#040b25' : pColor)
+        }
+      },
+    )
   },
 }

@@ -1,7 +1,7 @@
 import { A as toHomePath, C as chartAreaBorder, D as parseFecha, E as parseErrors, O as parseTextError, S as ajustarFechaUTC, T as mostrarNotifyError, _ as cargarMenus, a as avisos_show_default, b as setConfig, c as mutar$1, d as __extends, f as __read, g as re_login_default, h as mostrarRelogin, i as mostrarAviso, j as toast1, k as parseTextErrorWs, l as query$1, m as __values, o as NotisService, p as __spreadArray, r as eventBus, s as defectoOps$1, t as useLoginStore, u as lib_default, w as defectoOps$2, x as ajustarFechaLocal, y as encriptarString } from "./user-sITiXt2Y.js";
 import { n as sql_usuarios, t as UsuariosService } from "./usuariosService-DeiCZJ49.js";
 import { n as _plugin_vue_export_helper_default, t as LoginView_default } from "./LoginView-DdFCkGtG.js";
-import { Fragment, Transition, computed, createBlock, createCommentVNode, createElementBlock, createElementVNode, createTextVNode, createVNode, defineAsyncComponent, defineComponent, effectScope, nextTick, normalizeClass, normalizeStyle, onBeforeMount, onMounted, onUnmounted, openBlock, ref, renderList, resolveComponent, toDisplayString, unref, watch, withCtx, withDirectives } from "vue";
+import { Fragment, Transition, computed, createBlock, createCommentVNode, createElementBlock, createElementVNode, createTextVNode, createVNode, defineAsyncComponent, defineComponent, nextTick, normalizeClass, normalizeStyle, onBeforeMount, onMounted, onUnmounted, openBlock, ref, renderList, resolveComponent, toDisplayString, unref, watch, withCtx, withDirectives } from "vue";
 import { ApolloClient } from "@apollo/client/core";
 import { ApolloClients, provideApolloClients, useMutation, useQuery, useSubscription } from "@vue/apollo-composable";
 import Dark from "quasar/src/plugins/dark/Dark.js";
@@ -184,23 +184,20 @@ var AuthPlugin = { install(app, config) {
 	};
 	provideApolloClients(apolloClients);
 	app.provide(ApolloClients, apolloClients);
-	const cookieName = process.env.COOKIE_THEME_NAME || "";
+	const cookieName = config.cookieThemeName || "quasar-theme-auth";
 	const cookieOpts = {
 		expires: 365,
 		path: "/"
 	};
 	Dark.set(Cookies.get(cookieName) === "true");
-	effectScope(true).run(() => {
-		watch(() => Dark.isActive, (val) => {
-			Cookies.set(cookieName, String(val), cookieOpts);
-			const metaThemeColor = document.querySelector("meta[name=theme-color]");
-			if (metaThemeColor) {
-				const pColor = getComputedStyle(document.documentElement).getPropertyValue("--primary").trim();
-				const color = val ? "#040b25" : pColor;
-				metaThemeColor.setAttribute("content", color);
-				window.alert(color);
-			}
-		});
+	watch(() => Dark.isActive, (val) => {
+		window.alert(val);
+		Cookies.set(cookieName, String(val), cookieOpts);
+		const metaThemeColor = document.querySelector("meta[name=theme-color]");
+		if (metaThemeColor) {
+			const pColor = getComputedStyle(document.documentElement).getPropertyValue("--primary").trim();
+			metaThemeColor.setAttribute("content", val ? "#040b25" : pColor);
+		}
 	});
 } };
 //#endregion
