@@ -154,17 +154,38 @@ function patchQuasarConfig() {
     return
   }
   let content = readFileSync(configPath, 'utf-8')
+
+  // 1. Agregar 'auth' al array boot
   if (content.includes("'auth'")) {
     warn("quasar.config.ts ya tiene boot 'auth'")
-    return
+  } else {
+    content = content.replace(/boot:\s*\[/, "boot: [\n      'auth',")
+    ok("quasar.config.ts — boot 'auth' agregado")
   }
-  // Busca boot: [ con cualquier contenido y agrega 'auth' al inicio
-  content = content.replace(
-    /boot:\s*\[/,
-    "boot: [\n      'auth',"
-  )
+
+  // 2. Agregar alias de Apollo si no existe ya
+  const apolloAlias = `'@apollo/client/core/index.js': '@apollo/client'`
+  if (content.includes(apolloAlias)) {
+    warn("quasar.config.ts ya tiene alias Apollo")
+  } else if (content.includes('extendViteConf')) {
+    // Inyectar alias dentro del extendViteConf existente
+    content = content.replace(
+      /extendViteConf\s*\(\s*\w+\s*\)\s*\{/,
+      (match) =>
+        match +
+        `\n        viteConf.resolve ??= {}\n        viteConf.resolve.alias = Object.assign(viteConf.resolve.alias ?? {}, { ${apolloAlias} })`
+    )
+    ok("quasar.config.ts — alias Apollo inyectado en extendViteConf existente")
+  } else {
+    // Crear extendViteConf nuevo antes del cierre del bloque build:
+    content = content.replace(
+      /(\bbuild\s*:\s*\{)/,
+      `$1\n      extendViteConf(viteConf) {\n        viteConf.resolve ??= {}\n        viteConf.resolve.alias = Object.assign(viteConf.resolve.alias ?? {}, { ${apolloAlias} })\n      },`
+    )
+    ok("quasar.config.ts — extendViteConf con alias Apollo agregado")
+  }
+
   writeFileSync(configPath, content, 'utf-8')
-  ok("quasar.config.ts — boot 'auth' agregado")
 }
 
 // ─── Ejecutar ────────────────────────────────────────────────────────────────
