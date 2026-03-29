@@ -251,6 +251,22 @@ function installPeerDeps() {
   ok('dependencias Apollo instaladas')
 }
 
+// ─── Patch index.html ────────────────────────────────────────────────────────
+
+function patchIndexHtml() {
+  const htmlPath = join(cwd, 'index.html')
+  if (!existsSync(htmlPath)) { warn('index.html no encontrado'); return }
+  let src = readFileSync(htmlPath, 'utf-8')
+  const marker = 'name="theme-color"'
+  if (src.includes(marker)) { warn('index.html → theme-color ya existe'); return }
+  src = src.replace(
+    /<\/head>/,
+    '    <meta name="theme-color" content="#054287" />\n  </head>'
+  )
+  writeFileSync(htmlPath, src, 'utf-8')
+  ok('index.html → theme-color agregado')
+}
+
 // ─── Run ─────────────────────────────────────────────────────────────────────
 
 console.log('\n🚀  Inicializando proyecto con @dsaldias/auth-web...\n')
@@ -264,6 +280,9 @@ escribir('.env',                   env)
 
 console.log('\n── quasar.config.ts ─────────────────────────────────')
 patchQuasarConfig()
+
+console.log('\n── index.html ───────────────────────────────────────')
+patchIndexHtml()
 
 console.log('\n── Dependencias Apollo ──────────────────────────────')
 installPeerDeps()
