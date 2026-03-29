@@ -194,7 +194,8 @@ function patchQuasarConfig() {
   }
 
   // 3. css array: ensure auth-web.scss and tuto_driver.scss are included
-  const requiredCss = ['src/css/auth-web.scss', 'src/css/tuto_driver.scss']
+  // Quasar resolves css entries relative to src/css/, so just use the filename
+  const requiredCss = ['auth-web.scss', 'tuto_driver.scss']
   for (const cssFile of requiredCss) {
     if (!src.includes(cssFile)) {
       // If there's a css array, append; otherwise add one
