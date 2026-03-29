@@ -1,6 +1,5 @@
 import 'src/css/club-neon.css'
 import type { App } from 'vue'
-import { watch } from 'vue'
 import { ApolloClient } from '@apollo/client/core'
 import { ApolloClients, provideApolloClients } from '@vue/apollo-composable'
 import { Dark, Cookies } from 'quasar'
@@ -34,17 +33,20 @@ export const AuthPlugin = {
     const cookieName = config.cookieThemeName || 'quasar-theme-auth'
     const cookieOpts = { expires: 365, path: '/' }
     Dark.set(Cookies.get(cookieName) === 'true')
-    watch(
-      () => Dark.isActive,
-      (val) => {
-        window.alert(val)
-        Cookies.set(cookieName, String(val), cookieOpts)
-        const metaThemeColor = document.querySelector('meta[name=theme-color]')
-        if (metaThemeColor) {
-          const pColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim()
-          metaThemeColor.setAttribute('content', val ? '#040b25' : pColor)
-        }
-      },
-    )
+
+    // MutationObserver: detecta el cambio de body--dark directamente en el DOM.
+    // Más fiable que watch(() => Dark.isActive) cuando el plugin corre como librería
+    // externa, ya que no depende del scope reactivo de Vue en install().
+    const syncTheme = (isDark: boolean) => {
+      Cookies.set(cookieName, String(isDark), cookieOpts)
+      const meta = document.querySelector('meta[name=theme-color]')
+      if (meta) {
+        const primary = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim()
+        meta.setAttribute('content', isDark ? '#040b25' : primary)
+      }
+    }
+    new MutationObserver(() => {
+      syncTheme(document.body.classList.contains('body--dark'))
+    }).observe(document.body, { attributes: true, attributeFilter: ['class'] })
   },
 }

@@ -1,4 +1,4 @@
-import { t as LoginView_default } from "./LoginView-DdFCkGtG.js";
+import { t as LoginView_default } from "./LoginView-KYhYuDb3.js";
 import { createBlock, defineComponent, openBlock } from "vue";
 //#endregion
 //#region src/pages/auth/login/login-index.vue
