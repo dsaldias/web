@@ -1,6 +1,5 @@
 import 'src/css/club-neon.css'
 import type { App } from 'vue'
-import { nextTick } from 'vue'
 import { ApolloClient } from '@apollo/client/core'
 import { ApolloClients, provideApolloClients } from '@vue/apollo-composable'
 import { Dark, Cookies } from 'quasar'
@@ -33,7 +32,12 @@ export const AuthPlugin = {
     // Inicializar dark mode desde cookie
     const cookieName = config.cookieThemeName || 'quasar-theme-auth'
     const cookieOpts = { expires: 365, path: '/' }
-    void nextTick(() => Dark.set(Cookies.get(cookieName) === 'true'))
+    // Agregar body--dark inmediatamente (CSS, sin flash) y aplicar el
+    // estado reactivo después del mount con setTimeout para que todos
+    // los componentes ya estén montados cuando Dark.set dispare.
+    const isDark = Cookies.get(cookieName) === 'true'
+    if (isDark) document.body.classList.add('body--dark')
+    setTimeout(() => Dark.set(isDark), 0)
 
     // MutationObserver: detecta el cambio de body--dark directamente en el DOM.
     // Más fiable que watch(() => Dark.isActive) cuando el plugin corre como librería

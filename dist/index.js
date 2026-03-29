@@ -1,7 +1,6 @@
-import { A as toHomePath, C as chartAreaBorder, D as parseFecha, E as parseErrors, O as parseTextError, S as ajustarFechaUTC, T as mostrarNotifyError, _ as cargarMenus, a as avisos_show_default, b as setConfig, c as mutar$1, d as __extends, f as __read, g as re_login_default, h as mostrarRelogin, i as mostrarAviso, j as toast1, k as parseTextErrorWs, l as query$1, m as __values, o as NotisService, p as __spreadArray, r as eventBus, s as defectoOps$1, t as useLoginStore, u as lib_default, w as defectoOps$2, x as ajustarFechaLocal, y as encriptarString } from "./user-sITiXt2Y.js";
-import { n as sql_usuarios, t as UsuariosService } from "./usuariosService-DeiCZJ49.js";
-import { n as _plugin_vue_export_helper_default, t as LoginView_default } from "./LoginView-DdFCkGtG.js";
-import { Fragment, Transition, computed, createBlock, createCommentVNode, createElementBlock, createElementVNode, createTextVNode, createVNode, defineAsyncComponent, defineComponent, nextTick, normalizeClass, normalizeStyle, onBeforeMount, onMounted, onUnmounted, openBlock, ref, renderList, resolveComponent, toDisplayString, unref, watch, withCtx, withDirectives } from "vue";
+import { A as toHomePath, C as chartAreaBorder, D as parseFecha, E as parseErrors, O as parseTextError, S as ajustarFechaUTC, T as mostrarNotifyError, _ as cargarMenus, a as avisos_show_default, b as setConfig, c as mutar$1, d as __extends, f as __read, g as re_login_default, h as mostrarRelogin, i as mostrarAviso, j as toast1, k as parseTextErrorWs, l as query$1, m as __values, o as NotisService, p as __spreadArray, r as eventBus, s as defectoOps$1, t as useLoginStore, u as lib_default, w as defectoOps$2, x as ajustarFechaLocal, y as encriptarString } from "./user-3ifBbU8j.js";
+import { n as sql_usuarios, t as UsuariosService } from "./usuariosService-gSmuoApK.js";
+import { n as _plugin_vue_export_helper_default, t as LoginView_default } from "./LoginView-KYhYuDb3.js";
 import { ApolloClient } from "@apollo/client/core";
 import { ApolloClients, provideApolloClients, useMutation, useQuery, useSubscription } from "@vue/apollo-composable";
 import Dark from "quasar/src/plugins/dark/Dark.js";
@@ -11,6 +10,7 @@ import { Kind, OperationTypeNode } from "graphql";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
+import { Fragment, Transition, computed, createBlock, createCommentVNode, createElementBlock, createElementVNode, createTextVNode, createVNode, defineAsyncComponent, defineComponent, nextTick, normalizeClass, normalizeStyle, onBeforeMount, onMounted, onUnmounted, openBlock, ref, renderList, resolveComponent, toDisplayString, unref, watch, withCtx, withDirectives } from "vue";
 import Notify from "quasar/src/plugins/notify/Notify.js";
 import QSpace from "quasar/src/components/space/QSpace.js";
 import QBtn from "quasar/src/components/btn/QBtn.js";
@@ -189,7 +189,9 @@ var AuthPlugin = { install(app, config) {
 		expires: 365,
 		path: "/"
 	};
-	nextTick(() => Dark.set(Cookies.get(cookieName) === "true"));
+	const isDark = Cookies.get(cookieName) === "true";
+	if (isDark) document.body.classList.add("body--dark");
+	setTimeout(() => Dark.set(isDark), 0);
 	const syncTheme = (isDark) => {
 		Cookies.set(cookieName, String(isDark), cookieOpts);
 		const meta = document.querySelector("meta[name=theme-color]");
@@ -772,11 +774,11 @@ var iniciarSubscripcion = () => {
 };
 var datitos = async (datos) => {
 	if (!datos) return;
-	const { useLoginStore } = await import("./user-sITiXt2Y.js").then((n) => n.n);
+	const { useLoginStore } = await import("./user-3ifBbU8j.js").then((n) => n.n);
 	useLoginStore().setNotifyData(datos);
 };
 var setconectadosTxt = async (datos) => {
-	const { useLoginStore } = await import("./user-sITiXt2Y.js").then((n) => n.n);
+	const { useLoginStore } = await import("./user-3ifBbU8j.js").then((n) => n.n);
 	const store = useLoginStore();
 	store.setWsTotalConectados(datos.total_conectados);
 	store.setWsConectados(datos.conectados);
@@ -2339,8 +2341,8 @@ var MainLayout_default = /* @__PURE__ */ defineComponent({
 		const foto_64 = ref("");
 		const refusuarios_conectados = ref();
 		const router = useRouter();
-		const Login = defineAsyncComponent(() => import("./login-index-CZDbFBrE.js"));
-		const usuarios_conectados = defineAsyncComponent(() => import("./usuarios_conectados-OnioKWbk.js"));
+		const Login = defineAsyncComponent(() => import("./login-index-DZ6mJCW0.js"));
+		const usuarios_conectados = defineAsyncComponent(() => import("./usuarios_conectados-CnNcaOZU.js"));
 		const showConectados = ref(false);
 		const pendingOpenConectados = ref(false);
 		const edgeLightRef = ref();
