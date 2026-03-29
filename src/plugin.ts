@@ -38,6 +38,7 @@ export const AuthPlugin = {
     // Más fiable que watch(() => Dark.isActive) cuando el plugin corre como librería
     // externa, ya que no depende del scope reactivo de Vue en install().
     const syncTheme = (isDark: boolean) => {
+      Dark.set(isDark)
       Cookies.set(cookieName, String(isDark), cookieOpts)
       const meta = document.querySelector('meta[name=theme-color]')
       if (meta) {
