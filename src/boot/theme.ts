@@ -16,7 +16,7 @@ export default boot(() => {
     (val) => {
       Dark.set(val)
       Cookies.set(cookie_name, '' + val)
-
+      window.alert('themeeeee')
       setTheme(val)
     },
   )
