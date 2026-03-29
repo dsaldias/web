@@ -9,7 +9,7 @@ import { resolve } from 'path'
 export default defineConfig({
   plugins: [
     vue(),
-    quasar({ sassVariables: false }), // resuelve q-btn etc. a imports de 'quasar' en el dist
+    quasar({ sassVariables: 'src/css/quasar.variables.scss' }), // incluye CSS de componentes Quasar con variables del proyecto
     dts({
       include: ['src'],
       exclude: ['src/pages', 'src/router', 'src/boot', 'src/stores/app'],
