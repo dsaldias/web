@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'fs'
-import { join } from 'path'
+import { join, dirname } from 'path'
+import { fileURLToPath } from 'url'
 import { execSync } from 'child_process'
+
+const pkgRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 
 const cwd = process.cwd()
 const ok   = (msg) => console.log(`  ✅ ${msg}`)
@@ -183,14 +186,34 @@ function patchQuasarConfig() {
       // Insert before closing bracket of plugins array
       src = src.replace(
         /plugins\s*:\s*\[([^\]]*)\]/,
-        (match, inner) => `plugins: [${inner.trimEnd()}${inner.trim() ? ', ' : ''}'${plugin}']`
+        (_m, inner) => `plugins: [${inner.trimEnd()}${inner.trim() ? ', ' : ''}'${plugin}']`
       )
       ok(`quasar.config.ts → plugin '${plugin}' agregado`)
       changed = true
     }
   }
 
-  // 3. Apollo alias — fixes @vue/apollo-composable subpath resolution in Vite
+  // 3. css array: ensure auth-web.scss and tuto_driver.scss are included
+  const requiredCss = ['src/css/auth-web.scss', 'src/css/tuto_driver.scss']
+  for (const cssFile of requiredCss) {
+    if (!src.includes(cssFile)) {
+      // If there's a css array, append; otherwise add one
+      if (/css\s*:\s*\[/.test(src)) {
+        src = src.replace(
+          /css\s*:\s*\[([^\]]*)\]/,
+          (_m, inner) => `css: [${inner.trimEnd()}${inner.trim() ? ', ' : ''}'${cssFile}']`
+        )
+      } else {
+        src = src.replace(/build\s*:\s*\{/, `build: {\n      css: ['${cssFile}'],`)
+      }
+      ok(`quasar.config.ts → css '${cssFile}' agregado`)
+      changed = true
+    } else {
+      warn(`quasar.config.ts → css '${cssFile}' ya existe`)
+    }
+  }
+
+  // 4. Apollo alias — fixes @vue/apollo-composable subpath resolution in Vite
   const apolloMarker = '@apollo/client/core/index.js'
   if (src.includes(apolloMarker)) {
     warn('quasar.config.ts → alias Apollo ya existe')
@@ -251,6 +274,28 @@ function installPeerDeps() {
   ok('dependencias Apollo instaladas')
 }
 
+// ─── Copy CSS files ──────────────────────────────────────────────────────────
+
+function copyStyles() {
+  const cssDir = join(cwd, 'src/css')
+  mkdirSync(cssDir, { recursive: true })
+
+  const files = [
+    { src: 'quasar.variables.scss', dest: 'quasar.variables.scss', force: true },
+    { src: 'app.scss',              dest: 'auth-web.scss',          force: false },
+    { src: 'tuto_driver.scss',      dest: 'tuto_driver.scss',       force: false },
+  ]
+
+  for (const f of files) {
+    const srcPath  = join(pkgRoot, 'src/css', f.src)
+    const destPath = join(cssDir, f.dest)
+    if (!existsSync(srcPath)) { warn(`src/css/${f.src} no encontrado en el paquete`); continue }
+    if (existsSync(destPath) && !f.force) { warn(`src/css/${f.dest} ya existe, no se sobrescribe`); continue }
+    writeFileSync(destPath, readFileSync(srcPath, 'utf-8'), 'utf-8')
+    ok(`src/css/${f.dest}`)
+  }
+}
+
 // ─── Patch index.html ────────────────────────────────────────────────────────
 
 function patchIndexHtml() {
@@ -277,6 +322,9 @@ escribir('src/boot/auth.ts',       bootAuth)
 escribir('src/router/rutas-app.ts', rutasApp)
 escribir('src/router/routes.ts',   routes,  true)  // siempre reemplaza el default de Quasar
 escribir('.env',                   env)
+
+console.log('\n── Estilos ──────────────────────────────────────────')
+copyStyles()
 
 console.log('\n── quasar.config.ts ─────────────────────────────────')
 patchQuasarConfig()
