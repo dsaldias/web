@@ -198,6 +198,7 @@ var AuthPlugin = { install(app, config) {
 				const pColor = getComputedStyle(document.documentElement).getPropertyValue("--primary").trim();
 				const color = val ? "#040b25" : pColor;
 				metaThemeColor.setAttribute("content", color);
+				window.alert(color);
 			}
 		});
 	});
