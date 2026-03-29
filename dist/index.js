@@ -193,8 +193,7 @@ var AuthPlugin = { install(app, config) {
 	if (isDark) document.body.classList.add("body--dark");
 	setTimeout(() => {
 		Dark.set(isDark);
-		window.alert(isDark);
-	}, 3900);
+	}, 30);
 	const syncTheme = (isDark) => {
 		Cookies.set(cookieName, String(isDark), cookieOpts);
 		const meta = document.querySelector("meta[name=theme-color]");
