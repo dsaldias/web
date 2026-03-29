@@ -36,7 +36,6 @@ export const AuthPlugin = {
     watch(
       () => Dark.isActive,
       (val) => {
-        Dark.set(val)
         Cookies.set(cookieName, String(val))
       },
     )

@@ -118,6 +118,7 @@ GRAPHQL_AUTH=https://auth.sladia.site/query_auth
 GRAPHQL_APP=https://auth.sladia.site/query
 GRAPHQL_WSS=wss://auth.sladia.site/ws
 GRAPHQL_WSS_APP=wss://auth.sladia.site/ws_app
+GRAPHQL_SSE_APP=https://auth.sladia.site/sse
 
 # Debe coincidir con DECODE_PASS_KEY del .env del servidor
 DECODE_PASS_KEY=Lf5puh9aSuWEmh9Hx1ctoGSn8Qb5kYnn5lM+RBi7e3c=
@@ -131,8 +132,12 @@ SHOW_DASH_REPORTE1=si
 SHOW_DASH_REPORTE2=si
 SHOW_DASH_APP=si
 ACCEPT_OAUTH=
+KEEP_CLIMA=
 SHOW_ROL_SELECT=si
 SHOW_LOGIN_BUTTON=si
+SHOW_TOUR_TUTO=
+
+TUTO_VIDEO_URL=
 
 COOKIE_THEME_NAME=quasar-theme-auth_x
 XDATAUSER_ROLUNIDAD=xrolunidad_auth_x
@@ -143,7 +148,12 @@ XDATAUSER_NAME=xdataUser-auth_x
 XMENUS_NAME=xmenus-auth_x
 XTHEMA_CUADERNO=xthema_cuarderno-auth_x
 X_CLIMA=xclima-auth_x
+API_MAPS=
 LAST_DARK_STATE=quasar-last-dark-state_x
+
+#
+# INGRESA TUS VARIABLES A PARTIR DE AQUI :)
+#
 `
 
 // ─── Patch quasar.config.ts ───────────────────────────────────────────────────
@@ -230,7 +240,7 @@ function installPeerDeps() {
   if (!existsSync(pkgPath)) return
   const pkg    = JSON.parse(readFileSync(pkgPath, 'utf-8'))
   const have   = new Set(Object.keys({ ...pkg.dependencies, ...pkg.devDependencies }))
-  const needed = ['@apollo/client', '@vue/apollo-composable', 'graphql', 'graphql-ws']
+  const needed = ['@apollo/client@3.7.17', '@vue/apollo-composable', 'graphql', 'graphql-ws']
   const missing = needed.filter(p => !have.has(p))
   if (!missing.length) { ok('dependencias Apollo ya instaladas'); return }
 

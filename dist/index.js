@@ -187,7 +187,6 @@ var AuthPlugin = { install(app, config) {
 	const cookieName = config.cookieThemeName || "quasar-theme-auth";
 	Dark.set(Cookies.get(cookieName) === "true");
 	watch(() => Dark.isActive, (val) => {
-		Dark.set(val);
 		Cookies.set(cookieName, String(val));
 	});
 } };
@@ -2419,7 +2418,7 @@ var MainLayout_default = /* @__PURE__ */ defineComponent({
 								})) : createCommentVNode("", true),
 								createVNode(QToggle, {
 									"model-value": _ctx.$q.dark.isActive,
-									"onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => unref(Dark).set($event)),
+									"onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => _ctx.$q.dark.set($event)),
 									color: _ctx.$q.dark ? "black" : "white",
 									"unchecked-icon": "brightness_7",
 									"checked-icon": "dark_mode",
