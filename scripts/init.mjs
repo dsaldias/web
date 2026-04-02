@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'fs'
+import { writeFileSync, readFileSync, existsSync, mkdirSync, renameSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { execSync } from 'child_process'
@@ -169,151 +169,142 @@ LAST_DARK_STATE=quasar-last-dark-state_x
 # GRAPHQL_SSE_APP=https://auth.sladia.site/sse
 `
 
-// ─── Patch quasar.config.ts ───────────────────────────────────────────────────
+// ─── quasar.config.ts template ───────────────────────────────────────────────
+// Based on the default Quasar template with auth-web requirements pre-applied.
+// The user's original is preserved as quasar.config.original.ts for reference
+// (e.g. to copy back their publicPath, appId, vueRouterMode, etc.).
+
+const quasarConfigTemplate = `// Configuration for your app
+// https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
+
+import { defineConfig } from '#q-app/wrappers'
+
+export default defineConfig((ctx) => {
+  return {
+    boot: ['auth'],
+
+    css: ['app.scss', 'auth-web.scss', 'tuto_driver.scss'],
+
+    extras: [
+      'roboto-font',
+      'material-icons',
+    ],
+
+    build: {
+      extendViteConf(viteConf) {
+        if (!viteConf.resolve) { viteConf.resolve = {} }
+        // Redirect bare @apollo/client → @apollo/client/core so Rollup does not
+        // pull in React-specific code. Sub-paths like @apollo/client/link/* are
+        // left untouched because the regex only matches the exact bare import.
+        const existingAlias = viteConf.resolve.alias
+        const aliasArray = Array.isArray(existingAlias)
+          ? existingAlias
+          : Object.entries(existingAlias || {}).map(([find, replacement]) => ({ find, replacement }))
+        viteConf.resolve.alias = [
+          ...aliasArray,
+          { find: /^@apollo\\/client$/, replacement: '@apollo/client/core' },
+        ]
+      },
+
+      // __DEV__ is referenced by the @dsaldias/auth-web dist bundle.
+      rawDefine: { __DEV__: String(ctx.dev) },
+
+      target: {
+        browser: 'baseline-widely-available',
+        node: 'node22',
+      },
+
+      typescript: {
+        strict: true,
+        vueShim: true,
+      },
+
+      vueRouterMode: 'history',
+
+      // ✏️  Personaliza aquí según tu proyecto:
+      // publicPath: '/mi-app/',
+      // distDir: 'dist/spa',
+
+      vitePlugins: [
+        [
+          'vite-plugin-checker',
+          {
+            vueTsc: true,
+            eslint: {
+              lintCommand: 'eslint -c ./eslint.config.js "./src*/**/*.{ts,js,mjs,cjs,vue}"',
+              useFlatConfig: true,
+            },
+          },
+          { server: false },
+        ],
+      ],
+    },
+
+    devServer: {
+      open: false,
+    },
+
+    framework: {
+      config: {},
+      plugins: ['Notify', 'Cookies', 'Meta'],
+    },
+
+    animations: [],
+
+    ssr: {
+      prodPort: 3000,
+      middlewares: ['render'],
+      pwa: false,
+    },
+
+    pwa: {
+      workboxMode: 'GenerateSW',
+    },
+
+    cordova: {},
+
+    capacitor: {
+      hideSplashscreen: true,
+    },
+
+    electron: {
+      preloadScripts: ['electron-preload'],
+      inspectPort: 5858,
+      bundler: 'packager',
+      packager: {},
+      builder: {
+        appId: 'app',
+      },
+    },
+
+    bex: {
+      extraScripts: [],
+    },
+  }
+})
+`
+
+// ─── Write quasar.config.ts ───────────────────────────────────────────────────
 
 function patchQuasarConfig() {
-  const configPath = join(cwd, 'quasar.config.ts')
+  const configPath  = join(cwd, 'quasar.config.ts')
+  const backupPath  = join(cwd, 'quasar.config.original.ts')
+
   if (!existsSync(configPath)) {
     warn('quasar.config.ts no encontrado — revisa que estés en la raíz de un proyecto Quasar')
     return
   }
-  let src = readFileSync(configPath, 'utf-8')
-  let changed = false
 
-  // 1. boot: add 'auth'
-  if (!src.includes("'auth'")) {
-    src = src.replace(/boot\s*:\s*\[\s*\]/, "boot: ['auth']")
-    ok("quasar.config.ts → boot 'auth' agregado")
-    changed = true
+  if (!existsSync(backupPath)) {
+    renameSync(configPath, backupPath)
+    ok('quasar.config.ts → respaldado como quasar.config.original.ts')
   } else {
-    warn("quasar.config.ts → boot 'auth' ya existe")
+    warn('quasar.config.original.ts ya existe — se sobreescribe quasar.config.ts igual')
   }
 
-  // 2. framework.plugins: ensure Notify, Cookies, Meta
-  const requiredPlugins = ['Notify', 'Cookies', 'Meta']
-  for (const plugin of requiredPlugins) {
-    if (src.includes(`'${plugin}'`) || src.includes(`"${plugin}"`)) continue
-
-    // Try to append to existing plugins array (handles single-line and multi-line)
-    const pluginsMatch = src.match(/plugins\s*:\s*\[/)
-    if (pluginsMatch) {
-      src = src.replace(
-        /plugins\s*:\s*\[([^\]]*)\]/,
-        (_m, inner) => `plugins: [${inner.trimEnd()}${inner.trim() ? ', ' : ''}'${plugin}']`
-      )
-      ok(`quasar.config.ts → plugin '${plugin}' agregado`)
-    } else {
-      // No plugins key — add it inside framework: {}
-      const fwMatch = src.match(/framework\s*:\s*\{/)
-      if (fwMatch) {
-        src = src.replace(/framework\s*:\s*\{/, `framework: {\n      plugins: ['${plugin}'],`)
-        ok(`quasar.config.ts → plugins: ['${plugin}'] creado en framework`)
-      } else {
-        warn(`quasar.config.ts → no se pudo agregar plugin '${plugin}': no hay framework ni plugins key`)
-      }
-    }
-    changed = true
-  }
-
-  // 3. css array: ensure auth-web.scss and tuto_driver.scss are included
-  // Quasar resolves css entries relative to src/css/, so just use the filename
-  const requiredCss = ['auth-web.scss', 'tuto_driver.scss']
-  for (const cssFile of requiredCss) {
-    if (!src.includes(cssFile)) {
-      // If there's a css array, append; otherwise add one
-      if (/css\s*:\s*\[/.test(src)) {
-        src = src.replace(
-          /css\s*:\s*\[([^\]]*)\]/,
-          (_m, inner) => `css: [${inner.trimEnd()}${inner.trim() ? ', ' : ''}'${cssFile}']`
-        )
-      } else {
-        src = src.replace(/build\s*:\s*\{/, `build: {\n      css: ['${cssFile}'],`)
-      }
-      ok(`quasar.config.ts → css '${cssFile}' agregado`)
-      changed = true
-    } else {
-      warn(`quasar.config.ts → css '${cssFile}' ya existe`)
-    }
-  }
-
-  // 4. Apollo alias — redirects bare @apollo/client → @apollo/client/core to avoid
-  //    Rollup pulling in React-specific code. Uses regex find so sub-paths are untouched.
-  const apolloMarker = "@apollo/client/core'"
-  if (src.includes(apolloMarker) || src.includes('@apollo/client/core"')) {
-    warn('quasar.config.ts → alias Apollo ya existe')
-  } else {
-    const aliasBody = [
-      `if (!viteConf.resolve) { viteConf.resolve = {} }`,
-      `const existingAlias = viteConf.resolve.alias`,
-      `const aliasArray = Array.isArray(existingAlias)`,
-      `  ? existingAlias`,
-      `  : Object.entries(existingAlias || {}).map(([find, replacement]) => ({ find, replacement }))`,
-      `viteConf.resolve.alias = [`,
-      `  ...aliasArray,`,
-      `  { find: /^@apollo\\/client$/, replacement: '@apollo/client/core' },`,
-      `]`,
-    ].join('\n        ')
-
-    // Case A: uncommented extendViteConf already exists — replace its entire body
-    const evMatch = src.match(/extendViteConf\s*\(\s*(\w+)\s*\)\s*\{/)
-    if (evMatch && !src.slice(0, evMatch.index).trimEnd().endsWith('//')) {
-      const param = evMatch[1]
-      src = src.replace(
-        /extendViteConf\s*\(\s*\w+\s*\)\s*\{[\s\S]*?\n\s*\},/,
-        `extendViteConf(${param}) {\n        ${aliasBody.replace(/viteConf/g, param)}\n      },`
-      )
-      ok('quasar.config.ts → alias Apollo inyectado en extendViteConf existente')
-    } else {
-      // Case B: no extendViteConf — add one inside build: {
-      const newBlock = [
-        `extendViteConf(viteConf) {`,
-        `        ${aliasBody}`,
-        `      },`,
-      ].join('\n      ')
-      src = src.replace(/build\s*:\s*\{/, `build: {\n      ${newBlock}`)
-      ok('quasar.config.ts → extendViteConf con alias Apollo agregado')
-    }
-    changed = true
-  }
-
-  // 5. rawDefine: ensure __DEV__ is defined (required by @dsaldias/auth-web dist)
-  if (src.includes('__DEV__')) {
-    warn('quasar.config.ts → rawDefine __DEV__ ya existe')
-  } else {
-    if (/^\s*rawDefine\s*:\s*\{/m.test(src)) {
-      // Uncommented rawDefine exists — append __DEV__ into it
-      src = src.replace(
-        /rawDefine\s*:\s*\{([^}]*)\}/,
-        (_m, inner) => `rawDefine: {${inner.trimEnd()}${inner.trim() ? ', ' : ''  }__DEV__: String(ctx.dev) }`,
-      )
-      ok('quasar.config.ts → __DEV__ agregado a rawDefine existente')
-    } else if (/\/\/\s*rawDefine\s*:/.test(src)) {
-      // Commented rawDefine line — replace preserving indentation
-      src = src.replace(
-        /([ \t]*)\/\/\s*rawDefine\s*:.*\n/,
-        (_, indent) => `${indent}rawDefine: { __DEV__: String(ctx.dev) },\n`,
-      )
-      ok('quasar.config.ts → rawDefine __DEV__ agregado (descomentado)')
-    } else {
-      // No rawDefine at all — inject inside build: {
-      src = src.replace(/build\s*:\s*\{/, `build: {\n      rawDefine: { __DEV__: String(ctx.dev) },`)
-      ok('quasar.config.ts → rawDefine __DEV__ agregado')
-    }
-    changed = true
-  }
-
-  // 6. Ensure defineConfig callback receives ctx param (needed for rawDefine)
-  if (!src.match(/defineConfig\s*\(\s*\(\s*ctx\b/)) {
-    // Replace (_ctx), (/* ctx */), or anonymous () with (ctx)
-    src = src.replace(
-      /defineConfig\s*\(\s*\(\s*(?:_ctx|\/\*[^*]*\*\/\s*)?\s*\)\s*=>/,
-      'defineConfig((ctx) =>'
-    )
-    ok('quasar.config.ts → parámetro ctx agregado a defineConfig')
-    changed = true
-  }
-
-  if (changed) writeFileSync(configPath, src, 'utf-8')
+  writeFileSync(configPath, quasarConfigTemplate, 'utf-8')
+  ok('quasar.config.ts → creado con configuración auth-web')
+  info('Revisa quasar.config.original.ts para copiar tu publicPath, appId, etc.')
 }
 
 // ─── Install missing peer deps ────────────────────────────────────────────────
