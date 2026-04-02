@@ -182,7 +182,7 @@ function patchQuasarConfig() {
 
   // 1. boot: add 'auth'
   if (!src.includes("'auth'")) {
-    src = src.replace(/boot\s*:\s*\[/, "boot: [\n      'auth',")
+    src = src.replace(/boot\s*:\s*\[\s*\]/, "boot: ['auth']")
     ok("quasar.config.ts → boot 'auth' agregado")
     changed = true
   } else {
@@ -244,14 +244,14 @@ function patchQuasarConfig() {
   } else {
     const aliasBody = [
       `if (!viteConf.resolve) { viteConf.resolve = {} }`,
-      `        const existingAlias = viteConf.resolve.alias`,
-      `        const aliasArray = Array.isArray(existingAlias)`,
-      `          ? existingAlias`,
-      `          : Object.entries(existingAlias || {}).map(([find, replacement]) => ({ find, replacement }))`,
-      `        viteConf.resolve.alias = [`,
-      `          ...aliasArray,`,
-      `          { find: /^@apollo\\/client$/, replacement: '@apollo/client/core' },`,
-      `        ]`,
+      `const existingAlias = viteConf.resolve.alias`,
+      `const aliasArray = Array.isArray(existingAlias)`,
+      `  ? existingAlias`,
+      `  : Object.entries(existingAlias || {}).map(([find, replacement]) => ({ find, replacement }))`,
+      `viteConf.resolve.alias = [`,
+      `  ...aliasArray,`,
+      `  { find: /^@apollo\\/client$/, replacement: '@apollo/client/core' },`,
+      `]`,
     ].join('\n        ')
 
     // Case A: uncommented extendViteConf already exists — replace its entire body
@@ -280,15 +280,22 @@ function patchQuasarConfig() {
   if (src.includes('__DEV__')) {
     warn('quasar.config.ts → rawDefine __DEV__ ya existe')
   } else {
-    if (/rawDefine\s*:\s*\{/.test(src)) {
-      // Append into existing rawDefine object
+    if (/^\s*rawDefine\s*:\s*\{/m.test(src)) {
+      // Uncommented rawDefine exists — append __DEV__ into it
       src = src.replace(
         /rawDefine\s*:\s*\{([^}]*)\}/,
-        (_m, inner) => `rawDefine: {${inner.trimEnd()}${inner.trim() ? ',\n        ' : '\n        '}__DEV__: String(ctx.dev),\n      }`
+        (_m, inner) => `rawDefine: {${inner.trimEnd()}${inner.trim() ? ', ' : ''  }__DEV__: String(ctx.dev) }`,
       )
       ok('quasar.config.ts → __DEV__ agregado a rawDefine existente')
+    } else if (/\/\/\s*rawDefine\s*:/.test(src)) {
+      // Commented rawDefine line — replace preserving indentation
+      src = src.replace(
+        /([ \t]*)\/\/\s*rawDefine\s*:.*\n/,
+        (_, indent) => `${indent}rawDefine: { __DEV__: String(ctx.dev) },\n`,
+      )
+      ok('quasar.config.ts → rawDefine __DEV__ agregado (descomentado)')
     } else {
-      // Add rawDefine block inside build: { … } before the closing brace
+      // No rawDefine at all — inject inside build: {
       src = src.replace(/build\s*:\s*\{/, `build: {\n      rawDefine: { __DEV__: String(ctx.dev) },`)
       ok('quasar.config.ts → rawDefine __DEV__ agregado')
     }
