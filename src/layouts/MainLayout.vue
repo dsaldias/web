@@ -42,8 +42,7 @@
               <q-expansion-item
                 v-if="link.children?.length"
                 :icon="link.icon"
-                :label="link.label"
-                dense
+                :label="link.label" 
                 expand-separator
               >
                 <q-item
@@ -84,19 +83,6 @@
             </template>
           </template>
 
-          <!-- <q-expansion-item dense dense-toggle expand-separator icon="perm_identity" label="Ajustes" >
-            <q-item v-ripple clickable active-class="text-secondary">
-              <q-item-section avatar>
-                <q-icon class="q-ml-lg" color="link.color" name="settings" />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label> jejeje </q-item-label>
-              </q-item-section>
-              <q-item-section avatar>
-                <q-avatar size="md" icon="arrow_right" />
-              </q-item-section>
-            </q-item>
-          </q-expansion-item> -->
         </q-list>
       </q-scroll-area>
     </q-drawer>
