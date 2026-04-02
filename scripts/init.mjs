@@ -236,43 +236,73 @@ function patchQuasarConfig() {
     }
   }
 
-  // 4. Apollo alias — fixes @vue/apollo-composable subpath resolution in Vite
-  const apolloMarker = '@apollo/client/core/index.js'
-  if (src.includes(apolloMarker)) {
+  // 4. Apollo alias — redirects bare @apollo/client → @apollo/client/core to avoid
+  //    Rollup pulling in React-specific code. Uses regex find so sub-paths are untouched.
+  const apolloMarker = "@apollo/client/core'"
+  if (src.includes(apolloMarker) || src.includes('@apollo/client/core"')) {
     warn('quasar.config.ts → alias Apollo ya existe')
   } else {
-    // Lines to inject (simple, no ??= or optional chaining)
-    const aliasLines = [
+    const aliasBody = [
       `if (!viteConf.resolve) { viteConf.resolve = {} }`,
-      `        viteConf.resolve.alias = Object.assign(viteConf.resolve.alias || {}, {`,
-      `          '${apolloMarker}': '@apollo/client',`,
-      `        })`,
+      `        const existingAlias = viteConf.resolve.alias`,
+      `        const aliasArray = Array.isArray(existingAlias)`,
+      `          ? existingAlias`,
+      `          : Object.entries(existingAlias || {}).map(([find, replacement]) => ({ find, replacement }))`,
+      `        viteConf.resolve.alias = [`,
+      `          ...aliasArray,`,
+      `          { find: /^@apollo\\/client$/, replacement: '@apollo/client/core' },`,
+      `        ]`,
     ].join('\n        ')
 
-    // Case A: uncommented extendViteConf already exists — inject at start of body
-    // Match: extendViteConf(anyParam) { OR extendViteConf (anyParam) {
+    // Case A: uncommented extendViteConf already exists — replace its entire body
     const evMatch = src.match(/extendViteConf\s*\(\s*(\w+)\s*\)\s*\{/)
     if (evMatch && !src.slice(0, evMatch.index).trimEnd().endsWith('//')) {
       const param = evMatch[1]
-      // Replace every occurrence of ??= with compatible syntax first
-      src = src.replace(new RegExp(`${param}\\.resolve\\s*\\?\\?=\\s*\\{\\}`, 'g'), `if (!${param}.resolve) { ${param}.resolve = {} }`)
-      src = src.replace(new RegExp(`${param}\\.resolve\\.alias\\s*\\?\\?`, 'g'), `${param}.resolve.alias ||`)
-      // Inject lines at start of body
       src = src.replace(
-        /extendViteConf\s*\(\s*\w+\s*\)\s*\{/,
-        (m) => m + '\n        ' + aliasLines.replace(/viteConf/g, param)
+        /extendViteConf\s*\(\s*\w+\s*\)\s*\{[\s\S]*?\n\s*\},/,
+        `extendViteConf(${param}) {\n        ${aliasBody.replace(/viteConf/g, param)}\n      },`
       )
       ok('quasar.config.ts → alias Apollo inyectado en extendViteConf existente')
     } else {
       // Case B: no extendViteConf — add one inside build: {
       const newBlock = [
         `extendViteConf(viteConf) {`,
-        `        ${aliasLines}`,
+        `        ${aliasBody}`,
         `      },`,
       ].join('\n      ')
       src = src.replace(/build\s*:\s*\{/, `build: {\n      ${newBlock}`)
       ok('quasar.config.ts → extendViteConf con alias Apollo agregado')
     }
+    changed = true
+  }
+
+  // 5. rawDefine: ensure __DEV__ is defined (required by @dsaldias/auth-web dist)
+  if (src.includes('__DEV__')) {
+    warn('quasar.config.ts → rawDefine __DEV__ ya existe')
+  } else {
+    if (/rawDefine\s*:\s*\{/.test(src)) {
+      // Append into existing rawDefine object
+      src = src.replace(
+        /rawDefine\s*:\s*\{([^}]*)\}/,
+        (_m, inner) => `rawDefine: {${inner.trimEnd()}${inner.trim() ? ',\n        ' : '\n        '}__DEV__: String(ctx.dev),\n      }`
+      )
+      ok('quasar.config.ts → __DEV__ agregado a rawDefine existente')
+    } else {
+      // Add rawDefine block inside build: { … } before the closing brace
+      src = src.replace(/build\s*:\s*\{/, `build: {\n      rawDefine: { __DEV__: String(ctx.dev) },`)
+      ok('quasar.config.ts → rawDefine __DEV__ agregado')
+    }
+    changed = true
+  }
+
+  // 6. Ensure defineConfig callback receives ctx param (needed for rawDefine)
+  if (!src.match(/defineConfig\s*\(\s*\(\s*ctx\b/)) {
+    // Replace (_ctx), (/* ctx */), or anonymous () with (ctx)
+    src = src.replace(
+      /defineConfig\s*\(\s*\(\s*(?:_ctx|\/\*[^*]*\*\/\s*)?\s*\)\s*=>/,
+      'defineConfig((ctx) =>'
+    )
+    ok('quasar.config.ts → parámetro ctx agregado a defineConfig')
     changed = true
   }
 

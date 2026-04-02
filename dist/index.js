@@ -2581,7 +2581,6 @@ var MainLayout_default = /* @__PURE__ */ defineComponent({
 												key: 0,
 												icon: link.icon,
 												label: link.label,
-												dense: "",
 												"expand-separator": ""
 											}, {
 												default: withCtx(() => [(openBlock(true), createElementBlock(Fragment, null, renderList(link.children, (child) => {
