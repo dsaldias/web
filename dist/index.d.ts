@@ -8,9 +8,9 @@ export * from './stores/auth/relogin';
 export { encriptarString } from './stores/auth/cifrado';
 export { parseErrors, mostrarNotifyError, toast1, parseTextError, parseTextErrorWs, parseFecha, ajustarFechaUTC, ajustarFechaLocal, toHomePath, chartAreaBorder, } from './stores/auth/utils';
 export * from './stores/auth/event_bus';
-export { mutar as mutarAuth, query as queryAuth, defectoOps as defectoOpsAuth } from './stores/auth/server';
+export { mutar as mutarAuth, query as queryAuth, defectoOps as defectoOpsAuth, } from './stores/auth/server';
 export type { Opciones as OpcionesAuth } from './stores/auth/server';
-export { mutar as mutarApp, query as queryApp, defectoOps as defectoOpsApp } from './stores/auth/serverapp';
+export { mutar as mutarApp, query as queryApp, defectoOps as defectoOpsApp, } from './stores/auth/serverapp';
 export type { Opciones as OpcionesApp } from './stores/auth/serverapp';
 export { subs as subsAuth } from './stores/auth/serverws';
 export type { Valores as ValoresAuth } from './stores/auth/serverws';
@@ -56,4 +56,5 @@ export { default as TicketsIndex } from './pages/auth/tickets/tickets_index.vue'
 export { default as NotisIndex } from './pages/auth/notificaciones/notis-index.vue';
 export { default as DashAuthIndex } from './pages/auth/dashboard/dash-index-auth.vue';
 export * from './pages/auth/usuarios/utils';
+export { columnas, columns } from './pages/auth/usuarios/utils';
 export type * from './components/models';

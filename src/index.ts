@@ -12,19 +12,33 @@ export * from 'src/stores/auth/relogin'
 // Encriptación y utilidades
 export { encriptarString } from 'src/stores/auth/cifrado'
 export {
-  parseErrors, mostrarNotifyError, toast1,
-  parseTextError, parseTextErrorWs,
-  parseFecha, ajustarFechaUTC, ajustarFechaLocal,
-  toHomePath, chartAreaBorder,
+  parseErrors,
+  mostrarNotifyError,
+  toast1,
+  parseTextError,
+  parseTextErrorWs,
+  parseFecha,
+  ajustarFechaUTC,
+  ajustarFechaLocal,
+  toHomePath,
+  chartAreaBorder,
 } from 'src/stores/auth/utils'
 export * from 'src/stores/auth/event_bus'
 
 // Wrappers Apollo — auth (query_auth / ws)
-export { mutar as mutarAuth, query as queryAuth, defectoOps as defectoOpsAuth } from 'src/stores/auth/server'
+export {
+  mutar as mutarAuth,
+  query as queryAuth,
+  defectoOps as defectoOpsAuth,
+} from 'src/stores/auth/server'
 export type { Opciones as OpcionesAuth } from 'src/stores/auth/server'
 
 // Wrappers Apollo — app (query / ws_app)
-export { mutar as mutarApp, query as queryApp, defectoOps as defectoOpsApp } from 'src/stores/auth/serverapp'
+export {
+  mutar as mutarApp,
+  query as queryApp,
+  defectoOps as defectoOpsApp,
+} from 'src/stores/auth/serverapp'
 export type { Opciones as OpcionesApp } from 'src/stores/auth/serverapp'
 
 // Subscripciones WebSocket — auth
@@ -84,6 +98,7 @@ export { default as DashAuthIndex } from 'src/pages/auth/dashboard/dash-index-au
 
 // Columnas de tablas
 export * from 'src/pages/auth/usuarios/utils'
+export { columnas, columns } from 'src/pages/auth/usuarios/utils'
 
 // Tipos TypeScript
 export type * from 'src/components/models'
