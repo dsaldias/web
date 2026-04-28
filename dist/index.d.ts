@@ -55,4 +55,5 @@ export { default as UnidadesIndex } from './pages/auth/unidades/unidades-index.v
 export { default as TicketsIndex } from './pages/auth/tickets/tickets_index.vue';
 export { default as NotisIndex } from './pages/auth/notificaciones/notis-index.vue';
 export { default as DashAuthIndex } from './pages/auth/dashboard/dash-index-auth.vue';
+export * from './pages/auth/usuarios/utils';
 export type * from './components/models';

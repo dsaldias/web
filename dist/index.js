@@ -3524,7 +3524,7 @@ var LandingLayout_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/usuarios/utils.ts
-var columns$4 = [
+var columns = [
 	{
 		name: "index",
 		field: "index",
@@ -3631,7 +3631,7 @@ var columns$4 = [
 		label: ""
 	}
 ];
-var columnas$1 = (more_datos) => {
+var columnas = (more_datos) => {
 	if (more_datos) return [
 		"index",
 		"id",
@@ -3697,7 +3697,7 @@ var columns_unidades = [{
 	label: "unidad",
 	align: "left"
 }];
-var columns_permisos$1 = [
+var columns_permisos = [
 	{
 		name: "nombre",
 		field: "nombre",
@@ -3717,7 +3717,7 @@ var columns_permisos$1 = [
 		align: "left"
 	}
 ];
-var columns_menus$1 = [{
+var columns_menus = [{
 	name: "label",
 	field: "label",
 	label: "",
@@ -4460,7 +4460,7 @@ var registrar_upd_default$3 = /* @__PURE__ */ defineComponent({
 											}, {
 												default: withCtx(() => [createVNode(QTable, {
 													rows: permisos.value,
-													columns: unref(columns_permisos$1),
+													columns: unref(columns_permisos),
 													flat: "",
 													dense: "",
 													loading: loading_permisos.value,
@@ -4487,7 +4487,7 @@ var registrar_upd_default$3 = /* @__PURE__ */ defineComponent({
 											}, {
 												default: withCtx(() => [createVNode(QTable, {
 													rows: menus.value,
-													columns: unref(columns_menus$1),
+													columns: unref(columns_menus),
 													flat: "",
 													dense: "",
 													loading: loading_menus.value,
@@ -4600,14 +4600,14 @@ var usuarios_index_default = /* @__PURE__ */ defineComponent({
 		};
 		onMounted(async () => {
 			rol.value = null;
-			visibleColumns.value = columnas$1(more_datos.value);
+			visibleColumns.value = columnas(more_datos.value);
 			await getdatos();
 		});
 		return (_ctx, _cache) => {
 			return openBlock(), createBlock(QPage, { class: "q-pa-sm" }, {
 				default: withCtx(() => [createVNode(QTable, {
 					rows: rows.value,
-					columns: unref(columns$4),
+					columns: unref(columns),
 					"visible-columns": visibleColumns.value,
 					flat: "",
 					bordered: "",
@@ -4645,7 +4645,7 @@ var usuarios_index_default = /* @__PURE__ */ defineComponent({
 						}),
 						createVNode(QToggle, {
 							modelValue: more_datos.value,
-							"onUpdate:modelValue": [_cache[1] || (_cache[1] = ($event) => more_datos.value = $event), _cache[2] || (_cache[2] = ($event) => visibleColumns.value = unref(columnas$1)(more_datos.value))],
+							"onUpdate:modelValue": [_cache[1] || (_cache[1] = ($event) => more_datos.value = $event), _cache[2] || (_cache[2] = ($event) => visibleColumns.value = unref(columnas)(more_datos.value))],
 							color: "orange",
 							label: "más datos",
 							dense: ""
@@ -4764,7 +4764,7 @@ var usuarios_index_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/roles/utils.ts
-var columns$3 = [
+var columns$4 = [
 	{
 		name: "index",
 		field: "index",
@@ -4816,7 +4816,7 @@ var columns$3 = [
 		label: ""
 	}
 ];
-var columns_permisos = [
+var columns_permisos$1 = [
 	{
 		name: "nombre",
 		field: "nombre",
@@ -4834,7 +4834,7 @@ var columns_permisos = [
 		label: "grupo"
 	}
 ];
-var columns_menus = [{
+var columns_menus$1 = [{
 	name: "label",
 	field: "label",
 	label: "",
@@ -5151,7 +5151,7 @@ var registrar_upd_default$2 = /* @__PURE__ */ defineComponent({
 									}, {
 										default: withCtx(() => [createVNode(QTable, {
 											rows: menus.value,
-											columns: unref(columns_menus),
+											columns: unref(columns_menus$1),
 											flat: "",
 											dense: "",
 											loading: loading_menus.value,
@@ -5192,7 +5192,7 @@ var registrar_upd_default$2 = /* @__PURE__ */ defineComponent({
 									}, {
 										default: withCtx(() => [createVNode(QTable, {
 											rows: permisos.value,
-											columns: unref(columns_permisos),
+											columns: unref(columns_permisos$1),
 											flat: "",
 											dense: "",
 											loading: loading_permisos.value,
@@ -5276,7 +5276,7 @@ var roles_index_default = /* @__PURE__ */ defineComponent({
 			return openBlock(), createBlock(QPage, { class: "q-pa-sm" }, {
 				default: withCtx(() => [createVNode(QTable, {
 					rows: rows.value,
-					columns: unref(columns$3),
+					columns: unref(columns$4),
 					flat: "",
 					bordered: "",
 					dense: "",
@@ -5373,7 +5373,7 @@ var roles_index_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/unidades/utils.ts
-var columns$2 = [
+var columns$3 = [
 	{
 		name: "index",
 		field: "index",
@@ -5684,7 +5684,7 @@ var unidades_index_default = /* @__PURE__ */ defineComponent({
 			return openBlock(), createBlock(QPage, { class: "q-pa-sm" }, {
 				default: withCtx(() => [createVNode(QTable, {
 					rows: rows.value,
-					columns: unref(columns$2),
+					columns: unref(columns$3),
 					flat: "",
 					bordered: "",
 					dense: "",
@@ -5781,7 +5781,7 @@ var unidades_index_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/tickets/utils.ts
-var columns$1 = [
+var columns$2 = [
 	{
 		name: "index",
 		field: "index",
@@ -5874,7 +5874,7 @@ var columns_gen = [
 		label: ""
 	}
 ];
-var columnas = (more_datos) => {
+var columnas$1 = (more_datos) => {
 	if (more_datos) return [
 		"index",
 		"id",
@@ -6234,7 +6234,7 @@ var tickets_1_default = /* @__PURE__ */ defineComponent({
 			refretirar_ticket.value.open(row);
 		};
 		onMounted(() => {
-			visibleColumns.value = columnas(more_datos.value);
+			visibleColumns.value = columnas$1(more_datos.value);
 			listar();
 			console.log("mis tickets");
 		});
@@ -6246,7 +6246,7 @@ var tickets_1_default = /* @__PURE__ */ defineComponent({
 					"visible-columns": visibleColumns.value,
 					dense: "",
 					rows: rows.value,
-					columns: unref(columns$1),
+					columns: unref(columns$2),
 					"row-key": "name"
 				}, {
 					"top-left": withCtx(() => [createVNode(QBtn, {
@@ -6256,7 +6256,7 @@ var tickets_1_default = /* @__PURE__ */ defineComponent({
 						onClick: _cache[0] || (_cache[0] = ($event) => listar())
 					}), createVNode(QToggle, {
 						modelValue: more_datos.value,
-						"onUpdate:modelValue": [_cache[1] || (_cache[1] = ($event) => more_datos.value = $event), _cache[2] || (_cache[2] = ($event) => visibleColumns.value = unref(columnas)(more_datos.value))],
+						"onUpdate:modelValue": [_cache[1] || (_cache[1] = ($event) => more_datos.value = $event), _cache[2] || (_cache[2] = ($event) => visibleColumns.value = unref(columnas$1)(more_datos.value))],
 						color: "orange",
 						label: "mostrar otros datos",
 						class: "q-my-none"
@@ -6646,7 +6646,7 @@ var tickets_index_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/notificaciones/utils.ts
-var columns = [
+var columns$1 = [
 	{
 		name: "index",
 		field: "index",
@@ -6983,7 +6983,7 @@ var notis_index_default = /* @__PURE__ */ defineComponent({
 			return openBlock(), createBlock(QPage, { class: "q-pa-sm" }, {
 				default: withCtx(() => [createVNode(QTable, {
 					rows: rows.value,
-					columns: unref(columns),
+					columns: unref(columns$1),
 					flat: "",
 					bordered: "",
 					dense: "",
@@ -9538,4 +9538,4 @@ var dash_index_auth_default = /* @__PURE__ */ defineComponent({
 	}
 });
 //#endregion
-export { AuthPlugin, avisos_show_default as AvisosShow, boton_perfil_default as BtnPerfil, dash_index_auth_default as DashAuthIndex, DashboardService, EdgeLight_default as EdgeLight, editar_perfil_default as EditarPerfil, LandingLayout_default as LandingLayout, LoginService, LoginView_default as LoginView, MainLayout_default as MainLayout, MeService, MenusService, notis_index_default as NotisIndex, NotisService, PerfilService, PermisosService, re_login_default as ReLogin, roles_index_default as RolesIndex, roles_select_default as RolesSelect, RolesService, tickets_index_default as TicketsIndex, TicketsService, unidades_index_default as UnidadesIndex, UnidadesService, usuarios_index_default as UsuariosIndex, UsuariosRolesService, UsuariosService, ajustarFechaLocal, ajustarFechaUTC, cargarMenus, chartAreaBorder, defectoOps as defectoOpsApp, defectoOps$1 as defectoOpsAuth, detenerSubscripcion, edgeLightSignal, encriptarString, eventBus, iniciarSubscripcion, mostrarAviso, mostrarNotifyError, mostrarRelogin, mutar as mutarApp, mutar$1 as mutarAuth, parseErrors, parseFecha, parseTextError, parseTextErrorWs, query as queryApp, query$1 as queryAuth, sql_roles, sql_usuarios, subs as subsApp, subs$1 as subsAuth, toHomePath, toast1, useLoginStore };
+export { AuthPlugin, avisos_show_default as AvisosShow, boton_perfil_default as BtnPerfil, dash_index_auth_default as DashAuthIndex, DashboardService, EdgeLight_default as EdgeLight, editar_perfil_default as EditarPerfil, LandingLayout_default as LandingLayout, LoginService, LoginView_default as LoginView, MainLayout_default as MainLayout, MeService, MenusService, notis_index_default as NotisIndex, NotisService, PerfilService, PermisosService, re_login_default as ReLogin, roles_index_default as RolesIndex, roles_select_default as RolesSelect, RolesService, tickets_index_default as TicketsIndex, TicketsService, unidades_index_default as UnidadesIndex, UnidadesService, usuarios_index_default as UsuariosIndex, UsuariosRolesService, UsuariosService, ajustarFechaLocal, ajustarFechaUTC, cargarMenus, chartAreaBorder, columnas, columns, columns_menus, columns_permisos, columns_roles, columns_rolunidad, columns_unidades, defectoOps as defectoOpsApp, defectoOps$1 as defectoOpsAuth, detenerSubscripcion, edgeLightSignal, encriptarString, eventBus, iniciarSubscripcion, mostrarAviso, mostrarNotifyError, mostrarRelogin, mutar as mutarApp, mutar$1 as mutarAuth, parseErrors, parseFecha, parseTextError, parseTextErrorWs, query as queryApp, query$1 as queryAuth, sql_roles, sql_usuarios, subs as subsApp, subs$1 as subsAuth, toHomePath, toast1, useLoginStore };

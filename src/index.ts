@@ -82,5 +82,8 @@ export { default as TicketsIndex } from 'src/pages/auth/tickets/tickets_index.vu
 export { default as NotisIndex } from 'src/pages/auth/notificaciones/notis-index.vue'
 export { default as DashAuthIndex } from 'src/pages/auth/dashboard/dash-index-auth.vue'
 
+// Columnas de tablas
+export * from 'src/pages/auth/usuarios/utils'
+
 // Tipos TypeScript
 export type * from 'src/components/models'
