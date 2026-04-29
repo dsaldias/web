@@ -10,7 +10,7 @@ import { Kind, OperationTypeNode } from "graphql";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
-import { Fragment, Transition, computed, createBlock, createCommentVNode, createElementBlock, createElementVNode, createTextVNode, createVNode, defineAsyncComponent, defineComponent, nextTick, normalizeClass, normalizeStyle, onBeforeMount, onMounted, onUnmounted, openBlock, ref, renderList, resolveComponent, toDisplayString, unref, watch, withCtx, withDirectives } from "vue";
+import { Fragment, Transition, computed, createBlock, createCommentVNode, createElementBlock, createElementVNode, createTextVNode, createVNode, defineAsyncComponent, defineComponent, inject, nextTick, normalizeClass, normalizeStyle, onBeforeMount, onMounted, onUnmounted, openBlock, ref, renderList, resolveComponent, resolveDynamicComponent, toDisplayString, unref, watch, withCtx, withDirectives } from "vue";
 import QSpace from "quasar/src/components/space/QSpace.js";
 import QBtn from "quasar/src/components/btn/QBtn.js";
 import QCardSection from "quasar/src/components/card/QCardSection.js";
@@ -9472,6 +9472,7 @@ var _hoisted_1 = [
 var dash_index_auth_default = /* @__PURE__ */ defineComponent({
 	__name: "dash-index-auth",
 	setup(__props) {
+		const consumerDash = inject("authDashComponent", null);
 		const expanded = ref(false);
 		const is_tuto = ref(process.env.SHOW_TUTO_VIDEO);
 		const is_dash_app = ref(process.env.SHOW_DASH_APP);
@@ -9530,7 +9531,8 @@ var dash_index_auth_default = /* @__PURE__ */ defineComponent({
 						_: 1
 					}, 8, ["modelValue", "header-class"])) : createCommentVNode("", true),
 					createVNode(dash_auth_default),
-					is_dash_app.value ? (openBlock(), createBlock(dash_app_default, { key: 1 })) : createCommentVNode("", true)
+					is_dash_app.value ? (openBlock(), createBlock(dash_app_default, { key: 1 })) : createCommentVNode("", true),
+					unref(consumerDash) ? (openBlock(), createBlock(resolveDynamicComponent(unref(consumerDash)), { key: 2 })) : createCommentVNode("", true)
 				]),
 				_: 1
 			});

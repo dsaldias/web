@@ -30,14 +30,18 @@
 
     <dashAuth />
     <dashApp v-if="is_dash_app" />
+    <component :is="consumerDash" v-if="consumerDash" />
   </q-page>
 </template>
 
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { onMounted, onUnmounted, ref, watch, inject } from 'vue'
+import type { Component } from 'vue'
 import dashAuth from './dash-auth.vue'
 import dashApp from 'src/pages/app/dashboard/dash-app.vue'
+
+const consumerDash = inject<Component | null>('authDashComponent', null)
 
 const expanded = ref(false)
 const is_tuto = ref(process.env.SHOW_TUTO_VIDEO)
