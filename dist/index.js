@@ -1391,11 +1391,11 @@ var _plugin_vue_export_helper_default = (sfc, props) => {
 };
 //#endregion
 //#region src/components/auth/geo/geo_modalbk.vue
-var _hoisted_1$21 = {
+var _hoisted_1$20 = {
 	class: "q-mt-md",
 	align: "right"
 };
-function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
 	const _component_LTileLayer = resolveComponent("LTileLayer");
 	const _component_LMarker = resolveComponent("LMarker");
 	const _component_LMap = resolveComponent("LMap");
@@ -1447,7 +1447,7 @@ function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
 					_: 1
 				}),
 				createVNode(QCardSection, { class: "q-pt-none" }, {
-					default: withCtx(() => [createElementVNode("div", _hoisted_1$21, [
+					default: withCtx(() => [createElementVNode("div", _hoisted_1$20, [
 						$setup.loading ? (openBlock(), createBlock(QLinearProgress, {
 							key: 0,
 							dark: "",
@@ -1482,7 +1482,7 @@ function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
 		_: 1
 	}, 8, ["modelValue"]);
 }
-var geo_modalbk_default = /* @__PURE__ */ _plugin_vue_export_helper_default(geo_modalbk_vue_vue_type_script_lang_default, [["render", _sfc_render$4]]);
+var geo_modalbk_default = /* @__PURE__ */ _plugin_vue_export_helper_default(geo_modalbk_vue_vue_type_script_lang_default, [["render", _sfc_render$3]]);
 //#endregion
 //#region src/stores/auth/zoomer.js
 var init_zoomer = () => {
@@ -1622,7 +1622,7 @@ var editar_perfil_vue_vue_type_script_lang_default = {
 };
 //#endregion
 //#region src/components/auth/perfil/editar_perfil.vue
-var _hoisted_1$20 = { class: "row q-col-gutter-sm" };
+var _hoisted_1$19 = { class: "row q-col-gutter-sm" };
 var _hoisted_2$15 = { class: "col-xs-12 flex flex-center" };
 var _hoisted_3$13 = { class: "col-xs-12 col-sm-6" };
 var _hoisted_4$8 = { class: "col-xs-12 col-sm-6" };
@@ -1640,7 +1640,7 @@ var _hoisted_13$2 = {
 };
 var _hoisted_14$2 = { class: "col-xs-12" };
 var _hoisted_15$2 = { class: "row justify-end q-gutter-x-sm q-mt-md" };
-function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
 	const _component_Geo = resolveComponent("Geo");
 	return openBlock(), createBlock(QDialog, {
 		modelValue: $setup.alert,
@@ -1680,7 +1680,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
 				createVNode(QCardSection, null, {
 					default: withCtx(() => [createVNode(QForm, { onSubmit: $setup.onSubmit }, {
 						default: withCtx(() => [
-							createElementVNode("div", _hoisted_1$20, [
+							createElementVNode("div", _hoisted_1$19, [
 								createElementVNode("div", _hoisted_2$15, [createVNode(QAvatar, { size: "90px" }, {
 									default: withCtx(() => [$setup.foto_64 ? (openBlock(), createBlock(QImg, {
 										key: 0,
@@ -1863,14 +1863,14 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
 		_: 1
 	}, 8, ["modelValue"]);
 }
-var editar_perfil_default = /* @__PURE__ */ _plugin_vue_export_helper_default(editar_perfil_vue_vue_type_script_lang_default, [["render", _sfc_render$3]]);
+var editar_perfil_default = /* @__PURE__ */ _plugin_vue_export_helper_default(editar_perfil_vue_vue_type_script_lang_default, [["render", _sfc_render$2]]);
 //#endregion
 //#region src/components/app/ext/perfil/extension_btn.vue
-var _sfc_main$1 = {};
-function _sfc_render$2(_ctx, _cache) {
+var _sfc_main = {};
+function _sfc_render$1(_ctx, _cache) {
 	return openBlock(), createElementBlock("div");
 }
-var extension_btn_default = /* @__PURE__ */ _plugin_vue_export_helper_default(_sfc_main$1, [["render", _sfc_render$2]]);
+var extension_btn_default = /* @__PURE__ */ _plugin_vue_export_helper_default(_sfc_main, [["render", _sfc_render$1]]);
 boot(() => {
 	const cookie_name = process.env.COOKIE_THEME_NAME || "";
 	const v = Cookies.get(cookie_name) == "true";
@@ -1974,7 +1974,7 @@ var boton_perfil_vue_vue_type_script_lang_default = {
 };
 //#endregion
 //#region src/components/auth/perfil/boton_perfil.vue
-var _hoisted_1$19 = { class: "q-pa-none q-ma-none" };
+var _hoisted_1$18 = { class: "q-pa-none q-ma-none" };
 var _hoisted_2$14 = {
 	key: 1,
 	src: "https://cdn.quasar.dev/img/boy-avatar.png"
@@ -2015,10 +2015,10 @@ var _hoisted_11$2 = {
 		"opacity": ".7"
 	}
 };
-function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
 	const _component_extension_btn = resolveComponent("extension_btn");
 	const _component_EditarPerfil = resolveComponent("EditarPerfil");
-	return openBlock(), createElementBlock("div", _hoisted_1$19, [createVNode(QBtn, {
+	return openBlock(), createElementBlock("div", _hoisted_1$18, [createVNode(QBtn, {
 		flat: "",
 		class: "q-pl-xs q-pr-none",
 		onClick: $setup.subscribir
@@ -2095,7 +2095,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
 		_: 1
 	}, 8, ["onClick"]), createVNode(_component_EditarPerfil, { ref: "refEditarPerfil" }, null, 512)]);
 }
-var boton_perfil_default = /* @__PURE__ */ _plugin_vue_export_helper_default(boton_perfil_vue_vue_type_script_lang_default, [["render", _sfc_render$1]]);
+var boton_perfil_default = /* @__PURE__ */ _plugin_vue_export_helper_default(boton_perfil_vue_vue_type_script_lang_default, [["render", _sfc_render]]);
 //#endregion
 //#region src/components/auth/roles/roles-select.vue
 var roles_select_default = /* @__PURE__ */ defineComponent({
@@ -2175,7 +2175,7 @@ var roles_select_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/components/auth/EdgeLight.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$18 = {
+var _hoisted_1$17 = {
 	key: 0,
 	class: "edge-light"
 };
@@ -2197,7 +2197,7 @@ var EdgeLight_default = /* @__PURE__ */ _plugin_vue_export_helper_default(/* @__
 		__expose({ trigger });
 		return (_ctx, _cache) => {
 			return openBlock(), createBlock(Transition, { name: "edge" }, {
-				default: withCtx(() => [active.value ? (openBlock(), createElementBlock("div", _hoisted_1$18)) : createCommentVNode("", true)]),
+				default: withCtx(() => [active.value ? (openBlock(), createElementBlock("div", _hoisted_1$17)) : createCommentVNode("", true)]),
 				_: 1
 			});
 		};
@@ -2411,7 +2411,7 @@ var app_logo_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/layouts/MainLayout.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$17 = { key: 0 };
+var _hoisted_1$16 = { key: 0 };
 var _hoisted_2$13 = { key: 1 };
 var _hoisted_3$11 = ["innerHTML"];
 //#endregion
@@ -2508,7 +2508,7 @@ var MainLayout_default = /* @__PURE__ */ defineComponent({
 									id: "tuto_icon_ws",
 									onDblclick: _cache[1] || (_cache[1] = ($event) => openConectados())
 								}, {
-									default: withCtx(() => [_ctx.$q.screen.width > 600 ? (openBlock(), createElementBlock("span", _hoisted_1$17, toDisplayString(unref(store).ws_total_conectados) + " conexiones ", 1)) : (openBlock(), createElementBlock("span", _hoisted_2$13, toDisplayString(unref(store).ws_total_conectados), 1)), createVNode(QTooltip, { class: "bg-purple" }, {
+									default: withCtx(() => [_ctx.$q.screen.width > 600 ? (openBlock(), createElementBlock("span", _hoisted_1$16, toDisplayString(unref(store).ws_total_conectados) + " conexiones ", 1)) : (openBlock(), createElementBlock("span", _hoisted_2$13, toDisplayString(unref(store).ws_total_conectados), 1)), createVNode(QTooltip, { class: "bg-purple" }, {
 										default: withCtx(() => [createElementVNode("span", null, "Estado de notificaciones (" + toDisplayString(unref(store).ws_conectados) + ") ", 1)]),
 										_: 1
 									})]),
@@ -2659,7 +2659,7 @@ var MainLayout_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/components/auth/landing/landing-index.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$16 = { class: "row items-center no-wrap q-mr-md" };
+var _hoisted_1$15 = { class: "row items-center no-wrap q-mr-md" };
 var _hoisted_2$12 = { class: "row q-col-gutter-md q-mb-lg" };
 var _hoisted_3$10 = { class: "col-12 col-sm-6 col-lg-3 neon-fade-in neon-fade-in--d1" };
 var _hoisted_4$6 = { class: "neon-metric-value" };
@@ -3021,7 +3021,7 @@ var landing_index_default = /* @__PURE__ */ _plugin_vue_export_helper_default(/*
 						"gap": "12px"
 					} }, {
 						default: withCtx(() => [
-							createElementVNode("div", _hoisted_1$16, [
+							createElementVNode("div", _hoisted_1$15, [
 								createVNode(QIcon, {
 									name: "music_note",
 									color: "pink",
@@ -3807,7 +3807,7 @@ var botonera_opt_default$3 = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/usuarios/rol-unidad-select.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$15 = { class: "row q-col-gutter-sm" };
+var _hoisted_1$14 = { class: "row q-col-gutter-sm" };
 var _hoisted_2$11 = { class: "col-xs-12 col-sm-5" };
 var _hoisted_3$9 = { class: "col-xs-12 col-sm-7" };
 //#endregion
@@ -3874,7 +3874,7 @@ var rol_unidad_select_default = /* @__PURE__ */ defineComponent({
 							_: 1
 						}),
 						createVNode(QCardSection, { class: "q-pt-none" }, {
-							default: withCtx(() => [createVNode(QSeparator, { class: "q-mt-none q-mb-lg" }), createElementVNode("div", _hoisted_1$15, [createElementVNode("div", _hoisted_2$11, [_cache[7] || (_cache[7] = createElementVNode("b", { class: "text-primary" }, "Seleccione una unidad:", -1)), createVNode(QTable, {
+							default: withCtx(() => [createVNode(QSeparator, { class: "q-mt-none q-mb-lg" }), createElementVNode("div", _hoisted_1$14, [createElementVNode("div", _hoisted_2$11, [_cache[7] || (_cache[7] = createElementVNode("b", { class: "text-primary" }, "Seleccione una unidad:", -1)), createVNode(QTable, {
 								rows: unidades.value,
 								columns: unref(columns_unidades),
 								flat: "",
@@ -3960,7 +3960,7 @@ var val_apellido2 = (val) => {
 };
 //#endregion
 //#region src/pages/auth/usuarios/registrar-upd.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$14 = { class: "text-subtitle1 text-weight-medium" };
+var _hoisted_1$13 = { class: "text-subtitle1 text-weight-medium" };
 var _hoisted_2$10 = { class: "row q-col-gutter-md" };
 var _hoisted_3$8 = { class: "col-xs-12 col-lg-4 col-sm-6" };
 var _hoisted_4$5 = { class: "row q-col-gutter-xs" };
@@ -4204,7 +4204,7 @@ var registrar_upd_default$3 = /* @__PURE__ */ defineComponent({
 											color: "primary",
 											class: "q-mr-sm"
 										}, null, 8, ["name"]),
-										createElementVNode("span", _hoisted_1$14, toDisplayString(input.value.id ? "Editar usuario" : "Registrar usuario"), 1),
+										createElementVNode("span", _hoisted_1$13, toDisplayString(input.value.id ? "Editar usuario" : "Registrar usuario"), 1),
 										createVNode(QSpace),
 										withDirectives(createVNode(QBtn, {
 											flat: "",
@@ -4552,7 +4552,7 @@ var registrar_upd_default$3 = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/usuarios/usuarios-index.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$13 = { class: "row items-center full-width q-gutter-x-sm" };
+var _hoisted_1$12 = { class: "row items-center full-width q-gutter-x-sm" };
 var _hoisted_2$9 = ["src"];
 //#endregion
 //#region src/pages/auth/usuarios/usuarios-index.vue
@@ -4623,7 +4623,7 @@ var usuarios_index_default = /* @__PURE__ */ defineComponent({
 					],
 					separator: "horizontal"
 				}, {
-					top: withCtx(() => [createElementVNode("div", _hoisted_1$13, [
+					top: withCtx(() => [createElementVNode("div", _hoisted_1$12, [
 						createVNode(QIcon, {
 							name: "manage_accounts",
 							color: "primary",
@@ -4905,7 +4905,7 @@ var botonera_opt_default$2 = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/roles/registrar-upd.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$12 = { class: "text-subtitle1 text-weight-medium" };
+var _hoisted_1$11 = { class: "text-subtitle1 text-weight-medium" };
 var _hoisted_2$8 = { class: "row q-col-gutter-md" };
 var _hoisted_3$7 = { class: "col-xs-12 col-lg-6" };
 var _hoisted_4$4 = { class: "column q-gutter-sm" };
@@ -5076,7 +5076,7 @@ var registrar_upd_default$2 = /* @__PURE__ */ defineComponent({
 										color: "primary",
 										class: "q-mr-sm"
 									}, null, 8, ["name"]),
-									createElementVNode("span", _hoisted_1$12, toDisplayString(input.value.id ? "Editar rol" : "Registrar rol"), 1),
+									createElementVNode("span", _hoisted_1$11, toDisplayString(input.value.id ? "Editar rol" : "Registrar rol"), 1),
 									createVNode(QSpace),
 									withDirectives(createVNode(QBtn, {
 										flat: "",
@@ -5247,7 +5247,7 @@ var registrar_upd_default$2 = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/roles/roles-index.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$11 = { class: "row items-center full-width q-gutter-x-sm" };
+var _hoisted_1$10 = { class: "row items-center full-width q-gutter-x-sm" };
 //#endregion
 //#region src/pages/auth/roles/roles-index.vue
 var roles_index_default = /* @__PURE__ */ defineComponent({
@@ -5287,7 +5287,7 @@ var roles_index_default = /* @__PURE__ */ defineComponent({
 					"rows-per-page-options": [0],
 					separator: "horizontal"
 				}, {
-					top: withCtx(() => [createElementVNode("div", _hoisted_1$11, [
+					top: withCtx(() => [createElementVNode("div", _hoisted_1$10, [
 						createVNode(QIcon, {
 							name: "shield",
 							color: "primary",
@@ -5470,7 +5470,7 @@ var botonera_opt_default$1 = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/unidades/registrar-upd.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$10 = { class: "text-subtitle1 text-weight-medium" };
+var _hoisted_1$9 = { class: "text-subtitle1 text-weight-medium" };
 var _hoisted_2$7 = { class: "row q-col-gutter-md" };
 var _hoisted_3$6 = { class: "col-xs-12 col-sm-6 column q-gutter-sm" };
 var _hoisted_4$3 = { class: "row items-center q-gutter-x-sm" };
@@ -5559,7 +5559,7 @@ var registrar_upd_default$1 = /* @__PURE__ */ defineComponent({
 										color: "primary",
 										class: "q-mr-sm"
 									}, null, 8, ["name"]),
-									createElementVNode("span", _hoisted_1$10, toDisplayString(input.value.id ? "Editar unidad" : "Registrar unidad"), 1),
+									createElementVNode("span", _hoisted_1$9, toDisplayString(input.value.id ? "Editar unidad" : "Registrar unidad"), 1),
 									createVNode(QSpace),
 									withDirectives(createVNode(QBtn, {
 										flat: "",
@@ -5655,7 +5655,7 @@ var registrar_upd_default$1 = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/unidades/unidades-index.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$9 = { class: "row items-center full-width q-gutter-x-sm" };
+var _hoisted_1$8 = { class: "row items-center full-width q-gutter-x-sm" };
 //#endregion
 //#region src/pages/auth/unidades/unidades-index.vue
 var unidades_index_default = /* @__PURE__ */ defineComponent({
@@ -5695,7 +5695,7 @@ var unidades_index_default = /* @__PURE__ */ defineComponent({
 					"rows-per-page-options": [0],
 					separator: "horizontal"
 				}, {
-					top: withCtx(() => [createElementVNode("div", _hoisted_1$9, [
+					top: withCtx(() => [createElementVNode("div", _hoisted_1$8, [
 						createVNode(QIcon, {
 							name: "account_tree",
 							color: "primary",
@@ -6090,7 +6090,7 @@ var retirar_ticket_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/tickets/ver_ticket.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$8 = { class: "q-my-none" };
+var _hoisted_1$7 = { class: "q-my-none" };
 var _hoisted_2$6 = { class: "q-my-none" };
 var _hoisted_3$5 = { class: "q-my-none" };
 var _hoisted_4$2 = { class: "q-my-none" };
@@ -6151,7 +6151,7 @@ var ver_ticket_default = /* @__PURE__ */ defineComponent({
 						createVNode(QCardSection, { class: "q-pt-none" }, {
 							default: withCtx(() => [
 								createVNode(QSeparator, { class: "q-mt-none q-mb-lg" }),
-								createElementVNode("p", _hoisted_1$8, [_cache[4] || (_cache[4] = createElementVNode("b", null, "Numero ticket:", -1)), createTextVNode(" " + toDisplayString(ticket.value.id), 1)]),
+								createElementVNode("p", _hoisted_1$7, [_cache[4] || (_cache[4] = createElementVNode("b", null, "Numero ticket:", -1)), createTextVNode(" " + toDisplayString(ticket.value.id), 1)]),
 								createElementVNode("p", _hoisted_2$6, [_cache[5] || (_cache[5] = createElementVNode("b", null, "Problema:", -1)), createTextVNode(" " + toDisplayString(ticket.value.problema), 1)]),
 								createElementVNode("p", _hoisted_3$5, [_cache[6] || (_cache[6] = createElementVNode("b", null, "Estado:", -1)), createTextVNode(" " + toDisplayString(ticket.value.estado), 1)]),
 								createElementVNode("p", _hoisted_4$2, [_cache[7] || (_cache[7] = createElementVNode("b", null, "Reportado el:", -1)), createTextVNode(" " + toDisplayString(unref(parseFecha)(ticket.value.fecha_registro)), 1)]),
@@ -6201,7 +6201,7 @@ var ver_ticket_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/tickets/tickets_1.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$7 = { class: "q-pa-none" };
+var _hoisted_1$6 = { class: "q-pa-none" };
 var _hoisted_2$5 = { style: { "text-wrap": "wrap" } };
 var _hoisted_3$4 = { style: { "text-wrap": "wrap" } };
 //#endregion
@@ -6239,7 +6239,7 @@ var tickets_1_default = /* @__PURE__ */ defineComponent({
 			console.log("mis tickets");
 		});
 		return (_ctx, _cache) => {
-			return openBlock(), createElementBlock("div", _hoisted_1$7, [
+			return openBlock(), createElementBlock("div", _hoisted_1$6, [
 				createVNode(QTable, {
 					title: "",
 					class: "my-sticky-header-table",
@@ -6405,7 +6405,7 @@ var tickets_1_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/tickets/tickets_2.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$6 = { class: "q-pa-none" };
+var _hoisted_1$5 = { class: "q-pa-none" };
 var _hoisted_2$4 = { style: { "text-wrap": "wrap" } };
 var _hoisted_3$3 = { style: { "text-wrap": "wrap" } };
 //#endregion
@@ -6436,7 +6436,7 @@ var tickets_2_default = /* @__PURE__ */ defineComponent({
 			console.log("mis tickets");
 		});
 		return (_ctx, _cache) => {
-			return openBlock(), createElementBlock("div", _hoisted_1$6, [
+			return openBlock(), createElementBlock("div", _hoisted_1$5, [
 				createVNode(QTable, {
 					title: "",
 					class: "my-sticky-header-table",
@@ -6788,7 +6788,7 @@ var botonera_opt_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/notificaciones/registrar-upd.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$5 = { class: "text-subtitle1 text-weight-medium" };
+var _hoisted_1$4 = { class: "text-subtitle1 text-weight-medium" };
 var _hoisted_2$3 = { class: "row q-col-gutter-md" };
 var _hoisted_3$2 = { class: "col-xs-12 col-sm-6" };
 var _hoisted_4$1 = { class: "col-xs-12 col-sm-6" };
@@ -6876,7 +6876,7 @@ var registrar_upd_default = /* @__PURE__ */ defineComponent({
 										color: "primary",
 										class: "q-mr-sm"
 									}, null, 8, ["name"]),
-									createElementVNode("span", _hoisted_1$5, toDisplayString(input.value.id ? "Editar notificación" : "Registrar notificación"), 1),
+									createElementVNode("span", _hoisted_1$4, toDisplayString(input.value.id ? "Editar notificación" : "Registrar notificación"), 1),
 									createVNode(QSpace),
 									withDirectives(createVNode(QBtn, {
 										flat: "",
@@ -6953,7 +6953,7 @@ var registrar_upd_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/notificaciones/notis-index.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$4 = { class: "row items-center full-width q-gutter-x-sm" };
+var _hoisted_1$3 = { class: "row items-center full-width q-gutter-x-sm" };
 var _hoisted_2$2 = ["innerHTML"];
 //#endregion
 //#region src/pages/auth/notificaciones/notis-index.vue
@@ -6994,7 +6994,7 @@ var notis_index_default = /* @__PURE__ */ defineComponent({
 					"rows-per-page-options": [0],
 					separator: "horizontal"
 				}, {
-					top: withCtx(() => [createElementVNode("div", _hoisted_1$4, [
+					top: withCtx(() => [createElementVNode("div", _hoisted_1$3, [
 						createVNode(QIcon, {
 							name: "notifications",
 							color: "primary",
@@ -7107,7 +7107,7 @@ var notis_index_default = /* @__PURE__ */ defineComponent({
 });
 //#endregion
 //#region src/pages/auth/dashboard/dash-reporte1.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$3 = { class: "q-mt-lg" };
+var _hoisted_1$2 = { class: "q-mt-lg" };
 var _hoisted_2$1 = {
 	class: "row text-center justify-center q-col-gutter-xs",
 	id: "tuto_reporte1"
@@ -7139,7 +7139,7 @@ var dash_reporte1_default = /* @__PURE__ */ defineComponent({
 			get();
 		});
 		return (_ctx, _cache) => {
-			return openBlock(), createElementBlock("div", _hoisted_1$3, [createElementVNode("div", _hoisted_2$1, [(openBlock(true), createElementBlock(Fragment, null, renderList(reporte1.value, (r, i) => {
+			return openBlock(), createElementBlock("div", _hoisted_1$2, [createElementVNode("div", _hoisted_2$1, [(openBlock(true), createElementBlock(Fragment, null, renderList(reporte1.value, (r, i) => {
 				return openBlock(), createElementBlock("div", {
 					class: "col-xs-6 col-sm-3 col-lg-2 col-xl-1 neon-fade-in neon-fade-in--d1",
 					key: i
@@ -9288,7 +9288,7 @@ var plugin = {
 };
 //#endregion
 //#region src/pages/auth/dashboard/dash-reporte2.vue?vue&type=script&setup=true&lang.ts
-var _hoisted_1$2 = {
+var _hoisted_1$1 = {
 	class: "row",
 	id: "tuto_reporte2"
 };
@@ -9422,7 +9422,7 @@ var dash_reporte2_default = /* @__PURE__ */ defineComponent({
 			theme();
 		});
 		return (_ctx, _cache) => {
-			return openBlock(), createElementBlock("div", _hoisted_1$2, [createElementVNode("div", _hoisted_2, [_cache[0] || (_cache[0] = createTextVNode(" HOLIS ", -1)), createVNode(unref(LineChart), {
+			return openBlock(), createElementBlock("div", _hoisted_1$1, [createElementVNode("div", _hoisted_2, [_cache[0] || (_cache[0] = createTextVNode(" HOLIS ", -1)), createVNode(unref(LineChart), {
 				ref_key: "refLineChart",
 				ref: refLineChart,
 				class: "q-mt-xl",
@@ -9453,14 +9453,6 @@ var dash_auth_default = /* @__PURE__ */ defineComponent({
 	}
 });
 //#endregion
-//#region src/pages/app/dashboard/dash-app.vue
-var _sfc_main = {};
-var _hoisted_1$1 = { class: "text-center" };
-function _sfc_render(_ctx, _cache) {
-	return openBlock(), createElementBlock("div", _hoisted_1$1, "APP DASH -- edit this");
-}
-var dash_app_default = /* @__PURE__ */ _plugin_vue_export_helper_default(_sfc_main, [["render", _sfc_render]]);
-//#endregion
 //#region src/pages/auth/dashboard/dash-index-auth.vue?vue&type=script&setup=true&lang.ts
 var _hoisted_1 = [
 	"width",
@@ -9475,7 +9467,6 @@ var dash_index_auth_default = /* @__PURE__ */ defineComponent({
 		const consumerDash = inject("authDashComponent", null);
 		const expanded = ref(false);
 		const is_tuto = ref(process.env.SHOW_TUTO_VIDEO);
-		const is_dash_app = ref(process.env.SHOW_DASH_APP);
 		const video_url = ref(process.env.TUTO_VIDEO_URL + "");
 		const refIFrame = ref();
 		const width = ref("100%");
@@ -9531,8 +9522,7 @@ var dash_index_auth_default = /* @__PURE__ */ defineComponent({
 						_: 1
 					}, 8, ["modelValue", "header-class"])) : createCommentVNode("", true),
 					createVNode(dash_auth_default),
-					is_dash_app.value ? (openBlock(), createBlock(dash_app_default, { key: 1 })) : createCommentVNode("", true),
-					unref(consumerDash) ? (openBlock(), createBlock(resolveDynamicComponent(unref(consumerDash)), { key: 2 })) : createCommentVNode("", true)
+					unref(consumerDash) ? (openBlock(), createBlock(resolveDynamicComponent(unref(consumerDash)), { key: 1 })) : createCommentVNode("", true)
 				]),
 				_: 1
 			});

@@ -29,7 +29,7 @@
     </q-expansion-item>
 
     <dashAuth />
-    <dashApp v-if="is_dash_app" />
+    <!-- <dashApp v-if="is_dash_app" /> -->
     <component :is="consumerDash" v-if="consumerDash" />
   </q-page>
 </template>
@@ -39,13 +39,13 @@
 import { onMounted, onUnmounted, ref, watch, inject } from 'vue'
 import type { Component } from 'vue'
 import dashAuth from './dash-auth.vue'
-import dashApp from 'src/pages/app/dashboard/dash-app.vue'
+// import dashApp from 'src/pages/app/dashboard/dash-app.vue'
 
 const consumerDash = inject<Component | null>('authDashComponent', null)
 
 const expanded = ref(false)
 const is_tuto = ref(process.env.SHOW_TUTO_VIDEO)
-const is_dash_app = ref(process.env.SHOW_DASH_APP)
+// const is_dash_app = ref(process.env.SHOW_DASH_APP)
 const video_url = ref<string>(process.env.TUTO_VIDEO_URL + '')
 const refIFrame = ref()
 const width = ref('100%')
