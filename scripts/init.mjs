@@ -77,6 +77,18 @@ export const rutasApp: RouteRecordRaw[] = [
 ]
 `
 
+const rutasPublicasApp = `import type { RouteRecordRaw } from 'vue-router'
+
+// Agrega aquí las rutas públicas de tu aplicación
+// Estas NO requieren autenticación y se montan directamente (sin MainLayout)
+export const rutasPublicasApp: RouteRecordRaw[] = [
+  // {
+  //   path: '/public/mi-pagina',
+  //   component: () => import('pages/app/public/mi-pagina.vue'),
+  // },
+]
+`
+
 const routes = `import type { RouteRecordRaw } from 'vue-router'
 import {
   MainLayout,
@@ -90,6 +102,7 @@ import {
   DashAuthIndex,
 } from '@dsaldias/auth-web'
 import { rutasApp } from './rutas-app'
+import { rutasPublicasApp } from './rutas-publicas-app'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -113,6 +126,7 @@ const routes: RouteRecordRaw[] = [
     path: '/principal.html',
     component: LandingLayout,
   },
+  ...rutasPublicasApp,
   {
     path: '/:catchAll(.*)*',
     component: () => import('src/pages/ErrorNotFound.vue'),
@@ -375,9 +389,10 @@ console.log('\n🚀  Inicializando proyecto con @dsaldias/auth-web...\n')
 console.log('── Archivos ─────────────────────────────────────────')
 
 escribir('src/App.vue',            appVue,  true)  // siempre reemplaza el default de Quasar
-escribir('src/boot/auth.ts',       bootAuth)
-escribir('src/router/rutas-app.ts', rutasApp)
-escribir('src/router/routes.ts',   routes,  true)  // siempre reemplaza el default de Quasar
+escribir('src/boot/auth.ts',                bootAuth)
+escribir('src/router/rutas-app.ts',         rutasApp)
+escribir('src/router/rutas-publicas-app.ts', rutasPublicasApp)
+escribir('src/router/routes.ts',            routes,  true)  // siempre reemplaza el default de Quasar
 escribir('.env',                   env)
 
 console.log('\n── Estilos ──────────────────────────────────────────')
