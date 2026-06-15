@@ -555,14 +555,35 @@ function patchIndexHtml() {
   const htmlPath = join(cwd, 'index.html')
   if (!existsSync(htmlPath)) { warn('index.html no encontrado'); return }
   let src = readFileSync(htmlPath, 'utf-8')
-  const marker = 'name="theme-color"'
-  if (src.includes(marker)) { warn('index.html → theme-color ya existe'); return }
-  src = src.replace(
-    /<\/head>/,
-    '    <meta name="theme-color" content="#054287" />\n  </head>'
-  )
-  writeFileSync(htmlPath, src, 'utf-8')
-  ok('index.html → theme-color agregado')
+  const activeHtml = src.replace(/<!--[\s\S]*?-->/g, '')
+  let changed = false
+
+  if (activeHtml.includes('name="theme-color"')) {
+    warn('index.html → theme-color ya existe')
+  } else {
+    src = src.replace(
+      /<\/head>/,
+      '    <meta name="theme-color" content="#054287" />\n  </head>'
+    )
+    changed = true
+    ok('index.html → theme-color agregado')
+  }
+
+  if (activeHtml.includes('Content-Security-Policy')) {
+    warn('index.html → Content-Security-Policy ya existe; verifica connect-src, img-src y frame-src')
+  } else {
+    const csp = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://cdn.quasar.dev; font-src 'self' data:; connect-src 'self' http://localhost:* ws://localhost:* https://auth.sladia.site wss://auth.sladia.site; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; manifest-src 'self';"
+    src = src.replace(
+      /<\/head>/,
+      `    <meta http-equiv="Content-Security-Policy" content="${csp}" />\n  </head>`
+    )
+    changed = true
+    ok('index.html → Content-Security-Policy agregado')
+  }
+
+  if (changed) {
+    writeFileSync(htmlPath, src, 'utf-8')
+  }
 }
 
 // ─── Patch router for Quasar app-vite 3 filename routing ─────────────────────
