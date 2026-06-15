@@ -492,6 +492,11 @@ function installPeerDeps() {
 
   const pm  = detectPkgManager()
   const add = pm === 'npm' ? 'install' : 'add'
+  if (pm === 'pnpm') {
+    warn(`dependencias Apollo faltantes: ${missing.join(', ')}`)
+    info(`Instálalas manualmente con: pnpm add ${missing.join(' ')}`)
+    return
+  }
   info(`Instalando con ${pm}: ${missing.join(', ')}`)
   execSync(`${pm} ${add} ${missing.join(' ')}`, { stdio: 'inherit', cwd })
   ok('dependencias Apollo instaladas')
