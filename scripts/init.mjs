@@ -93,10 +93,23 @@ function patchQuasarConfigInPlace() {
   src = addToArrayProperty(src, 'css', ['auth-web.scss', 'tuto_driver.scss'])
   src = addToArrayProperty(src, 'plugins', ['Notify', 'Cookies', 'Meta'])
 
-  if (!/^\s*(rawDefine|define)\s*:/m.test(src)) {
+  if (/^\s*(rawDefine|define)\s*:/m.test(src)) {
+    if (!/['"]process\.env['"]\s*:|process\.env\s*:/.test(src)) {
+      src = src.replace(
+        /^(\s*)(rawDefine|define)\s*:\s*\{/m,
+        `$1$2: {\n$1  'process.env': JSON.stringify(process.env),`
+      )
+    }
+    if (!/__DEV__\s*:/.test(src)) {
+      src = src.replace(
+        /^(\s*)(rawDefine|define)\s*:\s*\{/m,
+        `$1$2: {\n$1  __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),`
+      )
+    }
+  } else {
     src = src.replace(
       /(build\s*:\s*\{)/,
-      `$1\n      define: { __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production') },`
+      `$1\n      define: {\n        'process.env': JSON.stringify(process.env),\n        __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),\n      },`
     )
   }
 
