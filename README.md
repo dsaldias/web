@@ -60,15 +60,15 @@ git add dist && git commit -m "build" && git push
 # En el proyecto consumidor
 yarn upgrade @dsaldias/auth-web
 
+#
 # nueva version:
 npm run build:lib
-git add dist scripts/init.mjs package.json
+git add --all
 git commit -m "compat quasar app-vite 3 init"
 git push
 
 #consumidor:
-pnpm add 'github:dsaldias/web#v3rc'
-pnpm update @dsaldias/auth-web
+pnpm add 'github:dsaldias/web'
 pnpm add '@apollo/client@^3.8' @vue/apollo-composable graphql graphql-ws
 ./node_modules/.bin/auth-web-init --skip-install
 pnpm exec auth-web-init
@@ -79,10 +79,9 @@ pnpm add 'github:dsaldias/web#v3rc'
 # desde cero:
 pnpm create quasar@latest (incluir typescript, pinia)
 quasar dev -m pwa (debe funcionar)
-pnpm add 'github:dsaldias/web#v3rc'
+pnpm add 'github:dsaldias/web'
 pnpm add '@apollo/client@^3.8' @vue/apollo-composable graphql graphql-ws
 ./node_modules/.bin/auth-web-init --skip-install
-
 ```
 
 ---
