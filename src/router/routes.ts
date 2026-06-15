@@ -1,38 +1,44 @@
 import type { RouteRecordRaw } from 'vue-router'
-import { rutas } from './rutas'
-import { rutaspublicas } from './rutas_publicas'
+import {
+  MainLayout,
+  LandingLayout,
+  LoginView,
+  UsuariosIndex,
+  RolesIndex,
+  UnidadesIndex,
+  TicketsIndex,
+  NotisIndex,
+  DashAuthIndex,
+} from '@dsaldias/auth-web'
+import { rutasApp } from './rutas-app'
+import { rutasPublicasApp } from './rutas-publicas-app'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: MainLayout,
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') },
-      { path: '/roles', component: () => import('pages/auth/roles/roles-index.vue') },
-      { path: '/unidades', component: () => import('pages/auth/unidades/unidades-index.vue') },
-      { path: '/usuarios', component: () => import('pages/auth/usuarios/usuarios-index.vue') },
-      { path: '/avisos', component: () => import('pages/auth/notificaciones/notis-index.vue') },
-      { path: '/tickets', component: () => import('pages/auth/tickets/tickets_index.vue') },
-      ...rutas,
+      { path: '',          component: DashAuthIndex },
+      { path: '/roles',    component: RolesIndex },
+      { path: '/unidades', component: UnidadesIndex },
+      { path: '/usuarios', component: UsuariosIndex },
+      { path: '/avisos',   component: NotisIndex },
+      { path: '/tickets',  component: TicketsIndex },
+      ...rutasApp,
     ],
   },
   {
     path: '/login',
-    component: () => import('components/auth/login/LoginView.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
+    component: LoginView,
   },
   {
     path: '/principal.html',
-    component: () => import('layouts/LandingLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
+    component: LandingLayout,
   },
-  ...rutaspublicas,
-
-  // Always leave this as last one,
-  // but you can also remove it
+  ...rutasPublicasApp,
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
+    component: () => import('src/pages/ErrorNotFound.vue'),
   },
 ]
 

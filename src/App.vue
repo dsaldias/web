@@ -3,20 +3,9 @@
 </template>
 
 <script setup lang="ts">
-import { iniciarSubscripcion, detenerSubscripcion } from 'src/stores/auth/notificaciones'
-import { onBeforeUnmount, onMounted } from 'vue'
+import { onMounted, onBeforeUnmount } from 'vue'
+import { iniciarSubscripcion, detenerSubscripcion } from '@dsaldias/auth-web'
 
-const handleBeforeUnload = () => {
-  console.log('cerrando....')
-  detenerSubscripcion()
-}
-
-onMounted(() => {
-  iniciarSubscripcion()
-  window.addEventListener('beforeunload', handleBeforeUnload)
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('beforeunload', handleBeforeUnload)
-})
+onMounted(() => iniciarSubscripcion())
+onBeforeUnmount(() => detenerSubscripcion())
 </script>

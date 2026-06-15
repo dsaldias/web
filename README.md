@@ -25,13 +25,13 @@ npx auth-web-init
 
 Genera automáticamente:
 
-| Archivo | Descripción |
-| --- | --- |
-| `src/App.vue` | Monta las suscripciones WebSocket de notificaciones |
-| `src/boot/auth.ts` | Registra `AuthPlugin` con los endpoints del servidor |
-| `src/router/routes.ts` | Rutas RBAC (usuarios, roles, unidades, tickets, etc.) |
-| `src/router/rutas-app.ts` | Archivo vacío para las rutas propias de tu app |
-| `.env` | Variables de entorno con URLs del servidor RBAC |
+| Archivo                   | Descripción                                           |
+| ------------------------- | ----------------------------------------------------- |
+| `src/App.vue`             | Monta las suscripciones WebSocket de notificaciones   |
+| `src/boot/auth.ts`        | Registra `AuthPlugin` con los endpoints del servidor  |
+| `src/router/routes.ts`    | Rutas RBAC (usuarios, roles, unidades, tickets, etc.) |
+| `src/router/rutas-app.ts` | Archivo vacío para las rutas propias de tu app        |
+| `.env`                    | Variables de entorno con URLs del servidor RBAC       |
 
 También parchea `quasar.config.ts` para agregar `'auth'` al array `boot`.
 
@@ -59,6 +59,30 @@ git add dist && git commit -m "build" && git push
 
 # En el proyecto consumidor
 yarn upgrade @dsaldias/auth-web
+
+# nueva version:
+npm run build:lib
+git add dist scripts/init.mjs package.json
+git commit -m "compat quasar app-vite 3 init"
+git push
+
+#consumidor:
+pnpm add 'github:dsaldias/web#v3rc'
+pnpm update @dsaldias/auth-web
+pnpm add '@apollo/client@^3.8' @vue/apollo-composable graphql graphql-ws
+./node_modules/.bin/auth-web-init --skip-install
+pnpm exec auth-web-init
+
+(de alguna rama)
+pnpm add 'github:dsaldias/web#v3rc'
+
+# desde cero:
+pnpm create quasar@latest (incluir typescript, pinia)
+quasar dev -m pwa (debe funcionar)
+pnpm add 'github:dsaldias/web#v3rc'
+pnpm add '@apollo/client@^3.8' @vue/apollo-composable graphql graphql-ws
+./node_modules/.bin/auth-web-init --skip-install
+
 ```
 
 ---

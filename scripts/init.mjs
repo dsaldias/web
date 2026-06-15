@@ -549,6 +549,51 @@ function copyStyles({ forceVariables = true } = {}) {
   }
 }
 
+function patchQuasarVariables() {
+  const srcPath = join(pkgRoot, 'src/css/quasar.variables.scss')
+  const destPath = join(cwd, 'src/css/quasar.variables.scss')
+  if (!existsSync(srcPath)) { warn('src/css/quasar.variables.scss no encontrado en el paquete'); return }
+  if (!existsSync(destPath)) {
+    writeFileSync(destPath, readFileSync(srcPath, 'utf-8'), 'utf-8')
+    ok('src/css/quasar.variables.scss')
+    return
+  }
+
+  const wanted = {
+    primary: '#054287',
+    secondary: '#21ba45',
+    accent: '#9c27b0',
+    dark: '#040b25',
+    'dark-page': '#040b25',
+    positive: '#21ba45',
+    negative: '#c10015',
+    info: '#31ccec',
+    warning: '#f2c037',
+  }
+  let src = readFileSync(destPath, 'utf-8')
+  const before = src
+
+  for (const [name, value] of Object.entries(wanted)) {
+    const rx = new RegExp(`\\$${name}\\s*:[^;]+;`)
+    if (rx.test(src)) {
+      src = src.replace(rx, `$${name}: ${value};`)
+    } else {
+      src += `\n$${name}: ${value};`
+    }
+  }
+
+  if (!src.includes('--primary: #{$primary};')) {
+    src += `\n\n:root {\n  --primary: #{$primary};\n}\n`
+  }
+
+  if (src !== before) {
+    writeFileSync(destPath, src, 'utf-8')
+    ok('src/css/quasar.variables.scss → variables auth-web aplicadas')
+  } else {
+    warn('src/css/quasar.variables.scss → variables auth-web ya estaban aplicadas')
+  }
+}
+
 // ─── Patch index.html ────────────────────────────────────────────────────────
 
 function patchIndexHtml() {
@@ -569,10 +614,24 @@ function patchIndexHtml() {
     ok('index.html → theme-color agregado')
   }
 
+  const csp = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://cdn.quasar.dev; font-src 'self' data:; connect-src 'self' http://localhost:* ws://localhost:* https://auth.sladia.site wss://auth.sladia.site; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; manifest-src 'self';"
   if (activeHtml.includes('Content-Security-Policy')) {
-    warn('index.html → Content-Security-Policy ya existe; verifica connect-src, img-src y frame-src')
+    const authWebCsp = `<meta http-equiv="Content-Security-Policy" content="${csp}" />`
+    if (src.includes(authWebCsp)) {
+      warn('index.html → Content-Security-Policy auth-web ya existe')
+    } else {
+      src = src.replace(
+        /(\s*<meta\b[^>]*http-equiv=["']Content-Security-Policy["'][\s\S]*?>)/i,
+        '\n    <!-- auth-web-init: CSP anterior comentada\n$1\n    -->'
+      )
+      src = src.replace(
+        /<\/head>/,
+        `    ${authWebCsp}\n  </head>`
+      )
+      changed = true
+      ok('index.html → Content-Security-Policy anterior comentada y CSP auth-web agregada')
+    }
   } else {
-    const csp = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://cdn.quasar.dev; font-src 'self' data:; connect-src 'self' http://localhost:* ws://localhost:* https://auth.sladia.site wss://auth.sladia.site; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; manifest-src 'self';"
     src = src.replace(
       /<\/head>/,
       `    <meta http-equiv="Content-Security-Policy" content="${csp}" />\n  </head>`
@@ -657,6 +716,7 @@ function runModernInit(project) {
 
   console.log('\n── Estilos ──────────────────────────────────────────')
   copyStyles({ forceVariables: false })
+  patchQuasarVariables()
 
   console.log('\n── quasar.config.ts ─────────────────────────────────')
   patchQuasarConfigInPlace()
