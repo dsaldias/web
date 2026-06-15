@@ -171,7 +171,7 @@ export default boot(({ app }) => {
 `
 
 const bootAuthV3 = `import { defineBoot } from '#q-app'
-import { AuthPlugin } from '@dsaldias/auth-web'
+import { AuthPlugin, iniciarSubscripcion, detenerSubscripcion } from '@dsaldias/auth-web'
 import '@dsaldias/auth-web/style'
 
 // Opcional: componente propio que se renderiza en el dashboard principal
@@ -189,6 +189,12 @@ export default defineBoot(({ app }) => {
     decodePassKey:   process.env.DECODE_PASS_KEY    + '',
     cookieThemeName: process.env.COOKIE_THEME_NAME  + '',
   })
+
+  iniciarSubscripcion()
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('beforeunload', () => detenerSubscripcion())
+  }
 })
 `
 
@@ -594,6 +600,36 @@ function patchQuasarVariables() {
   }
 }
 
+function patchAuthBootSubscriptions() {
+  const relPath = 'src/boot/auth.ts'
+  const bootPath = join(cwd, relPath)
+  if (!existsSync(bootPath)) return
+
+  let src = readFileSync(bootPath, 'utf-8')
+  const before = src
+
+  if (!src.includes('iniciarSubscripcion')) {
+    src = src.replace(
+      /import\s+\{\s*AuthPlugin\s*\}\s+from\s+['"]@dsaldias\/auth-web['"]/,
+      "import { AuthPlugin, iniciarSubscripcion, detenerSubscripcion } from '@dsaldias/auth-web'"
+    )
+  }
+
+  if (!src.includes('window.addEventListener') && src.includes('app.use(AuthPlugin')) {
+    src = src.replace(
+      /(\n\s*app\.use\(AuthPlugin,[\s\S]*?\n\s*\}\))/,
+      `$1\n\n  iniciarSubscripcion()\n\n  if (typeof window !== 'undefined') {\n    window.addEventListener('beforeunload', () => detenerSubscripcion())\n  }`
+    )
+  }
+
+  if (src !== before) {
+    writeFileSync(bootPath, src, 'utf-8')
+    ok('src/boot/auth.ts → subscripción de notificaciones registrada')
+  } else {
+    warn('src/boot/auth.ts → subscripción de notificaciones ya registrada')
+  }
+}
+
 // ─── Patch index.html ────────────────────────────────────────────────────────
 
 function patchIndexHtml() {
@@ -705,6 +741,7 @@ function runLegacyInit() {
 
 function runModernInit(project) {
   escribir('src/boot/auth.ts',         bootAuthV3)
+  patchAuthBootSubscriptions()
   escribir('src/router/rutas-app.ts',  rutasApp)
   escribir('src/router/rutas-publicas-app.ts', rutasPublicasApp)
   if (project.filenameBasedRouting) {
