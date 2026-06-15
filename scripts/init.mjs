@@ -89,15 +89,27 @@ function patchQuasarConfigInPlace() {
   let src = readFileSync(configPath, 'utf-8')
   const before = src
 
+  if (!src.includes('function readAuthWebEnv')) {
+    src = src.replace(
+      /(import\s+\{\s*defineConfig\s*\}\s+from\s+['"]#q-app['"];?\n)/,
+      `$1import { existsSync, readFileSync } from 'node:fs'\n\nfunction readAuthWebEnv() {\n  if (!existsSync('.env')) return {}\n  return Object.fromEntries(\n    readFileSync('.env', 'utf-8')\n      .split(/\\r?\\n/)\n      .map((line) => line.trim())\n      .filter((line) => line && !line.startsWith('#') && line.includes('='))\n      .map((line) => {\n        const index = line.indexOf('=')\n        const key = line.slice(0, index).trim()\n        const value = line.slice(index + 1).trim().replace(/^['\"]|['\"]$/g, '')\n        return [key, value]\n      }),\n  )\n}\n\nconst authWebEnv = readAuthWebEnv()\n`
+    )
+  }
+
   src = addToArrayProperty(src, 'boot', ['auth'])
   src = addToArrayProperty(src, 'css', ['auth-web.scss', 'tuto_driver.scss'])
   src = addToArrayProperty(src, 'plugins', ['Notify', 'Cookies', 'Meta'])
+
+  src = src.replace(
+    /['"]process\.env['"]\s*:\s*JSON\.stringify\(process\.env\)/g,
+    `'process.env': JSON.stringify({ ...process.env, ...authWebEnv })`
+  )
 
   if (/^\s*(rawDefine|define)\s*:/m.test(src)) {
     if (!/['"]process\.env['"]\s*:|process\.env\s*:/.test(src)) {
       src = src.replace(
         /^(\s*)(rawDefine|define)\s*:\s*\{/m,
-        `$1$2: {\n$1  'process.env': JSON.stringify(process.env),`
+        `$1$2: {\n$1  'process.env': JSON.stringify({ ...process.env, ...authWebEnv }),`
       )
     }
     if (!/__DEV__\s*:/.test(src)) {
@@ -109,7 +121,7 @@ function patchQuasarConfigInPlace() {
   } else {
     src = src.replace(
       /(build\s*:\s*\{)/,
-      `$1\n      define: {\n        'process.env': JSON.stringify(process.env),\n        __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),\n      },`
+      `$1\n      define: {\n        'process.env': JSON.stringify({ ...process.env, ...authWebEnv }),\n        __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),\n      },`
     )
   }
 
