@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { writeFileSync, readFileSync, existsSync, mkdirSync, renameSync } from 'fs'
+import { writeFileSync, readFileSync, existsSync, mkdirSync, renameSync, copyFileSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { execSync } from 'child_process'
@@ -7,6 +7,7 @@ import { execSync } from 'child_process'
 const pkgRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 
 const cwd = process.cwd()
+const args = new Set(process.argv.slice(2))
 const ok   = (msg) => console.log(`  ✅ ${msg}`)
 const warn = (msg) => console.log(`  ⚠️  ${msg}`)
 const info = (msg) => console.log(`  ℹ️  ${msg}`)
@@ -26,6 +27,85 @@ function detectPkgManager() {
   if (existsSync(join(cwd, 'yarn.lock')))      return 'yarn'
   if (existsSync(join(cwd, 'pnpm-lock.yaml'))) return 'pnpm'
   return 'npm'
+}
+
+function readJson(relPath) {
+  const abs = join(cwd, relPath)
+  if (!existsSync(abs)) return null
+  return JSON.parse(readFileSync(abs, 'utf-8'))
+}
+
+function readText(relPath) {
+  const abs = join(cwd, relPath)
+  return existsSync(abs) ? readFileSync(abs, 'utf-8') : ''
+}
+
+function backupFile(relPath) {
+  const abs = join(cwd, relPath)
+  if (!existsSync(abs)) return
+  const backup = join(cwd, `${relPath}.auth-web-backup`)
+  if (existsSync(backup)) return
+  copyFileSync(abs, backup)
+  ok(`${relPath} → respaldado como ${relPath}.auth-web-backup`)
+}
+
+function detectProject() {
+  const pkg = readJson('package.json') || {}
+  const deps = { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) }
+  const appVite = deps['@quasar/app-vite'] || ''
+  const quasarConfig = readText('quasar.config.ts')
+  return {
+    appVite,
+    isAppVite3: /^(\^|~)?3\.|3\.0\.0-/.test(appVite),
+    filenameBasedRouting: /filenameBasedRouting\s*:\s*true/.test(quasarConfig),
+  }
+}
+
+function addToArrayProperty(source, property, values) {
+  const rx = new RegExp(`(${property}\\s*:\\s*\\[)([\\s\\S]*?)(\\])`, 'm')
+  const match = source.match(rx)
+  if (!match) return source
+  let body = match[2]
+  let changed = false
+  for (const value of values) {
+    const quoted = value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    if (new RegExp(`['"]${quoted}['"]`).test(body)) continue
+    const comma = body.trim().length > 0 && !body.trimEnd().endsWith(',') ? ',' : ''
+    body = `${body.trimEnd()}${comma}\n      '${value}',\n    `
+    changed = true
+  }
+  return changed ? source.replace(rx, `$1${body}$3`) : source
+}
+
+function patchQuasarConfigInPlace() {
+  const relPath = 'quasar.config.ts'
+  const configPath = join(cwd, relPath)
+  if (!existsSync(configPath)) {
+    warn('quasar.config.ts no encontrado — revisa que estés en la raíz de un proyecto Quasar')
+    return
+  }
+
+  backupFile(relPath)
+  let src = readFileSync(configPath, 'utf-8')
+  const before = src
+
+  src = addToArrayProperty(src, 'boot', ['auth'])
+  src = addToArrayProperty(src, 'css', ['auth-web.scss', 'tuto_driver.scss'])
+  src = addToArrayProperty(src, 'plugins', ['Notify', 'Cookies', 'Meta'])
+
+  if (!/^\s*(rawDefine|define)\s*:/m.test(src)) {
+    src = src.replace(
+      /(build\s*:\s*\{)/,
+      `$1\n      define: { __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production') },`
+    )
+  }
+
+  if (src !== before) {
+    writeFileSync(configPath, src, 'utf-8')
+    ok('quasar.config.ts → parcheado sin reemplazar estructura')
+  } else {
+    warn('quasar.config.ts → no hubo cambios necesarios')
+  }
 }
 
 // ─── Templates ───────────────────────────────────────────────────────────────
@@ -51,6 +131,28 @@ import '@dsaldias/auth-web/style'
 // import MiDashboard from 'src/pages/app/dashboard/mi-dashboard.vue'
 
 export default boot(({ app }) => {
+  // Opcional: pasar un componente propio al dashboard
+  // app.provide('authDashComponent', MiDashboard)
+
+  app.use(AuthPlugin, {
+    graphqlAuth:     process.env.GRAPHQL_AUTH       + '',
+    graphqlApp:      process.env.GRAPHQL_APP        + '',
+    wss:             process.env.GRAPHQL_WSS        + '',
+    wssApp:          process.env.GRAPHQL_WSS_APP    + '',
+    decodePassKey:   process.env.DECODE_PASS_KEY    + '',
+    cookieThemeName: process.env.COOKIE_THEME_NAME  + '',
+  })
+})
+`
+
+const bootAuthV3 = `import { defineBoot } from '#q-app'
+import { AuthPlugin } from '@dsaldias/auth-web'
+import '@dsaldias/auth-web/style'
+
+// Opcional: componente propio que se renderiza en el dashboard principal
+// import MiDashboard from 'src/pages/app/dashboard/mi-dashboard.vue'
+
+export default defineBoot(({ app }) => {
   // Opcional: pasar un componente propio al dashboard
   // app.provide('authDashComponent', MiDashboard)
 
@@ -134,6 +236,47 @@ const routes: RouteRecordRaw[] = [
 ]
 
 export default routes
+`
+
+const authWebRoutes = `import type { RouteRecordRaw } from 'vue-router'
+import {
+  MainLayout,
+  LandingLayout,
+  LoginView,
+  UsuariosIndex,
+  RolesIndex,
+  UnidadesIndex,
+  TicketsIndex,
+  NotisIndex,
+  DashAuthIndex,
+} from '@dsaldias/auth-web'
+import { rutasApp } from './rutas-app'
+import { rutasPublicasApp } from './rutas-publicas-app'
+
+export const authWebRoutes: RouteRecordRaw[] = [
+  {
+    path: '/',
+    component: MainLayout,
+    children: [
+      { path: '',          component: DashAuthIndex },
+      { path: '/roles',    component: RolesIndex },
+      { path: '/unidades', component: UnidadesIndex },
+      { path: '/usuarios', component: UsuariosIndex },
+      { path: '/avisos',   component: NotisIndex },
+      { path: '/tickets',  component: TicketsIndex },
+      ...rutasApp,
+    ],
+  },
+  {
+    path: '/login',
+    component: LoginView,
+  },
+  {
+    path: '/principal.html',
+    component: LandingLayout,
+  },
+  ...rutasPublicasApp,
+]
 `
 
 const env = `ENV=prod
@@ -330,12 +473,21 @@ function patchQuasarConfig() {
 // ─── Install missing peer deps ────────────────────────────────────────────────
 
 function installPeerDeps() {
+  if (args.has('--skip-install') || process.env.AUTH_WEB_INIT_SKIP_INSTALL === '1') {
+    warn('instalación de dependencias omitida por --skip-install')
+    return
+  }
   const pkgPath = join(cwd, 'package.json')
   if (!existsSync(pkgPath)) return
   const pkg    = JSON.parse(readFileSync(pkgPath, 'utf-8'))
   const have   = new Set(Object.keys({ ...pkg.dependencies, ...pkg.devDependencies }))
-  const needed = ['@apollo/client@3.7.17', '@vue/apollo-composable', 'graphql', 'graphql-ws']
-  const missing = needed.filter(p => !have.has(p))
+  const needed = [
+    { name: '@apollo/client', spec: '@apollo/client@^3.8' },
+    { name: '@vue/apollo-composable', spec: '@vue/apollo-composable' },
+    { name: 'graphql', spec: 'graphql' },
+    { name: 'graphql-ws', spec: 'graphql-ws' },
+  ]
+  const missing = needed.filter(p => !have.has(p.name)).map(p => p.spec)
   if (!missing.length) { ok('dependencias Apollo ya instaladas'); return }
 
   const pm  = detectPkgManager()
@@ -347,12 +499,12 @@ function installPeerDeps() {
 
 // ─── Copy CSS files ──────────────────────────────────────────────────────────
 
-function copyStyles() {
+function copyStyles({ forceVariables = true } = {}) {
   const cssDir = join(cwd, 'src/css')
   mkdirSync(cssDir, { recursive: true })
 
   const files = [
-    { src: 'quasar.variables.scss', dest: 'quasar.variables.scss', force: true },
+    { src: 'quasar.variables.scss', dest: 'quasar.variables.scss', force: forceVariables },
     { src: 'app.scss',              dest: 'auth-web.scss',          force: false },
     { src: 'tuto_driver.scss',      dest: 'tuto_driver.scss',       force: false },
   ]
@@ -383,26 +535,103 @@ function patchIndexHtml() {
   ok('index.html → theme-color agregado')
 }
 
+// ─── Patch router for Quasar app-vite 3 filename routing ─────────────────────
+
+function patchAutoRouter() {
+  const relPath = 'src/router/index.ts'
+  const routerPath = join(cwd, relPath)
+  if (!existsSync(routerPath)) {
+    warn('src/router/index.ts no encontrado — no se pudieron inyectar rutas auth-web')
+    return
+  }
+
+  backupFile(relPath)
+  let src = readFileSync(routerPath, 'utf-8')
+  const before = src
+
+  if (!src.includes("from './auth-web-routes'") && !src.includes('from "./auth-web-routes"')) {
+    src = src.replace(
+      /(import\s+\{[\s\S]*?\}\s+from\s+['"]vue-router['"];?\n)/,
+      `$1import { authWebRoutes } from './auth-web-routes'\n`
+    )
+  }
+
+  if (!/routes\s*:\s*\[\s*\.\.\.authWebRoutes\s*,\s*\.\.\.routes\s*\]/.test(src)) {
+    src = src.replace(
+      /(createRouter\s*\(\s*\{[\s\S]*?)(\n\s*)routes\s*,/,
+      '$1$2routes: [...authWebRoutes, ...routes],'
+    )
+    src = src.replace(
+      /(createRouter\s*\(\s*\{[\s\S]*?)(\n\s*)routes\s*:\s*routes\s*,/,
+      '$1$2routes: [...authWebRoutes, ...routes],'
+    )
+  }
+
+  if (src !== before) {
+    writeFileSync(routerPath, src, 'utf-8')
+    ok('src/router/index.ts → rutas auth-web inyectadas')
+  } else {
+    warn('src/router/index.ts → rutas auth-web ya estaban inyectadas')
+  }
+}
+
+function runLegacyInit() {
+  escribir('src/App.vue',             appVue, true)
+  escribir('src/boot/auth.ts',        bootAuth)
+  escribir('src/router/rutas-app.ts', rutasApp)
+  escribir('src/router/rutas-publicas-app.ts', rutasPublicasApp)
+  escribir('src/router/routes.ts',    routes, true)
+  escribir('.env',                    env)
+
+  console.log('\n── Estilos ──────────────────────────────────────────')
+  copyStyles()
+
+  console.log('\n── quasar.config.ts ─────────────────────────────────')
+  patchQuasarConfig()
+
+  console.log('\n── index.html ───────────────────────────────────────')
+  patchIndexHtml()
+}
+
+function runModernInit(project) {
+  escribir('src/boot/auth.ts',         bootAuthV3)
+  escribir('src/router/rutas-app.ts',  rutasApp)
+  escribir('src/router/rutas-publicas-app.ts', rutasPublicasApp)
+  if (project.filenameBasedRouting) {
+    escribir('src/router/auth-web-routes.ts', authWebRoutes)
+  } else {
+    escribir('src/router/routes.ts', routes, true)
+  }
+  escribir('.env',                     env)
+
+  console.log('\n── Estilos ──────────────────────────────────────────')
+  copyStyles({ forceVariables: false })
+
+  console.log('\n── quasar.config.ts ─────────────────────────────────')
+  patchQuasarConfigInPlace()
+
+  if (project.filenameBasedRouting) {
+    console.log('\n── Router ───────────────────────────────────────────')
+    patchAutoRouter()
+  }
+
+  console.log('\n── index.html ───────────────────────────────────────')
+  patchIndexHtml()
+}
+
 // ─── Run ─────────────────────────────────────────────────────────────────────
 
 console.log('\n🚀  Inicializando proyecto con @dsaldias/auth-web...\n')
+const project = detectProject()
+info(`@quasar/app-vite detectado: ${project.appVite || 'no declarado'}`)
+info(`filenameBasedRouting: ${project.filenameBasedRouting ? 'si' : 'no'}`)
 console.log('── Archivos ─────────────────────────────────────────')
 
-escribir('src/App.vue',            appVue,  true)  // siempre reemplaza el default de Quasar
-escribir('src/boot/auth.ts',                bootAuth)
-escribir('src/router/rutas-app.ts',         rutasApp)
-escribir('src/router/rutas-publicas-app.ts', rutasPublicasApp)
-escribir('src/router/routes.ts',            routes,  true)  // siempre reemplaza el default de Quasar
-escribir('.env',                   env)
-
-console.log('\n── Estilos ──────────────────────────────────────────')
-copyStyles()
-
-console.log('\n── quasar.config.ts ─────────────────────────────────')
-patchQuasarConfig()
-
-console.log('\n── index.html ───────────────────────────────────────')
-patchIndexHtml()
+if (project.isAppVite3 || project.filenameBasedRouting) {
+  runModernInit(project)
+} else {
+  runLegacyInit()
+}
 
 console.log('\n── Dependencias Apollo ──────────────────────────────')
 installPeerDeps()

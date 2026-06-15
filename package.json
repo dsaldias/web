@@ -20,7 +20,6 @@
   },
   "files": [
     "dist",
-    "src",
     "scripts"
   ],
   "scripts": {
@@ -29,11 +28,11 @@
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
     "build": "quasar build",
-    "build:lib": "vite build --config vite.config.lib.ts",
-    "postinstall": "node -e \"if(process.env.INIT_CWD===process.cwd())require('child_process').execSync('quasar prepare',{stdio:'inherit'});\""
+    "build:lib": "vite build --config vite.config.lib.ts"
   },
   "peerDependencies": {
     "@apollo/client": ">=3.8",
+    "@quasar/extras": ">=1.16",
     "@vue/apollo-composable": ">=4.0",
     "graphql": ">=16",
     "graphql-ws": ">=5",
@@ -43,7 +42,6 @@
     "vue-router": ">=4"
   },
   "dependencies": {
-    "@quasar/extras": "^1.16.4",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "axios": "^1.2.1",
     "chart.js": "^4.4.7",
