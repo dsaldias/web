@@ -20,6 +20,7 @@
   },
   "files": [
     "dist",
+    "src/css",
     "scripts"
   ],
   "scripts": {
@@ -31,7 +32,7 @@
     "build:lib": "vite build --config vite.config.lib.ts"
   },
   "peerDependencies": {
-    "@apollo/client": ">=3.8",
+    "@apollo/client": ">=3.8 <4",
     "@quasar/extras": ">=1.16",
     "@vue/apollo-composable": ">=4.0",
     "graphql": ">=16",
