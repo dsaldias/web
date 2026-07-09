@@ -1,3 +1,4 @@
+/* oxlint-disable */
 /* eslint-disable */
 import { Router } from 'vue-router';
 

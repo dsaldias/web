@@ -129,7 +129,7 @@ const usuarios_conectados = defineAsyncComponent(
 )
 const showConectados = ref(false)
 const pendingOpenConectados = ref(false)
-const edgeLightRef = ref<InstanceType<typeof EdgeLight>>()
+const edgeLightRef = ref<{ trigger: () => void } | null>(null)
 
 watch(edgeLightSignal, () => edgeLightRef.value?.trigger())
 

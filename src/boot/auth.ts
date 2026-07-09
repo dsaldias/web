@@ -1,11 +1,11 @@
-import { boot } from 'quasar/wrappers'
+import { defineBoot } from '@quasar/app-vite'
 import { AuthPlugin } from '@dsaldias/auth-web'
 import '@dsaldias/auth-web/style'
 
 // Opcional: componente propio que se renderiza en el dashboard principal
 // import MiDashboard from 'src/pages/app/dashboard/mi-dashboard.vue'
 
-export default boot(({ app }) => {
+export default defineBoot(({ app }) => {
   // Opcional: pasar un componente propio al dashboard
   // app.provide('authDashComponent', MiDashboard)
 

@@ -1,4 +1,4 @@
-import { T as mostrarNotifyError, _ as cargarMenus, t as useLoginStore, v as LoginService } from "./user-1BtAW-kN.js";
+import { T as mostrarNotifyError, _ as cargarMenus, t as useLoginStore, v as LoginService } from "./user-D_aFbAUy.js";
 import { Fragment, createBlock, createCommentVNode, createElementBlock, createElementVNode, createTextVNode, createVNode, defineComponent, onBeforeMount, onMounted, onUnmounted, openBlock, ref, unref, vShow, withCtx, withDirectives } from "vue";
 import QBtn from "quasar/src/components/btn/QBtn.js";
 import QCardSection from "quasar/src/components/card/QCardSection.js";
@@ -93,7 +93,7 @@ var LoginView_default = /* @__PURE__ */ defineComponent({
 		const changePWD = () => pwd.value == "text" ? pwd.value = "password" : pwd.value = "text";
 		const googleLogin = async () => {
 			loading.value = true;
-			const { loginGoogle } = await import("./firebaseauth-C2TeXFry.js");
+			const { loginGoogle } = await import("./firebaseauth-09DvJxhO.js");
 			const d = await loginGoogle();
 			if (d && d.user) {
 				const res = await service.createOauth(d.user);

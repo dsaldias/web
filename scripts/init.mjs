@@ -371,7 +371,7 @@ LAST_DARK_STATE=quasar-last-dark-state_x
 const quasarConfigTemplate = `// Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
-import { defineConfig } from '#q-app/wrappers'
+import { defineConfig } from '@quasar/app-vite'
 
 export default defineConfig((ctx) => {
   return {

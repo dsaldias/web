@@ -36,6 +36,7 @@ export default defineConfig({
     rollupOptions: {
       // Todo lo que el proyecto consumidor ya tiene instalado va aquí
       external: [
+        '@quasar/app-vite',
         'vue',
         'pinia',
         'vue-router',

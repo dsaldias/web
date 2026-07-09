@@ -1,6 +1,6 @@
-import { A as toHomePath, C as chartAreaBorder, D as parseFecha, E as parseErrors, M as notifyCreate, N as setNotifyBridge, O as parseTextError, S as ajustarFechaUTC, T as mostrarNotifyError, _ as cargarMenus, a as avisos_show_default, b as setConfig, c as mutar$1, d as __extends, f as __read, g as re_login_default, h as mostrarRelogin, i as mostrarAviso, j as toast1, k as parseTextErrorWs, l as query$1, m as __values, o as NotisService, p as __spreadArray, r as eventBus, s as defectoOps$1, t as useLoginStore, u as lib_default, v as LoginService, w as defectoOps$2, x as ajustarFechaLocal, y as encriptarString } from "./user-1BtAW-kN.js";
-import { n as sql_usuarios, t as UsuariosService } from "./usuariosService-BtLTDkkC.js";
-import { t as LoginView_default } from "./LoginView-rZgjQInn.js";
+import { A as toHomePath, C as chartAreaBorder, D as parseFecha, E as parseErrors, M as notifyCreate, N as setNotifyBridge, O as parseTextError, S as ajustarFechaUTC, T as mostrarNotifyError, _ as cargarMenus, a as avisos_show_default, b as setConfig, c as mutar$1, d as __extends, f as __read, g as re_login_default, h as mostrarRelogin, i as mostrarAviso, j as toast1, k as parseTextErrorWs, l as query$1, m as __values, o as NotisService, p as __spreadArray, r as eventBus, s as defectoOps$1, t as useLoginStore, u as lib_default, v as LoginService, w as defectoOps$2, x as ajustarFechaLocal, y as encriptarString } from "./user-D_aFbAUy.js";
+import { n as sql_usuarios, t as UsuariosService } from "./usuariosService--q3U3aiI.js";
+import { t as LoginView_default } from "./LoginView-BYhk3yEm.js";
 import { ApolloClient } from "@apollo/client/core";
 import { ApolloClients, provideApolloClients, useMutation, useQuery, useSubscription } from "@vue/apollo-composable";
 import Dark from "quasar/src/plugins/dark/Dark.js";
@@ -38,7 +38,7 @@ import ClosePopup from "quasar/src/directives/close-popup/ClosePopup.js";
 import QRadio from "quasar/src/components/radio/QRadio.js";
 import QFile from "quasar/src/components/file/QFile.js";
 import Notify from "quasar/src/plugins/notify/Notify.js";
-import { boot } from "quasar/wrappers";
+import { defineBoot } from "@quasar/app-vite";
 import QSelect from "quasar/src/components/select/QSelect.js";
 import QBadge from "quasar/src/components/badge/QBadge.js";
 import QToolbar from "quasar/src/components/toolbar/QToolbar.js";
@@ -744,7 +744,6 @@ var iniciarSubscripcion = () => {
 			const notificacion = result.data.notificaciones_subs;
 			const dt = notificacion.data_json;
 			let datos = null;
-			let color = "orange";
 			let tipo = "";
 			const datanot = {
 				message: notificacion.title,
@@ -756,7 +755,7 @@ var iniciarSubscripcion = () => {
 			if ((dt + "").startsWith("{")) {
 				const p = JSON.parse(dt);
 				datos = p["datos"];
-				color = p["color"];
+				const color = p["color"];
 				tipo = p["tipo"];
 				if (color) {
 					delete datanot.type;
@@ -779,11 +778,11 @@ var iniciarSubscripcion = () => {
 };
 var datitos = async (datos) => {
 	if (!datos) return;
-	const { useLoginStore } = await import("./user-1BtAW-kN.js").then((n) => n.n);
+	const { useLoginStore } = await import("./user-D_aFbAUy.js").then((n) => n.n);
 	useLoginStore().setNotifyData(datos);
 };
 var setconectadosTxt = async (datos) => {
-	const { useLoginStore } = await import("./user-1BtAW-kN.js").then((n) => n.n);
+	const { useLoginStore } = await import("./user-D_aFbAUy.js").then((n) => n.n);
 	const store = useLoginStore();
 	store.setWsTotalConectados(datos.total_conectados);
 	store.setWsConectados(datos.conectados);
@@ -1482,7 +1481,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
 		_: 1
 	}, 8, ["modelValue"]);
 }
-var geo_modalbk_default = /* @__PURE__ */ _plugin_vue_export_helper_default(geo_modalbk_vue_vue_type_script_lang_default, [["render", _sfc_render$3]]);
+var geo_modalbk_default = /*#__PURE__*/ _plugin_vue_export_helper_default(geo_modalbk_vue_vue_type_script_lang_default, [["render", _sfc_render$3]]);
 //#endregion
 //#region src/stores/auth/zoomer.js
 var init_zoomer = () => {
@@ -1863,15 +1862,15 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
 		_: 1
 	}, 8, ["modelValue"]);
 }
-var editar_perfil_default = /* @__PURE__ */ _plugin_vue_export_helper_default(editar_perfil_vue_vue_type_script_lang_default, [["render", _sfc_render$2]]);
+var editar_perfil_default = /*#__PURE__*/ _plugin_vue_export_helper_default(editar_perfil_vue_vue_type_script_lang_default, [["render", _sfc_render$2]]);
 //#endregion
 //#region src/components/app/ext/perfil/extension_btn.vue
 var _sfc_main = {};
 function _sfc_render$1(_ctx, _cache) {
 	return openBlock(), createElementBlock("div");
 }
-var extension_btn_default = /* @__PURE__ */ _plugin_vue_export_helper_default(_sfc_main, [["render", _sfc_render$1]]);
-boot(() => {
+var extension_btn_default = /*#__PURE__*/ _plugin_vue_export_helper_default(_sfc_main, [["render", _sfc_render$1]]);
+defineBoot(() => {
 	const cookie_name = process.env.COOKIE_THEME_NAME || "";
 	const v = Cookies.get(cookie_name) == "true";
 	Dark.set(v);
@@ -2095,7 +2094,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
 		_: 1
 	}, 8, ["onClick"]), createVNode(_component_EditarPerfil, { ref: "refEditarPerfil" }, null, 512)]);
 }
-var boton_perfil_default = /* @__PURE__ */ _plugin_vue_export_helper_default(boton_perfil_vue_vue_type_script_lang_default, [["render", _sfc_render]]);
+var boton_perfil_default = /*#__PURE__*/ _plugin_vue_export_helper_default(boton_perfil_vue_vue_type_script_lang_default, [["render", _sfc_render]]);
 //#endregion
 //#region src/components/auth/roles/roles-select.vue
 var roles_select_default = /* @__PURE__ */ defineComponent({
@@ -2181,7 +2180,7 @@ var _hoisted_1$17 = {
 };
 //#endregion
 //#region src/components/auth/EdgeLight.vue
-var EdgeLight_default = /* @__PURE__ */ _plugin_vue_export_helper_default(/* @__PURE__ */ defineComponent({
+var EdgeLight_default = /*#__PURE__*/ _plugin_vue_export_helper_default(/* @__PURE__ */ defineComponent({
 	__name: "EdgeLight",
 	setup(__props, { expose: __expose }) {
 		const active = ref(false);
@@ -2427,12 +2426,12 @@ var MainLayout_default = /* @__PURE__ */ defineComponent({
 		const foto_64 = ref("");
 		const refusuarios_conectados = ref();
 		const router = useRouter();
-		const Login = defineAsyncComponent(() => import("./login-index-CUlSJqTk.js"));
-		const usuarios_conectados = defineAsyncComponent(() => import("./usuarios_conectados-LR2oxIlh.js"));
+		const Login = defineAsyncComponent(() => import("./login-index-BMx4idH9.js"));
+		const usuarios_conectados = defineAsyncComponent(() => import("./usuarios_conectados-GxdBa6Lx.js"));
 		const showConectados = ref(false);
 		const pendingOpenConectados = ref(false);
 		const edgeLightRef = ref();
-		watch(edgeLightSignal, () => edgeLightRef.value?.trigger());
+		watch(edgeLightSignal, () => edgeLightRef.value?.trigger?.());
 		const toggleLeftDrawer = () => leftDrawerOpen.value = !leftDrawerOpen.value;
 		const toHomeR = async () => {
 			const r = toHomePath();
@@ -2707,7 +2706,7 @@ var _hoisted_33 = { class: "col" };
 var _hoisted_34 = { class: "col" };
 //#endregion
 //#region src/components/auth/landing/landing-index.vue
-var landing_index_default = /* @__PURE__ */ _plugin_vue_export_helper_default(/* @__PURE__ */ defineComponent({
+var landing_index_default = /*#__PURE__*/ _plugin_vue_export_helper_default(/* @__PURE__ */ defineComponent({
 	__name: "landing-index",
 	setup(__props) {
 		const $q = useQuasar();
@@ -7748,10 +7747,14 @@ var Color = class Color {
 		return this;
 	}
 };
-(() => {
-	let id = 0;
-	return () => id++;
-})();
+//#endregion
+//#region node_modules/chart.js/dist/chunks/helpers.dataset.js
+/*!
+* Chart.js v4.5.1
+* https://www.chartjs.org
+* (c) 2025 Chart.js Contributors
+* Released under the MIT License
+*/
 /**
 * Returns true if `value` is neither null nor undefined, else returns false.
 * @param value - The value to test.
@@ -8176,7 +8179,7 @@ var Defaults = class {
 		appliers.forEach((apply) => apply(this));
 	}
 };
-var defaults$2 = /* @__PURE__ */ new Defaults({
+var defaults$2 = /* #__PURE__ */ new Defaults({
 	_scriptable: (name) => !name.startsWith("on"),
 	_indexable: (name) => name !== "events",
 	hover: { _fallback: "interaction" },
@@ -8379,9 +8382,19 @@ var utils = {
 			width
 		};
 	},
+	/**
+	* Returns value bounded by min and max. This is equivalent to max(min, min(value, max)).
+	* @todo move this method in Chart.helpers.bound
+	* https://doc.qt.io/qt-5/qtglobal.html#qBound
+	*/
 	bound: function(min, value, max) {
 		return Math.max(min, Math.min(value, max));
 	},
+	/**
+	* Returns an array of pair [value, state] where state is:
+	* * -1: value is only in a0 (removed)
+	* *  1: value is only in a1 (added)
+	*/
 	arrayDiff: function(a0, a1) {
 		var prev = a0.slice();
 		var updates = [];
@@ -8395,6 +8408,9 @@ var utils = {
 		for (i = 0, ilen = prev.length; i < ilen; ++i) updates.push([prev[i], -1]);
 		return updates;
 	},
+	/**
+	* https://github.com/chartjs/chartjs-plugin-datalabels/issues/70
+	*/
 	rasterize: function(v) {
 		return Math.round(v * devicePixelRatio) / devicePixelRatio;
 	}
@@ -8749,6 +8765,9 @@ var Label = function(config, ctx, el, index) {
 	me._el = el;
 };
 merge(Label.prototype, {
+	/**
+	* @private
+	*/
 	_modelize: function(display, lines, config, context) {
 		var me = this;
 		var index = me._index;
@@ -8923,6 +8942,9 @@ merge(HitBox.prototype, {
 		}
 		return true;
 	},
+	/**
+	* @private
+	*/
 	_points: function() {
 		var me = this;
 		var rect = me._rect;
@@ -9475,7 +9497,8 @@ var dash_index_auth_default = /* @__PURE__ */ defineComponent({
 			if (!refIFrame.value) return;
 			width.value = "100%";
 			if (refIFrame.value.offsetWidth > 1080) width.value = "80%";
-			height.value = refIFrame.value.offsetWidth * 9 / 16;
+			const alto = refIFrame.value.offsetWidth * 9 / 16;
+			height.value = alto;
 		};
 		watch(() => expanded.value, () => {
 			setTimeout(() => size(), 300);

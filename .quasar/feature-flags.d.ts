@@ -1,3 +1,4 @@
+/* oxlint-disable */
 /* eslint-disable */
 import "quasar/dist/types/feature-flag.d.ts";
 

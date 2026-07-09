@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* oxlint-disable */
 /**
  * THIS FILE IS GENERATED AUTOMATICALLY.
  * DO NOT EDIT.
@@ -11,53 +11,36 @@
  * Boot files are your "main.js"
  **/
 
-
 import { createApp } from 'vue'
 
 
 
-
-
-
-
 import '@quasar/extras/roboto-font/roboto-font.css'
-
 import '@quasar/extras/material-icons/material-icons.css'
-
-
 
 
 // We load Quasar stylesheet file
 import 'quasar/dist/quasar.sass'
 
 
-
-
-import 'src/css/app.scss'
-
-import 'src/css/club-neon.css'
-
+import '@/css/app.scss'
+import '@/css/auth-web.scss'
+import '@/css/tuto_driver.scss'
 
 import createQuasarApp from './app.js'
 import quasarUserOptions from './quasar-user-options.js'
 
-
-import 'app/src-pwa/register-service-worker'
-
+import '@/../src-pwa/register-sw'
 
 
 
-
-
-const publicPath = `/auth/`
+const publicPath = `/`
 
 async function start ({
   app,
   router
-  , store
-}, bootFiles) {
-  
-  let hasRedirected = false
+  , store}, bootFiles) {
+    let hasRedirected = false
   const getRedirectUrl = url => {
     try { return router.resolve(url).href }
     catch (err) {}
@@ -79,8 +62,7 @@ async function start ({
     // continue if we didn't fail to resolve the url
     if (href !== null) {
       window.location.href = href
-      
-    }
+          }
   }
 
   const urlPath = window.location.href.replace(window.location.origin, '')
@@ -90,42 +72,29 @@ async function start ({
       await bootFiles[i]({
         app,
         router,
-        store,
-        ssrContext: null,
+        store,        ssrContext: null,
         redirect,
         urlPath,
         publicPath
       })
     }
     catch (err) {
-      if (err && err.url) {
-        redirect(err.url)
-        return
-      }
-
-      console.error('[Quasar] boot error:', err)
+      if (!hasRedirected) console.error('[Quasar] boot error:', err)
       return
     }
   }
 
-  if (hasRedirected === true) return
+  if (hasRedirected) return
   
-
   app.use(router)
 
   
-
     
-
-    
-      app.mount('#q-app')
-    
-  
-
+          app.mount('#q-app')
+      
 }
 
 createQuasarApp(createApp, quasarUserOptions)
-
   .then(app => {
     // eventually remove this when Cordova/Capacitor/Electron support becomes old
     const [ method, mapFn ] = Promise.allSettled !== void 0
@@ -145,16 +114,8 @@ createQuasarApp(createApp, quasarUserOptions)
       ]
 
     return Promise[ method ]([
-      
-      import('boot/theme'),
-      
-      import('boot/axios'),
-      
-      import('boot/apollo')
-      
-    ]).then(bootFiles => {
+            import('@/boot/auth')          ]).then(bootFiles => {
       const boot = mapFn(bootFiles).filter(entry => typeof entry === 'function')
       start(app, boot)
     })
   })
-

@@ -1,3 +1,4 @@
+/* oxlint-disable */
 /* eslint-disable */
 declare module '*.vue' {
   import { DefineComponent } from 'vue';

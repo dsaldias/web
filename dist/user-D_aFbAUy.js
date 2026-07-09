@@ -139,7 +139,7 @@ var encriptarString = async (textoPlano) => {
 			name: "AES-CBC",
 			length: 256
 		}, false, ["encrypt", "decrypt"]);
-		const iv = crypto.getRandomValues(new Uint8Array(16));
+		const iv = crypto.getRandomValues(/* @__PURE__ */ new Uint8Array(16));
 		const textoPlanoBytes = new TextEncoder().encode(textoPlano);
 		const textoCifradoBuffer = await crypto.subtle.encrypt({
 			name: "AES-CBC",
@@ -276,7 +276,7 @@ var re_login_default = /* @__PURE__ */ defineComponent({
 		};
 		const googleLogin = async () => {
 			loading.value = true;
-			const { loginGoogle } = await import("./firebaseauth-C2TeXFry.js");
+			const { loginGoogle } = await import("./firebaseauth-09DvJxhO.js");
 			const d = await loginGoogle();
 			if (d && d.user) {
 				const res = await service.createOauth(d.user);
@@ -575,7 +575,8 @@ function parseDocument(source) {
 	if (!docCache.has(cacheKey)) {
 		var parsed = parse(source, {
 			experimentalFragmentVariables,
-			allowLegacyFragmentVariables: experimentalFragmentVariables
+			allowLegacyFragmentVariables: experimentalFragmentVariables,
+			experimentalFragmentArguments: experimentalFragmentVariables
 		});
 		if (!parsed || parsed.kind !== "Document") throw new Error("Not a valid GraphQL document.");
 		docCache.set(cacheKey, stripLoc(processFragments(parsed)));

@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* oxlint-disable */
 /**
  * THIS FILE IS GENERATED AUTOMATICALLY.
  * DO NOT EDIT.
@@ -11,9 +11,7 @@
  * Boot files are your "main.js"
  **/
 
-
-
-import App from 'app/src/App.vue'
+import App from '@/../src/App.vue'
 let appPrefetch = typeof App.preFetch === 'function'
   ? App.preFetch
   : (
@@ -22,7 +20,6 @@ let appPrefetch = typeof App.preFetch === 'function'
       ? App.__c.preFetch
       : false
     )
-
 
 function getMatchedComponents (to, router) {
   const route = to
@@ -51,7 +48,7 @@ export function addPreFetchHooks ({ router, store, publicPath }) {
   // Doing it after initial route is resolved so that we don't double-fetch
   // the data that we already have. Using router.beforeResolve() so that all
   // async components are resolved.
-  router.beforeResolve((to, from, next) => {
+  router.beforeResolve(async (to, from) => {
     const
       urlPath = window.location.href.replace(window.location.origin, ''),
       matched = getMatchedComponents(to, router),
@@ -63,7 +60,7 @@ export function addPreFetchHooks ({ router, store, publicPath }) {
         return diffed || (diffed = (
           !prevMatched[i] ||
           prevMatched[i].c !== m.c ||
-          m.path.indexOf('/:') > -1 // does it has params?
+          m.path.includes('/:') // does it has params?
         ))
       })
       .filter(m => m.c !== void 0 && (
@@ -73,44 +70,34 @@ export function addPreFetchHooks ({ router, store, publicPath }) {
       ))
       .map(m => m.c.__c !== void 0 ? m.c.__c.preFetch : m.c.preFetch)
 
-    
-    if (appPrefetch !== false) {
+        if (appPrefetch !== false) {
       preFetchList.unshift(appPrefetch)
       appPrefetch = false
     }
     
+    if (preFetchList.length === 0) return
 
-    if (preFetchList.length === 0) {
-      return next()
-    }
+    let redirectArg = null
+    const redirect = url => { redirectArg = url }
 
-    let hasRedirected = false
-    const redirect = url => {
-      hasRedirected = true
-      next(url)
-    }
-    const proceed = () => {
-      
-      if (hasRedirected === false) { next() }
+    
+    for (let i = 0; redirectArg === null && i < preFetchList.length; i++) {
+      try {
+        await preFetchList[i]({
+          store,          currentRoute: to,
+          previousRoute: from,
+          redirect,
+          urlPath,
+          publicPath
+        })
+      } catch (e) {
+                if (redirectArg !== null) return redirectArg
+        console.error(e)
+        return
+      }
     }
 
     
-
-    preFetchList.reduce(
-      (promise, preFetch) => promise.then(() => hasRedirected === false && preFetch({
-        store,
-        currentRoute: to,
-        previousRoute: from,
-        redirect,
-        urlPath,
-        publicPath
-      })),
-      Promise.resolve()
-    )
-    .then(proceed)
-    .catch(e => {
-      console.error(e)
-      proceed()
-    })
+    if (redirectArg !== null) return redirectArg
   })
 }

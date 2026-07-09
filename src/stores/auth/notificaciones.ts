@@ -38,7 +38,6 @@ const iniciarSubscripcion = () => {
       // console.log('Notificación recibida:', notificacion)
       const dt = notificacion.data_json
       let datos = null
-      let color = 'orange'
       let tipo = ''
       const datanot: any = {
         message: notificacion.title,
@@ -50,7 +49,7 @@ const iniciarSubscripcion = () => {
       if ((dt + '').startsWith('{')) {
         const p = JSON.parse(dt)
         datos = p['datos']
-        color = p['color']
+        const color = p['color']
         tipo = p['tipo']
 
         if (color) {

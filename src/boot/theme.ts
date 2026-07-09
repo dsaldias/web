@@ -1,9 +1,9 @@
-import { boot } from 'quasar/wrappers'
+import { defineBoot } from '@quasar/app-vite'
 import { Cookies } from 'quasar'
 import { Dark } from 'quasar'
 import { watch } from 'vue'
 
-export default boot(() => {
+export default defineBoot(() => {
   const cookie_name = process.env.COOKIE_THEME_NAME || ''
   const value = Cookies.get(cookie_name)
 

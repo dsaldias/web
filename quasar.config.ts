@@ -1,7 +1,7 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
-import { defineConfig } from '#q-app/wrappers'
+import { defineConfig } from '@quasar/app-vite'
 
 export default defineConfig((ctx) => {
   return {
@@ -15,6 +15,11 @@ export default defineConfig((ctx) => {
     ],
 
     build: {
+      alias: {
+        src: ctx.appPaths.resolve.app('src'),
+        stores: ctx.appPaths.resolve.app('src/stores'),
+      },
+
       extendViteConf(viteConf) {
         if (!viteConf.resolve) { viteConf.resolve = {} }
         // Redirect bare @apollo/client → @apollo/client/core so Rollup does not
@@ -41,6 +46,16 @@ export default defineConfig((ctx) => {
       typescript: {
         strict: true,
         vueShim: true,
+        extendTsConfig(tsConfig) {
+          tsConfig.compilerOptions ??= {}
+          tsConfig.compilerOptions.paths = {
+            ...tsConfig.compilerOptions.paths,
+            src: ['./../src'],
+            'src/*': ['./../src/*'],
+            stores: ['./../src/stores'],
+            'stores/*': ['./../src/stores/*'],
+          }
+        },
       },
 
       vueRouterMode: 'history',
