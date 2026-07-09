@@ -35,7 +35,9 @@ import 'quasar/dist/quasar.sass'
 
 import 'src/css/app.scss'
 
-import 'src/css/club-neon.css'
+import 'src/css/auth-web.scss'
+
+import 'src/css/tuto_driver.scss'
 
 
 import createQuasarApp from './app.js'
@@ -51,7 +53,7 @@ import 'app/src-pwa/register-service-worker'
 console.info('[Quasar] Running PWA.')
 
 
-const publicPath = `/auth/`
+const publicPath = `/`
 
 async function start ({
   app,
@@ -148,11 +150,7 @@ createQuasarApp(createApp, quasarUserOptions)
 
     return Promise[ method ]([
       
-      import('boot/theme'),
-      
-      import('boot/axios'),
-      
-      import('boot/apollo')
+      import('boot/auth')
       
     ]).then(bootFiles => {
       const boot = mapFn(bootFiles).filter(entry => typeof entry === 'function')
