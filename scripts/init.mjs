@@ -650,7 +650,7 @@ function patchIndexHtml() {
     ok('index.html → theme-color agregado')
   }
 
-  const csp = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://cdn.quasar.dev; font-src 'self' data:; connect-src 'self' http://localhost:* ws://localhost:* https://auth.sladia.site wss://auth.sladia.site; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; manifest-src 'self';"
+  const csp = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://cdn.quasar.dev; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' http://localhost:* ws://localhost:* https://auth.sladia.site wss://auth.sladia.site; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; manifest-src 'self';"
   if (activeHtml.includes('Content-Security-Policy')) {
     const authWebCsp = `<meta http-equiv="Content-Security-Policy" content="${csp}" />`
     if (src.includes(authWebCsp)) {

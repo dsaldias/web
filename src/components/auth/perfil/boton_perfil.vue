@@ -5,9 +5,12 @@
         <q-img v-if="foto_64" :src="foto_64" />
         <img v-else src="https://cdn.quasar.dev/img/boy-avatar.png" />
       </q-avatar>
-      <span class="q-ml-xs ellipsis" style="max-width: 9em;">{{ datos.username }}</span>
+      <!-- <span class="q-ml-xs ellipsis" style="max-width: 9em;">{{ datos.username }}</span>
       <q-icon name="arrow_drop_down" size="xs" />
-      <q-tooltip>Perfil</q-tooltip>
+      <q-tooltip>Perfil</q-tooltip> -->
+      <span class="q-ml-xs ellipsis" style="max-width: 9em;"> {{ datos.username }} </span>
+      <q-badge v-if="store.chatUnreadCount > 0" color="red" rounded floating :label="chatUnreadLabel" />
+      <q-tooltip> Perfil </q-tooltip>
       <q-menu>
         <div class="row no-wrap" style="min-width: 320px">
 
@@ -30,6 +33,9 @@
             />
 
             <q-btn flat no-caps icon="edit" label="Editar perfil" align="left" v-close-popup @click="openEdit()" />
+            <q-btn class="q-mt-xs" color="primary" label="Abrir chat" outline icon="chat" square size="sm" v-close-popup stretch @click="openChat()">
+              <q-badge v-if="store.chatUnreadCount > 0" color="red" rounded floating :label="chatUnreadLabel" />
+            </q-btn>
             <extension_btn />
           </div>
 
@@ -52,27 +58,32 @@
     </q-btn>
 
     <EditarPerfil ref="refEditarPerfil"/>
+    <ChatModal ref="refChatModal" />
   </div>
 </template>
 
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useLoginStore } from 'src/stores/auth/user';
 import PerfilService from 'stores/auth/services/perfilService'
 import EditarPerfil from './editar_perfil.vue'
 import extension_btn from 'src/components/app/ext/perfil/extension_btn.vue';
+import ChatModal from 'src/components/auth/chat/chat_modal.vue';
+import ChatsService from 'src/stores/auth/services/chatsService';
 import { parseFecha, toHomePath } from 'src/stores/auth/utils';
 import { useRouter } from 'vue-router';
 import { getThemeDark } from 'src/boot/theme';
 
 export default {
-  components:{ EditarPerfil,extension_btn },
+  components:{ EditarPerfil,extension_btn,ChatModal },
   setup () {
     const datos = ref<any>({})
     const store = useLoginStore()
     const perfilService = new PerfilService();
+    const chatsService = new ChatsService();
     const refEditarPerfil = ref()
+    const refChatModal = ref()
     const router = useRouter();
     const foto_64 = ref('');
     const unsubscribe = ref()
@@ -87,6 +98,16 @@ export default {
 
     const openEdit = () => { 
       refEditarPerfil.value.open();
+    }
+
+    const openChat = () => {
+      refChatModal.value.open()
+    }
+
+    const chatUnreadLabel = computed(() => store.chatUnreadCount > 99 ? '99+' : String(store.chatUnreadCount))
+
+    const setThemaCuaderno = () => {
+      store.setThemaCuaderno(store.thema_cuaderno)
     }
 
     const cargarDatos = async () => {
@@ -109,6 +130,7 @@ export default {
       datos.value.username = `${us.username}`;
       datos.value.roles = `${roles} roles.`;
       datos.value.last_login = us.last_login;
+      void loadChatUnreadCount(us.id)
       await getFoto(data.usuario)
     }
 
@@ -126,6 +148,16 @@ export default {
       });
     }
 
+    const loadChatUnreadCount = async (userId: string | number) => {
+      if (!userId) return
+      try {
+        const res:any = await chatsService.chats_no_leidos(userId)
+        store.setChatUnreadCount(Number(res?.chats_no_leidos || 0))
+      } catch {
+        store.setChatUnreadCount(0)
+      }
+    }
+
     onMounted(async ()=>{
       await cargarDatos();
     })
@@ -138,11 +170,15 @@ export default {
       datos,
       logout,
       openEdit,
+      openChat,
       store,
       refEditarPerfil,
+      refChatModal,
       foto_64,
       parseFecha,
-      subscribir
+      subscribir,
+      setThemaCuaderno,
+      chatUnreadLabel
     }
   }
 }

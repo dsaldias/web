@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useLoginStore } from 'stores/auth/user'
-import Landing from 'components/auth/landing/landing-index.vue'
+import Landing from 'src/components/auth/landing/landing-index.vue'
 import app_name from 'src/components/app/ext/name/app_name.vue'
 import app_logo from 'src/components/app/ext/logo/app_logo.vue'
 

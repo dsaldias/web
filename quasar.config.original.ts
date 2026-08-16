@@ -2,9 +2,23 @@
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
 import { defineConfig } from '@quasar/app-vite'
+import { config as loadDotEnv } from 'dotenv'
 import path from 'path'
 
+const envFile = loadDotEnv().parsed ?? {}
+
 export default defineConfig((ctx) => {
+  const clientEnv = {
+    ...envFile,
+    DEV: ctx.dev,
+    PROD: ctx.prod,
+    MODE: ctx.modeName,
+    CLIENT: true,
+    SERVER: false,
+    VUE_ROUTER_MODE: 'history',
+    VUE_ROUTER_BASE: '/auth/',
+  }
+
   return {
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
     // preFetch: true,
@@ -67,6 +81,10 @@ export default defineConfig((ctx) => {
 
       publicPath: '/auth/',
       envFiles: ['.env'],
+      define: {
+        __DEV__: ctx.dev,
+        'process.env': clientEnv,
+      },
       // analyze: true,
       // env: {},
       // rawDefine: {}
