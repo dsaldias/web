@@ -53,7 +53,7 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
 import { ref } from 'vue'
-import Geo from 'components/auth/geo/geo_modalbk.vue'
+import Geo from 'src/components/auth/geo/geo_modalbk.vue'
 import UnidadesService from 'src/stores/auth/services/unidadesService'
 import { toast1 } from 'src/stores/auth/utils'
 

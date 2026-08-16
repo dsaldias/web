@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ref } from 'vue'
 import gql from 'graphql-tag'
-import { notifyCreate } from './notifyBridge'
 import { subs } from 'src/stores/auth/serverws'
+import { notifyCreate } from './notifyBridge'
 
 const msg = ref('')
 const subscriptionRef: any = ref(null)
@@ -59,6 +59,11 @@ const iniciarSubscripcion = () => {
         void datitos(datos)
       }
 
+      if (tipo == 'chat') {
+        void setChat(datos)
+        return
+      }
+
       // Mostrar la notificación
       if (tipo != 'conectados') {
         notifyCreate(datanot)
@@ -96,6 +101,15 @@ const setconectadosTxt = async (datos: any) => {
   // store.setWsTotalConectados(title)
   store.setWsTotalConectados(datos.total_conectados)
   store.setWsConectados(datos.conectados)
+}
+
+const setChat = async (datos: any) => {
+  if (!datos) return
+  const { useLoginStore } = await import('./user')
+  const store = useLoginStore()
+  const dataUser = typeof store.dataUser == 'string' ? JSON.parse(store.dataUser) : store.dataUser
+  const userId = dataUser?.usuario?.id
+  if ((datos.destinator_id + '') == (userId + '')) store.registerChat(datos)
 }
 
 // Limpieza de la suscripción (puedes llamarla cuando lo necesites)

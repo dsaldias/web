@@ -91,7 +91,7 @@ import MeService from 'src/stores/auth/services/meService';
 import Validaciones from './validador';
 import { ref } from 'vue';
 import {Notify} from 'quasar'
-import Geo from 'components/auth/geo/geo_modalbk.vue';
+import Geo from 'src/components/auth/geo/geo_modalbk.vue';
 import {init_zoomer} from 'stores/auth/zoomer';
 
 export default {
