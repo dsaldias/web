@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-none q-ma-none">
-    <q-btn flat class="q-pl-xs q-pr-none" @click="subscribir">
+    <q-btn flat class="q-pl-xs q-pr-none">
       <q-avatar size="26px">
         <q-img v-if="foto_64" :src="foto_64" />
         <img v-else src="https://cdn.quasar.dev/img/boy-avatar.png" />
@@ -141,12 +141,12 @@ export default {
       if(res && res.get_imagen) foto_64.value = res.get_imagen;
     }
 
-    const subscribir = () => { 
-      if(unsubscribe.value) return
-      unsubscribe.value = store.$subscribe((_, state) => { 
-        store.setThemaCuaderno(state.thema_cuaderno)
-      });
-    }
+    // const subscribir = () => { 
+    //   if(unsubscribe.value) return
+    //   unsubscribe.value = store.$subscribe((_, state) => { 
+    //     store.setThemaCuaderno(state.thema_cuaderno)
+    //   });
+    // }
 
     const loadChatUnreadCount = async (userId: string | number) => {
       if (!userId) return
@@ -176,7 +176,7 @@ export default {
       refChatModal,
       foto_64,
       parseFecha,
-      subscribir,
+      // subscribir,
       setThemaCuaderno,
       chatUnreadLabel
     }

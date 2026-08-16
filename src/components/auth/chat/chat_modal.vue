@@ -113,12 +113,12 @@
 
         <div v-else class="chat-messages">
           <div ref="messageScrollRef" class="chat-message-scroll">
-            <div v-if="messagesLoading" class="chat-state chat-state--small">
+            <!-- <div v-if="messagesLoading" class="chat-state chat-state--small">
               <q-spinner color="primary" size="28px" />
               <strong>Cargando mensajes</strong>
-            </div>
+            </div> -->
 
-            <div v-else-if="messagesError" class="chat-state chat-state--small">
+            <div v-if="messagesError" class="chat-state chat-state--small">
               <q-icon name="chat" size="30px" color="primary" />
               <strong>No se pudieron cargar los mensajes</strong>
               <span>{{ messagesError }}</span>
@@ -130,7 +130,7 @@
               <strong>Sin mensajes</strong>
             </div>
 
-            <div v-else class="chat-message-list">
+            <div v-if="messages.length" class="chat-message-list">
               <div
                 v-for="message in messages"
                 :key="String(message.id)"
@@ -143,6 +143,7 @@
               <span ref="messageBottomRef" class="chat-message-bottom" />
             </div>
           </div>
+          <q-linear-progress v-if="messagesLoading" dark rounded indeterminate class="q-mt-xs" color="green" size="xs" />
 
           <q-form class="chat-composer" @submit.prevent="sendMessage">
             <div v-if="composerBlockedReason" class="chat-warning">
