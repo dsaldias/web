@@ -55,6 +55,8 @@ export const useLoginStore = defineStore('userstore', {
     ws_noti_status: ref(''),
     ws_total_conectados: ref(''),
     ws_conectados: ref(''),
+    chat: ref<any>(null),
+    chatUnreadCount: ref(0),
     loading_menus: ref(false),
     notify_data: {},
     thema_cuaderno: ref(get_storage_name_bool(xthema_cuaderno)),
@@ -132,6 +134,13 @@ export const useLoginStore = defineStore('userstore', {
     setWsConectados(e: string) {
       this.ws_conectados = e
     },
+    registerChat(data: any) {
+      this.chat = data
+      this.chatUnreadCount += 1
+    },
+    setChatUnreadCount(total: number) {
+      this.chatUnreadCount = Math.max(0, total)
+    },
     setRolUnidad(rolunidad: any) {
       localStorage.setItem(xdatauser_rolunidad, btoa(JSON.stringify(rolunidad)))
       this.rolUnidad = rolunidad
@@ -170,6 +179,8 @@ export const useLoginStore = defineStore('userstore', {
       localStorage.removeItem(process.env.XMENUS_NAME + '')
       localStorage.removeItem(process.env.XTHEMA_CUADERNO + '')
       localStorage.removeItem(process.env.X_CLIMA + '')
+      this.chat = null
+      this.chatUnreadCount = 0
       // this.setRolUnidad(null)
 
       eventBus.emit('on_logout', { reload: reload })

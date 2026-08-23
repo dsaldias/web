@@ -1,9 +1,23 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
-import { defineConfig } from '#q-app/wrappers'
+import { defineConfig } from '@quasar/app-vite'
+import { config as loadDotEnv } from 'dotenv'
+
+const envFile = loadDotEnv().parsed ?? {}
 
 export default defineConfig((ctx) => {
+  const clientEnv = {
+    ...envFile,
+    DEV: ctx.dev,
+    PROD: ctx.prod,
+    MODE: ctx.modeName,
+    CLIENT: true,
+    SERVER: false,
+    VUE_ROUTER_MODE: 'history',
+    VUE_ROUTER_BASE: '/',
+  }
+
   return {
     boot: ['auth'],
 
@@ -15,6 +29,11 @@ export default defineConfig((ctx) => {
     ],
 
     build: {
+      alias: {
+        src: ctx.appPaths.resolve.app('src'),
+        stores: ctx.appPaths.resolve.app('src/stores'),
+      },
+
       extendViteConf(viteConf) {
         if (!viteConf.resolve) { viteConf.resolve = {} }
         // Redirect bare @apollo/client → @apollo/client/core so Rollup does not
@@ -30,8 +49,13 @@ export default defineConfig((ctx) => {
         ]
       },
 
-      // __DEV__ is referenced by the @dsaldias/auth-web dist bundle.
-      rawDefine: { __DEV__: String(ctx.dev) },
+      // Este proyecto y @dsaldias/auth-web todavía leen process.env.* en
+      // código cliente. Quasar App Vite 3 recomienda import.meta.env, pero
+      // mantener esta definición evita migrar todo el código de una vez.
+      define: {
+        __DEV__: ctx.dev,
+        'process.env': clientEnv,
+      },
 
       target: {
         browser: 'baseline-widely-available',
@@ -41,6 +65,16 @@ export default defineConfig((ctx) => {
       typescript: {
         strict: true,
         vueShim: true,
+        extendTsConfig(tsConfig) {
+          tsConfig.compilerOptions ??= {}
+          tsConfig.compilerOptions.paths = {
+            ...tsConfig.compilerOptions.paths,
+            src: ['./../src'],
+            'src/*': ['./../src/*'],
+            stores: ['./../src/stores'],
+            'stores/*': ['./../src/stores/*'],
+          }
+        },
       },
 
       vueRouterMode: 'history',

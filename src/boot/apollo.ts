@@ -1,7 +1,7 @@
-import { boot } from 'quasar/wrappers'
+import { defineBoot } from '@quasar/app-vite'
 import { AuthPlugin } from 'src/plugin'
 
-export default boot(({ app }) => {
+export default defineBoot(({ app }) => {
   app.use(AuthPlugin, {
     graphqlAuth: process.env.GRAPHQL_AUTH + '',
     graphqlApp: process.env.GRAPHQL_APP + '',

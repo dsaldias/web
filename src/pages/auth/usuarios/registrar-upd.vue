@@ -137,7 +137,7 @@ import MenusService from 'src/stores/auth/services/menusService'
 import UsuariosService from 'src/stores/auth/services/usuariosService'
 import RolUnidad from './rol-unidad-select.vue'
 import PerfilService from 'src/stores/auth/services/perfilService'
-import Geo from 'components/auth/geo/geo_modalbk.vue'
+import Geo from 'src/components/auth/geo/geo_modalbk.vue'
 import { columns_permisos, columns_menus, columns_rolunidad } from './utils'
 import { init_zoomer } from 'stores/auth/zoomer'
 import {

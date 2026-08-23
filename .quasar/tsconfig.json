@@ -6,6 +6,7 @@
     "allowJs": true,
     "resolveJsonModule": true,
     "moduleDetection": "force",
+    "moduleResolution": "bundler",
     "isolatedModules": true,
     "module": "preserve",
     "noEmit": true,
@@ -27,53 +28,23 @@
       "src/*": [
         "./../src/*"
       ],
-      "app": [
-        "./.."
-      ],
-      "app/*": [
-        "./../*"
-      ],
-      "components": [
-        "./../src/components"
-      ],
-      "components/*": [
-        "./../src/components/*"
-      ],
-      "layouts": [
-        "./../src/layouts"
-      ],
-      "layouts/*": [
-        "./../src/layouts/*"
-      ],
-      "pages": [
-        "./../src/pages"
-      ],
-      "pages/*": [
-        "./../src/pages/*"
-      ],
-      "assets": [
-        "./../src/assets"
-      ],
-      "assets/*": [
-        "./../src/assets/*"
-      ],
-      "boot": [
-        "./../src/boot"
-      ],
-      "boot/*": [
-        "./../src/boot/*"
-      ],
       "stores": [
         "./../src/stores"
       ],
       "stores/*": [
         "./../src/stores/*"
       ],
+      "@": [
+        "./../src"
+      ],
+      "@/*": [
+        "./../src/*"
+      ],
       "#q-app": [
         "./../node_modules/@quasar/app-vite/types/index.d.ts"
       ],
-      "#q-app/wrappers": [
-        "./../node_modules/@quasar/app-vite/types/app-wrappers.d.ts"
+      "#q-app/client": [
+        "./../node_modules/@quasar/app-vite/exports/client/client.d.ts"
       ],
       "#q-app/bex/background": [
         "./../node_modules/@quasar/app-vite/types/bex/entrypoints/background.d.ts"
@@ -83,11 +54,23 @@
       ],
       "#q-app/bex/private/bex-bridge": [
         "./../node_modules/@quasar/app-vite/types/bex/bex-bridge.d.ts"
+      ],
+      "#q-app/electron/main": [
+        "./../node_modules/@quasar/app-vite/exports/electron/main-runtime.d.ts"
+      ],
+      "#q-app/electron/preload": [
+        "./../node_modules/@quasar/app-vite/exports/electron/preload-runtime.d.ts"
+      ],
+      "#q-app/testing": [
+        "./../node_modules/@quasar/app-vite/exports/testing/testing.d.ts"
+      ],
+      "#q-app/capacitor": [
+        "./../node_modules/@quasar/app-vite/exports/capacitor/capacitor.d.ts"
       ]
     }
   },
   "include": [
-    "./**/*.d.ts",
+    "./*.d.ts",
     "./../**/*"
   ],
   "exclude": [
@@ -95,6 +78,7 @@
     "./../node_modules",
     "./../src-capacitor",
     "./../src-cordova",
-    "./../quasar.config.*.temporary.compiled*"
+    "./../quasar.config.*.temporary.compiled*",
+    "./../src-pwa/sw"
   ]
 }

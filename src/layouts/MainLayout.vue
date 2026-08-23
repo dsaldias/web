@@ -101,19 +101,21 @@
 
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
-import { defineAsyncComponent, nextTick, ref, watch, /* onMounted, */ onBeforeMount } from 'vue'
+import { nextTick, ref, watch, /* onMounted, */ onBeforeMount, defineAsyncComponent } from 'vue'
 import { useLoginStore } from 'stores/auth/user'
 import { colorWs } from './utils'
 import { useRouter } from 'vue-router'
 import PerfilService from 'stores/auth/services/perfilService'
-import BtnPerfil from 'components/auth/perfil/boton_perfil.vue'
-import RolUnidad from 'components/auth/roles/roles-select.vue'
+import BtnPerfil from 'src/components/auth/perfil/boton_perfil.vue'
+import RolUnidad from 'src/components/auth/roles/roles-select.vue'
 import FabButton from './fabs/FabButton.vue'
 import { toHomePath } from 'src/stores/auth/utils'
 import app_name from 'src/components/app/ext/name/app_name.vue'
 import app_logo from 'src/components/app/ext/logo/app_logo.vue'
-import EdgeLight from 'components/auth/EdgeLight.vue'
+import EdgeLight from 'src/components/auth/EdgeLight.vue'
 import { edgeLightSignal } from 'stores/auth/notificaciones'
+// import Login from 'src/pages/auth/login/login-index.vue'
+// import usuarios_conectados from 'src/components/app/ext/conectados/usuarios_conectados.vue'
 
 const leftDrawerOpen = ref(false)
 const store = useLoginStore()
@@ -123,13 +125,13 @@ const show_landing = ref(process.env.SHOW_LANDING_PAGE)
 const foto_64 = ref('')
 const refusuarios_conectados = ref()
 const router = useRouter()
-const Login = defineAsyncComponent(() => import('pages/auth/login/login-index.vue'))
+const Login = defineAsyncComponent(() => import('src/pages/auth/login/login-index.vue'))
 const usuarios_conectados = defineAsyncComponent(
   () => import('src/components/app/ext/conectados/usuarios_conectados.vue'),
 )
 const showConectados = ref(false)
 const pendingOpenConectados = ref(false)
-const edgeLightRef = ref<InstanceType<typeof EdgeLight>>()
+const edgeLightRef = ref<{ trigger: () => void } | null>(null)
 
 watch(edgeLightSignal, () => edgeLightRef.value?.trigger())
 

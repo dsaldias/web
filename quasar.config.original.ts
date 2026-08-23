@@ -1,10 +1,24 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
-import { defineConfig } from '#q-app/wrappers'
+import { defineConfig } from '@quasar/app-vite'
+import { config as loadDotEnv } from 'dotenv'
 import path from 'path'
 
-export default defineConfig((/* ctx */) => {
+const envFile = loadDotEnv().parsed ?? {}
+
+export default defineConfig((ctx) => {
+  const clientEnv = {
+    ...envFile,
+    DEV: ctx.dev,
+    PROD: ctx.prod,
+    MODE: ctx.modeName,
+    CLIENT: true,
+    SERVER: false,
+    VUE_ROUTER_MODE: 'history',
+    VUE_ROUTER_BASE: '/auth/',
+  }
+
   return {
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
     // preFetch: true,
@@ -33,6 +47,11 @@ export default defineConfig((/* ctx */) => {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#build
     build: {
+      alias: {
+        src: ctx.appPaths.resolve.app('src'),
+        stores: ctx.appPaths.resolve.app('src/stores'),
+      },
+
       target: {
         browser: ['es2022', 'firefox115', 'chrome115', 'safari14'],
         node: 'node20',
@@ -41,7 +60,16 @@ export default defineConfig((/* ctx */) => {
       typescript: {
         strict: true,
         vueShim: true,
-        // extendTsConfig (tsConfig) {}
+        extendTsConfig(tsConfig) {
+          tsConfig.compilerOptions ??= {}
+          tsConfig.compilerOptions.paths = {
+            ...tsConfig.compilerOptions.paths,
+            src: ['./../src'],
+            'src/*': ['./../src/*'],
+            stores: ['./../src/stores'],
+            'stores/*': ['./../src/stores/*'],
+          }
+        },
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
@@ -53,6 +81,10 @@ export default defineConfig((/* ctx */) => {
 
       publicPath: '/auth/',
       envFiles: ['.env'],
+      define: {
+        __DEV__: ctx.dev,
+        'process.env': clientEnv,
+      },
       // analyze: true,
       // env: {},
       // rawDefine: {}
@@ -158,7 +190,7 @@ export default defineConfig((/* ctx */) => {
       // useCredentialsForManifestTag: true,
       // injectPwaMetaTags: false,
       // extendPWACustomSWConf (esbuildConf) {},
-      extendGenerateSWOptions (cfg) {
+      extendGenerateSWOptions (cfg: any) {
         // Ensure new SW activates immediately and takes control
         cfg.skipWaiting = true
         cfg.clientsClaim = true

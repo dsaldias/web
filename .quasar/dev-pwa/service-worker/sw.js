@@ -1,6 +1,6 @@
 // @ts-ignore
 try {
-  self['workbox:core:7.3.0'] && _();
+  self['workbox:core:7.4.0'] && _();
 } catch (e) {}
 
 /*
@@ -572,7 +572,7 @@ const logger = (() => {
 
 // @ts-ignore
 try {
-  self['workbox:routing:7.3.0'] && _();
+  self['workbox:routing:7.4.0'] && _();
 } catch (e) {}
 
 /*
@@ -1322,7 +1322,7 @@ function waitUntil(event, asyncFn) {
 
 // @ts-ignore
 try {
-  self['workbox:precaching:7.3.0'] && _();
+  self['workbox:precaching:7.4.0'] && _();
 } catch (e) {}
 
 /*
@@ -1626,7 +1626,7 @@ async function copyResponse(response, modifier) {
     statusText: clonedResponse.statusText
   };
   // Apply any user modifications.
-  const modifiedResponseInit = modifier ? modifier(responseInit) : responseInit;
+  const modifiedResponseInit = responseInit;
   // Create the new response from the body stream and `ResponseInit`
   // modifications. Note: not all browsers support the Response.body stream,
   // so fall back to reading the entire body into memory as a blob.
@@ -1767,7 +1767,7 @@ function timeout(ms) {
 
 // @ts-ignore
 try {
-  self['workbox:strategies:7.3.0'] && _();
+  self['workbox:strategies:7.4.0'] && _();
 } catch (e) {}
 
 /*
@@ -3306,7 +3306,6 @@ setCacheNameDetails({
 });
 self.skipWaiting();
 clientsClaim();
-
 /**
  * The precacheAndRoute() method efficiently caches and responds to
  * requests for URLs in the manifest.
@@ -3362,4 +3361,5 @@ precacheAndRoute([{
   "revision": "d082235f6e6d2109e84e397f66fa868d"
 }], {});
 cleanupOutdatedCaches();
+//# sourceMappingURL=sw.js.map
 //# sourceMappingURL=sw.js.map

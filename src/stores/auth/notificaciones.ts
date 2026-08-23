@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ref } from 'vue'
 import gql from 'graphql-tag'
-import { notifyCreate } from './notifyBridge'
 import { subs } from 'src/stores/auth/serverws'
+import { notifyCreate } from './notifyBridge'
 
 const msg = ref('')
 const subscriptionRef: any = ref(null)
@@ -38,7 +38,6 @@ const iniciarSubscripcion = () => {
       // console.log('Notificación recibida:', notificacion)
       const dt = notificacion.data_json
       let datos = null
-      let color = 'orange'
       let tipo = ''
       const datanot: any = {
         message: notificacion.title,
@@ -50,7 +49,7 @@ const iniciarSubscripcion = () => {
       if ((dt + '').startsWith('{')) {
         const p = JSON.parse(dt)
         datos = p['datos']
-        color = p['color']
+        const color = p['color']
         tipo = p['tipo']
 
         if (color) {
@@ -58,6 +57,11 @@ const iniciarSubscripcion = () => {
           datanot.color = color
         }
         void datitos(datos)
+      }
+
+      if (tipo == 'chat') {
+        void setChat(datos)
+        return
       }
 
       // Mostrar la notificación
@@ -97,6 +101,15 @@ const setconectadosTxt = async (datos: any) => {
   // store.setWsTotalConectados(title)
   store.setWsTotalConectados(datos.total_conectados)
   store.setWsConectados(datos.conectados)
+}
+
+const setChat = async (datos: any) => {
+  if (!datos) return
+  const { useLoginStore } = await import('./user')
+  const store = useLoginStore()
+  const dataUser = typeof store.dataUser == 'string' ? JSON.parse(store.dataUser) : store.dataUser
+  const userId = dataUser?.usuario?.id
+  if ((datos.destinator_id + '') == (userId + '')) store.registerChat(datos)
 }
 
 // Limpieza de la suscripción (puedes llamarla cuando lo necesites)
