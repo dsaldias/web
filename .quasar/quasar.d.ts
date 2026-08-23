@@ -49,7 +49,6 @@ interface ImportMetaEnv {
   readonly XDG_SESSION_DESKTOP?: string;
   readonly LOGNAME?: string;
   readonly XDG_SESSION_TYPE?: string;
-  readonly PANEL_GDK_CORE_DEVICE_EVENTS?: number;
   readonly PNPM_HOME?: string;
   readonly XAUTHORITY?: string;
   readonly LS_OPTIONS?: string;
